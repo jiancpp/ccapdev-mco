@@ -29,3 +29,7 @@ Inside the repo:
 ```
 npm install
 ```
+## 4️⃣ Run the App
+```
+npm run dev
+```
