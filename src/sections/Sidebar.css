@@ -1,0 +1,75 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    height: 100vh;
+    border-right: solid 1px rgb(223, 223, 223);
+
+    padding-top: 20px;
+  }
+
+.sidebar .nav-button {
+    width: 80%;
+    height: 50px;
+    text-align: left;
+    background-color: white;
+    color: #7d7676;
+    border: none;
+    border-radius: 15px;
+    margin-top: 15px;
+
+    cursor: pointer;
+}
+
+.sidebar .nav-button:hover {
+    background-color: #e6e6e6;
+}
+
+.sidebar .nav-button:active .current-page {
+    background-color: #eeeeee;
+}
+
+
+.sidebar .nav-button .bi {
+    font-size: 20px;
+}
+
+.sidebar .nav-button span {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.nav-button * {
+    display: inline-block;
+    margin-left: 15px;
+
+}
+
+.sidebar .review-button {
+    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d );
+    color: white;
+    width: 70%;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -1px;
+
+    cursor: pointer;
+}
+
+.sidebar .review-button:hover {
+    background: linear-gradient(to right, #770045, #ff5757, #770045 );
+}
+
+.sidebar .review-button:active {
+    opacity: 0.9;
+}
+
+.sidebar .current-page {
+    opacity: 1;
+    background-color: #d9d9d9;
+}

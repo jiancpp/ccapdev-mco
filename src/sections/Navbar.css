@@ -1,0 +1,54 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 98%;
+    height: 70px;
+    background: linear-gradient(135deg,#a11547, #5c0627);
+    margin: 10px 0 0 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); */
+    color: white;
+}
+
+nav div {
+    margin: 0 15px;
+}
+
+.buttons {
+    justify-content: space-around;
+    width: 100px;
+}
+
+#notifications {
+    position: relative;
+    display: inline-block;
+    font-size: 30px;
+}
+
+#notifications::after {
+    content: "";
+    position: absolute;
+    right: 30;
+
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    z-index: 10
+}
+
+#profile-pic {
+    background: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+}
+
+.logo {
+    color: white;
+    /* font-weight: 600; */
+    letter-spacing: -2px;
+    font-size: 32px;
+}

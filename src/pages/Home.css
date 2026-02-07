@@ -1,0 +1,41 @@
+#home {
+    width: 100%;
+    padding: 40px;
+}
+
+#home .buttons {
+    width: 100%;
+    justify-content: space-between;
+}
+
+#home .filters button {
+    height: 40px;
+    border-radius: 20px;
+    padding: 0 30px;
+    margin-right: 15px;
+    border: 1px solid #9e005d;
+
+    font-size: 15px;
+    font-weight: 600;
+    color: #9e005d;
+    background-color: white;
+    cursor: pointer;
+}
+
+#home .selected {
+    background: linear-gradient(to right, rgba(158, 0, 92, 0.25), rgba(255, 87, 87, 0.25), rgba(158, 0, 92, 0.25) );
+}
+
+#home .review-button {
+    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d );
+    color: white;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    padding: 0 40px;
+
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -1px;
+
+    cursor: pointer;}
