@@ -17,7 +17,7 @@ export const dummyArtists = [
     },
     {
         _id: "a3",
-        name: "Sabrina Carppenter",
+        name: "Sabrina Carpenter",
         avatar: "..assets/SabrinaCarpenter.png",
         rating: 5,
         reviews: 143,
