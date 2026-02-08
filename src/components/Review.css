@@ -4,7 +4,13 @@
     margin-top: 15px;
 }
 
-.profile {
+.post .post-content {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 15px 30px 15px 15px ;
+}
+
+.post .profile {
     background: rgb(99, 22, 22);
     width: 50px;
     height: 50px;
@@ -12,32 +18,36 @@
     margin: 10px;
 }
 
-
-.post-actions {
+.post .post-actions {
     margin: 15px;
 }
 
-
-.post-actions button {
+.post .post-actions button {
     display: flex;
+    align-items: center;
+    justify-content: center;
     min-width: 70px;
-    max-width: 100px;
-    justify-content: space-around;
     border: none;
     padding: 5px 20px;
     font-size: 18px;
     border-radius: 30px;
-    text-align: left;
+    margin-right: 5px;
 }
 
-.post-actions button * {
-    display: inline-block;
-}
-
-.username {
+.post .post-actions button span {
+    text-align: center;
+    color: #7d7676;
     font-weight: 600;
 }
 
-.post-btn * {
+.post .post-actions button span.gap {
+    width: 5px;
+}
 
+.icon i {
+    vertical-align: middle;
+}
+
+.post .username {
+    font-weight: 600;
 }

@@ -1,19 +1,31 @@
 import './Review.css'
+import { dummyUsers } from "../data/dummyUsers";
 
-function Review({username, reviewTitle, numStars, reviewContent}) {
+const getUserById = (id) =>
+  dummyUsers.find((user) => user._id === id);
+
+function Review({ review }) {
+    const user = getUserById(review.user_id);
+
     return (
         <div className="post">
-            <div className='flex'>
+            <div className='post-content'>
                 <div className="profile"></div>
                 <div className="review-details">
-                    <p><span className="username">{username}</span>  3hrs ago</p>
-                    <h1>{reviewTitle}</h1>
-                    <p className="description">{reviewContent}</p>
+                    <p><span className="username">{user.username}</span>  3hrs ago</p>
+                    <h1>{review.review_header}</h1>
+                    <p className="description">{review.review_content}</p>
                 </div>
             </div>
             <div className="post-actions flex">
                 <button className="post-btn like">
-                    <i className="bi bi-heart"></i>
+                    <span className='icon'><i className="bi bi-heart"></i></span>
+                    <span className="gap"></span>
+                    <span>55</span>
+                </button>
+                <button className="post-btn like">
+                    <span className='icon'><i class="bi bi-hand-thumbs-down"></i></span>
+                    <span className="gap"></span>
                     <span>55</span>
                 </button>
             </div>

@@ -1,3 +1,11 @@
+.nav-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 10px 0 0 0;
+    background-color: white;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
@@ -5,7 +13,7 @@ nav {
     width: 98%;
     height: 70px;
     background: linear-gradient(135deg,#a11547, #5c0627);
-    margin: 10px 0 0 0;
+    
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); */

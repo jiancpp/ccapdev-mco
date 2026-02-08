@@ -1,7 +1,18 @@
-import Review from '../components/Review'
+import { useState, useEffect } from 'react'              
 import './Home.css'
 
+import Review from '../components/Review'
+import { dummyReviews } from '../data/dummyreviews'
+import { dummyUsers } from '../data/dummyUsers'
+
 function Home() {
+    const [reviews, setReviews] = useState([]);
+
+    // Simulates API Fetching
+    useEffect(() => {
+        setReviews(dummyReviews)
+    }, [])
+
     return (
         <div id='home'>
             <div className="buttons flex f-center">
@@ -11,9 +22,9 @@ function Home() {
                 </div>
                 <button className="review-button" onClick={() => setActivePage("log-in")}>Review +</button>
             </div>
-            <Review username={"Torotottie"} 
-                    reviewTitle={"HELOOO"}
-                    reviewContent={"Lorem ipsum persona grata! Capsicum aurora borealis imperata. Dumighay ka man yari ka bansot."}/>
+            {reviews.map((review) => (
+                <Review key={review.id} review={review}/>
+            ))}
         </div>
     )
 }
