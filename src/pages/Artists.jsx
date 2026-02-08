@@ -23,7 +23,7 @@ function Artists() {
             </div>
             <div className="blocks">
                 {artists.map((artist) => (
-                    <ArtistBlock key={artist.id} artist={artist}/>
+                    <ArtistBlock key={artist._id} artist={artist}/>
                 ))}
             </div>
             

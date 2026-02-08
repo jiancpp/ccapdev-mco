@@ -1,5 +1,5 @@
 import './ArtistBlock.css'
-import { StarRating } from './StarRating';
+// import { StarRating } from './StarRating';
 
 function ArtistBlock({ artist }) {
     return (
@@ -10,7 +10,7 @@ function ArtistBlock({ artist }) {
                     <div className="top-block">
                         <h3 className="name">{artist.name}</h3>
                         <div className="stars">
-                            <StarRating rating={artist.rating} />
+                            {/* <StarRating rating={Number(artist.rating)} /> */}
                         </div>
                     </div>
                     <div className="bottom-block">
