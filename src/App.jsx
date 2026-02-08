@@ -8,7 +8,7 @@ import MainContent from './sections/MainContent';
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 
 function App() {
-  const [activePage, setActivePage] = useState("home");
+  const [activePage, setActivePage] = useState({page: "home", params: {}});
 
   return (
     <>
@@ -16,7 +16,7 @@ function App() {
         <Navbar />
         <div className="flex">
           <Sidebar activePage={activePage} setActivePage={setActivePage} />
-          <MainContent activePage={activePage} />
+          <MainContent activePage={activePage} setActivePage={setActivePage} />
         </div>
       </div>
     </>

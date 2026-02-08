@@ -1,6 +1,6 @@
 export const trendingReviews = [
     {
-        _id: "r3",
+        _id: "r4",
         user_id: "u2", 
         artist: "Taylor Swift",
         album: null,
@@ -12,7 +12,7 @@ export const trendingReviews = [
         dislikes: 109,
     },
     {
-        _id: "r4",
+        _id: "r5",
         user_id: "u3", 
         artist: "IV of Spades",
         album: null,

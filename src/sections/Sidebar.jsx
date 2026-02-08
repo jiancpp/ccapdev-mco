@@ -3,24 +3,24 @@ import "./Sidebar.css"
 function Sidebar({activePage, setActivePage}) {
     return (
         <div className="sidebar">
-            <button className={activePage==="home" ? "nav-button current-page" : "nav-button"} 
-                    onClick={() => setActivePage("home")}>
+            <button className={activePage.page==="home" ? "nav-button current-page" : "nav-button"} 
+                    onClick={() => setActivePage({ page: "home", params: {} })}>
                 <i className="bi bi-house-fill"></i>
                 <span>Home</span>
             </button>
         
-            <button className={activePage==="artists" ? "nav-button current-page" : "nav-button"} 
-                    onClick={() => setActivePage("artists")}>
+            <button className={activePage.page==="artists" ? "nav-button current-page" : "nav-button"} 
+                    onClick={() => setActivePage({ page: "artists", params: {} })}>
                     <i className="bi bi-people-fill"></i>
                 <span>Artists</span>
             </button>
 
-            <button className={activePage==="log-in" ? "nav-button current-page" : "nav-button"} 
-                onClick={() => setActivePage("log-in")}>                
+            <button className={activePage.page==="log-in" ? "nav-button current-page" : "nav-button"} 
+                onClick={() => setActivePage({ page: "log-in", params: {} })}>                
                 <i className="bi bi-bar-chart-line-fill"></i>
                 <span>Charts</span>
             </button>
-            <button className="review-button review-button-dynamic" onClick={() => setActivePage("log-in")}>
+            <button className="review-button review-button-dynamic" onClick={() => setActivePage({ page: "log-in", params: {} })}>
                 <span>Review +</span>
             </button>
         </div>        
