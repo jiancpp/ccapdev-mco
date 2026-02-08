@@ -4,7 +4,7 @@ import './Artists.css'
 import ArtistBlock from '../components/ArtistBlock'
 import { dummyArtists } from '../data/dummyArtists'
 
-function Artists({ openModal }) {
+function Artists({ openModal, setActivePage }) {
     const [artists, setArtists] = useState([]);
 
     // Simulates API Fetching
@@ -23,7 +23,9 @@ function Artists({ openModal }) {
             </div>
             <div className="blocks">
                 {artists.map((artist) => (
-                    <ArtistBlock key={artist._id} artist={artist}/>
+                    <ArtistBlock key={artist._id} 
+                    artist={artist}
+                    setActivePage={setActivePage}/>
                 ))}
             </div>
             

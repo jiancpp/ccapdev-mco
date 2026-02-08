@@ -1,0 +1,138 @@
+.artist-profile {
+    width: 100%;
+    padding: 40px 40px 0 40px;
+    font-family: Helvetica, sans-serif;
+}
+
+.artist-profile .indent {
+    margin-left: 22px;
+}
+
+.artist-profile .header {
+    background: linear-gradient(90deg, #fbc2d8, #fff4e0);
+    position: relative;
+    height: 120px;
+    margin-bottom: 75px;
+    border-radius: 20px;
+}
+
+.artist-profile .header .profile-pic {
+    position: absolute;
+    bottom: -50px;
+    left: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    background-color: #fbc2d8;
+    overflow: hidden; 
+    border: 4px solid white; 
+}
+
+.artist-profile .header .profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-profile .header .user-follow-btn {
+    position: absolute;
+    right: 0;
+    bottom: -60px;
+    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
+    padding: 10px 50px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: -0.05em;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.artist-profile .artist-profile-details {
+    margin-bottom: 30px;
+}
+
+.artist-profile .artist-name {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.artist-profile .artist-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.artist-profile .artist-rating .stars {
+    display: flex;
+    align-items: center; 
+}
+
+.artist-profile .artist-meta {
+    color: #333;
+    font-size: 16px;
+}
+
+.artist-profile .artist-nav { 
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 40px;
+}
+
+.artist-profile .artist-nav .nav-item {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #9e005d;
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.artist-profile .artist-nav .nav-item {
+    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.artist-profile .artist-nav .nav-item.active {
+    border-bottom: 3px solid #ff5757;
+}
+
+.artist-profile .rate-review-section {
+    margin-bottom: 40px;
+}
+
+.artist-profile .rate-review-section h3 {
+    font-size: 20px;
+    color: #888;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.artist-profile .rate-review-section .user-input-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.artist-profile .rate-review-section .user-avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #9e005d;
+}
+
+.artist-profile .rate-review-section .empty-stars {
+    font-size: 32px;
+    color: #bbb; 
+    cursor: pointer;
+    letter-spacing: 5px;
+}
