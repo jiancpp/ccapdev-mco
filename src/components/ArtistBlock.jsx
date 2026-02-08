@@ -1,9 +1,11 @@
 import './ArtistBlock.css'
 import { StarRating } from './StarRating';
 
-function ArtistBlock({ artist }) {
+function ArtistBlock({ artist, setActivePage }) {
     return (
-        <div className="artist-block">
+        <div className="artist-block" onClick={() => setActivePage({ page: "artist", params: { id: artist._id } })}
+            style={{ cursor: "pointer" }}
+        >
             <div className='block-content'>
                 <div className="profile">
                     <img src={artist.photo} alt="" className="profile-img" />
