@@ -1,0 +1,97 @@
+.user-profile {
+    width: 100%;
+    padding: 40px 40px 0 40px;
+}
+
+.user-profile .indent {
+    margin-left: 22px;
+}
+
+.user-profile .header {
+    background: linear-gradient(90deg, #fbc2d8, #fff4e0);
+    position: relative;
+    height: 120px;
+    margin-bottom: 75px;
+    border-radius: 20px;
+}
+
+.user-profile .header .profile-pic {
+    position: absolute;
+    bottom: -50px;
+    left: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    background-color: #fbc2d8;
+}
+
+.user-profile .header .profile-pic img {
+    position: inherit;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+}
+
+.user-profile .header .user-follow-btn {
+    position: absolute;
+    right: 0;
+    bottom: -60px;
+
+    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d );
+    padding: 10px 50px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: -0.05em;
+    border-radius: 30px;
+}
+
+.user-profile .user-profile-details {
+    margin-bottom: 30px;
+}
+
+.user-profile .user-profile-details .user-username {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.user-profile .user-profile-details .user-stats {
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.user-profile .user-profile-details .bio {
+    height: auto;
+    white-space: pre-line;
+}
+
+.user-profile .user-profile-nav {
+    border-bottom: 1px solid #aaa;
+}
+
+.user-profile .user-profile-nav .user-nav-item {
+    position: relative;
+    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d); /* gradient colors */
+    -webkit-background-clip: text; /* clip gradient to text */
+    -webkit-text-fill-color: transparent; /* make text fill transparent */
+    background-clip: text; /* standard property (for non-webkit browsers) */
+    width: 100px;
+    font-family: Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    border: none;
+    color: #9e005d;
+    padding: 10px 0;
+}
+
+.user-profile .user-profile-nav .user-nav-item::after {
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    z-index: 100;
+    content: '__________________';
+    color: transparent;
+    width: inherit;
+    height: 2px;
+    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
+}

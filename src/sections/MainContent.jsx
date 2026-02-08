@@ -6,7 +6,7 @@ import "./MainContent.css"
 function MainContent({ activePage, setActivePage, openModal }) {
     return (
         <div className="content">
-            {activePage.page === "home" && <Home setActivePage={setActivePage}/>}
+            {activePage.page === "home" && <Home setActivePage={setActivePage} openModal={openModal} />}
             {activePage.page === "artists" && <Artists openModal={openModal} />}
             {/* activePage === "create" && <Create />} */}
 

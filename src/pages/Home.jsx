@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import './Home.css'
 
 import Review from '../components/Review'
-import { dummyReviews } from '../data/dummyreviews'
+import { dummyReviews } from '../data/dummyReviews'
 import { trendingReviews } from '../data/trendingReviews'
 import { dummyUsers } from '../data/dummyUsers'
 
