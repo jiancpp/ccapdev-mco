@@ -3,7 +3,7 @@ import "./Sidebar.css"
 function Sidebar({activePage, setActivePage, openModal}) {
     return (
         <div className="sidebar">
-            <button className={activePage.page==="home" ? "nav-button current-page" : "nav-button"} 
+            <button className={activePage.page==="home" || activePage.page==="user"  ? "nav-button current-page" : "nav-button"} 
                     onClick={() => setActivePage({ page: "home", params: {} })}>
                 <i className="bi bi-house-fill"></i>
                 <span>Home</span>
