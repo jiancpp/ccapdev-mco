@@ -46,3 +46,14 @@
     grid-template-columns: repeat(2, 1fr); 
     gap: 20px; 
 }
+
+@media (max-width: 1000px) {
+    .blocks {
+        grid-template-columns: 1fr; 
+        gap: 15px; 
+    }
+
+    #artists {
+        padding: 20px;
+    }
+}

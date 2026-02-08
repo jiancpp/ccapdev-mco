@@ -1,6 +1,6 @@
 import "./Sidebar.css"
 
-function Sidebar({activePage, setActivePage}) {
+function Sidebar({activePage, setActivePage, openModal}) {
     return (
         <div className="sidebar">
             <button className={activePage.page==="home" ? "nav-button current-page" : "nav-button"} 
@@ -20,7 +20,7 @@ function Sidebar({activePage, setActivePage}) {
                 <i className="bi bi-bar-chart-line-fill"></i>
                 <span>Charts</span>
             </button>
-            <button className="review-button review-button-dynamic" onClick={() => setActivePage({ page: "log-in", params: {} })}>
+            <button className="review-button review-button-dynamic" onClick={openModal}>
                 <span>Review +</span>
             </button>
         </div>        

@@ -4,7 +4,7 @@ import './Artists.css'
 import ArtistBlock from '../components/ArtistBlock'
 import { dummyArtists } from '../data/dummyArtists'
 
-function Artists() {
+function Artists({ openModal }) {
     const [artists, setArtists] = useState([]);
 
     // Simulates API Fetching
@@ -19,7 +19,7 @@ function Artists() {
                     <button className='selected'>Pop</button>
                     <button>OPM</button>
                 </div>
-                <button className="review-button" onClick={() => setActivePage("log-in")}>Review +</button>
+                <button className="review-button" onClick={openModal}>Review +</button>
             </div>
             <div className="blocks">
                 {artists.map((artist) => (

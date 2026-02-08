@@ -1,5 +1,4 @@
 import './Navbar.css'
-import MenuModal from '../components/Modal'
 
 function Navbar() {
     return (
