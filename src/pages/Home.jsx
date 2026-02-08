@@ -3,24 +3,41 @@ import './Home.css'
 
 import Review from '../components/Review'
 import { dummyReviews } from '../data/dummyreviews'
+import { trendingReviews } from '../data/trendingReviews'
 import { dummyUsers } from '../data/dummyUsers'
 
 function Home() {
     const [reviews, setReviews] = useState([]);
+    const [filter, setFilter] = useState("recent")
 
     // Simulates API Fetching
     useEffect(() => {
-        setReviews(dummyReviews)
-    }, [])
+        if (filter==="recent") {
+            setReviews(dummyReviews);
+        } else {
+            setReviews(trendingReviews);
+        }
+    }, [filter])
+
+    const toggle = (filter) => {
+        setFilter((prev) => (prev!==filter ? filter : prev))
+    }
 
     return (
         <div id='home'>
             <div className="buttons flex f-center">
                 <div className="filters flex f-center">
-                    <button className='selected'>Recent</button>
-                    <button>Trending</button>
+                    <button 
+                        className={`${filter==="recent" ? "selected" : ""}`}
+                        onClick={() => toggle("recent")}>
+                        Recent
+                    </button>
+                    <button 
+                        className={`${filter==="trending" ? "selected" : ""}`}
+                        onClick={() => toggle("trending")}>
+                        Trending</button>
                 </div>
-                <button className="review-button" onClick={() => setActivePage("log-in")}>Review +</button>
+                <button className="review-button review-button-fixed" onClick={() => setActivePage("log-in")}>Review +</button>
             </div>
             {reviews.map((review) => (
                 <Review key={review.id} review={review}/>

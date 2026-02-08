@@ -48,10 +48,9 @@
 
 }
 
-.sidebar .review-button {
+.review-button {
     background: linear-gradient(to right, #9e005d, #ff5757, #9e005d );
     color: white;
-    width: 70%;
     height: 50px;
     border: none;
     border-radius: 15px;
@@ -63,12 +62,16 @@
     cursor: pointer;
 }
 
-.sidebar .review-button:hover {
+.review-button:hover {
     background: linear-gradient(to right, #770045, #ff5757, #770045 );
 }
 
-.sidebar .review-button:active {
+.review-button:active {
     opacity: 0.9;
+}
+
+.review-button-dynamic {
+    width: 70%;
 }
 
 .sidebar .current-page {

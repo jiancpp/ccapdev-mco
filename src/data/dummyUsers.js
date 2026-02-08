@@ -2,16 +2,16 @@ export const dummyUsers = [
     {
         _id: "u1",
         username: "Torotottie",
-        avatar: "..assets/torotottie.png"
+        avatar: "/public/assets/torotottie.jpg"
     },
     {
         _id: "u2",
         username: "Mariemarrr",
-        avatar: "..assets/Mariemarr.png"
+        avatar: "/public/assets/mariemarrr.jpg"
     },
     {
         _id: "u3",
-        username: "Mariemarrr",
-        avatar: "..assets/Mariemarr.png"
+        username: "pringles",
+        avatar: "/public/assets/pringles.jpg"
     },
 ]

@@ -20,9 +20,18 @@
     color: #9e005d;
     background-color: white;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-#home .selected {
+#home .filters button:hover {
+    background: linear-gradient(to right, rgba(158, 0, 92, 0.1), rgba(255, 87, 87, 0.1), rgba(158, 0, 92, 0.1) );
+}
+
+#home .filters button:active {
+    background: linear-gradient(to right, rgba(158, 0, 92, 0.15), rgba(255, 87, 87, 0.15), rgba(158, 0, 92, 0.15) );
+}
+
+#home .selected, #home .filters button.selected:hover {
     background: linear-gradient(to right, rgba(158, 0, 92, 0.25), rgba(255, 87, 87, 0.25), rgba(158, 0, 92, 0.25) );
 }
 
@@ -38,4 +47,5 @@
     font-weight: 600;
     letter-spacing: -1px;
 
-    cursor: pointer;}
+    cursor: pointer;
+}

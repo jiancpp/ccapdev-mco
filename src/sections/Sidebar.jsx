@@ -20,7 +20,7 @@ function Sidebar({activePage, setActivePage}) {
                 <i className="bi bi-bar-chart-line-fill"></i>
                 <span>Charts</span>
             </button>
-            <button className="review-button" onClick={() => setActivePage("log-in")}>
+            <button className="review-button review-button-dynamic" onClick={() => setActivePage("log-in")}>
                 <span>Review +</span>
             </button>
         </div>        

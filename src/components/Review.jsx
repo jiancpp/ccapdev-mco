@@ -1,33 +1,64 @@
 import './Review.css'
 import { dummyUsers } from "../data/dummyUsers";
+import { useState } from "react";
 
 const getUserById = (id) =>
   dummyUsers.find((user) => user._id === id);
 
 function Review({ review }) {
     const user = getUserById(review.user_id);
+    const [selected, setSelected] = useState(null);
+
+    const toggle = (reaction) => {
+        setSelected((prev) => (prev===reaction ? null : reaction))
+    }
 
     return (
         <div className="post">
             <div className='post-content'>
-                <div className="profile"></div>
+                <div className="profile">
+                    <img src={user.avatar} alt="" />
+                </div>
                 <div className="review-details">
-                    <p><span className="username">{user.username}</span>  3hrs ago</p>
-                    <h1>{review.review_header}</h1>
-                    <p className="description">{review.review_content}</p>
+                    <div className='user'><span className="username">{user.username}</span>  3hrs ago</div>
+                    <div className='title'>{review.review_header}</div>
+                    <div className='rating'>
+                        { Array.from({ length: Math.floor(review.rating) }).map((_, i) => (
+                            <i className="bi bi-star-fill" key={i}></i>
+                        ))}
+                        { Array.from({ length: 5 - Math.floor(review.rating) }).map((_, i) => (
+                            <i className="bi bi-star-fill grey" key={i}></i>
+                        ))}
+                    </div>
+                    <div className='embed'>
+                        <span className='icon'><i className="bi bi-person-fill"></i></span>
+                        <span>{review.artist}</span>
+                    </div>
+                    <div className="description">{review.review_content}</div>
                 </div>
             </div>
             <div className="post-actions flex">
-                <button className="post-btn like">
-                    <span className='icon'><i className="bi bi-heart"></i></span>
+                <div 
+                    className={`post-btn heart ${selected === "heart" ? "active" : ""}`}
+                    onClick={() => toggle("heart")}>
+                    <span className='icon'>
+                        <i className={`"bi ${selected === "heart" ? "bi-heart-fill" : "bi-heart"}`}></i>
+                    </span>
                     <span className="gap"></span>
-                    <span>55</span>
-                </button>
-                <button className="post-btn like">
-                    <span className='icon'><i class="bi bi-hand-thumbs-down"></i></span>
+                    <span>{review.likes}</span>
+                </div>
+                <div 
+                    className={`post-btn dislike ${selected === "dislike" ? "active" : ""}`}
+                    onClick={() => toggle("dislike")}>
+                    <span className='icon'>
+                        <i className={`"bi ${selected === "dislike" ? "bi-hand-thumbs-down-fill" : "bi-hand-thumbs-down"}`}></i>
+                    </span>
                     <span className="gap"></span>
-                    <span>55</span>
-                </button>
+                    <span>{review.dislikes}</span>
+                </div>
+                <div className="post-btn share">
+                    <span className='icon'><i className="bi bi-share-fill"></i></span>
+                </div>
             </div>
         </div>
     )

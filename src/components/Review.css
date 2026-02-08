@@ -1,12 +1,13 @@
 .post {
     border: 1px solid #bdbdbd;
+    color: black;
     border-radius: 20px;
     margin-top: 15px;
 }
 
 .post .post-content {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 1fr;
     margin: 15px 30px 15px 15px ;
 }
 
@@ -18,34 +19,104 @@
     margin: 10px;
 }
 
+.post .profile img {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+}
+
+/* Text Styling */
+.post .review-details * {
+    margin-top: 10px
+}
+
+.post .title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.post .rating i{
+    color: #ffb000;
+    font-size: 1.3em;
+    margin-right: 5px;
+}
+
+.post .rating i.grey {
+    color: gray;
+}
+
+.post .embed {
+    padding: 10px;
+    background: linear-gradient(90deg, #fbc2d8, #fff4e0);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.post .embed:hover {
+    background: linear-gradient(90deg, #edb7cc, #e8decb);
+}
+
+.post .embed .icon {
+    display: inline-block;
+    margin: 0 10px 0 5px;
+}
+
+.post .description {
+    margin: 20px 0;
+}
+
+/* React Buttons */
 .post .post-actions {
     margin: 15px;
 }
 
-.post .post-actions button {
+.post .post-actions .post-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     min-width: 70px;
-    border: none;
+    background-color: #eeeeee;
     padding: 5px 20px;
     font-size: 18px;
     border-radius: 30px;
     margin-right: 5px;
+    cursor: pointer;
+
+    transition: 0.2s;
 }
 
-.post .post-actions button span {
+.post .post-btn span {
     text-align: center;
     color: #7d7676;
     font-weight: 600;
 }
 
-.post .post-actions button span.gap {
+.post .post-btn  span.gap {
     width: 5px;
 }
 
-.icon i {
+.post-btn i {
     vertical-align: middle;
+}
+
+.post-btn.heart:hover, .post-btn.dislike:hover, .post-btn.share:hover {
+    background: #dedede;
+}
+
+.post-btn.heart.active {
+    background: #f2bed0;
+}
+
+.post-btn.heart.active span {
+    color: #a11547;
+}
+
+.post-btn.dislike.active {
+    background: #ffdac2;
+}
+
+.post-btn.dislike.active span {
+    color: #ff751f;
 }
 
 .post .username {
