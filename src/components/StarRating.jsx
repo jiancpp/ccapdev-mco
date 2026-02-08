@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function StarRating({ rating = 0 }) {
+export function StarRating({ rating = 0 }) {
     const totalStars = 5;
 
     return (
