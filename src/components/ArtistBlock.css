@@ -1,0 +1,33 @@
+.artist-block {
+    color: black;
+    background-color: white;
+    border: 1px solid #bdbdbd;
+    border-radius: 20px;
+    margin-top: 15px;
+}
+
+.artist-block .block-content {
+    display: flex;
+    gap: 20px;
+    margin: 15px 30px 15px 15px ;
+}
+
+.artist-block .artist-details * {
+    margin-bottom: 15px;
+}
+
+.artist-block .top-block *, .artist-block .bottom-block * {
+    margin-bottom: 0px;
+}
+
+.artist-block .profile {
+    background: rgb(99, 22, 22);
+    width: 135px;
+    height: 135px;
+    border-radius: 100%;
+    margin: 10px;
+}
+
+.artist-block .name {
+    font-weight: 600;
+}
