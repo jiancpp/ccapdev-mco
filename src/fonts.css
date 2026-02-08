@@ -1,44 +1,8 @@
-/* LIGHT */
-@font-face {
-  font-family: "Carollo Playscript";
-  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Carollo Playscript";
-  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Light%20Italic.woff2") format("woff2");
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* REGULAR */
-@font-face {
-  font-family: "Carollo Playscript";
-  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Carollo Playscript";
-  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Regular%20Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* MEDIUM */
 @font-face {
   font-family: "Carollo Playscript";
   src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
@@ -46,39 +10,4 @@
   src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Medium%20Italic.woff2") format("woff2");
   font-weight: 500;
   font-style: italic;
-  font-display: swap;
-}
-
-/* BOLD */
-@font-face {
-  font-family: "Carollo Playscript";
-  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Bold.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Carollo Playscript";
-  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Bold%20Italic.woff2") format("woff2");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* BLACK */
-@font-face {
-  font-family: "Carollo Playscript";
-  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Black.woff2") format("woff2");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Carollo Playscript";
-  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Black%20Italic.woff2") format("woff2");
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
 }
