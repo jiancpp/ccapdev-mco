@@ -7,7 +7,7 @@
     margin-left: 22px;
 }
 
-.user-profile .back {
+.user-profile .back-btn {
     background: linear-gradient(to right, #9e005d, #ff5757, #9e005d); /* gradient colors */
     -webkit-background-clip: text; /* clip gradient to text */
     -webkit-text-fill-color: transparent; /* make text fill transparent */
@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 
-.user-profile .back:hover {
+.user-profile .back-btn:hover {
     opacity: 0.5;
 }
 
@@ -100,6 +100,7 @@
     color: #9e005d;
     padding: 10px 0;
     cursor: pointer;
+    transition: left 0.5s step-end;
 }
 
 .user-profile .user-profile-nav .user-nav-item input{
@@ -135,6 +136,8 @@
 
 .user-profile .user-likes div {
     color: #aaa;
+    margin-top: 10px;
+    font-size: 20px;
 }
 
 .user-profile .user-likes i{

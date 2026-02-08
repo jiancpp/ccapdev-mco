@@ -16,7 +16,7 @@ function UserProfile({ user_id, setActivePage }) {
 
     return (
         <div className="user-profile">
-            <button className="back" onClick={() => setActivePage({page: "home", params: {}})}>
+            <button className="back-btn" onClick={() => setActivePage({page: "home", params: {}})}>
                 <i className="bi bi-arrow-left"></i> Back
             </button>
             <div className="header">
