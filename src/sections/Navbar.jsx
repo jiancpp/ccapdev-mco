@@ -1,6 +1,6 @@
 import './Navbar.css'
 
-function Navbar() {
+function Navbar({ showLogin }) {
     return (
         <div className="nav-container">
             <nav>
@@ -9,7 +9,10 @@ function Navbar() {
                 </div>
                 <div className="buttons flex">
                     <i id='notifications' className="bi bi-bell-fill"></i>
-                    <span id="profile-pic" title='Open settings menu'></span>
+                    <span 
+                        id="profile-pic" 
+                        title='Open settings menu'
+                        onClick={ showLogin }></span>
                 </div>
             </nav>
         </div>
