@@ -21,6 +21,7 @@
   --fs-xl: 1.5rem;
 
   /* letter spacing */
+  --ls-very-tight: -0.06em;
   --ls-tight: -0.02em;
   --ls-normal: 0;
 }
