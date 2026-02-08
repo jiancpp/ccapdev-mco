@@ -55,8 +55,13 @@ nav div {
 }
 
 .logo {
-    color: white;
-    /* font-weight: 600; */
-    letter-spacing: -2px;
-    font-size: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 80px; 
+    width: auto;
+    object-fit: contain;
+    margin-top: 40px;
 }
