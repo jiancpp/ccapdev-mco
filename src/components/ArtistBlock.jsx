@@ -1,4 +1,5 @@
 import './ArtistBlock.css'
+import { StarRating } from './StarRating';
 
 function ArtistBlock({ artist }) {
     return (
@@ -8,7 +9,9 @@ function ArtistBlock({ artist }) {
                 <div className="artist-details">
                     <div className="top-block">
                         <h3 className="name">{artist.name}</h3>
-                        <div className="stars">--Rating--</div>
+                        <div className="stars">
+                            <StarRating rating={artist.rating} />
+                        </div>
                     </div>
                     <div className="bottom-block">
                         <div className="details">{artist.reviews} reviews</div>
