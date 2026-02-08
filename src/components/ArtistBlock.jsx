@@ -5,7 +5,9 @@ function ArtistBlock({ artist }) {
     return (
         <div className="artist-block">
             <div className='block-content'>
-                <div className="profile"></div>
+                <div className="profile">
+                    <img src={artist.photo} alt="" className="profile-img" />
+                </div>
                 <div className="artist-details">
                     <div className="top-block">
                         <h3 className="name">{artist.name}</h3>

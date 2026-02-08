@@ -54,7 +54,7 @@ export function InteractiveStarRating({ totalStars = 5 }) {
                     ></i>
                 );
             })}
-            <span style={{ marginLeft: '10px', color: 'white' }}>{rating} / {totalStars}</span>
+            <span style={{ marginLeft: '10px', color: 'black' }}>({rating}/{totalStars})</span>
         </div>
     );
 }

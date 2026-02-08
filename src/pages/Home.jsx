@@ -6,7 +6,7 @@ import { dummyReviews } from '../data/dummyreviews'
 import { trendingReviews } from '../data/trendingReviews'
 import { dummyUsers } from '../data/dummyUsers'
 
-function Home() {
+function Home({ openModal }) {
     const [reviews, setReviews] = useState([]);
     const [filter, setFilter] = useState("recent")
 
@@ -37,7 +37,7 @@ function Home() {
                         onClick={() => toggle("trending")}>
                         Trending</button>
                 </div>
-                <button className="review-button review-button-fixed" onClick={() => setActivePage("log-in")}>Review +</button>
+                <button className="review-button review-button-fixed" onClick={openModal}>Review +</button>
             </div>
             {reviews.map((review) => (
                 <Review key={review.id} review={review}/>
