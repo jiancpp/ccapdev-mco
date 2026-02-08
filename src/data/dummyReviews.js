@@ -22,11 +22,11 @@ export const dummyReviews = [
         review_header: "BAWLIN RN",
         review_content: "No words. ",
         
-        likes: 55,
-        dislikes: 6,
+        likes: 70,
+        dislikes: 5,
     },
     {
-        _id: "r2",
+        _id: "r3",
         user_id: "u2", 
         artist: "BTS",
         album: null,
@@ -35,7 +35,20 @@ export const dummyReviews = [
         review_header: "",
         review_content: "",
         
-        likes: 55,
+        likes: 5,
         dislikes: 6,
-    }
+    },
+    {
+        _id: "r6",
+        user_id: "u1", 
+        artist: "BTS",
+        album: null,
+        song: null,
+        rating: 5,
+        review_header: "",
+        review_content: "",
+        
+        likes: 59,
+        dislikes: 6,
+    },
 ]

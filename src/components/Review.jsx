@@ -5,7 +5,7 @@ import { useState } from "react";
 const getUserById = (id) =>
   dummyUsers.find((user) => user._id === id);
 
-function Review({ review }) {
+function Review({ review, setActivePage }) {
     const user = getUserById(review.user_id);
     const [selected, setSelected] = useState(null);
 
@@ -20,7 +20,9 @@ function Review({ review }) {
                     <img src={user.avatar} alt="" />
                 </div>
                 <div className="review-details">
-                    <div className='user'><span className="username">{user.username}</span>  3hrs ago</div>
+                    <div className='user'>
+                        <span className="username" onClick={() => setActivePage({page: "user", params: {id: user._id}})}>{user.username}</span>  3hrs ago
+                        </div>
                     <div className='title'>{review.review_header}</div>
                     <div className='rating'>
                         { Array.from({ length: Math.floor(review.rating) }).map((_, i) => (

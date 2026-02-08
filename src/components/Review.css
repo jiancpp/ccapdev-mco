@@ -30,6 +30,11 @@
     margin-top: 10px
 }
 
+.post .username:hover {
+    cursor: pointer;
+    color: #7d7676;
+}
+
 .post .title {
     font-size: 24px;
     font-weight: 600;
