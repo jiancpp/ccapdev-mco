@@ -6,8 +6,13 @@ import './MainLayout.css'
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import ReviewModal from '../pages/ReviewModal';
+import { dummyUsers } from "../data/dummyUsers";
 
-function MainLayout() {
+/***** Utilities ******/
+const getUserById = (id) => dummyUsers.find((user) => user._id === id );
+
+function MainLayout({ activeUserID, setActiveUser}) {
+    const activeUser = getUserById(activeUserID);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
@@ -15,13 +20,13 @@ function MainLayout() {
 
     return (
         <>
-            <Navbar />
+            <Navbar activeUser={activeUser}/>
             <div className="layout-container flex">
                 <Sidebar openModal={openModal}/>
 
                 {/* Main Content Panel */}
                 <div className="content">
-                    <Outlet context={{ openModal }}/>
+                    <Outlet context={{ openModal, activeUser }}/>
                 </div>
             </div>
 

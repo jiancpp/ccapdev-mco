@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom"; // to use params from links or routes
+import { useOutletContext } from "react-router-dom"; // to use params passed from Outlet
 import { useNavigate } from "react-router-dom";
 
 import "./UserProfile.css"
@@ -29,6 +30,7 @@ function UserProfile() {
     const navigate = useNavigate();
     const goToHome = () => navigate("/")
     const [section, setSection] = useState("reviews");
+    const { activeUser } = useOutletContext();
 
     const { user_id } = useParams();
     const user = getUserById(user_id);    
@@ -52,7 +54,15 @@ function UserProfile() {
             <div className="header">
                 <div className="banner"></div>
                 <div className="profile-pic"><img src={user.avatar} alt="" /></div>
-                <div className="user-follow-btn">Follow</div>
+                { user._id !== activeUser._id ? 
+                    (<div className="user-follow-btn">Follow</div>) :
+                    (<div 
+                        className="user-edit-profile-btn"
+                        onClick={ () => navigate(`/profile/${user_id}/edit-profile`)}>
+                            Edit Profile <i className="bi bi-pencil"></i>
+                    </div>)
+                }
+                
             </div>
             <div className="user-profile-details indent">
                 <div className="user-username">{user.username}</div>

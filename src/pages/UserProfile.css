@@ -66,6 +66,26 @@
     background: linear-gradient(to right, #770045, #ff5757, #770045 );
 }
 
+.user-profile .header .user-edit-profile-btn {
+    position: absolute;
+    right: 0;
+    bottom: -60px;
+
+    border: 1px solid #9e005d;
+    padding: 10px 35px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #9e005d;
+    letter-spacing: -0.05em;
+    border-radius: 30px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.user-profile .header .user-edit-profile-btn:hover {
+    background: #f4e1ec;
+}
+
 .user-profile .user-profile-details {
     margin-bottom: 30px;
 }

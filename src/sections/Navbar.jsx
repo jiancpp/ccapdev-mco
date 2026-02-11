@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import './Navbar.css'
 
 
-function Navbar() {
+function Navbar({ activeUser }) {
     const showLogin = () => useNavigate("/login");
 
     return (
@@ -13,10 +13,14 @@ function Navbar() {
                 </div>
                 <div className="buttons flex">
                     <i id='notifications' className="bi bi-bell-fill"></i>
-                    <span 
+                    <div 
                         id="profile-pic" 
                         title='Open settings menu'
-                        onClick={ showLogin }></span>
+                        onClick={ showLogin }>
+                        { activeUser !== null ?
+                          (<img src={activeUser.avatar}></img>) : ""
+                        }
+                    </div>
                 </div>
             </nav>
         </div>

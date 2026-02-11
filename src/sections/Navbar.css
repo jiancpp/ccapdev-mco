@@ -25,6 +25,7 @@ nav div {
 }
 
 .buttons {
+    align-items: center;
     justify-content: space-around;
     width: 100px;
 }
@@ -49,10 +50,17 @@ nav div {
 
 #profile-pic {
     background: white;
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     border-radius: 100%;
     cursor: pointer;
+}
+
+#profile-pic img {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    border: solid 1px white;
 }
 
 .logo {
