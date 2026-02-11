@@ -13,7 +13,7 @@ import { dummyAlbums } from "../data/dummyAlbums";
 const getArtistById = (id) => dummyArtists.find((artist) => artist._id === id);
 const getReviewsByArtist = (artist_id) => dummyReviews.filter((review) => review.artist_id === artist_id);
 const getSongsByArtist = (artist_id) => dummySongs.filter((song) => song.artist_id === artist_id);
-const getAlbumsByArtist = (artist_id) => dummyAlbums.filter((album) => album.artist_id === artist_id); // 2. Helper
+const getAlbumsByArtist = (artist_id) => dummyAlbums.filter((album) => album.artist_id === artist_id);
 
 function ArtistProfile() {
     const navigate = useNavigate();
