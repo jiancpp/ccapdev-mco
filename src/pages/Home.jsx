@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react'              
+import { useState, useEffect } from 'react' 
+import { useOutletContext } from "react-router-dom";
+
 import './Home.css'
 
 import Review from '../components/Review'
@@ -6,7 +8,9 @@ import { dummyReviews } from '../data/dummyReviews'
 import { trendingReviews } from '../data/trendingReviews'
 import { dummyUsers } from '../data/dummyUsers'
 
-function Home({ setActivePage, openModal }) {
+function Home() {
+    const { openModal } = useOutletContext();
+
     const [reviews, setReviews] = useState([]);
     const [filter, setFilter] = useState("recent")
 
@@ -40,7 +44,7 @@ function Home({ setActivePage, openModal }) {
                 <button className="review-button review-button-fixed" onClick={openModal}>Review +</button>
             </div>
             {reviews.map((review) => (
-                <Review key={review._id} review={review} setActivePage={setActivePage}/>
+                <Review key={review._id} review={review} />
             ))}
         </div>
     )

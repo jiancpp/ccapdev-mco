@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import './Navbar.css'
 
-function Navbar({ showLogin }) {
+
+function Navbar() {
+    const showLogin = () => useNavigate("/login");
+
     return (
         <div className="nav-container">
             <nav>

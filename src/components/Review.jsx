@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'; 
+
 import './Review.css'
 import ReviewEmbed from './ReviewEmbed';
 
@@ -7,10 +9,15 @@ import { useState } from "react";
 const getUserById = (id) =>
   dummyUsers.find((user) => user._id === id);
 
-function Review({ review, setActivePage }) {
-    const user = getUserById(review.user_id);
-    const [selected, setSelected] = useState(null);
+function Review({ review }) {
+    // Navigation
+    const navigate = useNavigate();
 
+    // Review Details
+    const user = getUserById(review.user_id);
+
+    // Reactions
+    const [selected, setSelected] = useState(null);
     const toggle = (reaction) => {
         setSelected((prev) => (prev===reaction ? null : reaction))
     }
@@ -23,8 +30,12 @@ function Review({ review, setActivePage }) {
                 </div>
                 <div className="review-details">
                     <div className='user'>
-                        <span className="username" onClick={() => setActivePage({page: "user", params: {id: user._id}})}>{user.username}</span>  3hrs ago
-                        </div>
+                        <span 
+                            className="username" 
+                            onClick={ () => navigate(`/profile/${user._id}`) }>
+                                {user.username}</span> {user._id} 3hrs ago
+                    </div>
+
                     <div className='title'>{review.review_header}</div>
                     <div className='rating'>
                         { Array.from({ length: Math.floor(review.rating) }).map((_, i) => (
@@ -43,7 +54,7 @@ function Review({ review, setActivePage }) {
                     className={`post-btn heart ${selected === "heart" ? "active" : ""}`}
                     onClick={() => toggle("heart")}>
                     <span className='icon'>
-                        <i className={`"bi ${selected === "heart" ? "bi-heart-fill" : "bi-heart"}`}></i>
+                        <i className={`bi ${selected === "heart" ? "bi-heart-fill" : "bi-heart"}`}></i>
                     </span>
                     <span className="gap"></span>
                     <span>{review.likes}</span>
@@ -52,7 +63,7 @@ function Review({ review, setActivePage }) {
                     className={`post-btn dislike ${selected === "dislike" ? "active" : ""}`}
                     onClick={() => toggle("dislike")}>
                     <span className='icon'>
-                        <i className={`"bi ${selected === "dislike" ? "bi-hand-thumbs-down-fill" : "bi-hand-thumbs-down"}`}></i>
+                        <i className={`bi ${selected === "dislike" ? "bi-hand-thumbs-down-fill" : "bi-hand-thumbs-down"}`}></i>
                     </span>
                     <span className="gap"></span>
                     <span>{review.dislikes}</span>

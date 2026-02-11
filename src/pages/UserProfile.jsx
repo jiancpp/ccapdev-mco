@@ -1,3 +1,6 @@
+import { useParams } from "react-router-dom"; // to use params from links or routes
+import { useNavigate } from "react-router-dom";
+
 import "./UserProfile.css"
 import Review from "../components/Review";
 
@@ -8,15 +11,21 @@ import { useState } from "react";
 const getUserById = (id) => dummyUsers.find((user) => user._id === id);
 const getReviewsByUser = (user_id) => dummyReviews.filter((review) => review.user_id === user_id);
 
-function UserProfile({ user_id, setActivePage }) {
-    const user = getUserById(user_id);    
-    const reviews = getReviewsByUser(user_id);
+function UserProfile() {
+    const navigate = useNavigate();
+    const goToHome = () => navigate("/")
 
+    const { user_id } = useParams();
+    const user = getUserById(user_id);    
+
+    if (!user) return( <div>User not found</div> )
+
+    const reviews = getReviewsByUser(user_id);
     const [section, setSection] = useState("reviews");
 
     return (
         <div className="user-profile">
-            <button className="back-btn" onClick={() => setActivePage({page: "home", params: {}})}>
+            <button className="back-btn" onClick={ goToHome }>
                 <i className="bi bi-arrow-left"></i> Back
             </button>
             <div className="header">
@@ -51,7 +60,7 @@ function UserProfile({ user_id, setActivePage }) {
             </div>
             <div className={`user-reviews indent ${section!=="reviews" ? "hidden" : ""}`}>
                 {reviews.map((review) => (
-                    <Review key={review._id} review={review} setActivePage={setActivePage}/>
+                    <Review key={review._id} review={review} />
                 ))}
             </div>
             <div className={`user-likes indent ${section!=="likes" ? "hidden" : ""}`}>
