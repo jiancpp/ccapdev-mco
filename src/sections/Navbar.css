@@ -7,6 +7,7 @@
 }
 
 nav {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -73,4 +74,61 @@ nav div {
     width: auto;
     object-fit: contain;
     margin-top: 40px;
+}
+
+
+.profile-settings-modal {
+    position: absolute;
+    top: 60px;
+    right: 13px;
+    z-index: 1000;
+}
+
+.profile-settings-modal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 220px;
+    background-color: white;
+    border-radius: 10px;
+    overflow-x: hidden;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.4);  /* box-shadow: [offset-x] [offset-y] [blur-radius] [spread-radius] [color] [inset]; */
+    color: black;
+}
+
+.profile-settings-modal li {
+    display: flex;
+    align-items: center;
+    margin: 6px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.profile-settings-modal li:hover {
+    background: #dedede;
+}
+
+.profile-settings-modal li:active {
+    background: #bdbdbd;
+}
+
+.profile-settings-modal .username {
+    text-align: left;
+    font-weight: 600;
+}
+
+.profile-settings-modal .profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin: 0;
+}
+
+.profile-settings-modal img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    margin: 0;
+    background-color: #5c0627;
 }

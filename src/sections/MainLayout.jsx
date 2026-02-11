@@ -20,7 +20,7 @@ function MainLayout({ activeUserID, setActiveUser}) {
 
     return (
         <>
-            <Navbar activeUser={activeUser}/>
+            <Navbar activeUser={activeUser} setActiveUser={setActiveUser}/>
             <div className="layout-container flex">
                 <Sidebar openModal={openModal}/>
 

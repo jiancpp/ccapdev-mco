@@ -38,7 +38,7 @@ export const dummyUsers = [
     {
         _id: "u5",
         username: "raisinlvrr",
-        avatar: "/assets/stangly.jpg",
+        avatar: "/assets/raisinlvrr.jpg",
         bio: "i stan raisins.",
         followers: ["u1", "u2", "u3", "u4", "u5"],
         following: ["u1", "u2", "u3", "u4", "u5"],

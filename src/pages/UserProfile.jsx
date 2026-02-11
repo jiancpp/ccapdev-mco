@@ -30,7 +30,7 @@ function UserProfile() {
     const navigate = useNavigate();
     const goToHome = () => navigate("/")
     const [section, setSection] = useState("reviews");
-    const { activeUser } = useOutletContext();
+    const { openModal, activeUser } = useOutletContext();
 
     const { user_id } = useParams();
     const user = getUserById(user_id);    
@@ -40,7 +40,7 @@ function UserProfile() {
 
     // ------ Data from User ------ //
     const followers = user.followers.map((id) => getUserById(id));
-    const following = user.followers.map((id) => getUserById(id));
+    const following = user.following.map((id) => getUserById(id));
     const reviews = getReviewsByUser(user_id);
     const liked_reviews = user.liked.map((id) => getReviewById(id));
 
@@ -93,13 +93,13 @@ function UserProfile() {
             </div>
             <div className={`user-reviews indent ${section!=="reviews" ? "hidden" : ""}`}>
                 {reviews.map((review) => (
-                    <Review key={review._id} review={review} />
+                    <Review key={review._id} review={review} activeUser={activeUser} />
                 ))}
             </div>
             <div className={`user-likes indent ${section!=="likes" ? "hidden" : ""}`}>
                 {liked_reviews.length > 0 ? 
                     (liked_reviews.map((review) => (
-                        <Review key={review._id} review={review} />
+                        <Review key={review._id} review={review} activeUser={activeUser} />
                     ))) :
                     (<NothingBlock />)
                 }

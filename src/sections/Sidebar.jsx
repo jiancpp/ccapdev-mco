@@ -25,11 +25,11 @@ function Sidebar({ openModal }) {
                 <span>Artists</span>
             </button>
 
-            <button className={ currentPath === "/login" ? "nav-button current-page" : "nav-button"} 
+            {/* <button className={ currentPath === "/login" ? "nav-button current-page" : "nav-button"} 
                 onClick={ goToLogIn }>                
                 <i className="bi bi-bar-chart-line-fill"></i>
                 <span>Charts</span>
-            </button>
+            </button> */}
             <button className="review-button review-button-dynamic" onClick={openModal}>
                 <span>Review +</span>
             </button>

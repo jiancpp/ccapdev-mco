@@ -32,7 +32,7 @@ export const dummyAlbums = [
         _id: "al201",
         artist_id: "a2",
         title: "Harry's House",
-        cover: "https://i.scdn.co/image/ab67616d00001e0282ce362511fb3d9dda6578ee",
+        cover: "/assets/HarrysHouse.jfif",
         year: "2022",
         songs: 13
     },
@@ -40,7 +40,7 @@ export const dummyAlbums = [
         _id: "al202",
         artist_id: "a2",
         title: "Fine Line",
-        cover: "https://i.scdn.co/image/ab67616d00001e0225180571abce9472f61bd722",
+        cover: "/assets/FineLine.jfif",
         year: "2019",
         songs: 12
     },
@@ -86,7 +86,7 @@ export const dummyAlbums = [
         _id: "al701",
         artist_id: "a7",
         title: "Limasawa Street",
-        cover: "/assets/BenAndBen.jpg",
+        cover: "/assets/LimasawaStreet.jfif",
         year: "2019",
         songs: 13
     },
@@ -94,7 +94,7 @@ export const dummyAlbums = [
         _id: "al702",
         artist_id: "a7",
         title: "Pebble House, Vol. 1",
-        cover: "/assets/BenAndBen.jpg",
+        cover: "/assets/PebbleHouse.jpg",
         year: "2021",
         songs: 12
     },
@@ -104,7 +104,7 @@ export const dummyAlbums = [
         _id: "al1101",
         artist_id: "a11",
         title: "Pagsibol",
-        cover: "/assets/SB19.jpg",
+        cover: "/assets/Pagsibol.jfif",
         year: "2021",
         songs: 6
     },
@@ -114,7 +114,7 @@ export const dummyAlbums = [
         _id: "al1201",
         artist_id: "a12",
         title: "SOUR",
-        cover: "/assets/OliviaRodrigo.jpg",
+        cover: "/assets/OliviaRodrigo.WEBP",
         year: "2021",
         songs: 11
     },
@@ -122,7 +122,7 @@ export const dummyAlbums = [
         _id: "al1202",
         artist_id: "a12",
         title: "GUTS",
-        cover: "/assets/OliviaRodrigo.jpg",
+        cover: "/assets/GUTS.jfif",
         year: "2023",
         songs: 12
     },
@@ -132,7 +132,7 @@ export const dummyAlbums = [
         _id: "al901",
         artist_id: "a9",
         title: "After Hours",
-        cover: "/assets/TheWeeknd.jpg",
+        cover: "/assets/AfterHours.jfif",
         year: "2020",
         songs: 14
     },
@@ -140,7 +140,7 @@ export const dummyAlbums = [
         _id: "al902",
         artist_id: "a9",
         title: "Dawn FM",
-        cover: "/assets/TheWeeknd.jpg",
+        cover: "/assets/DawnFM.jfif",
         year: "2022",
         songs: 16
     }
