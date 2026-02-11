@@ -35,6 +35,7 @@ html, body {
   padding: 0;
   height: 100%; /* optional, for full height layouts */
   overflow-x: hidden;
+  overflow-y: auto;
 
   font-family: var(--font-primary);
   font-size: var(--ls-tight);
