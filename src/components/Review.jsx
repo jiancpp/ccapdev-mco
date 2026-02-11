@@ -1,4 +1,6 @@
 import './Review.css'
+import ReviewEmbed from './ReviewEmbed';
+
 import { dummyUsers } from "../data/dummyUsers";
 import { useState } from "react";
 
@@ -32,10 +34,7 @@ function Review({ review, setActivePage }) {
                             <i className="bi bi-star-fill grey" key={i}></i>
                         ))}
                     </div>
-                    <div className='embed'>
-                        <span className='icon'><i className="bi bi-person-fill"></i></span>
-                        <span>{review.artist}</span>
-                    </div>
+                    <ReviewEmbed review={review}/>
                     <div className="description">{review.review_content}</div>
                 </div>
             </div>

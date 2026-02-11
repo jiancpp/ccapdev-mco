@@ -16,7 +16,7 @@ export const dummyReviews = [
         _id: "r2",
         user_id: "u3", 
         artist: "Cup of Joe",
-        album: null,
+        album: "SILAKBO",
         song: null,
         rating: 4,
         review_header: "BAWLIN RN",

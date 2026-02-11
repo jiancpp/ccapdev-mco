@@ -7,7 +7,7 @@
     margin-left: 22px;
 }
 
-.user-profile .back-btn {
+.back-btn {
     background: linear-gradient(to right, #9e005d, #ff5757, #9e005d); /* gradient colors */
     -webkit-background-clip: text; /* clip gradient to text */
     -webkit-text-fill-color: transparent; /* make text fill transparent */
@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 
-.user-profile .back-btn:hover {
+.back-btn:hover {
     opacity: 0.5;
 }
 

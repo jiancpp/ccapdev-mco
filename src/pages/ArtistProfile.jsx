@@ -14,7 +14,9 @@ function ArtistProfile({ artist_id, setActivePage }) {
 
     return (
         <div className="artist-profile">
-            <button className="back-btn" onClick={() => setActivePage({page: "artists", params: {}})}>Back</button>
+            <button className="back-btn" onClick={() => setActivePage({page: "artists", params: {}})}>
+                <i className="bi bi-arrow-left"></i> Back
+            </button>
 
             <div className="header">
                 <div className="banner"></div>

@@ -50,22 +50,6 @@
     color: gray;
 }
 
-.post .embed {
-    padding: 10px;
-    background: linear-gradient(90deg, #fbc2d8, #fff4e0);
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.post .embed:hover {
-    background: linear-gradient(90deg, #edb7cc, #e8decb);
-}
-
-.post .embed .icon {
-    display: inline-block;
-    margin: 0 10px 0 5px;
-}
-
 .post .description {
     margin: 20px 0;
 }

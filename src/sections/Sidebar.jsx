@@ -9,7 +9,7 @@ function Sidebar({activePage, setActivePage, openModal}) {
                 <span>Home</span>
             </button>
         
-            <button className={activePage.page==="artists" ? "nav-button current-page" : "nav-button"} 
+            <button className={activePage.page==="artists" || activePage.page ==='artist' ? "nav-button current-page" : "nav-button"} 
                     onClick={() => setActivePage({ page: "artists", params: {} })}>
                     <i className="bi bi-people-fill"></i>
                 <span>Artists</span>
