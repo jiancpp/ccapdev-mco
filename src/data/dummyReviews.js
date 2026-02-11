@@ -2,6 +2,7 @@ export const dummyReviews = [
     {
         _id: "r1",
         user_id: "u1", 
+        artist_id: "a2",
         artist: "Harry Styles",
         album: null,
         song: null,
@@ -15,6 +16,7 @@ export const dummyReviews = [
     {
         _id: "r2",
         user_id: "u3", 
+        artist_id: "a1",
         artist: "Cup of Joe",
         album: "SILAKBO",
         song: null,
@@ -29,6 +31,7 @@ export const dummyReviews = [
         _id: "r3",
         user_id: "u2", 
         artist: "BTS",
+        artist_id: "a4",
         album: null,
         song: null,
         rating: 1,
@@ -41,7 +44,8 @@ export const dummyReviews = [
     {
         _id: "r6",
         user_id: "u1", 
-        artist: "BTS",
+        artist_id: "a3",
+        artist: "Sabrina Carpenter",
         album: null,
         song: null,
         rating: 5,

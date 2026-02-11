@@ -64,7 +64,7 @@ function ArtistProfile() {
 
             <div className="artist-reviews indent">
                 {reviews.map((review) => (
-                    <Review key={review._id} review={review} setActivePage={setActivePage}/>
+                    <Review key={review._id} review={review} />
                 ))}
             </div>
         </div>

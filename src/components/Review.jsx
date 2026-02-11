@@ -33,7 +33,7 @@ function Review({ review }) {
                         <span 
                             className="username" 
                             onClick={ () => navigate(`/profile/${user._id}`) }>
-                                {user.username}</span> {user._id} 3hrs ago
+                                {user.username}</span>  3hrs ago
                     </div>
 
                     <div className='title'>{review.review_header}</div>
@@ -45,7 +45,7 @@ function Review({ review }) {
                             <i className="bi bi-star-fill grey" key={i}></i>
                         ))}
                     </div>
-                    <ReviewEmbed review={review}/>
+                    <ReviewEmbed review={review} navigate={navigate}/>
                     <div className="description">{review.review_content}</div>
                 </div>
             </div>

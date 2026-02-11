@@ -3,32 +3,52 @@ import { useNavigate } from "react-router-dom";
 
 import "./UserProfile.css"
 import Review from "../components/Review";
+import NothingBlock from "../components/NothingBlock"
 
 import { dummyUsers } from "../data/dummyUsers";
 import { dummyReviews } from "../data/dummyReviews";
+import { trendingReviews } from "../data/trendingReviews";
 import { useState } from "react";
 
+/***** Utilities ******/
 const getUserById = (id) => dummyUsers.find((user) => user._id === id);
-const getReviewsByUser = (user_id) => dummyReviews.filter((review) => review.user_id === user_id);
+const getReviewById = (id) => {
+    var review = dummyReviews.find((review) => review._id === id);
+    if (!review) review = trendingReviews.find((review) => review._id === id);
+    return review;
+}
+const getReviewsByUser = (user_id) => {
+    const reviews = dummyReviews.filter((review) => review.user_id === user_id);
+    const trending = trendingReviews.filter((review) => review.user_id === user_id)
+    return reviews.concat(trending);
+}
 
+/***** Main Component *****/
 function UserProfile() {
+    // ------- Helper Utilities ------ //
     const navigate = useNavigate();
     const goToHome = () => navigate("/")
+    const [section, setSection] = useState("reviews");
 
     const { user_id } = useParams();
     const user = getUserById(user_id);    
 
-    // Error Handling
+    // ----- Error Handling ------ //
     if (!user) return( <div style={{ padding: "20px" }}>User not found</div> )
 
+    // ------ Data from User ------ //
+    const followers = user.followers.map((id) => getUserById(id));
+    const following = user.followers.map((id) => getUserById(id));
     const reviews = getReviewsByUser(user_id);
-    const [section, setSection] = useState("reviews");
+    const liked_reviews = user.liked.map((id) => getReviewById(id));
 
     return (
         <div className="user-profile">
             <button className="back-btn" onClick={ goToHome }>
                 <i className="bi bi-arrow-left"></i> Back
             </button>
+
+            {/* HEADER PROFILE */}
             <div className="header">
                 <div className="banner"></div>
                 <div className="profile-pic"><img src={user.avatar} alt="" /></div>
@@ -36,9 +56,11 @@ function UserProfile() {
             </div>
             <div className="user-profile-details indent">
                 <div className="user-username">{user.username}</div>
-                <div className="user-stats">6 followers  •  6 following</div>
+                <div className="user-stats">{user.followers.length} followers  •  {user.following.length} following</div>
                 <div className="user-bio">{user.bio}</div>
             </div>
+
+            {/* USER HISTORY (e.g. REVIEW, LIKES) */}
             <div className="user-profile-nav indent">
                 <label className="user-nav-item reviews">
                     <input 
@@ -65,8 +87,12 @@ function UserProfile() {
                 ))}
             </div>
             <div className={`user-likes indent ${section!=="likes" ? "hidden" : ""}`}>
-                <div><i className="bi bi-emoji-neutral"></i></div>
-                <div>Nothing here yet.</div>
+                {liked_reviews.length > 0 ? 
+                    (liked_reviews.map((review) => (
+                        <Review key={review._id} review={review} />
+                    ))) :
+                    (<NothingBlock />)
+                }
             </div>
         </div>
     )

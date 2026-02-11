@@ -32,8 +32,8 @@ export const dummyArtists = [
         photo: "/assets/BTS.jfif",
         country: "United States",
         rating: 5,
-        reviews: 143,
-        songs: 21
+        reviews: 163,
+        songs: 26
     },
     {
         _id: "a5",

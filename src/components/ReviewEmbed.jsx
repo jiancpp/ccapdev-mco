@@ -1,12 +1,12 @@
 import './ReviewEmbed.css'
 
-function ReviewEmbed({ review }) {
+function ReviewEmbed({ review, navigate }) {
     // Artist Review
     if (review.song!==null) {
         return null
     } else if (review.album!==null) {
         return (
-            <div className="embed embed-album">
+            <div className="embed embed-album" onClick={ () => navigate(`/artists/artist-profile/${review.artist_id}`)}>
                 <div className="album-cover">
                     <img src="/assets/Silakbo.jpg" alt="" />
                 </div>
@@ -21,7 +21,7 @@ function ReviewEmbed({ review }) {
         )
     } else {
         return (
-            <div className='embed embed-artist'>
+            <div className="embed embed-artist" onClick={() => navigate(`/artists/artist-profile/${review.artist_id}`)}>
                 <span className='icon'><i className="bi bi-person-fill"></i></span>
                 <span>{review.artist}</span>
             </div>

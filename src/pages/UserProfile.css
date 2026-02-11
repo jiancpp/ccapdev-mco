@@ -21,6 +21,8 @@
     opacity: 0.5;
 }
 
+/***** HEADER PROFILE ******/
+
 .user-profile .header {
     background: linear-gradient(90deg, #fbc2d8, #fff4e0);
     position: relative;
@@ -58,6 +60,10 @@
     color: white;
     letter-spacing: -0.05em;
     border-radius: 30px;
+}
+
+.user-profile .header .user-follow-btn:hover {
+    background: linear-gradient(to right, #770045, #ff5757, #770045 );
 }
 
 .user-profile .user-profile-details {
@@ -125,25 +131,6 @@
 
 .user-profile-nav:has(.likes input:checked)::after {
     left: 100px;
-}
-
-.user-profile .user-likes {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-}
-
-.user-profile .user-likes div {
-    color: #aaa;
-    margin-top: 10px;
-    font-size: 20px;
-}
-
-.user-profile .user-likes i{
-    display: inline-block;
-    font-size: 50px;
-    margin-top: 50px;
 }
 
 .user-profile .hidden {

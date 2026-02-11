@@ -15,8 +15,8 @@
 }
 
 .embed .icon {
-    display: inline-block;
     margin: 0 10px 0 5px;
+    vertical-align: middle;
 }
 
 .embed .album-cover {
@@ -36,8 +36,8 @@
 }
 
 
-.embed .album-details * {
-    margin-bottom: 6px;
+.album-details span{
+    line-height: 1.5em;
 }
 
 .embed .album-details .album-title{
