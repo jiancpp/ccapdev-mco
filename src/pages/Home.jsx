@@ -9,7 +9,7 @@ import { trendingReviews } from '../data/trendingReviews'
 import { dummyUsers } from '../data/dummyUsers'
 
 function Home() {
-    const { openModal } = useOutletContext();
+    const { openModal, activeUser } = useOutletContext();
 
     const [reviews, setReviews] = useState([]);
     const [filter, setFilter] = useState("recent")
@@ -44,7 +44,7 @@ function Home() {
                 <button className="review-button review-button-fixed" onClick={openModal}>Review +</button>
             </div>
             {reviews.map((review) => (
-                <Review key={review._id} review={review} />
+                <Review key={review._id} review={review} activeUser={activeUser}/>
             ))}
         </div>
     )

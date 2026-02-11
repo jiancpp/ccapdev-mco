@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 
 import "./ArtistProfile.css";
 import Review from "../components/Review";
@@ -18,6 +18,7 @@ const getAlbumsByArtist = (artist_id) => dummyAlbums.filter((album) => album.art
 function ArtistProfile() {
     const navigate = useNavigate();
     const { artist_id } = useParams();
+    const { activeUser } = useOutletContext();
     
     const [activeTab, setActiveTab] = useState("reviews");
 
@@ -88,7 +89,7 @@ function ArtistProfile() {
                     <div className="artist-reviews indent">
                         {reviews.length > 0 ? (
                             reviews.map((review) => (
-                                <Review key={review._id} review={review} />
+                                <Review key={review._id} review={review} activeUser={activeUser} />
                             ))
                         ) : (
                             <p className="no-data-msg">No reviews yet.</p>

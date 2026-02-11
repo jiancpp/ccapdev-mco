@@ -1,8 +1,71 @@
+.visible {
+    visibility: visible;
+}
+
+.hidden {
+    visibility: none;
+}
+
 .post {
     border: 1px solid #bdbdbd;
     color: black;
     border-radius: 20px;
     margin-top: 15px;
+    position: relative;
+}
+
+.post .options {
+    position: absolute;
+    font-size: 24px;
+    top: 18px;
+    right: 22px;
+    color: #7d7676;
+    cursor: pointer;
+}
+
+.post .options-modal {
+    position: absolute;
+    right: 20px;
+    top: 45px;
+}
+
+.post .options-modal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 150px;
+    background-color: white;
+    border-radius: 10px;
+    overflow-x: hidden;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.4);  /* box-shadow: [offset-x] [offset-y] [blur-radius] [spread-radius] [color] [inset]; */
+}
+
+.post .options-modal li {
+    display: block;
+    margin: 6px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.post .options-modal li:hover {
+    background: #dedede;
+}
+
+.post .options-modal li:active {
+    background: #bdbdbd;
+}
+
+.post .options-modal i {
+    margin-right: 10px;
+}
+
+.post .options:hover {
+    color: #a69e9e;
+}
+
+.post .options:active {
+    color: #948b8b;
 }
 
 .post .post-content {
