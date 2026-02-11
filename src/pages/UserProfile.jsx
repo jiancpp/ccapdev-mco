@@ -18,7 +18,8 @@ function UserProfile() {
     const { user_id } = useParams();
     const user = getUserById(user_id);    
 
-    if (!user) return( <div>User not found</div> )
+    // Error Handling
+    if (!user) return( <div style={{ padding: "20px" }}>User not found</div> )
 
     const reviews = getReviewsByUser(user_id);
     const [section, setSection] = useState("reviews");

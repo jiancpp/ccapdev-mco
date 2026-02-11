@@ -1,3 +1,5 @@
+import { useParams, useNavigate } from "react-router-dom";
+
 import "./ArtistProfile.css"
 import Review from "../components/Review";
 import { StarRating } from "../components/StarRating";
@@ -8,13 +10,18 @@ import { dummyReviews } from "../data/dummyReviews";
 const getArtistById = (id) => dummyArtists.find((artist) => artist._id === id);
 const getReviewsByArtist = (artist_id) => dummyReviews.filter((review) => review.artist_id === artist_id);
 
-function ArtistProfile({ artist_id, setActivePage }) {
+function ArtistProfile() {
+    const navigate = useNavigate();
+    const { artist_id } = useParams();
+
     const artist = getArtistById(artist_id);    
     const reviews = getReviewsByArtist(artist_id);
 
+    if (!artist) return( <div style={{ padding: "20px" }}>Artist not found</div> )
+
     return (
         <div className="artist-profile">
-            <button className="back-btn" onClick={() => setActivePage({page: "artists", params: {}})}>
+            <button className="back-btn" onClick={ () => navigate("/artists")}>
                 <i className="bi bi-arrow-left"></i> Back
             </button>
 
