@@ -1,9 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 import './ArtistBlock.css'
 import { StarRating } from './StarRating';
 
-function ArtistBlock({ artist, setActivePage }) {
+function ArtistBlock({ artist }) {
+    const navigate = useNavigate();
+
     return (
-        <div className="artist-block" onClick={() => setActivePage({ page: "artist", params: { id: artist._id } })}
+        <div className="artist-block" onClick={ () => navigate(`/artists/artist-profile/${artist._id}`) }
             style={{ cursor: "pointer" }}
         >
             <div className='block-content'>

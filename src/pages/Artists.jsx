@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react'              
+import { useState, useEffect } from 'react'    
+import { useOutletContext } from 'react-router-dom'          
 import './Artists.css'
 
 import ArtistBlock from '../components/ArtistBlock'
 import { dummyArtists } from '../data/dummyArtists'
 
-function Artists({ openModal, setActivePage }) {
+function Artists() {
+    const { openModal } = useOutletContext()
+
     const [artists, setArtists] = useState([]);
 
     // Simulates API Fetching
@@ -23,9 +26,9 @@ function Artists({ openModal, setActivePage }) {
             </div>
             <div className="blocks">
                 {artists.map((artist) => (
-                    <ArtistBlock key={artist._id} 
-                    artist={artist}
-                    setActivePage={setActivePage}/>
+                    <ArtistBlock 
+                        key={artist._id} 
+                        artist={artist}/>
                 ))}
             </div>
             

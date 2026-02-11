@@ -1,47 +1,37 @@
-import { useState } from 'react'              // for dynamic components
-import './App.css'
+import { Routes, Route } from "react-router-dom";
 
-import Navbar from './sections/Navbar';
-import Sidebar from './sections/Sidebar';
-import MainContent from './sections/MainContent';
-import ReviewModal from './pages/ReviewModal';
+/******** Layouts ********/
+import MainLayout from './sections/MainLayout'
+
+/******** Components ********/
 import Login from './pages/Login'
+import Home from './pages/Home.jsx'
+import Artists from './pages/Artists.jsx'
+import UserProfile from './pages/UserProfile.jsx'
+import ArtistProfile from './pages/ArtistProfile.jsx'
+import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 
 function App() {
-  const [activePage, setActivePage] = useState({page: "home", params: {}});
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
-  // TODO: Change Later
-  const showLogin = () => setIsLoginOpen(true);
-
   return (
-    <>
-      <div className={`container ${!isLoginOpen ? "hidden" : ""}`}>
-        <Login />
-      </div>
-      <div className={`container ${isLoginOpen ? "hidden" : ""}`}>
-        <Navbar showLogin={showLogin} />
-        <div className="flex">
-          <Sidebar 
-            activePage={activePage} 
-            setActivePage={setActivePage} 
-            openModal={openModal} 
-          />
-          <MainContent 
-            activePage={activePage} 
-            setActivePage={setActivePage}
-            openModal={openModal} 
-          />
-        </div>
-      </div>
-      <ReviewModal isOpen={isModalOpen} onClose={closeModal} />
-    </>
+    <div id="main">
+      <Routes>
+        <Route element={<ScrollToTopWrapper />}>
+          {/* AUTH PAGES */}
+          <Route path='/login' element={<Login />} />
+          {/* <Route path='/register' element={<Register />} /> */}
+
+          {/* MAIN PAGES (w/ Navbar and Sidebar) */}
+          <Route element={<MainLayout />}>
+            <Route path='/' element={<Home />}></Route>
+            <Route path='/artists' element={<Artists />}></Route>
+            <Route path='/profile/:user_id' element={<UserProfile />}></Route>
+            <Route path='/artists/artist-profile/:artist_id' element={<ArtistProfile />}></Route>
+          </Route>
+        </Route>
+      </Routes>
+    </div>
   )
 }
 

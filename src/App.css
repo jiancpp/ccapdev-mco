@@ -11,3 +11,10 @@
 .hidden {
   display: none;
 }
+
+.content {
+  width: 100%;
+  min-height: 100vh;
+  border-left: solid 1px rgb(223, 223, 223);
+  padding-bottom: 15px;
+}
