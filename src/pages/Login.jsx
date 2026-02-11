@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import "./Login.css"
 
 function Login() {
-
+    const navigate = useNavigate();
+    
     return (
         <div id="login">
             <div className="background">
@@ -32,12 +34,12 @@ function Login() {
                             Remember Me
                         </div>
                         <div className="forgot-password">
-                            <a href="sign-up.html" className="forgot-password-link">Forgot Password?</a>
+                            <a href="/" className="forgot-password-link">Forgot Password?</a>
                         </div>
                     </div>
-                    <a href="home.html" className="login-button">LOGIN</a>
+                    <a href="/" className="login-button">LOGIN</a>
                     <div className="create-account">
-                        <p className="no-account">Don't have an account? <a href="sign-up.html" className="sign-up-link">Sign-up.</a></p>
+                        <p className="no-account">Don't have an account? <a href="/" className="sign-up-link">Sign-up.</a></p>
                     </div>
                 </div>
             </div>
