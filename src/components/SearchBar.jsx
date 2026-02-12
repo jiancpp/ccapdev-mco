@@ -63,6 +63,17 @@ export function SearchBar({ songs, albums, artists, onSelect }) {
     );
 }
 
-export function ReviewSearchBar({  }) {
-
+export function ReviewSearchBar({ onSearchChange }) {
+    return (
+        <div className="search-parent">
+            <div className="search-container">
+                <i className="bi bi-search search-icon"></i>
+                <input 
+                    type="text" 
+                    placeholder="Search reviews" 
+                    onChange={(e) => onSearchChange(e.target.value)}
+                />
+            </div>
+        </div>
+    );
 }
