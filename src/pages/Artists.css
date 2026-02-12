@@ -34,19 +34,14 @@
     background: linear-gradient(to right, rgba(158, 0, 92, 0.25), rgba(255, 87, 87, 0.25), rgba(158, 0, 92, 0.25) );
 }
 
-#artists .review-button {
-    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d );
-    color: white;
-    height: 50px;
-    border: none;
-    border-radius: 15px;
-    padding: 0 40px;
+#artists .filters .search-container {
+    height: 40px;
+    margin-right: 15px;
+    margin-bottom: auto;
+    width: 500px;
 
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: -1px;
-
-    cursor: pointer;
+    background-color: white;
+    transition: 0.3s;
 }
 
 .blocks {

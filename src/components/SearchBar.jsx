@@ -77,3 +77,48 @@ export function ReviewSearchBar({ onSearchChange }) {
         </div>
     );
 }
+
+export function ArtistSearchBar({ onSearchChange }) {
+    return (
+        <div className="search-parent">
+            <div className="search-container">
+                <i className="bi bi-search search-icon"></i>
+                <input 
+                    type="text" 
+                    placeholder="Search artists" 
+                    onChange={(e) => onSearchChange(e.target.value)}
+                />
+            </div>
+        </div>
+    );
+}
+
+export function AlbumSearchBar({ onSearchChange }) {
+    return (
+        <div className="search-parent">
+            <div className="search-container">
+                <i className="bi bi-search search-icon"></i>
+                <input 
+                    type="text" 
+                    placeholder="Search artists" 
+                    onChange={(e) => onSearchChange(e.target.value)}
+                />
+            </div>
+        </div>
+    );
+}
+
+export function SongSearchBar({ onSearchChange }) {
+    return (
+        <div className="search-parent">
+            <div className="search-container">
+                <i className="bi bi-search search-icon"></i>
+                <input 
+                    type="text" 
+                    placeholder="Search artists" 
+                    onChange={(e) => onSearchChange(e.target.value)}
+                />
+            </div>
+        </div>
+    );
+}

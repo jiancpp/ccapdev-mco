@@ -67,7 +67,7 @@ function Home() {
                         onClick={() => toggle("trending")}>
                         Trending
                     </button>
-                    <div className="search-container fixed">
+                    <div className="search-container">
                         <ReviewSearchBar onSearchChange={setSearchTerm} />
                     </div>
                 </div>
