@@ -30,7 +30,7 @@ function UserProfile() {
     const navigate = useNavigate();
     const goToHome = () => navigate("/")
     const [section, setSection] = useState("reviews");
-    const { openModal, activeUser } = useOutletContext();
+    const { activeUser, openProfileEdit } = useOutletContext();
 
     const { user_id } = useParams();
     const user = getUserById(user_id);    
@@ -58,7 +58,7 @@ function UserProfile() {
                     (<div className="user-follow-btn">Follow</div>) :
                     (<div 
                         className="user-edit-profile-btn"
-                        onClick={ () => navigate(`/profile/${user_id}/edit-profile`)}>
+                        onClick={ openProfileEdit }>
                             Edit Profile <i className="bi bi-pencil"></i>
                     </div>)
                 }

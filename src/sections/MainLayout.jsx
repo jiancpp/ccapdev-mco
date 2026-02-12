@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import ReviewModal from '../pages/ReviewModal';
 import { dummyUsers } from "../data/dummyUsers";
+import EditProfileModal from "../pages/EditProfileModal";
 
 /***** Utilities ******/
 const getUserById = (id) => dummyUsers.find((user) => user._id === id );
@@ -14,9 +15,12 @@ const getUserById = (id) => dummyUsers.find((user) => user._id === id );
 function MainLayout({ activeUserID, setActiveUser}) {
     const activeUser = getUserById(activeUserID);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isProfileOpen, setIsProfileOpen] = useState(true);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
+    const openProfileEdit = () => setIsProfileOpen(true);
+    const closeProfileEdit = () => setIsProfileOpen(false);
 
     return (
         <>
@@ -26,12 +30,13 @@ function MainLayout({ activeUserID, setActiveUser}) {
 
                 {/* Main Content Panel */}
                 <div className="content">
-                    <Outlet context={{ openModal, activeUser }}/>
+                    <Outlet context={{ activeUser, openModal, openProfileEdit }}/>
                 </div>
             </div>
 
             {/* Global Modal/s */}
             <ReviewModal isOpen={isModalOpen} onClose={closeModal} />
+            <EditProfileModal isOpen={isProfileOpen} onClose={closeProfileEdit} user={activeUser} />
         </>
     )
 }

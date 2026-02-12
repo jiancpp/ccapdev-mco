@@ -9,7 +9,6 @@ import Login from './pages/Login'
 import Home from './pages/Home.jsx'
 import Artists from './pages/Artists.jsx'
 import UserProfile from './pages/UserProfile.jsx'
-import UserProfileEdit from './pages/UserProfileEdit.jsx'
 import ArtistProfile from './pages/ArtistProfile.jsx'
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 
@@ -32,7 +31,6 @@ function App() {
             <Route path='/' element={<Home />}></Route>
             <Route path='/artists' element={<Artists />}></Route>
             <Route path='/profile/:user_id' element={<UserProfile />}></Route>
-            <Route path='/profile/:user_id/edit-profile' element={<UserProfileEdit />}></Route>
             <Route path='/artists/artist-profile/:artist_id' element={<ArtistProfile />}></Route>
           </Route>
         </Route>

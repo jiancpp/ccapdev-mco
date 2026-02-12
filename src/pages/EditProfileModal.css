@@ -1,0 +1,121 @@
+.profile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, rgba(255, 87, 87, .2), rgba(158, 0, 93, .2));
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.3s ease;
+}
+
+.profile-modal-content {
+    display: flex;
+    flex-direction: column;
+    background: #8d143d;
+    padding: 40px 40px 60px 40px;
+    border-radius: 20px;
+    width: 650px;
+    border: 1px solid #a11547;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    transform: translateY(20px) scale(0.99);
+    transition: transform 0.2s ease;
+}
+
+.profile-modal-overlay.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.profile-modal-overlay.open .profile-modal-content {
+    /* Ease up */
+    transform: translateY(0) scale(1);
+}
+
+.profile-modal-title {
+    background: radial-gradient(circle at center, rgb(255, 87, 87), white);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: "Carollo Playscript", italic;
+    letter-spacing: var(--ls-very-tight);
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    margin-top: -5px;
+    text-align: left;
+}
+
+.edit-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 30px
+}
+
+.edit-picture, .edit-picture img{
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    box-shadow: -1px 1px 8px rgba(83, 12, 36, 0.75);
+    cursor: pointer;
+}
+
+.edit-item-container {
+    position: relative;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.edit-details label {
+    font-size: 15px;
+    color: #ffcaca;
+}
+
+.edit-details input[type="text"], .edit-details textarea{
+    padding: 10px;
+    background: #ffdada;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    transition:
+        background-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.15s ease;
+}
+
+.edit-details input[type="text"]:focus, .edit-details textarea:focus {
+    border-color: #ffdada;
+    outline: none; 
+    background: #ffcaca;
+    transform: scale(1.01);
+}
+
+.edit-details #user-bio {
+    height: 5rem;
+}
+
+.edit-details .save {
+    position: absolute;
+    background: #ffafaf;
+    right: 40px;
+    padding: 10px 30px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-details .save:hover {
+    background: #fba3a3;
+}
+
+.edit-details .save:active {
+    background: #fc9a9a;
+}
