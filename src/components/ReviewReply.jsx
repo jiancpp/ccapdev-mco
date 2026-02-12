@@ -28,7 +28,7 @@ function ReviewReply({ review, activeUser }) {
     if (review?.reply !== "") {
         return (
             <div
-                className={`post ${deleteReview}`}
+                className={`post ${deleteReview} reply`}
                 onClick={() => setOpenOptions("hidden")}
                 onMouseLeave={() => setOpenOptions("hidden")}>
                 <div className="options"

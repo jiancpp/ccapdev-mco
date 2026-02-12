@@ -121,6 +121,7 @@
 /* React Buttons */
 .post .post-actions {
     margin: 15px;
+    margin-left: 30px;
 }
 
 .post .post-actions .post-btn {

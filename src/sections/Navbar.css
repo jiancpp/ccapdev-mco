@@ -34,13 +34,14 @@ nav div {
 #notifications {
     position: relative;
     display: inline-block;
-    font-size: 30px;
+    font-size: 25px;
+    color: #fdfdff;
 }
 
 #notifications::after {
     content: "";
     position: absolute;
-    right: 30;
+    right: -1px;
 
     width: 10px;
     height: 10px;
