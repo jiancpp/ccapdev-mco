@@ -27,10 +27,11 @@
 
 .artist-block .details {
     color: #810430;
-    background-color: #df648f5d;
+    background-color: #df648f3d;
     padding: 5px 8px;
     margin-left: auto;
-    margin-bottom: 12px;
+    margin-bottom: 2px;
+    margin-top: 10px;
     border-radius: 10px;
     font-size: var(--fs-sm);
     font-style: italic;
