@@ -15,7 +15,7 @@ const getUserById = (id) => dummyUsers.find((user) => user._id === id );
 function MainLayout({ activeUserID, setActiveUser}) {
     const activeUser = getUserById(activeUserID);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isProfileOpen, setIsProfileOpen] = useState(true);
+    const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
