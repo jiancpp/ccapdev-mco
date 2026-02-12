@@ -1,0 +1,68 @@
+import { useState } from 'react';
+import './SearchBar.css';
+
+export function SearchBar({ songs, albums, artists, onSelect }) {
+    const [searchTerm, setSearchTerm] = useState("");
+
+    const getArtistName = (id) => {
+        const artist = artists.find(a => a._id === id);
+        return artist ? artist.name : "Unknown Artist";
+    };
+
+    const filteredSongs = songs.filter(song => {
+        const artistName = getArtistName(song.artist_id);
+        return (
+            song.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            artistName.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    });
+
+    const filteredAlbums = albums.filter(album => {
+        const albumTitle = album.title || "";
+        const artistName = getArtistName(album.artist_id);
+        return (
+            albumTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            artistName.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    });
+
+    const handleSelect = (item) => {
+        onSelect(item);
+        setSearchTerm("");
+    };
+
+    return (
+        <div className="search-parent">
+            <div className="search-container">
+                <i className="bi bi-search search-icon"></i>
+                <input 
+                    type="text" 
+                    placeholder="Search songs and albums" 
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div>
+
+            {searchTerm && (
+                <div className="search-results">
+                    {filteredSongs.map(song => (
+                        <div key={song._id} className="result-item" onClick={() => handleSelect(song)}>
+                            <i className="bi bi-music-note song-icon"></i>
+                            <span className='res-title'>{song.title} </span><span className="res-subtitle">{getArtistName(song.artist_id)}</span>
+                        </div>
+                    ))}
+                    {filteredAlbums.map(album => (
+                        <div key={album._id} className="result-item" onClick={() => handleSelect(album)}>
+                            <i className="bi bi-vinyl album-icon"></i>
+                            <span className='res-title'>{album.name || album.title} </span><span className="res-subtitle">{getArtistName(album.artist_id)}</span>
+                        </div>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
+export function ReviewSearchBar({  }) {
+
+}

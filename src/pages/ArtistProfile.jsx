@@ -31,9 +31,20 @@ function ArtistProfile() {
 
     return (
         <div className="artist-profile">
-            <button className="back-btn" onClick={() => navigate("/artists")}>
-                <i className="bi bi-arrow-left"></i> Back
-            </button>
+            <div className="top-bar">
+                <button className="back-btn" onClick={() => navigate(-1)}>
+                    <i className="bi bi-arrow-left"></i> Back
+                </button>
+                
+                <div className="search-container">
+                    <input 
+                        type="text" 
+                        placeholder="Search songs, artists, and albums" 
+                        className="search-input"
+                    />
+                    <i className="bi bi-search search-icon"></i>
+                </div>
+            </div>
 
             <div className="header">
                 <div className="banner"></div>
@@ -105,7 +116,12 @@ function ArtistProfile() {
                     <div className="songs-list">
                         {songs.length > 0 ? (
                             songs.map((song, index) => (
-                                <div className="song-row" key={song._id}>
+                                <div 
+                                    className="song-row" 
+                                    key={song._id}
+                                    onClick={() => navigate(`/songs/${song._id}`)} 
+                                    style={{ cursor: "pointer" }}
+                                >
                                     <div className="song-image-container">
                                         <img 
                                             src={song.cover || artist.photo} 
