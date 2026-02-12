@@ -3,6 +3,7 @@
     background: linear-gradient(90deg, #fbc2d8, #fff4e0);
     border-radius: 10px;
     cursor: pointer;
+    box-shadow: 0px 2px 10px rgba(83, 83, 83, 0.2);
 }
 
 .embed:hover {
@@ -38,6 +39,7 @@
 
 .album-details span{
     line-height: 1.5em;
+    color: rgb(66, 11, 11);
 }
 
 .embed .album-details .album-title{
