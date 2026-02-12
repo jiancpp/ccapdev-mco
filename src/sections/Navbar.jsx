@@ -1,10 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import './Navbar.css'
 import { useState } from "react";
 
 
 function Navbar({ activeUser, setActiveUser }) {
     const navigate = useNavigate();
+    const { pathname } = useLocation();
     const [openSettings, setOpenSettings] = useState("hidden");
 
     return (
@@ -29,6 +30,10 @@ function Navbar({ activeUser, setActiveUser }) {
                 </div>
                 <div className="buttons flex">
                     {
+                        pathname.startsWith("/artist-view") ? 
+                        (                               
+                            <div className="login-btn" onClick={() => navigate("/about")}>Log Out</div>
+                        ) :
                         activeUser ?
                             (
                                 <>

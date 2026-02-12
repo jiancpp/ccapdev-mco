@@ -1,4 +1,14 @@
 export const dummyAlbums = [
+    // --- CUP OF JOE (a1) ---
+    {
+        _id: "al101",
+        artist_id: "a1",
+        title: "SILAKBO",
+        cover: "/assets/Silakbo.jpg", 
+        year: "2019",
+        songs: 15
+    },
+
     // --- IV OF SPADES (a6) ---
     {
         _id: "al601",
@@ -124,7 +134,7 @@ export const dummyAlbums = [
         _id: "al1201",
         artist_id: "a12",
         title: "SOUR",
-        cover: "/assets/OliviaRodrigo.WEBP",
+        cover: "/assets/SOUR.png",
         year: "2021",
         songs: 11
     },

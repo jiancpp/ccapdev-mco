@@ -33,7 +33,7 @@ function ArtistProfile() {
         <div className="artist-profile">
             <div className="top-bar">
                 <button className="back-btn" onClick={() => navigate(-1)}>
-                    <i className="bi bi-arrow-left"></i> Back
+                    <i className="bi bi-chevron-left"></i> Back
                 </button>
                 
                 <div className="search-container">

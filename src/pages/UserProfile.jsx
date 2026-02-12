@@ -37,10 +37,10 @@ function UserProfile() {
 
 
     const { user_id } = useParams();
-    const user = getUserById(user_id);    
+    const user = getUserById(user_id);
 
     // ----- Error Handling ------ //
-    if (!user) return( <div style={{ padding: "20px" }}>User not found</div> )
+    if (!user) return (<div style={{ padding: "20px" }}>User not found</div>)
 
     // ------ Data from User ------ //
     const followers = user.followers.map((id) => getUserById(id));
@@ -50,35 +50,35 @@ function UserProfile() {
 
     return (
         <div className="user-profile">
-            <button className="back-btn" onClick={ () => navigate(-1) }>
-                <i className="bi bi-arrow-left"></i> Back
+            <button className="back-btn" onClick={() => navigate(-1)}>
+                <i className="bi bi-chevron-left"></i> Back
             </button>
 
             {/* HEADER PROFILE */}
             <div className="header">
                 <div className="banner"></div>
                 <div className="profile-pic"><img src={user.avatar} alt="" /></div>
-                { activeUser && user._id === activeUser._id ? 
-                    (<div 
+                {activeUser && user._id === activeUser._id ?
+                    (<div
                         className="user-edit-profile-btn"
-                        onClick={ openProfileEdit }>
-                            Edit Profile <i className="bi bi-pencil"></i>
+                        onClick={openProfileEdit}>
+                        Edit Profile <i className="bi bi-pencil"></i>
                     </div>) :
                     (<div className="user-follow-btn">Follow</div>)
                 }
-                
+
             </div>
             <div className="user-profile-details indent">
                 <div className="user-username">{user.username}</div>
                 <div className="user-stats">
                     <span onMouseEnter={() => setOpenFollowers(true)} onMouseLeave={() => setOpenFollowers(false)}>
                         {user.followers.length} followers
-                        <div 
+                        <div
                             className={`user-stats-modal ${openFollowers ? "" : "hidden"}`}
                             onMouseLeave={() => setOpenFollowers(false)}>
                             <ul>
                                 {user.followers.map((follower) => (
-                                    <li onClick={ () => navigate(`/profile/${follower}`) }>{ getUserById(follower).username }</li>
+                                    <li onClick={() => navigate(`/profile/${follower}`)}>{getUserById(follower).username}</li>
                                 ))}
                             </ul>
                         </div>
@@ -86,12 +86,12 @@ function UserProfile() {
                     <span>•</span>
                     <span onMouseEnter={() => setOpenFollowing(true)} onMouseLeave={() => setOpenFollowing(false)}>
                         {user.following.length} following
-                        <div 
+                        <div
                             className={`user-stats-modal ${openFollowing ? "" : "hidden"}`}
                             onMouseLeave={() => setOpenFollowing(false)}>
                             <ul>
                                 {user.following.map((followed) => (
-                                    <li onClick={ () => navigate(`/profile/${followed}`) }>{ getUserById(followed).username }</li>
+                                    <li onClick={() => navigate(`/profile/${followed}`)}>{getUserById(followed).username}</li>
                                 ))}
                             </ul>
                         </div>
@@ -103,31 +103,31 @@ function UserProfile() {
             {/* USER HISTORY (e.g. REVIEW, LIKES) */}
             <div className="user-profile-nav indent">
                 <label className="user-nav-item reviews">
-                    <input 
-                        type="radio" 
-                        name="user-history" 
+                    <input
+                        type="radio"
+                        name="user-history"
                         value="reviews"
                         checked={section === "reviews"}
-                        onChange={(e) => (setSection(e.target.value))}/>
+                        onChange={(e) => (setSection(e.target.value))} />
                     Reviews
                 </label>
                 <label className="user-nav-item likes">
-                    <input 
-                        type="radio" 
-                        name="user-history" 
+                    <input
+                        type="radio"
+                        name="user-history"
                         value="likes"
                         checked={section === "likes"}
-                        onChange={(e) => (setSection(e.target.value))}/>
+                        onChange={(e) => (setSection(e.target.value))} />
                     Likes
                 </label>
             </div>
-            <div className={`user-reviews indent ${section!=="reviews" ? "hidden" : ""}`}>
+            <div className={`user-reviews indent ${section !== "reviews" ? "hidden" : ""}`}>
                 {reviews.map((review) => (
                     <Review key={review._id} review={review} activeUser={activeUser} />
                 ))}
             </div>
-            <div className={`user-likes indent ${section!=="likes" ? "hidden" : ""}`}>
-                {liked_reviews.length > 0 ? 
+            <div className={`user-likes indent ${section !== "likes" ? "hidden" : ""}`}>
+                {liked_reviews.length > 0 ?
                     (liked_reviews.map((review) => (
                         <Review key={review._id} review={review} activeUser={activeUser} />
                     ))) :
