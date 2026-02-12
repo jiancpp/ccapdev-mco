@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 
 import "./ArtistView.css";
-import Review from "../components/Review";
+import ArtistViewReview from "../components/ArtistViewReview";
 import { StarRating } from "../components/StarRating";
 
 import { dummyArtists } from "../data/dummyArtists";
@@ -35,9 +35,6 @@ function ArtistView() {
 
     return (
         <div className="artist-view">
-            <button className="back-btn" onClick={() => navigate("/artists")}>
-                <i className="bi bi-arrow-left"></i> Back
-            </button>
 
             <div className="header">
                 <div className="banner"></div>
@@ -92,7 +89,7 @@ function ArtistView() {
                     <div className="artist-reviews indent">
                         {reviews.length > 0 ? (
                             reviews.map((review) => (
-                                <Review key={review._id} review={review} activeUser={activeUser} />
+                                <ArtistViewReview key={review._id} review={review} activeUser={activeUser} />
                             ))
                         ) : (
                             <p className="no-data-msg">No reviews yet.</p>

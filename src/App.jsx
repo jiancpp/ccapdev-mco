@@ -3,6 +3,7 @@ import { useState } from "react";
 
 /******** Layouts ********/
 import MainLayout from './sections/MainLayout'
+import SecondLayout from "./sections/SecondLayout.jsx";
 
 /******** Components ********/
 import Login from './pages/Login'
@@ -34,8 +35,13 @@ function App() {
             <Route path='/artists' element={<Artists />}></Route>
             <Route path='/profile/:user_id' element={<UserProfile />}></Route>
             <Route path='/artists/artist-profile/:artist_id' element={<ArtistProfile />}></Route>
+          </Route>
+
+          {/* SECONDARY PAGES (w/ Navbar) */}
+          <Route element={<SecondLayout activeUserID={activeUser} setActiveUser={setActiveUser}/>}>
             <Route path='/artist-view/:artist_id' element={<ArtistView />}></Route>
           </Route>
+
         </Route>
       </Routes>
     </>
