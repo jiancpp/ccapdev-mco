@@ -15,10 +15,16 @@ function Navbar({ activeUser, setActiveUser }) {
                     onMouseLeave={() => setOpenSettings("hidden")}>
                     <ul>
                         <li onClick={() => activeUser && navigate(`/profile/${activeUser._id}`)}>View Profile</li>
-                        <li onClick={() => setActiveUser(null)}>Logout</li>
+                        <li onClick={() => {
+                            setActiveUser(null);
+                            navigate("/about")
+                        }}>Logout</li>
                     </ul>
                 </div>
-                <div className="logo flex" onClick={() => navigate("/about")}>
+                <div className="logo flex" onClick={() => {
+                    setActiveUser(null)
+                    navigate("/about");
+                }}>
                     <img src="https://eepy-elo.github.io/font-hosting/unsynth-logo.png" alt="" className="logo flex" />
                 </div>
                 <div className="buttons flex">

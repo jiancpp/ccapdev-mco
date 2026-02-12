@@ -152,6 +152,7 @@
     padding: 10px;
     background-image: linear-gradient(to right, #fbc2d8, #fff4e0);
     border-radius: 10px;
+    border: none;
     color: #a11547;
     text-align: center;
     font-weight: bold;

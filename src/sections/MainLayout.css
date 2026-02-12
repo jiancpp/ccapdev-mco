@@ -16,5 +16,6 @@
     width: 100%;
     min-height: 88vh;
     border-left: solid 1px rgb(223, 223, 223);
+    box-shadow: inset 5px 0 10px -6px rgba(34, 34, 34, 0.2);
 }
   

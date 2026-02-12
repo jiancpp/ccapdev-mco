@@ -44,7 +44,7 @@ function ArtistViewReview({ review, activeUser}) {
                 </div>
                 <div className={`options-modal ${openOptions}`}>
                     <ul onClick={ (e) => (e.stopPropagation())}>
-                        {activeUser._id === review.user_id ? 
+                        {activeUser && activeUser._id === review.user_id ? 
                             (   <>
                                 <li>
                                     <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
