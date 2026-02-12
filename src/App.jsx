@@ -14,6 +14,7 @@ import UserProfile from './pages/UserProfile.jsx'
 import ArtistProfile from './pages/ArtistProfile.jsx'
 import SongProfile from './pages/SongProfile.jsx'
 import ArtistView from './pages/ArtistView.jsx'
+import AlbumProfile from "./pages/AlbumProfile.jsx";
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 import AboutUnsynth from "./pages/AboutUnsynth";
 
@@ -38,6 +39,7 @@ function App() {
             <Route path='/profile/:user_id' element={<UserProfile />}></Route>
             <Route path='/artists/artist-profile/:artist_id' element={<ArtistProfile />}></Route>
             <Route path="/songs/:song_id" element={<SongProfile />} />
+            <Route path ="/albums/:album_id" element={<AlbumProfile />} />
           </Route>
 
           {/* SECONDARY PAGES (w/ Navbar) */}

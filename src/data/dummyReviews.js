@@ -11,6 +11,7 @@ export const dummyReviews = [
         review_content: "I've been following Harry Styles since his early days, but his solo work really surprised me. What I love most is how natural his growth feels—nothing sounds forced. His music has this warm, nostalgic vibe while still feeling modern, especially in albums like Fine Line and Harry's House.",
         likes: 55,
         dislikes: 6,
+        reply: "",
     },
     {
         _id: "r2",
@@ -24,6 +25,7 @@ export const dummyReviews = [
         review_content: "Juno is easily the catchiest track on Short n' Sweet. Sabrina's wit and vocal delivery are top-tier here. The production is crisp and the vibes are immaculate for summer.",
         likes: 120,
         dislikes: 2,
+        reply: "",
     },
     {
         _id: "r3",
@@ -37,6 +39,7 @@ export const dummyReviews = [
         review_content: "CLAPCLAPCLAP! is a masterpiece of modern Filipino rock. Tangerine Boulevard has that baseline that just stays in your head for days. Highly recommend for late-night drives.",
         likes: 42,
         dislikes: 1,
+        reply: "",
     },
     {
         _id: "r4",
@@ -50,6 +53,7 @@ export const dummyReviews = [
         review_content: "Midnights is such a cohesive mood. It captures those sleepless nights perfectly. Taylor continues to prove why she's the best lyricist of our generation.",
         likes: 89,
         dislikes: 12,
+        reply: "",
     },
     {
         _id: "r5",
@@ -63,6 +67,7 @@ export const dummyReviews = [
         review_content: "GUTS is angsty, loud, and incredibly relatable. It's a great evolution from SOUR. 'all-american bitch' is a standout, though the whole album is a no-skip for me.",
         likes: 34,
         dislikes: 3,
+        reply: "",
     },
     {
         _id: "r6",
@@ -76,5 +81,6 @@ export const dummyReviews = [
         review_content: "Sign of the Times is Harry's 'Bohemian Rhapsody'. The build-up is incredible and the vocals are raw and powerful. This song never gets old.",
         likes: 210,
         dislikes: 5,
+        reply: "Thank you :)) <3",
     }
 ];
