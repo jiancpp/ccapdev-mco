@@ -10,27 +10,38 @@ function Navbar({ activeUser, setActiveUser }) {
     return (
         <div className="nav-container">
             <nav>
-                <div 
-                    className={`profile-settings-modal ${openSettings}`} 
-                    onMouseLeave={ () => setOpenSettings("hidden")}>
+                <div
+                    className={`profile-settings-modal ${openSettings}`}
+                    onMouseLeave={() => setOpenSettings("hidden")}>
                     <ul>
                         <li onClick={() => activeUser && navigate(`/profile/${activeUser._id}`)}>View Profile</li>
-                        <li onClick={() => navigate("/login")}>Logout</li>
+                        <li onClick={() => setActiveUser(null)}>Logout</li>
                     </ul>
                 </div>
-                <div className="logo flex" onClick={ () => navigate("/about")}>
+                <div className="logo flex" onClick={() => navigate("/about")}>
                     <img src="https://eepy-elo.github.io/font-hosting/unsynth-logo.png" alt="" className="logo flex" />
                 </div>
                 <div className="buttons flex">
-                    <i id='notifications' className="bi bi-bell-fill"></i>
-                    <div 
-                        id="profile-pic" 
-                        title='Open settings menu'
-                        onClick={ () => setOpenSettings("visible") }>
-                        { activeUser !== null ?
-                          (<img src={activeUser.avatar}></img>) : ""
-                        }
-                    </div>
+                    {
+                        activeUser ?
+                            (
+                                <>
+                                    <i id='notifications' className="bi bi-bell-fill"></i>
+                                    <div
+                                        id="profile-pic"
+                                        title='Open settings menu'
+                                        onClick={() => setOpenSettings("visible")}>
+                                        {activeUser ?
+                                            (<img src={activeUser.avatar}></img>) : ""
+                                        }
+                                    </div>
+                                </>
+                            ) :
+                            (
+                                <div className="login-btn" onClick={() => navigate("/login")}>Log-in</div>
+                            )
+                    }
+
                 </div>
             </nav>
         </div>
