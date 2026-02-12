@@ -154,7 +154,8 @@ function ArtistProfile() {
                     <div className="albums-grid">
                         {albums.length > 0 ? (
                             albums.map((album) => (
-                                <div className="album-card" key={album._id}>
+                                <div className="album-card" key={album._id}
+                                onClick={() => navigate(`/albums/${album._id}`)}>
                                     <img 
                                         src={album.cover || artist.photo} 
                                         alt={album.title} 
