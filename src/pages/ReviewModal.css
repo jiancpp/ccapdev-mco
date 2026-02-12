@@ -30,7 +30,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    font-family: "Carollo Playscript", italic;
+    font-family: "Carollo Playscript";
     letter-spacing: var(--ls-very-tight);
     font-size: 2.2rem;
     margin-bottom: 25px;

@@ -3,7 +3,11 @@
     background-color: white;
     border: 1px solid #bdbdbd;
     border-radius: 20px;
-    margin-top: 15px;
+    margin: 1px 0px;
+}
+
+.artist-block:hover {
+    background: linear-gradient(to right, rgba(158, 0, 92, 0.15), rgba(255, 87, 87, 0.15), rgba(158, 0, 92, 0.15) );
 }
 
 .artist-block .block-content {
