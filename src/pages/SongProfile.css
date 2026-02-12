@@ -13,7 +13,7 @@
     align-items: center;
 }
 
-.song-profile .back-btn {
+.back-btn {
     background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -21,6 +21,13 @@
     border: none;
     margin-bottom: 10px;
     cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;    /* Vertically centers */
+}
+
+.back-btn i {
+    font-size: 20px;
 }
 
 .song-profile .back-btn:hover {

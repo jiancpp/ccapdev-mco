@@ -7,7 +7,7 @@ export const dummyReviews = [
         album_id: "al201",
         song_id: null,
         rating: 5,
-        review_header: "I LOVE HIM SO MUCHH",
+        review_header: "I LOVE THIS SO MUCHH",
         review_content: "I've been following Harry Styles since his early days, but his solo work really surprised me. What I love most is how natural his growth feels—nothing sounds forced. His music has this warm, nostalgic vibe while still feeling modern, especially in albums like Fine Line and Harry's House.",
         likes: 55,
         dislikes: 6,
@@ -82,5 +82,19 @@ export const dummyReviews = [
         likes: 210,
         dislikes: 5,
         reply: "Thank you :)) <3",
+    },
+    {
+        _id: "r14",
+        user_id: "u2",
+        artist_id: "a1",
+        artist: "Cup of Joe",
+        album_id: "al101", // Silakbo
+        song_id: null, 
+        rating: 5,
+        review_header: "A modern classic",
+        review_content: "Depicting the 5 stages of grief is chef's kiss",
+        likes: 210,
+        dislikes: 5,
+        reply: "",
     }
 ];
