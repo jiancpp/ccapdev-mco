@@ -53,7 +53,7 @@ export const dummyReviews = [
         review_content: "Midnights is such a cohesive mood. It captures those sleepless nights perfectly. Taylor continues to prove why she's the best lyricist of our generation.",
         likes: 89,
         dislikes: 12,
-        reply: "Period.",
+        reply: "",
     },
     {
         _id: "r5",
@@ -67,7 +67,7 @@ export const dummyReviews = [
         review_content: "GUTS is angsty, loud, and incredibly relatable. It's a great evolution from SOUR. 'all-american bitch' is a standout, though the whole album is a no-skip for me.",
         likes: 34,
         dislikes: 3,
-        reply: null,
+        reply: "",
     },
     {
         _id: "r6",
