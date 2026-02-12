@@ -258,3 +258,9 @@
     font-style: italic;
     margin-top: 20px;
 }
+
+.artist-profile .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
