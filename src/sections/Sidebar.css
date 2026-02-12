@@ -49,7 +49,7 @@
 }
 
 .review-button {
-    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d );
+    background: linear-gradient(to right, #9e005d, #d74a4a, #9e005d );
     color: white;
     height: 50px;
     border: none;
@@ -63,7 +63,7 @@
 }
 
 .review-button:hover {
-    background: linear-gradient(to right, #770045, #ff5757, #770045 );
+    background: linear-gradient(to right, #770045, #bd3f3f, #770045 );
 }
 
 .review-button:active {
