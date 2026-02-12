@@ -6,6 +6,7 @@ import MainLayout from './sections/MainLayout'
 
 /******** Components ********/
 import Login from './pages/Login'
+import Register from './pages/Register.jsx'
 import Home from './pages/Home.jsx'
 import Artists from './pages/Artists.jsx'
 import UserProfile from './pages/UserProfile.jsx'
@@ -24,7 +25,7 @@ function App() {
         <Route element={<ScrollToTopWrapper />}>
           {/* AUTH PAGES */}
           <Route path='/login' element={<Login />} />
-          {/* <Route path='/register' element={<Register />} /> */}
+          <Route path='/register' element={<Register />} />
 
           {/* MAIN PAGES (w/ Navbar and Sidebar) */}
           <Route element={<MainLayout activeUserID={activeUser} setActiveUser={setActiveUser}/>}>
