@@ -12,11 +12,8 @@ import Home from './pages/Home.jsx'
 import Artists from './pages/Artists.jsx'
 import UserProfile from './pages/UserProfile.jsx'
 import ArtistProfile from './pages/ArtistProfile.jsx'
-<<<<<<< HEAD
 import SongProfile from './pages/SongProfile.jsx'
-=======
 import ArtistView from './pages/ArtistView.jsx'
->>>>>>> 1f253a8c047d3d3467cc466ab64ffcdd8ff465fc
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 import AboutUnsynth from "./pages/AboutUnsynth";
 
