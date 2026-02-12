@@ -1,5 +1,19 @@
 @font-face {
   font-family: "Carollo Playscript";
+  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Carollo Playscript";
+  src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Regular%20Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Carollo Playscript";
   src: url("https://eepy-elo.github.io/font-hosting/Carollo%20Playscript%20Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
