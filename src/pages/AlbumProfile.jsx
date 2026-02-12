@@ -31,7 +31,6 @@ function AlbumProfile() {
     const artist = getArtistById(album.artist_id);
     const reviews = getReviewsByAlbum(album_id);
     const songs = getSongsByAlbum(album_id);
-
     return (
         <div className="song-profile">
             {/* TOP BAR */}
@@ -97,11 +96,15 @@ function AlbumProfile() {
             <div className="tab-content">
                 {activeTab === 'reviews' && (
                     <>
-                        <div className="rate-review-section hidden">
+                        <div className="rate-review-section">
                             <h3>Rate and Review</h3>
                             <div className="user-input-row">
                                 <div className="user-avatar-placeholder">
-                                    <i className="bi bi-person-fill"></i>
+                                    {   
+                                        activeUser ? 
+                                        (<img src={activeUser.avatar} />) :
+                                        (<i className="bi bi-person-fill"></i>)
+                                    }
                                 </div>
                                 <div className="interactive-stars">
                                     <i className="bi bi-star-fill"></i>

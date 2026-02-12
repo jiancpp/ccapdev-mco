@@ -95,6 +95,6 @@ export const dummyReviews = [
         review_content: "Depicting the 5 stages of grief is chef's kiss",
         likes: 210,
         dislikes: 5,
-        reply: "",
+        reply: "Thanks",
     }
 ];
