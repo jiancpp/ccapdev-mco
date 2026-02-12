@@ -18,3 +18,16 @@
   border-left: solid 1px rgb(223, 223, 223);
   padding-bottom: 15px;
 }
+
+.e-rte-dialog {
+  z-index: 99999 !important;
+}
+
+.e-dlg-overlay {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99998 !important; /* Ensure overlay is just below the dialog */
+}

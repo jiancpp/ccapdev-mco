@@ -1,14 +1,14 @@
-.artist-profile {
+.artist-view {
     width: 100%;
-    padding: 40px 40px 15px 40px;
+    padding: 40px 40px 0 40px;
     font-family: Helvetica, sans-serif;
 }
 
-.artist-profile .indent {
+.artist-view .indent {
     margin-left: 22px;
 }
 
-.artist-profile .header {
+.artist-view .header {
     background: linear-gradient(90deg, #fbc2d8, #fff4e0);
     position: relative;
     height: 120px;
@@ -16,7 +16,7 @@
     border-radius: 20px;
 }
 
-.artist-profile .header .profile-pic {
+.artist-view .header .profile-pic {
     position: absolute;
     bottom: -50px;
     left: 20px;
@@ -28,13 +28,13 @@
     border: 4px solid white; 
 }
 
-.artist-profile .header .profile-pic img {
+.artist-view .header .profile-pic img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.artist-profile .header .user-follow-btn {
+.artist-view .header .user-follow-btn {
     position: absolute;
     right: 0;
     bottom: -60px;
@@ -48,17 +48,17 @@
     cursor: pointer;
 }
 
-.artist-profile .artist-profile-details {
+.artist-view .artist-profile-details {
     margin-bottom: 30px;
 }
 
-.artist-profile .artist-name {
+.artist-view .artist-name {
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 5px;
 }
 
-.artist-profile .artist-rating {
+.artist-view .artist-rating {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -67,24 +67,24 @@
     font-weight: 600;
 }
 
-.artist-profile .artist-rating .stars {
+.artist-view .artist-rating .stars {
     display: flex;
     align-items: center; 
 }
 
-.artist-profile .artist-meta {
+.artist-view .artist-meta {
     color: #333;
     font-size: 16px;
 }
 
-.artist-profile .artist-nav { 
+.artist-view .artist-nav { 
     border-bottom: 1px solid #ddd;
     margin-bottom: 30px;
     display: flex;
     gap: 40px;
 }
 
-.artist-profile .artist-nav .nav-item {
+.artist-view .artist-nav .nav-item {
     background: none;
     border: none;
     font-size: 18px;
@@ -95,42 +95,42 @@
     position: relative;
 }
 
-.artist-profile .artist-nav .nav-item {
+.artist-view .artist-nav .nav-item {
     background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.artist-profile .artist-nav .nav-item.active {
+.artist-view .artist-nav .nav-item.active {
     border-bottom: 3px solid #ff5757;
 }
 
-.artist-profile .rate-review-section {
+.artist-view .rate-review-section {
     margin-bottom: 40px;
 }
 
-.artist-profile .rate-review-section h3 {
+.artist-view .rate-review-section h3 {
     font-size: 20px;
     color: #888;
     font-weight: 400;
     margin-bottom: 15px;
 }
 
-.artist-profile .rate-review-section .user-input-row {
+.artist-view .rate-review-section .user-input-row {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.artist-profile .rate-review-section .user-avatar-small {
+.artist-view .rate-review-section .user-avatar-small {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     background-color: #9e005d;
 }
 
-.artist-profile .rate-review-section .empty-stars {
+.artist-view .rate-review-section .empty-stars {
     font-size: 32px;
     color: #bbb; 
     cursor: pointer;
@@ -257,10 +257,4 @@
     color: #888;
     font-style: italic;
     margin-top: 20px;
-}
-
-.artist-profile .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }

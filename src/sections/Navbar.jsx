@@ -18,7 +18,7 @@ function Navbar({ activeUser, setActiveUser }) {
                         <li onClick={() => navigate("/login")}>Logout</li>
                     </ul>
                 </div>
-                <div className="logo flex">
+                <div className="logo flex" onClick={ () => navigate("/about")}>
                     <img src="https://eepy-elo.github.io/font-hosting/unsynth-logo.png" alt="" className="logo flex" />
                 </div>
                 <div className="buttons flex">

@@ -41,7 +41,7 @@ function Home() {
                         onClick={() => toggle("trending")}>
                         Trending</button>
                 </div>
-                <button className="review-button review-button-fixed" onClick={openModal}>Review +</button>
+                <button className="review-button review-button-fixed" onClick={openModal}>+</button>
             </div>
             {reviews.map((review) => (
                 <Review key={review._id} review={review} activeUser={activeUser}/>

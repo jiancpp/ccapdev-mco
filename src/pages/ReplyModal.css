@@ -25,12 +25,17 @@
     max-height: 600px;
 }
 
+.modal-content-wrapper {
+    overflow-y: scroll;
+    margin-top: 15px;
+}
+
 .modal-title {
     background: radial-gradient(circle at center, rgb(255, 87, 87), rgb(158, 0, 93));
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    font-family: "Carollo Playscript";
+    font-family: "Carollo Playscript", italic;
     letter-spacing: var(--ls-very-tight);
     font-size: 2.2rem;
     margin-bottom: 25px;
@@ -38,30 +43,7 @@
     text-align: center;
 }
 
-.search-container {
-    position: relative;
-    margin-bottom: 30px;
-}
-
-.search-container input {
-    width: 100%;
-    padding: 12px 20px 12px 45px;
-    border-radius: 25px;
-    border: 1px solid #df6490;
-    background: #FFF;
-    color: #000;
-    outline: none;
-}
-
-.search-icon {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #df6490;
-}
-
-.review-row {
+.review {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -115,6 +97,7 @@
     border-radius: 20px;
     background: white;
     overflow-y: scroll;
+    margin-top: 20px;
 }
 
 .header-input {

@@ -1,7 +1,20 @@
+import {
+  RichTextEditorComponent,
+  Toolbar,
+  Image,
+  Link,
+  HtmlEditor,
+  QuickToolbar,
+  Inject
+} from '@syncfusion/ej2-react-richtexteditor';
 import { InteractiveStarRating } from '../components/StarRating';
 import './ReviewModal.css';
 
 function ReviewModal({ isOpen, onClose }) {
+    const toolbarSettings = {
+        items: ['Bold', 'Italic', 'Underline', 'StrikeThrough', '|', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|', 'CreateLink', 'Image', '|', 'Undo', 'Redo']
+    };
+
     if (!isOpen) return null;
 
     return (
@@ -33,7 +46,18 @@ function ReviewModal({ isOpen, onClose }) {
 
                 <div className="input-group">
                     <input type="text" className="header-input" placeholder="Header" />
-                    <textarea className="review-textarea" placeholder="Write your review here"></textarea>
+                    <RichTextEditorComponent 
+                        className="review-rte" 
+                        toolbarSettings={toolbarSettings} 
+                        insertLinkSettings={{ target: 'body' }}
+                        insertImageSettings={{ target: 'body' }}
+                        actionComplete={(args) => {
+                            if (args.requestType === 'OpenDialog') {
+                            }
+                        }}
+                    >
+                        <Inject services={[Toolbar, Image, Link, HtmlEditor, QuickToolbar]} />
+                    </RichTextEditorComponent>
                 </div>
 
                 <div className="footer">

@@ -3,6 +3,7 @@ import { useState } from "react";
 
 /******** Layouts ********/
 import MainLayout from './sections/MainLayout'
+import SecondLayout from "./sections/SecondLayout.jsx";
 
 /******** Components ********/
 import Login from './pages/Login'
@@ -11,8 +12,13 @@ import Home from './pages/Home.jsx'
 import Artists from './pages/Artists.jsx'
 import UserProfile from './pages/UserProfile.jsx'
 import ArtistProfile from './pages/ArtistProfile.jsx'
+<<<<<<< HEAD
 import SongProfile from './pages/SongProfile.jsx'
+=======
+import ArtistView from './pages/ArtistView.jsx'
+>>>>>>> 1f253a8c047d3d3467cc466ab64ffcdd8ff465fc
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
+import AboutUnsynth from "./pages/AboutUnsynth";
 
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 
@@ -36,6 +42,13 @@ function App() {
             <Route path='/artists/artist-profile/:artist_id' element={<ArtistProfile />}></Route>
             <Route path="/songs/:song_id" element={<SongProfile />} />
           </Route>
+
+          {/* SECONDARY PAGES (w/ Navbar) */}
+          <Route element={<SecondLayout activeUserID={activeUser} setActiveUser={setActiveUser}/>}>
+            <Route path='/artist-view/:artist_id' element={<ArtistView />}></Route>
+            <Route path='/about' element={<AboutUnsynth />} />
+          </Route>
+
         </Route>
       </Routes>
     </>

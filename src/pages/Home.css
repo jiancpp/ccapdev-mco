@@ -1,6 +1,6 @@
 #home {
     width: 100%;
-    padding: 40px 40px 0 40px;
+    padding: 40px 40px 15px 40px;
 }
 
 #home .buttons {
@@ -36,14 +36,14 @@
 }
 
 #home .review-button {
-    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d );
+    background: linear-gradient(to right, #9e005d, #d74a4a, #9e005d );
     color: white;
     height: 50px;
     border: none;
     border-radius: 15px;
-    padding: 0 40px;
+    padding: 0 20px;
 
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 600;
     letter-spacing: -1px;
 
