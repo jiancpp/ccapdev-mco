@@ -59,4 +59,44 @@ export const dummyArtists = [
         reviews: 143,
         songs: 21
     },
+    {
+        _id: "a12",
+        name: "Olivia Rodrigo",
+        genre: "Pop",
+        photo: "/assets/OliviaRodrigo.jpg",
+        country: "United States",
+        rating: 5,
+        reviews: 143,
+        songs: 21
+    },
+    {
+        _id: "a7",
+        name: "Ben&Ben",
+        genre: "OPM",
+        photo: "/assets/BenAndBen.jpg",
+        country: "Philippines",
+        rating: 4.5,
+        reviews: 142,
+        songs: 20
+    },
+    {
+        _id: "a11",
+        name: "SB19",
+        genre: "P-Pop",
+        photo: "/assets/SB19.jpg",
+        country: "Philippines",
+        rating: 5,
+        reviews: 210,
+        songs: 18
+    },
+    {
+        _id: "a9",
+        name: "The Weeknd",
+        genre: "Pop/R&B",
+        photo: "/assets/TheWeeknd.jpg",
+        country: "Canada",
+        rating: 5,
+        reviews: 320,
+        songs: 35
+    }
 ]
