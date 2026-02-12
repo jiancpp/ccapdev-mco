@@ -11,6 +11,7 @@ export const trendingReviews = [
         review_content: "Limasawa Street is pure sunshine. Ben&Ben has this unique way of making you feel understood. The folk-pop arrangements are so rich, and the harmonies are just heavenly. Truly a landmark for OPM.",
         likes: 78,
         dislikes: 2,
+        reply: "Thank you!",
     },
     {
         _id: "r8",
@@ -24,6 +25,7 @@ export const trendingReviews = [
         review_content: "Pagsibol is a masterpiece. From 'MAPA' to 'WHAT?', the range they show is insane. They aren't just idols; they are incredible artists and songwriters representing the Philippines on the world stage.",
         likes: 312,
         dislikes: 4,
+        reply: "",
     },
     {
         _id: "r9",
@@ -37,6 +39,7 @@ export const trendingReviews = [
         review_content: "After Hours is Abel's best work. It's dark, atmospheric, and the 80s synth-wave influence is executed perfectly. 'Blinding Lights' is a hit, but the title track is the real emotional core.",
         likes: 95,
         dislikes: 8,
+        reply: "",
     },
     {
         _id: "r10",
@@ -50,6 +53,7 @@ export const trendingReviews = [
         review_content: "This album feels like a love letter to their 7-year journey. Every solo track allows the members to shine, and 'Black Swan' is probably one of the most artistic pop songs ever released.",
         likes: 540,
         dislikes: 15,
+        reply: "Saranghaeyo",
     },
     {
         _id: "r11",
@@ -63,6 +67,7 @@ export const trendingReviews = [
         review_content: "Pebble House shows a much edgier, more experimental side of the band. The collaborations with other Filipino artists are seamless. 'Sugat' makes me cry every single time.",
         likes: 64,
         dislikes: 1,
+        reply: "",
     },
     {
         _id: "r12",
@@ -76,6 +81,7 @@ export const trendingReviews = [
         review_content: "I love the concept of this album. Jim Carrey’s narration adds such a cool, eerie layer. It’s more upbeat than After Hours but still keeps that signature Weeknd melancholy.",
         likes: 110,
         dislikes: 7,
+        reply: "",
     },
     {
         _id: "r13",
@@ -89,5 +95,6 @@ export const trendingReviews = [
         review_content: "Even though they are on hiatus, their impact on the PH indie scene is unmatched. Their aesthetic and sound defined an era for us. CLAPCLAPCLAP! still sounds fresh in 2026.",
         likes: 88,
         dislikes: 0,
+        reply: "We'll be back ;)",
     }
 ];
