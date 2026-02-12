@@ -142,7 +142,7 @@ function SongProfile() {
             <div className="tab-content">
                 {activeTab === 'reviews' && (
                     <>
-                        <div className="rate-review-section">
+                        <div className="rate-review-section hidden">
                             <h3>Rate and Review</h3>
                             <div className="user-input-row">
                                 <div className="user-avatar-placeholder">

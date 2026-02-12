@@ -95,15 +95,8 @@
     position: relative;
 }
 
-.artist-profile .artist-nav .nav-item {
-    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
 .artist-profile .artist-nav .nav-item.active {
-    border-bottom: 3px solid #ff5757;
+    border-bottom: 3px solid #9e005d;
 }
 
 .artist-profile .rate-review-section {

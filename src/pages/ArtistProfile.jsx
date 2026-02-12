@@ -89,7 +89,7 @@ function ArtistProfile() {
             {/* REVIEWS TAB */}
             {activeTab === 'reviews' && (
                 <>
-                    <div className="rate-review-section indent">
+                    <div className="rate-review-section indent hidden">
                         <h3>Rate and Review</h3>
                         <div className="user-input-row">
                             <div className="user-avatar-small"></div>
