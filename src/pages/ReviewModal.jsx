@@ -8,12 +8,25 @@ import {
   Inject
 } from '@syncfusion/ej2-react-richtexteditor';
 import { InteractiveStarRating } from '../components/StarRating';
+import { SearchBar } from '../components/SearchBar';
+import { useState } from 'react';
+
+import { dummySongs } from '../data/dummySongs';
+import { dummyAlbums } from '../data/dummyAlbums';
+import { dummyArtists } from '../data/dummyArtists';
+
 import './ReviewModal.css';
 
 function ReviewModal({ isOpen, onClose }) {
     const toolbarSettings = {
         items: ['Bold', 'Italic', 'Underline', 'StrikeThrough', '|', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|', 'CreateLink', 'Image', '|', 'Undo', 'Redo']
     };
+
+    const [selectedItem, setSelectedItem] = useState({
+        title: "SILAKBO",
+        artist_id: "a1",
+        cover: "/assets/Silakbo.jpg"
+    });
 
     if (!isOpen) return null;
 
@@ -24,17 +37,21 @@ function ReviewModal({ isOpen, onClose }) {
                 
                 <h2 className="modal-title">Write a Review</h2>
 
-                <div className="search-container">
-                    <i className="bi bi-search search-icon"></i>
-                    <input type="text" placeholder="Search songs, artists, and albums" />
-                </div>
+                <SearchBar 
+                    songs={dummySongs} 
+                    albums={dummyAlbums} 
+                    artists={dummyArtists} 
+                    onSelect={(item) => setSelectedItem(item)} 
+                />
 
                 <div className="review-row">
                     <div className="selected-card">
-                        <img src="/public/assets/Silakbo.jpg" alt="Album" />
+                        <img src={selectedItem.cover} />
                         <div className="card-info">
-                            <p className="song-title">SILAKBO</p>
-                            <p className="artist-subtitle">Cup of Joe</p>
+                            <p className="song-title">{selectedItem.title}</p>
+                            <p className="artist-subtitle">
+                                {dummyArtists.find(a => a._id === selectedItem.artist_id)?.name}
+                            </p>
                         </div>
                     </div>
 
@@ -50,7 +67,7 @@ function ReviewModal({ isOpen, onClose }) {
                         className="review-rte" 
                         toolbarSettings={toolbarSettings} 
                         insertLinkSettings={{ target: 'body' }}
-                        insertImageSettings={{ target: 'body' }}
+                        insertcoverSettings={{ target: 'body' }}
                         actionComplete={(args) => {
                             if (args.requestType === 'OpenDialog') {
                             }
