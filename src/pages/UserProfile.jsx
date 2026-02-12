@@ -59,13 +59,13 @@ function UserProfile() {
             <div className="header">
                 <div className="banner"></div>
                 <div className="profile-pic"><img src={user.avatar} alt="" /></div>
-                { user._id !== activeUser._id ? 
-                    (<div className="user-follow-btn">Follow</div>) :
+                { activeUser && user._id === activeUser._id ? 
                     (<div 
                         className="user-edit-profile-btn"
                         onClick={ openProfileEdit }>
                             Edit Profile <i className="bi bi-pencil"></i>
-                    </div>)
+                    </div>) :
+                    (<div className="user-follow-btn">Follow</div>)
                 }
                 
             </div>

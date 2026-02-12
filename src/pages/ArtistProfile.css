@@ -1,6 +1,6 @@
 .artist-profile {
     width: 100%;
-    padding: 40px 40px 0 40px;
+    padding: 40px 40px 15px 40px;
     font-family: Helvetica, sans-serif;
 }
 
@@ -257,4 +257,10 @@
     color: #888;
     font-style: italic;
     margin-top: 20px;
+}
+
+.artist-profile .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
