@@ -19,7 +19,7 @@ const getSongsByAlbum = (album_id) => dummySongs.filter((song) => song.album_id 
 function AlbumProfile() {
     const navigate = useNavigate();
     const { album_id } = useParams();
-    const { activeUser } = useOutletContext();
+    const { activeUser, openModal } = useOutletContext();
 
     const [activeTab, setActiveTab] = useState("reviews");
 
@@ -97,16 +97,12 @@ function AlbumProfile() {
                 {activeTab === 'reviews' && (
                     <>
                         <div className="rate-review-section">
-                            <h3>Rate and Review</h3>
                             <div className="user-input-row">
+                                {/* TODO: update next time */}
                                 <div className="user-avatar-placeholder">
-                                    {   
-                                        activeUser ? 
-                                        (<img src={activeUser.avatar} />) :
-                                        (<i className="bi bi-person-fill"></i>)
-                                    }
+                                    <i className="bi bi-person-fill"></i>
                                 </div>
-                                <div className="interactive-stars">
+                                <div className="interactive-stars" onClick={ openModal }>
                                     <i className="bi bi-star-fill"></i>
                                     <i className="bi bi-star-fill"></i>
                                     <i className="bi bi-star-fill"></i>

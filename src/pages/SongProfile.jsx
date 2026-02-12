@@ -143,12 +143,11 @@ function SongProfile() {
                 {activeTab === 'reviews' && (
                     <>
                         <div className="rate-review-section">
-                            <h3>Rate and Review</h3>
                             <div className="user-input-row">
                                 <div className="user-avatar-placeholder">
                                     <i className="bi bi-person-fill"></i>
                                 </div>
-                                <div className="interactive-stars">
+                                <div className="interactive-stars" onClick={ openModal }>
                                     <i className="bi bi-star-fill"></i>
                                     <i className="bi bi-star-fill"></i>
                                     <i className="bi bi-star-fill"></i>

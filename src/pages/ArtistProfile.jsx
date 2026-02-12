@@ -63,6 +63,9 @@ function ArtistProfile() {
                 <div className="artist-meta">
                     <span className="country">{artist.country}</span>
                 </div>
+                <div className="description">
+                    <p>{artist.description}</p>
+                </div>
             </div>
 
             <div className="artist-nav indent">

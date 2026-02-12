@@ -40,6 +40,7 @@ function App() {
             <Route path='/artists/artist-profile/:artist_id' element={<ArtistProfile />}></Route>
             <Route path="/artists/artist-profile/:artist_idsongs/:song_id" element={<SongProfile />} />
             <Route path ="/albums/:album_id" element={<AlbumProfile />} />
+            <Route path ="/songs/:song_id" element={<SongProfile />} />
           </Route>
 
           {/* SECONDARY PAGES (w/ Navbar) */}
