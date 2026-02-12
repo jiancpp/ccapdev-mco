@@ -16,7 +16,7 @@ const getReviewsBySong = (song_id) => dummyReviews.filter((review) => review.son
 function SongProfile() {
     const navigate = useNavigate();
     const { song_id } = useParams();
-    const { activeUser } = useOutletContext();
+    const { activeUser, openModal } = useOutletContext();
 
     const [activeTab, setActiveTab] = useState("reviews");
     

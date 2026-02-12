@@ -6,7 +6,8 @@ export const dummyAlbums = [
         title: "SILAKBO",
         cover: "/assets/Silakbo.jpg", 
         year: "2019",
-        songs: 15
+        songs: 15,  
+        rating: 5
     },
 
     // --- IV OF SPADES (a6) ---
@@ -16,7 +17,8 @@ export const dummyAlbums = [
         title: "CLAPCLAPCLAP!",
         cover: "/assets/IVOfSpades.jfif", 
         year: "2019",
-        songs: 15
+        songs: 15,
+        rating: 5
     },
 
     // --- SABRINA CARPENTER (a3) ---
@@ -26,7 +28,8 @@ export const dummyAlbums = [
         title: "emails i can't send",
         cover: "/assets/SabrinaCarpenter.jpg",
         year: "2022",
-        songs: 13
+        songs: 13,
+        rating: 5
     },
     {
         _id: "al302",
@@ -34,7 +37,8 @@ export const dummyAlbums = [
         title: "Short n' Sweet",
         cover: "/assets/SabrinaCarpenter.jpg",
         year: "2024",
-        songs: 12
+        songs: 12,
+        rating: 5
     },
 
     // --- HARRY STYLES (a2) ---
@@ -44,7 +48,8 @@ export const dummyAlbums = [
         title: "Harry's House",
         cover: "/assets/HarrysHouse.jfif",
         year: "2022",
-        songs: 13
+        songs: 13,
+        rating: 5
     },
     {
         _id: "al202",
@@ -52,7 +57,8 @@ export const dummyAlbums = [
         title: "Fine Line",
         cover: "/assets/FineLine.jfif",
         year: "2019",
-        songs: 12
+        songs: 12,
+        rating: 5
     },
 
     {
@@ -62,7 +68,8 @@ export const dummyAlbums = [
         cover: "https://i.scdn.co/image/ab67616d0000b2733f8b8a9c71b2bd2f3019940b",
         year: "2016",
         songs: 2,
-        rating: 4.2,
+        rating: 5,
+                rating: 4.2,
     },
 
     // --- TAYLOR SWIFT (a5) ---
@@ -72,7 +79,8 @@ export const dummyAlbums = [
         title: "Midnights",
         cover: "/assets/TaylorSwift.jfif",
         year: "2022",
-        songs: 13
+        songs: 13,
+        rating: 5
     },
     {
         _id: "al502",
@@ -80,7 +88,8 @@ export const dummyAlbums = [
         title: "1989 (Taylor's Version)",
         cover: "/assets/TaylorSwift.jfif",
         year: "2023",
-        songs: 21
+        songs: 21,
+        rating: 5
     },
 
     // --- BTS (a4) ---
@@ -98,7 +107,8 @@ export const dummyAlbums = [
         title: "Map of the Soul: 7",
         cover: "/assets/BTS.jfif",
         year: "2020",
-        songs: 20
+        songs: 2,
+        rating: 50
     },
 
      // --- BEN&BEN (a7) ---
@@ -108,7 +118,8 @@ export const dummyAlbums = [
         title: "Limasawa Street",
         cover: "/assets/LimasawaStreet.jfif",
         year: "2019",
-        songs: 13
+        songs: 13,
+        rating: 5
     },
     {
         _id: "al702",
@@ -116,7 +127,8 @@ export const dummyAlbums = [
         title: "Pebble House, Vol. 1",
         cover: "/assets/PebbleHouse.jpg",
         year: "2021",
-        songs: 12
+        songs: 12,
+        rating: 5
     },
 
      // --- SB19 (a11) ---
@@ -136,7 +148,8 @@ export const dummyAlbums = [
         title: "SOUR",
         cover: "/assets/SOUR.png",
         year: "2021",
-        songs: 11
+        songs: 11,
+        rating: 5
     },
     {
         _id: "al1202",
@@ -144,7 +157,8 @@ export const dummyAlbums = [
         title: "GUTS",
         cover: "/assets/GUTS.jfif",
         year: "2023",
-        songs: 12
+        songs: 12,
+        rating: 5
     },
 
     // --- THE WEEKND (a9) ---
@@ -154,7 +168,8 @@ export const dummyAlbums = [
         title: "After Hours",
         cover: "/assets/AfterHours.jfif",
         year: "2020",
-        songs: 14
+        songs: 14,
+        rating: 5
     },
     {
         _id: "al902",
@@ -162,6 +177,7 @@ export const dummyAlbums = [
         title: "Dawn FM",
         cover: "/assets/DawnFM.jfif",
         year: "2022",
-        songs: 16
+        songs: 1,
+        rating: 56
     }
 ];
