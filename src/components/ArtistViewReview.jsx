@@ -4,6 +4,7 @@ import { useOutletContext } from "react-router-dom";
 import './ArtistViewReview.css'
 import "./Review.css";
 import ReviewEmbed from './ReviewEmbed';
+import ReviewReply from './ReviewReply';
 
 import { dummyUsers } from "../data/dummyUsers";
 import { useState } from "react";
@@ -119,6 +120,7 @@ function ArtistViewReview({ review, activeUser}) {
                     <span className='icon'><i className="bi-reply-fill"></i></span>
                 </div>
             </div>
+            <ReviewReply key={review._id} review={review} activeUser={activeUser}/>
         </div>
     )
 }

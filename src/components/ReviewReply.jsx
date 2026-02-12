@@ -7,9 +7,6 @@ import { dummyUsers } from "../data/dummyUsers";
 import { dummyArtists } from "../data/dummyArtists";
 import { useState } from "react";
 
-const getUserById = (id) =>
-    dummyUsers.find((user) => user._id === id);
-
 const getArtistById = (id) =>
     dummyArtists.find((artist) => artist._id === id);
 
@@ -22,7 +19,6 @@ function ReviewReply({ review, activeUser }) {
     const navigate = useNavigate();
 
     // Review Details
-    const user = getUserById(review.user_id);
     const artist = getArtistById(review.artist_id);
 
     const artist_photo = artist?.photo
@@ -44,24 +40,12 @@ function ReviewReply({ review, activeUser }) {
                 </div>
                 <div className={`options-modal ${openOptions}`}>
                     <ul onClick={(e) => (e.stopPropagation())}>
-                        {activeUser._id === review.user_id ?
-                            (<>
-                                <li>
-                                    <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
-                                </li>
-                                <li onClick={() => setDeleteReview("hidden")} >
-                                    <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
-                                </li>
-                            </>
-                            ) :
-                            (
-                                <>
-                                    <li onClick={() => setDeleteReview("hidden")} >
-                                        <span><i className="bi bi-eye-slash-fill"></i></span><span>Hide Review</span>
-                                    </li>
-                                </>
-                            )
-                        }
+                        <li>
+                            <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
+                        </li>
+                        <li onClick={() => setDeleteReview("hidden")} >
+                            <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -74,7 +58,7 @@ function ReviewReply({ review, activeUser }) {
                         <div className='user'>
                             <span
                                 className="username"
-                                onClick={() => navigate(`/profile/${user._id}`)}>
+                                onClick={() => navigate(`/profile/${artist._id}`)}>
                                 {review.artist}</span>  3hrs ago
                         </div>
 
