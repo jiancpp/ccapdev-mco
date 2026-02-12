@@ -133,7 +133,16 @@ nav div {
     background-color: #5c0627;
 }
 
-.log-in-btn {
-    margin-left: 20px;
-    width: 100px;
+.login-btn {
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #ffffff45;
+}
+
+.login-btn:active {
+    background: #ffffff35;
 }
