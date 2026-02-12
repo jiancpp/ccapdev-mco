@@ -1,3 +1,7 @@
+.hidden {
+    visibility: none;
+}
+
 .user-profile {
     width: 100%;
     padding: 40px 40px 0 40px;
@@ -98,6 +102,48 @@
 .user-profile .user-profile-details .user-stats {
     color: #aaa;
     margin-bottom: 10px;
+}
+
+.user-profile .user-profile-details .user-stats span {
+    margin-right: 10px;
+    position: relative;
+}
+
+.user-stats-modal {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    z-index: 13;
+}
+
+.user-stats-modal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 220px;
+    height: 100px;
+    background-color: white;
+    border-radius: 10px;
+    overflow-x: hidden;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.4);  /* box-shadow: [offset-x] [offset-y] [blur-radius] [spread-radius] [color] [inset]; */
+    color: black;
+}
+
+.user-stats-modal li {
+    display: flex;
+    align-items: center;
+    margin: 6px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.user-stats-modal li:hover {
+    background: #dedede;
+}
+
+.user-stats-modal li:active {
+    background: #bdbdbd;
 }
 
 .user-profile .user-profile-details .bio {

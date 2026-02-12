@@ -26,11 +26,16 @@ const getReviewsByUser = (user_id) => {
 
 /***** Main Component *****/
 function UserProfile() {
-    // ------- Helper Utilities ------ //
+    // ------- Navigation ------ //
     const navigate = useNavigate();
     const goToHome = () => navigate("/")
     const [section, setSection] = useState("reviews");
+
+    // ------------ Modals ---------- //
     const { activeUser, openProfileEdit } = useOutletContext();
+    const [openFollowers, setOpenFollowers] = useState(false);
+    const [openFollowing, setOpenFollowing] = useState(false);
+
 
     const { user_id } = useParams();
     const user = getUserById(user_id);    
@@ -66,7 +71,33 @@ function UserProfile() {
             </div>
             <div className="user-profile-details indent">
                 <div className="user-username">{user.username}</div>
-                <div className="user-stats">{user.followers.length} followers  •  {user.following.length} following</div>
+                <div className="user-stats">
+                    <span onMouseEnter={() => setOpenFollowers(true)} onMouseLeave={() => setOpenFollowers(false)}>
+                        {user.followers.length} followers
+                        <div 
+                            className={`user-stats-modal ${openFollowers ? "" : "hidden"}`}
+                            onMouseLeave={() => setOpenFollowers(false)}>
+                            <ul>
+                                {user.followers.map((follower) => (
+                                    <li onClick={ () => navigate(`/profile/${follower}`) }>{ getUserById(follower).username }</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </span>
+                    <span>•</span>
+                    <span onMouseEnter={() => setOpenFollowing(true)} onMouseLeave={() => setOpenFollowing(false)}>
+                        {user.following.length} following
+                        <div 
+                            className={`user-stats-modal ${openFollowing ? "" : "hidden"}`}
+                            onMouseLeave={() => setOpenFollowing(false)}>
+                            <ul>
+                                {user.following.map((followed) => (
+                                    <li onClick={ () => navigate(`/profile/${followed}`) }>{ getUserById(followed).username }</li>
+                                ))}
+                            </ul>
+                        </div>
+                    </span>
+                </div>
                 <div className="user-bio">{user.bio}</div>
             </div>
 
