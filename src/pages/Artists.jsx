@@ -13,7 +13,8 @@ function Artists() {
     const [searchTerm, setSearchTerm] = useState("");
 
     const displayedArtists = dummyArtists.filter(artist => {
-        const matchesSearch = artist.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesSearch = artist.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            artist.description.toLowerCase().includes(searchTerm.toLowerCase());
         
         const matchesGenre = activeFilters.genres.length === 0 || 
             activeFilters.genres.some(g => artist.genre.includes(g));
