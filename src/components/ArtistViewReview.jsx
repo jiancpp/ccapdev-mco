@@ -41,18 +41,30 @@ function ArtistViewReview({ review, activeUser }) {
                     e.stopPropagation(); // stops triggering parent event
                     setOpenOptions("visible")
                 }}>
-                <i className="bi bi-three-dots"></i>
-            </div>
-            <div className={`options-modal ${openOptions}`}>
-                <ul onClick={(e) => (e.stopPropagation())}>
-                    <li>
-                        <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
-                    </li>
-                    <li onClick={() => setDeleteReview("hidden")} >
-                        <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
-                    </li>
-                </ul>
-            </div>
+                    <i className="bi bi-three-dots"></i>
+                </div>
+                <div className={`options-modal ${openOptions}`}>
+                    <ul onClick={ (e) => (e.stopPropagation())}>
+                        {activeUser && activeUser._id === review.user_id ? 
+                            (   <>
+                                <li>
+                                    <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
+                                </li>
+                                <li onClick={ () => setDeleteReview("hidden") } >
+                                    <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
+                                </li>
+                                </>
+                            ) :
+                            (
+                                <>
+                                <li onClick={ () => setDeleteReview("hidden") } >
+                                    <span><i className="bi bi-eye-slash-fill"></i></span><span>Hide Review</span>
+                                </li>
+                                </>
+                            )
+                        }
+                    </ul>
+                </div>
 
             <div className='post-content'>
                 <div className="profile">

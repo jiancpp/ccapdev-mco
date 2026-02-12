@@ -1,7 +1,15 @@
 .post {
+    background: linear-gradient(to bottom, rgb(249, 249, 249), white, white, white);
+
     margin: 30px;
 }
 
 .post .description {
     margin: 5px 0;
+}
+
+.reply {
+    /* background-color: #fdf7f7; */
+    background: linear-gradient(to bottom, rgb(249, 249, 249), white, white, white);
+    box-shadow: 1px 2px 5px rgba(160, 160, 160, 0.3);
 }

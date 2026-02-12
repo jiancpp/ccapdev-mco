@@ -38,7 +38,7 @@ function Login() {
                         </div>
                     </div>
                     <a href="/" className="login-button">LOGIN</a>
-                    <a href='/artist-view/:artist_id' className="login-button">ARTIST LOGIN</a>
+                    <button onClick={() => navigate('/artist-view/:artist_id')} className="login-button">ARTIST LOGIN</button>
                     <div className="create-account">
                         <p className="no-account">Don't have an account? <a onClick={() => navigate("/register")} className="sign-up-link">Sign-up.</a></p>
                     </div>

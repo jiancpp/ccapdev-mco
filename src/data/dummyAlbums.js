@@ -45,6 +45,16 @@ export const dummyAlbums = [
         songs: 12
     },
 
+    {
+        _id: "al203",
+        artist_id: "a2",
+        title: "Harry Styles",
+        cover: "https://i.scdn.co/image/ab67616d0000b2733f8b8a9c71b2bd2f3019940b",
+        year: "2016",
+        songs: 2,
+        rating: 4.2,
+    },
+
     // --- TAYLOR SWIFT (a5) ---
     {
         _id: "al501",

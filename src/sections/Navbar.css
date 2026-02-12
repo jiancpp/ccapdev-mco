@@ -11,14 +11,14 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 98%;
+    max-width: 100%;
     height: 70px;
     background: linear-gradient(135deg,#a11547, #5c0627);
     
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5); */
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
     color: white;
+    margin: 0 10px;
 }
 
 nav div {
@@ -34,13 +34,14 @@ nav div {
 #notifications {
     position: relative;
     display: inline-block;
-    font-size: 30px;
+    font-size: 25px;
+    color: #fdfdff;
 }
 
 #notifications::after {
     content: "";
     position: absolute;
-    right: 30;
+    right: -1px;
 
     width: 10px;
     height: 10px;

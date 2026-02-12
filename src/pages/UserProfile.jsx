@@ -28,7 +28,6 @@ const getReviewsByUser = (user_id) => {
 function UserProfile() {
     // ------- Navigation ------ //
     const navigate = useNavigate();
-    const goToHome = () => navigate("/")
     const [section, setSection] = useState("reviews");
 
     // ------------ Modals ---------- //
@@ -51,7 +50,7 @@ function UserProfile() {
 
     return (
         <div className="user-profile">
-            <button className="back-btn" onClick={ goToHome }>
+            <button className="back-btn" onClick={ () => navigate(-1) }>
                 <i className="bi bi-arrow-left"></i> Back
             </button>
 
