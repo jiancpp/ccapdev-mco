@@ -14,6 +14,7 @@ import UserProfile from './pages/UserProfile.jsx'
 import ArtistProfile from './pages/ArtistProfile.jsx'
 import ArtistView from './pages/ArtistView.jsx'
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
+import AboutUnsynth from "./pages/AboutUnsynth";
 
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 
@@ -28,6 +29,7 @@ function App() {
           {/* AUTH PAGES */}
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/about' element={<AboutUnsynth />} />
 
           {/* MAIN PAGES (w/ Navbar and Sidebar) */}
           <Route element={<MainLayout activeUserID={activeUser} setActiveUser={setActiveUser}/>}>

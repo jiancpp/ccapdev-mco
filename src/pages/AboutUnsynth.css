@@ -1,0 +1,111 @@
+.about-page-container {
+    display: grid;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-page-container .header {
+    width: 350px;
+    text-align: center;
+    margin: auto;
+}
+
+.about-page-container .header h1, .about-page-container .header p  {
+    background: radial-gradient(circle at center, rgb(255, 87, 87), rgb(158, 0, 93));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;    
+    margin: 0;
+    letter-spacing: -2px;
+
+}
+
+.about-page-container .header h1 {
+    padding: 10px;
+    font-size: 75px;
+    font-weight: 500;
+}
+
+.about-page-container .header p {
+    padding: 10px;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.about-page-container h1 span {
+    font-family: 'Carollo Playscript';
+    font-weight: lighter;
+    font-style: italic;
+    letter-spacing: -3px;
+
+    background: radial-gradient(circle at center, rgb(255, 87, 87), rgb(158, 0, 93));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;   
+}
+
+.about-page-container button {
+    margin: 30px;
+    padding: 10px 20px;
+    background: #a11547;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+}
+
+.about-page-container .linear-border {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(90deg, #edb7cc, #e8decb);
+}
+
+.about-page-container .background {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -100;
+}
+
+.about-page-container .circle-element {
+    position: absolute;
+    z-index: -10;
+    width: 500px;
+    height: 500px;
+    background-color: transparent;
+    border: 110px solid rgba(181, 54, 98, 0.15);
+    border-radius: 50%;
+}
+
+.about-page-container .circle-l1 {
+    bottom: -350px;
+    left: -60px;
+}
+
+.about-page-container .circle-l2 {
+    bottom: -600px;
+    left: -300px;
+    border: 150px solid rgba(181, 54, 98, 0.15);;
+    width: 1000px;
+    height: 1000px;
+}
+
+.about-page-container .circle-r1 {
+    top: -350px;
+    right: -60px;
+}
+
+.about-page-container .circle-r2 {
+    top: -600px;
+    right: -300px;
+    border: 150px solid rgba(181, 54, 98, 0.15);;
+    width: 1000px;
+    height: 1000px;
+}

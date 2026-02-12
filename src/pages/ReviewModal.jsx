@@ -51,19 +51,13 @@ function ReviewModal({ isOpen, onClose }) {
                         toolbarSettings={toolbarSettings} 
                         insertLinkSettings={{ target: 'body' }}
                         insertImageSettings={{ target: 'body' }}
-                        // Add this to handle the "Table" and other dialogs too
                         actionComplete={(args) => {
                             if (args.requestType === 'OpenDialog') {
-                            // This is a backup to ensure any dynamically opened dialog 
-                            // targets the body
                             }
                         }}
                     >
-                        {/* Inject the required feature modules */}
                         <Inject services={[Toolbar, Image, Link, HtmlEditor, QuickToolbar]} />
-                    </RichTextEditorComponent><div className="review-textarea">
-                        
-                    </div>
+                    </RichTextEditorComponent>
                 </div>
 
                 <div className="footer">
