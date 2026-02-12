@@ -22,6 +22,7 @@
     border: 1px solid #a11547;
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-height: 600px;
 }
 
 .modal-title {
@@ -113,7 +114,7 @@
     border: 1px solid #df6490;
     border-radius: 20px;
     background: white;
-    overflow: hidden;
+    overflow-y: scroll;
 }
 
 .header-input {
@@ -138,17 +139,9 @@ textarea::placeholder {
     opacity: 1;
 }
 
-.review-textarea {
-    width: 100%;
-    height: 150px;
-    padding: 15px 20px;
-    border: none;
-    outline: none;
-    resize: none;
-    font-family: inherit;
-    font-size: var(--fs-sm);
-    background: white;
-    color: #000;
+.review-rte .e-rte-content {
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .submit-btn {
