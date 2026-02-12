@@ -16,14 +16,16 @@ function ArtistBlock({ artist }) {
                 </div>
                 <div className="artist-details">
                     <div className="top-block">
-                        <h3 className="name">{artist.name}</h3>
+                        <div className="first-line flex">
+                            <h3 className="name">{artist.name}</h3>
+                        <div className="details">{artist.reviews} reviews</div>
+                        </div>
                         <div className="stars">
                             <StarRating rating={Number(artist.rating)} />
                         </div>
                     </div>
                     <div className="bottom-block">
-                        <div className="details">{artist.reviews} reviews</div>
-                        <div className="details">{artist.songs} songs released</div>
+                        <div className="description">{artist.description}</div>
                     </div>
                 </div>
             </div>

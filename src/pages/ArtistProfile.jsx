@@ -33,7 +33,7 @@ function ArtistProfile() {
         <div className="artist-profile">
             <div className="top-bar">
                 <button className="back-btn" onClick={() => navigate(-1)}>
-                    <i className="bi bi-arrow-left"></i> Back
+                    <i className="bi bi-chevron-left"></i> Back
                 </button>
                 
                 <div className="search-container">
@@ -63,6 +63,9 @@ function ArtistProfile() {
                 <div className="artist-meta">
                     <span className="country">{artist.country}</span>
                 </div>
+                <div className="description">
+                    <p>{artist.description}</p>
+                </div>
             </div>
 
             <div className="artist-nav indent">
@@ -89,7 +92,7 @@ function ArtistProfile() {
             {/* REVIEWS TAB */}
             {activeTab === 'reviews' && (
                 <>
-                    <div className="rate-review-section indent">
+                    <div className="rate-review-section indent hidden">
                         <h3>Rate and Review</h3>
                         <div className="user-input-row">
                             <div className="user-avatar-small"></div>

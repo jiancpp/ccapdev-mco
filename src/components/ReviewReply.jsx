@@ -31,7 +31,7 @@ function ReviewReply({ review, activeUser }) {
                 className={`post ${deleteReview} reply`}
                 onClick={() => setOpenOptions("hidden")}
                 onMouseLeave={() => setOpenOptions("hidden")}>
-                <div className="options"
+                {/* <div className="options"
                     onClick={(e) => {
                         e.stopPropagation(); // stops triggering parent event
                         setOpenOptions("visible")
@@ -47,12 +47,11 @@ function ReviewReply({ review, activeUser }) {
                             <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
                         </li>
                     </ul>
-                </div>
+                </div> */}
 
                 <div className='post-content'>
                     <div className="profile">
-
-                        <img src={artist_photo} alt="" />
+                        <img src={artist.photo} alt="" />
                     </div>
                     <div className="review-details">
                         <div className='user'>

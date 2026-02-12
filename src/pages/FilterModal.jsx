@@ -50,7 +50,7 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                                 className={`rating-btn ${tempFilters.rating === star ? 'active' : ''}`}
                                 onClick={() => setTempFilters({...tempFilters, rating: star})}
                             >
-                                <i className="bi-star-fill" style={{color: '#ffc107'}}></i> {star} Stars +
+                                <i className="bi-star-fill" style={{color: '#ffc107'}}></i> {star}-Star +
                             </button>
                         ))}
                     </div>
