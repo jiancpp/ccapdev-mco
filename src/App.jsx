@@ -11,6 +11,7 @@ import Home from './pages/Home.jsx'
 import Artists from './pages/Artists.jsx'
 import UserProfile from './pages/UserProfile.jsx'
 import ArtistProfile from './pages/ArtistProfile.jsx'
+import ArtistView from './pages/ArtistView.jsx'
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
@@ -33,6 +34,7 @@ function App() {
             <Route path='/artists' element={<Artists />}></Route>
             <Route path='/profile/:user_id' element={<UserProfile />}></Route>
             <Route path='/artists/artist-profile/:artist_id' element={<ArtistProfile />}></Route>
+            <Route path='/artist-view/:artist_id' element={<ArtistView />}></Route>
           </Route>
         </Route>
       </Routes>
