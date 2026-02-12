@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-#login{
+#register{
     background-image: linear-gradient(to right, #f3599e, #fffcb7);
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
     justify-content: center;
 }
 
-#login .background {
+#register .background {
     display: block;
     position: absolute;
     top: 0;
@@ -25,7 +25,7 @@
 
 }
 
-#login .circle-element {
+#register .circle-element {
     position: absolute;
     z-index: 1;
     width: 500px;
@@ -35,12 +35,12 @@
     border-radius: 50%;
 }
 
-#login .circle-l1 {
+#register .circle-l1 {
     bottom: -350px;
     left: -60px;
 }
 
-#login .circle-l2 {
+#register .circle-l2 {
     bottom: -600px;
     left: -300px;
     border: 150px solid rgba(255, 255, 255, 0.15);
@@ -48,12 +48,12 @@
     height: 1000px;
 }
 
-#login .circle-r1 {
+#register .circle-r1 {
     top: -350px;
     right: -60px;
 }
 
-#login .circle-r2 {
+#register .circle-r2 {
     top: -600px;
     right: -300px;
     border: 150px solid rgba(255, 255, 255, 0.15);
@@ -61,28 +61,28 @@
     height: 1000px;
 }
 
-#login .login-background {
+#register .register-background {
     color: white;
     /* margin-top: 125px; */
     width: 500px;
-    height: 450px;
+    height: 500px;
     border-radius: 25px;
     background-image: linear-gradient(135deg, #a11547, #5c0627);
     box-shadow: 0px 20px 50px rgba(0,0,0,0.5);
     z-index: 2;
 }
 
-#login .logo-container {
+#register .logo-container {
     height: 10px;
     margin-top: 20px;
     margin-left: 20px;
 }
 
-#login .logo {
+#register .logo {
     width: 100px;
 }
 
-#login .login {
+#register .register {
     margin-top: 50px;
     margin-left: 100px;
     margin-right: 100px;
@@ -91,20 +91,20 @@
     flex-direction: column;
 }
 
-#login .login-title {
+#register .register-title {
     font-size: 50px;
     font-family: 'Carollo Playscript';
     letter-spacing: -0.03em;
     margin-bottom: 20px;
 }
 
-#login .login-forms {
+#register .register-forms {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#login .login-details {
+#register .register-details {
     width: 250px;
     padding: 15px;
     margin-top: 10px;
@@ -115,11 +115,11 @@
     font-size: 13px;
 }
 
-#login .view-password {
+#register .view-password {
 
 }
 
-#login .login-options {
+#register .register-options {
     display: flex;
     align-items: left;
     font-size: 10px;
@@ -127,27 +127,27 @@
     width: 75%;
 }
 
-#login .checkbox {
+#register .checkbox {
     border: white;
     margin-top: -0.5px;
 }
 
-#login .remember-me {
+#register .remember-me {
 }
 
-#login .forgot-password {
+#register .forgot-password {
     align-items: right;
     margin-left: auto;
     margin-right: 5px;
 }
 
-#login .forgot-password-link {
+#register .forgot-password-link {
     color: #ffde59;
     text-decoration: underline;
 }
 
-#login .login-button {
-    margin-top: 5px;
+#register .register-button {
+    margin-top: 15px;
     width: 150px;
     padding: 10px;
     background-image: linear-gradient(to right, #fbc2d8, #fff4e0);
@@ -159,18 +159,18 @@
     cursor: pointer;
 }
 
-#login .create-account {
+#register .create-account {
     align-items: bottom;
     height: 100%;
     margin-top: auto;
     font-size: 10px;
 }
 
-#login .no-account {
+#register .no-account {
     
 }
 
-#login .sign-up-link {
+#register .sign-up-link {
     color:#ffde59;
     text-decoration: underline;
     cursor: pointer;

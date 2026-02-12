@@ -1,0 +1,260 @@
+.artist-view {
+    width: 100%;
+    padding: 40px 40px 0 40px;
+    font-family: Helvetica, sans-serif;
+}
+
+.artist-view .indent {
+    margin-left: 22px;
+}
+
+.artist-view .header {
+    background: linear-gradient(90deg, #fbc2d8, #fff4e0);
+    position: relative;
+    height: 120px;
+    margin-bottom: 75px;
+    border-radius: 20px;
+}
+
+.artist-view .header .profile-pic {
+    position: absolute;
+    bottom: -50px;
+    left: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    background-color: #fbc2d8;
+    overflow: hidden; 
+    border: 4px solid white; 
+}
+
+.artist-view .header .profile-pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artist-view .header .user-follow-btn {
+    position: absolute;
+    right: 0;
+    bottom: -60px;
+    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
+    padding: 10px 50px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    letter-spacing: -0.05em;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.artist-view .artist-profile-details {
+    margin-bottom: 30px;
+}
+
+.artist-view .artist-name {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.artist-view .artist-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.artist-view .artist-rating .stars {
+    display: flex;
+    align-items: center; 
+}
+
+.artist-view .artist-meta {
+    color: #333;
+    font-size: 16px;
+}
+
+.artist-view .artist-nav { 
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+    display: flex;
+    gap: 40px;
+}
+
+.artist-view .artist-nav .nav-item {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 600;
+    color: #9e005d;
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.artist-view .artist-nav .nav-item {
+    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.artist-view .artist-nav .nav-item.active {
+    border-bottom: 3px solid #ff5757;
+}
+
+.artist-view .rate-review-section {
+    margin-bottom: 40px;
+}
+
+.artist-view .rate-review-section h3 {
+    font-size: 20px;
+    color: #888;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.artist-view .rate-review-section .user-input-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.artist-view .rate-review-section .user-avatar-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #9e005d;
+}
+
+.artist-view .rate-review-section .empty-stars {
+    font-size: 32px;
+    color: #bbb; 
+    cursor: pointer;
+    letter-spacing: 5px;
+}
+
+/* SONGS TAB */
+
+.songs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+    margin-top: 15px;
+}
+
+.song-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #fff; 
+    border-radius: 8px;
+    border: 1px solid #eee; 
+    transition: background-color 0.2s ease, transform 0.1s;
+}
+
+.song-row:hover {
+    background-color: #f8f9fa; 
+    transform: translateX(5px);
+    border-color: #ddd;
+}
+
+/* [PHOTO] Styling */
+.song-image-container {
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.song-cover {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.song-info {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.song-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #333;
+}
+
+.song-rating-container {
+    margin-right: 25px;
+
+    white-space: nowrap; 
+}
+
+.song-duration {
+    font-family: 'Courier New', Courier, monospace; 
+    color: #666;
+    font-size: 0.9rem;
+    min-width: 45px;
+    text-align: right;
+}
+
+.albums-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+    gap: 20px;
+    padding-top: 10px;
+}
+
+.album-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+    border: 1px solid #eee;
+}
+
+.album-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.album-cover {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    display: block;
+}
+
+.album-info {
+    padding: 10px;
+}
+
+.album-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    color: #333;
+}
+
+.album-year {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.no-data-msg {
+    color: #888;
+    font-style: italic;
+    margin-top: 20px;
+}
