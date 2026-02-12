@@ -29,7 +29,6 @@ function App() {
           {/* AUTH PAGES */}
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/about' element={<AboutUnsynth />} />
 
           {/* MAIN PAGES (w/ Navbar and Sidebar) */}
           <Route element={<MainLayout activeUserID={activeUser} setActiveUser={setActiveUser}/>}>
@@ -42,6 +41,7 @@ function App() {
           {/* SECONDARY PAGES (w/ Navbar) */}
           <Route element={<SecondLayout activeUserID={activeUser} setActiveUser={setActiveUser}/>}>
             <Route path='/artist-view/:artist_id' element={<ArtistView />}></Route>
+            <Route path='/about' element={<AboutUnsynth />} />
           </Route>
 
         </Route>
