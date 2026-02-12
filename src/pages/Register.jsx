@@ -30,9 +30,9 @@ function register() {
                         <input type="password" id="password" className="register-details" placeholder="Password"></input>
                         <input type="password" id="password" className="register-details" placeholder="Confirm Password"></input>
                     </div>
-                    <a href="/" className="register-button">REGISTER</a>
+                    <a onClick={() => navigate("/login")} className="register-button">REGISTER</a>
                     <div className="create-account">
-                        <p className="no-account">Already have an account? <a href="/" className="sign-up-link">Log in.</a></p>
+                        <p className="no-account">Already have an account? <a onClick={() => navigate("/login")} className="sign-up-link">Log in.</a></p>
                     </div>
                 </div>
             </div>

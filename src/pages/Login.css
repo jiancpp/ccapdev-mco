@@ -172,4 +172,5 @@
 #login .sign-up-link {
     color:#ffde59;
     text-decoration: underline;
+    cursor: pointer;
 }
