@@ -3,41 +3,34 @@
     padding: 40px 40px 0 40px;
 }
 
-#artists .buttons {
-    width: 100%;
-    justify-content: space-between;
+#artists .toolbar {
+    display: flex;
+    gap: 20px;
 }
 
-#artists .filters button {
-    height: 40px;
-    border-radius: 20px;
-    padding: 0 30px;
-    margin-right: 15px;
-    border: 1px solid #9e005d;
+#artists .filters {
+    background: linear-gradient(to right, #9e005d, #d74a4a, #9e005d );
+    color: white;
+    height: 45px;
+    width: 140px;
+    border: none;
+    border-radius: 15px;
+    padding: 0 20px;
+    margin-bottom: auto;
 
-    font-size: 15px;
-    font-weight: 600;
-    color: #9e005d;
-    background-color: white;
+    font-size: var(--fs-sm);
+    font-weight: 500;
+
     cursor: pointer;
 }
 
-#artists .filters button:hover {
-    background: linear-gradient(to right, rgba(158, 0, 92, 0.1), rgba(255, 87, 87, 0.1), rgba(158, 0, 92, 0.1) );
-}
-
-#artists .filters button:active {
-    background: linear-gradient(to right, rgba(158, 0, 92, 0.15), rgba(255, 87, 87, 0.15), rgba(158, 0, 92, 0.15) );
-}
-
-#artists .selected, #artists .filters button.selected:hover {
-    background: linear-gradient(to right, rgba(158, 0, 92, 0.25), rgba(255, 87, 87, 0.25), rgba(158, 0, 92, 0.25) );
+#artists .filters:hover {
+    background: linear-gradient(to right, #770045, #bd3f3f, #770045 );
 }
 
 #artists .filters .search-container {
     height: 40px;
     margin-right: 15px;
-    margin-bottom: auto;
     width: 500px;
 
     background-color: white;
@@ -48,7 +41,6 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
     gap: 20px; 
-    margin: 20px 0px;
 }
 
 @media (max-width: 1000px) {
