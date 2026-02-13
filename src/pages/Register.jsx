@@ -38,7 +38,7 @@ function register() {
                         </div>
                     </div>
                     <div className="register-forms">
-                        <input type="text" id="user" className="register-details" placeholder="Short Description"></input>
+                        <textarea name="short-description" className="register-details description" id="user">Short Description</textarea>
                         <input type="password" id="password" className="register-details" placeholder="Password"></input>
                         <input type="password" id="password" className="register-details" placeholder="Confirm Password"></input>
                     </div>
