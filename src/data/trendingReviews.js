@@ -40,6 +40,7 @@ export const trendingReviews = [
         likes: 95,
         dislikes: 8,
         reply: "",
+        isEdited: false,
     },
     {
         _id: "r10",
@@ -54,6 +55,7 @@ export const trendingReviews = [
         likes: 540,
         dislikes: 15,
         reply: "Saranghaeyo",
+        isEdited: false,
     },
     {
         _id: "r11",
@@ -68,6 +70,7 @@ export const trendingReviews = [
         likes: 64,
         dislikes: 1,
         reply: "",
+        isEdited: true,
     },
     {
         _id: "r12",
@@ -82,6 +85,7 @@ export const trendingReviews = [
         likes: 110,
         dislikes: 7,
         reply: "",
+        isEdited: true,
     },
     {
         _id: "r13",
@@ -96,5 +100,6 @@ export const trendingReviews = [
         likes: 88,
         dislikes: 0,
         reply: "We'll be back ;)",
+        isEdited: false,
     }
 ];
