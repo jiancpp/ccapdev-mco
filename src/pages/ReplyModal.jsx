@@ -23,7 +23,7 @@ function ReplyModal({ isOpen, onClose, }) {
                 <div className="modal-content-wrapper">
                     <button className="close-btn" onClick={onClose}>&times;</button>
 
-                    <h2 className="modal-title">Reply to Review</h2>
+                    <h2 className="modal-title">R<span className="ep">e<span className="pl">pl</span></span>y to Review</h2>
 
                     <div className="post">
                         <div className='post-content'>
@@ -64,7 +64,6 @@ function ReplyModal({ isOpen, onClose, }) {
                         </div>
                     </div>
                     <div className="input-group">
-                        <input type="text" className="header-input" placeholder="Header" />
                         <RichTextEditorComponent
                             className="review-rte"
                             toolbarSettings={toolbarSettings}

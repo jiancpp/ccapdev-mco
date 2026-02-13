@@ -43,6 +43,14 @@
     text-align: center;
 }
 
+.modal-title .ep{
+    letter-spacing: 1px;
+}
+
+.modal-title .pl{
+    letter-spacing: -3px;
+}
+
 .review {
     display: flex;
     justify-content: space-between;
