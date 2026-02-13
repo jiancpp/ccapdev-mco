@@ -12,6 +12,7 @@ export const dummyReviews = [
         likes: 55,
         dislikes: 6,
         reply: "",
+        isEdited: true,
     },
     {
         _id: "r2",
@@ -26,6 +27,7 @@ export const dummyReviews = [
         likes: 120,
         dislikes: 2,
         reply: "",
+        isEdited: false,
     },
     {
         _id: "r3",
@@ -40,6 +42,7 @@ export const dummyReviews = [
         likes: 42,
         dislikes: 1,
         reply: "",
+        isEdited: false,
     },
     {
         _id: "r4",
@@ -54,6 +57,7 @@ export const dummyReviews = [
         likes: 89,
         dislikes: 12,
         reply: "",
+        isEdited: true,
     },
     {
         _id: "r5",
@@ -68,6 +72,7 @@ export const dummyReviews = [
         likes: 34,
         dislikes: 3,
         reply: "",
+        isEdited: false,
     },
     {
         _id: "r6",
@@ -82,6 +87,7 @@ export const dummyReviews = [
         likes: 210,
         dislikes: 5,
         reply: "Thank you :)) <3",
+        isEdited: false,
     },
     {
         _id: "r14",
@@ -96,5 +102,6 @@ export const dummyReviews = [
         likes: 210,
         dislikes: 5,
         reply: "Thanks",
+        isEdited: false,
     }
 ];

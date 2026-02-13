@@ -71,7 +71,7 @@ function Review({ review, activeUser }) {
                         <span 
                             className="username" 
                             onClick={ () => navigate(`/profile/${user._id}`) }>
-                                {user.username}</span>  3hrs ago
+                                {user.username}</span>  3hrs ago <span className={`edited ${review.isEdited ? "" : "hidden"}`}>(Edited)</span>
                     </div>
 
                     <div className='title'>{review.review_header}</div>
