@@ -24,9 +24,21 @@ function register() {
                     <div className="register-title">
                         Register
                     </div>
+
                     <div className="register-forms">
                         <input type="text" id="user" className="register-details" placeholder="Username"></input>
                         <input type="text" id="user" className="register-details" placeholder="Email"></input>
+                    </div>
+                    <div className="avatar">
+                        <div className="picture-container">
+                            <div className="picture"></div>
+                        </div>
+                        <div className="upload">
+                          Upload <i className="bi bi-cloud-upload"></i>
+                        </div>
+                    </div>
+                    <div className="register-forms">
+                        <input type="text" id="user" className="register-details" placeholder="Short Description"></input>
                         <input type="password" id="password" className="register-details" placeholder="Password"></input>
                         <input type="password" id="password" className="register-details" placeholder="Confirm Password"></input>
                     </div>

@@ -30,7 +30,6 @@ function AboutUnsynth() {
                 </div>
                 <div className="record-disc">
                     <div className="c2">
-
                     </div>
                 </div>
             </div>
