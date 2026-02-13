@@ -28,6 +28,7 @@ Download latest version of Node LTS
 Inside the repo:
 ```
 npm install
+npm install @syncfusion/ej2-react-richtexteditor --sav
 ```
 ## 4️⃣ Run the App
 ```
