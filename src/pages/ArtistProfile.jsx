@@ -7,11 +7,16 @@ import { StarRating } from "../components/StarRating";
 
 import { dummyArtists } from "../data/dummyArtists";
 import { dummyReviews } from "../data/dummyReviews";
+import { trendingReviews } from "../data/trendingReviews";
 import { dummySongs } from "../data/dummySongs"; 
 import { dummyAlbums } from "../data/dummyAlbums"; 
 
 const getArtistById = (id) => dummyArtists.find((artist) => artist._id === id);
-const getReviewsByArtist = (artist_id) => dummyReviews.filter((review) => review.artist_id === artist_id);
+const getReviewsByArtist = (artist_id) => {
+    const recent = dummyReviews.filter((review) => review.artist_id === artist_id);
+    const trending = trendingReviews.filter((review) => review.artist_id === artist_id);
+    return recent.concat(trending)
+};
 const getSongsByArtist = (artist_id) => dummySongs.filter((song) => song.artist_id === artist_id);
 const getAlbumsByArtist = (artist_id) => dummyAlbums.filter((album) => album.artist_id === artist_id);
 
@@ -24,6 +29,7 @@ function ArtistProfile() {
 
     const artist = getArtistById(artist_id);    
     const reviews = getReviewsByArtist(artist_id);
+    reviews.concat(trendingReviews);
     const songs = getSongsByArtist(artist_id);
     const albums = getAlbumsByArtist(artist_id);
 
@@ -36,7 +42,7 @@ function ArtistProfile() {
                     <i className="bi bi-chevron-left"></i> Back
                 </button>
                 
-                <div className="search-container">
+                <div className="search-container hidden">
                     <input 
                         type="text" 
                         placeholder="Search songs, artists, and albums" 

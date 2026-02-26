@@ -39,7 +39,7 @@ function AlbumProfile() {
                     <i className="bi bi-chevron-left"></i>
                 </button>
                 
-                <div className="search-container">
+                <div className="search-container hidden">
                     <input 
                         type="text" 
                         placeholder="Search songs, artists, and albums" 

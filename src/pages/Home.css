@@ -23,16 +23,11 @@
     transition: 0.3s;
 }
 
-#home .filters button:hover {
-    background: linear-gradient(to right, rgba(158, 0, 92, 0.1), rgba(255, 87, 87, 0.1), rgba(158, 0, 92, 0.1) );
-}
 
-#home .filters button:active {
-    background: linear-gradient(to right, rgba(158, 0, 92, 0.15), rgba(255, 87, 87, 0.15), rgba(158, 0, 92, 0.15) );
-}
-
-#home .selected, #home .filters button.selected:hover {
-    background: linear-gradient(to right, rgba(158, 0, 92, 0.25), rgba(255, 87, 87, 0.25), rgba(158, 0, 92, 0.25) );
+#home .filters button.selected {
+    background: #9e005d;
+    color: white;
+    border: 1px solid transparent;
 }
 
 #home .filters .search-container {

@@ -31,6 +31,14 @@ function AboutUnsynth() {
                 <div className="record-disc">
                     <div className="c2">
                     </div>
+                    <div className="c3">
+                    </div>
+                    <div className="c4">
+                    </div>
+                     <div className="c5">
+                    </div>
+                    {/* <div className="c6">
+                    </div> */}
                 </div>
             </div>
         </div>
