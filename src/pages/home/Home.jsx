@@ -71,7 +71,6 @@ function Home() {
                         <ReviewSearchBar onSearchChange={setSearchTerm} />
                     </div>
                 </div>
-                {/* <button className="review-button review-button-fixed" onClick={openModal}>+</button> */}
             </div>
             <div className="review-list-main">
                 {displayedReviews.length > 0 ? (

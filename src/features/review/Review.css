@@ -91,12 +91,17 @@
 
 .edited {
     color: #928b8b;
-    font-size: 14px;
+    font-size: var(--fs-xs);
 }
 
 /* Text Styling */
-.post .review-details * {
-    margin-top: 10px
+.post .review-details {
+    margin-top: 10px;
+}
+
+.post .user {
+    font-size: var(--fs-md);
+    line-height: var(--lh-tight);
 }
 
 .post .username:hover {
@@ -105,13 +110,17 @@
 }
 
 .post .title {
-    font-size: 24px;
+    font-size: var(--fs-xl);
     font-weight: 600;
+}
+
+.post .rating {
+    margin-bottom: 10px;
 }
 
 .post .rating i{
     color: #ffb000;
-    font-size: 1.3em;
+    font-size: var(--fs-l);
     margin-right: 5px;
 }
 
@@ -136,7 +145,7 @@
     min-width: 70px;
     background-color: #eeeeee;
     padding: 5px 20px;
-    font-size: 18px;
+    font-size: var(--fs-md);
     border-radius: 30px;
     margin-right: 5px;
     cursor: pointer;

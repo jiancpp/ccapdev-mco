@@ -13,19 +13,19 @@
     border-radius: 20px;
     padding: 0 30px;
     margin-right: 15px;
-    border: 1px solid #9e005d;
+    border: 1px solid var(--primary-main);
 
-    font-size: 15px;
+    font-size: var(--fs-md);
     font-weight: 600;
-    color: #9e005d;
-    background-color: white;
+    color: var(--primary-main);
+    background-color: var(--bg-main);
     cursor: pointer;
     transition: 0.3s;
 }
 
 
 #home .filters button.selected {
-    background: #9e005d;
+    background: var(--primary-main);
     color: white;
     border: 1px solid transparent;
 }
@@ -36,21 +36,20 @@
     margin-bottom: auto;
     width: 500px;
 
-    background-color: white;
     transition: 0.3s;
 }
 
-#home .review-button {
-    background: linear-gradient(to right, #9e005d, #d74a4a, #9e005d );
-    color: white;
-    height: 50px;
-    border: none;
-    border-radius: 15px;
-    padding: 0 20px;
+#home .filters .search-container input {
+    background-color: var(--bg-main);
+    border: 1px solid var(--primary-main);
+    color: var(--primary-main);
+}
 
-    font-size: 25px;
-    font-weight: 600;
-    letter-spacing: -1px;
+#home .filters .search-container .search-icon {
+    color: var(--primary-main);
+}
 
-    cursor: pointer;
+#home .filters .search-container input::placeholder {
+    color: var(--primary-main);
+    opacity: 0.8;
 }

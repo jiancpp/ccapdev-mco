@@ -24,8 +24,8 @@
 
 .embed .album-cover {
     background-color: beige;
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     border-radius: 5px;
     padding: 0;
     margin: 5px 20px 5px 5px;
@@ -40,13 +40,13 @@
 
 
 .album-details span{
-    line-height: 1.5em;
+    font-size: var(--fs-sm);
+    line-height: var(--lh-single);
     color: rgb(66, 11, 11);
 }
 
 .embed .album-details .album-title{
-    font-size: 24px;
+    font-size: var(--fs-lg);
     font-weight: 600;
-    margin-bottom: 15px;
 }
 
