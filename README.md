@@ -1,36 +1,159 @@
-# React + Vite
+# 🌐 Unsynth
+
+A web-based application built using React, Vite, and MongoDB for music album and song reviews
+
+---
+
+# ⚙️ Repository Setup
+
+## 1️⃣ Install Node.js
+
+Download and install the **latest Node.js LTS version**.
+
+[https://nodejs.org/](https://nodejs.org/)
+
+Verify installation:
+
+```
+node -v
+npm -v
+```
+
+---
+
+## 2️⃣ Clone Repository
+
+```
+git clone https://github.com/your-username/your-repository.git
+cd your-repository
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+Inside the repository:
+
+```
+npm install
+npm install @syncfusion/ej2-react-richtexteditor --save
+```
+
+---
+
+## 4️⃣ Run the App
+
+Start the development server:
+
+```
+npm run dev
+```
+
+The application will run at:
+
+```
+http://localhost:5173
+```
+
+---
+
+# 📦 Dependencies
+
+## React + Vite
+
+This project uses **React with Vite** for fast development and Hot Module Replacement (HMR).
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* **[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react)**
+  Uses **Babel** (or **oxc** when used in rolldown-vite) for Fast Refresh.
+
+* **[@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc)**
+  Uses **SWC** for Fast Refresh.
+
+---
 
 ## React Compiler
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+The **React Compiler** is enabled in this template.
 
-Note: This will impact Vite dev & build performances.
+Documentation:
+[https://react.dev/learn/react-compiler](https://react.dev/learn/react-compiler)
 
-## Expanding the ESLint configuration
+> Note: This may impact Vite development and build performance.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
 
+## ESLint Configuration
 
-# ⚙️ Repository Setup
-## 1️⃣ Install Node.js
-Download latest version of Node LTS
+For production applications, it is recommended to use **TypeScript with type-aware lint rules**.
 
-## 2️⃣ Clone Repository
+Refer to the React + TypeScript Vite template:
+[https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)
 
-## 3️⃣ Install Dependencies
-Inside the repo:
+---
+
+## Database
+
+This project uses **MongoDB** as its database for storing and retrieving application data.
+
+MongoDB allows flexible document-based storage and integrates easily with JavaScript applications.
+
+Typical usage includes:
+
+* Storing application data
+* Managing user-generated content
+* Backend API data persistence
+
+---
+
+# 📁 `src` Organization
+
+The `src` folder contains the main source code of the application.
+A recommended structure is shown below:
+
 ```
-npm install
-npm install @syncfusion/ej2-react-richtexteditor --sav
+src/
+│
+├── assets/          # Images, icons, and static files
+├── components/      # Reusable UI components
+├── pages/           # Page-level components / views
+├── services/        # API calls and database interaction logic
+├── hooks/           # Custom React hooks
+├── utils/           # Helper functions and utilities
+│
+├── App.jsx          # Root React component
+├── main.jsx         # Application entry point
+└── index.css        # Global styles
 ```
-## 4️⃣ Run the App
-```
-npm run dev
-```
+
+### Folder Descriptions
+
+**assets**
+Contains static resources such as images, fonts, or icons used throughout the application.
+
+**components**
+Reusable UI components that can be used across multiple pages.
+
+**pages**
+High-level page components that represent different routes or screens in the application.
+
+**services**
+Handles communication with APIs or backend services (including MongoDB-related endpoints).
+
+**hooks**
+Custom React hooks for reusable state and logic.
+
+**utils**
+Utility/helper functions used across the project.
+
+---
+
+# 🧑‍💻 Tech Stack
+
+* **Frontend:** React + Vite
+* **Backend / API:** Node.js (if applicable)
+* **Database:** MongoDB
+* **Rich Text Editor:** Syncfusion React Rich Text Editor
