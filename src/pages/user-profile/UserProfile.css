@@ -42,7 +42,7 @@
     width: 120px;
     height: 120px;
     border-radius: 60px;
-    background-color: #fbc2d8;
+    background-color: var(--secondary-light);
 }
 
 .user-profile .header .profile-pic img {
@@ -57,17 +57,17 @@
     right: 0;
     bottom: -60px;
 
-    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d );
+    background: var(--gr-accent);
     padding: 10px 50px;
-    font-size: 17px;
+    font-size: var(--fs-l);
     font-weight: 600;
-    color: white;
+    color: var(--text-contrast);
     letter-spacing: -0.05em;
     border-radius: 30px;
 }
 
 .user-profile .header .user-follow-btn:hover {
-    background: linear-gradient(to right, #770045, #ff5757, #770045 );
+    background: var(--gr-accent);
 }
 
 .user-profile .header .user-edit-profile-btn {
@@ -75,11 +75,11 @@
     right: 0;
     bottom: -60px;
 
-    border: 1px solid #9e005d;
+    border: 1px solid var(--secondary-main);
     padding: 10px 35px;
-    font-size: 15px;
+    font-size: var(--fs-md);
     font-weight: 600;
-    color: #9e005d;
+    color: var(--secondary-main);
     letter-spacing: -0.05em;
     border-radius: 30px;
     transition: 0.2s;
@@ -87,11 +87,11 @@
 }
 
 .user-profile .header .user-edit-profile-btn i {
-    font-size: 13px;
+    font-size: var(--fs-sm);
 }
 
 .user-profile .header .user-edit-profile-btn:hover {
-    background: #f4e1ec;
+    background: var(--secondary-lighter);
 }
 
 .user-profile .user-profile-details {
@@ -99,12 +99,12 @@
 }
 
 .user-profile .user-profile-details .user-username {
-    font-size: 32px;
+    font-size: var(--fs-xxl);
     font-weight: 600;
 }
 
 .user-profile .user-profile-details .user-stats {
-    color: #aaa;
+    color: var(--text-contrast-dark);
     margin-bottom: 10px;
 }
 
@@ -164,16 +164,16 @@
     display: inline-block;
     text-align: center;
     position: relative;
-    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d); /* gradient colors */
+    background: var(--gr-accent); /* gradient colors */
     -webkit-background-clip: text; /* clip gradient to text */
     -webkit-text-fill-color: transparent; /* make text fill transparent */
     background-clip: text; /* standard property (for non-webkit browsers) */
     width: 100px;
     font-family: Helvetica, sans-serif;
     font-weight: 600;
-    font-size: 18px;
+    font-size: var(--fs-l);
     border: none;
-    color: #9e005d;
+    color: var(--tertiary-main);
     padding: 10px 0;
     cursor: pointer;
     transition: left 0.5s step-end;

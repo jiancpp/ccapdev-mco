@@ -9,7 +9,7 @@
 }
 
 .embed:hover {
-    background: linear-gradient(90deg, #edb7cc, #e8decb);
+    background: var(--gr-secondary);
 }
 
 .embed-album {
@@ -19,7 +19,6 @@
 
 .embed .icon {
     margin: 0 10px 0 5px;
-    vertical-align: middle;
 }
 
 .embed .album-cover {
@@ -42,7 +41,7 @@
 .album-details span{
     font-size: var(--fs-sm);
     line-height: var(--lh-single);
-    color: rgb(66, 11, 11);
+    color: #420b0b;
 }
 
 .embed .album-details .album-title{
@@ -50,3 +49,12 @@
     font-weight: 600;
 }
 
+.embed .line {
+    display: flex;
+    align-items: center;
+    margin-left: 3px;
+}
+
+.embed .line-title {
+    margin: 0 5px 5px 0;
+}
