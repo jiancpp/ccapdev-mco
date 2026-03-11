@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './ReviewReply.css'
 import './Review.css'
 
-import { dummyUsers } from "../data/dummyUsers";
-import { dummyArtists } from "../data/dummyArtists";
+import { dummyUsers } from "../../data/dummyUsers";
+import { dummyArtists } from "../../data/dummyArtists";
 import { useState } from "react";
 
 const getArtistById = (id) =>

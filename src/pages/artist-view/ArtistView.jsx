@@ -1,26 +1,25 @@
 import { useState } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 
-import "./ArtistProfile.css";
-import Review from "../components/Review";
-import { StarRating } from "../components/StarRating";
+import "./ArtistView.css";
+import ArtistViewReview from "../../features/review/ArtistViewReview";
+import { StarRating } from "../../components/StarRating";
 
-import { dummyArtists } from "../data/dummyArtists";
-import { dummyReviews } from "../data/dummyReviews";
-import { trendingReviews } from "../data/trendingReviews";
-import { dummySongs } from "../data/dummySongs"; 
-import { dummyAlbums } from "../data/dummyAlbums"; 
+import { dummyArtists } from "../../data/dummyArtists";
+import { dummyReviews } from "../../data/dummyReviews";
+import { dummySongs } from "../../data/dummySongs"; 
+import { dummyAlbums } from "../../data/dummyAlbums"; 
 
-const getArtistById = (id) => dummyArtists.find((artist) => artist._id === id);
-const getReviewsByArtist = (artist_id) => {
-    const recent = dummyReviews.filter((review) => review.artist_id === artist_id);
-    const trending = trendingReviews.filter((review) => review.artist_id === artist_id);
-    return recent.concat(trending)
-};
-const getSongsByArtist = (artist_id) => dummySongs.filter((song) => song.artist_id === artist_id);
-const getAlbumsByArtist = (artist_id) => dummyAlbums.filter((album) => album.artist_id === artist_id);
+// const getArtistById = (id) => dummyArtists.find((artist) => artist._id === id);
+// const getReviewsByArtist = (artist_id) => dummyReviews.filter((review) => review.artist_id === artist_id);
+// const getSongsByArtist = (artist_id) => dummySongs.filter((song) => song.artist_id === artist_id);
+// const getAlbumsByArtist = (artist_id) => dummyAlbums.filter((album) => album.artist_id === artist_id);
+const getArtistById = (id) => dummyArtists.find((artist) => artist._id === "a2");
+const getReviewsByArtist = (artist_id) => dummyReviews.filter((review) => review.artist_id === "a2");
+const getSongsByArtist = (artist_id) => dummySongs.filter((song) => song.artist_id === "a2");
+const getAlbumsByArtist = (artist_id) => dummyAlbums.filter((album) => album.artist_id === "a2");
 
-function ArtistProfile() {
+function ArtistView() {
     const navigate = useNavigate();
     const { artist_id } = useParams();
     const { activeUser } = useOutletContext();
@@ -29,28 +28,13 @@ function ArtistProfile() {
 
     const artist = getArtistById(artist_id);    
     const reviews = getReviewsByArtist(artist_id);
-    reviews.concat(trendingReviews);
     const songs = getSongsByArtist(artist_id);
     const albums = getAlbumsByArtist(artist_id);
 
     if (!artist) return( <div style={{ padding: "20px" }}>Artist not found</div> );
 
     return (
-        <div className="artist-profile">
-            <div className="top-bar">
-                <button className="back-btn" onClick={() => navigate(-1)}>
-                    <i className="bi bi-chevron-left"></i> Back
-                </button>
-                
-                <div className="search-container hidden">
-                    <input 
-                        type="text" 
-                        placeholder="Search songs, artists, and albums" 
-                        className="search-input"
-                    />
-                    <i className="bi bi-search search-icon"></i>
-                </div>
-            </div>
+        <div className="artist-view">
 
             <div className="header">
                 <div className="banner"></div>
@@ -68,9 +52,6 @@ function ArtistProfile() {
                 </div>
                 <div className="artist-meta">
                     <span className="country">{artist.country}</span>
-                </div>
-                <div className="description">
-                    <p>{artist.description}</p>
                 </div>
             </div>
 
@@ -93,23 +74,22 @@ function ArtistProfile() {
                 >
                     Albums ({albums.length})
                 </button>
+                <button 
+                    className={`nav-item ${activeTab === 'analytics' ? 'active' : ''}`}
+                    onClick={() => setActiveTab('analytics')}
+                >
+                    Analytics
+                </button>
             </div>
 
             {/* REVIEWS TAB */}
             {activeTab === 'reviews' && (
                 <>
-                    <div className="rate-review-section indent hidden">
-                        <h3>Rate and Review</h3>
-                        <div className="user-input-row">
-                            <div className="user-avatar-small"></div>
-                            <div className="empty-stars">★★★★★</div>
-                        </div>
-                    </div>
 
                     <div className="artist-reviews indent">
                         {reviews.length > 0 ? (
                             reviews.map((review) => (
-                                <Review key={review._id} review={review} activeUser={activeUser} />
+                                <ArtistViewReview key={review._id} review={review} activeUser={activeUser} />
                             ))
                         ) : (
                             <p className="no-data-msg">No reviews yet.</p>
@@ -125,12 +105,7 @@ function ArtistProfile() {
                     <div className="songs-list">
                         {songs.length > 0 ? (
                             songs.map((song, index) => (
-                                <div 
-                                    className="song-row" 
-                                    key={song._id}
-                                    onClick={() => navigate(`/songs/${song._id}`)} 
-                                    style={{ cursor: "pointer" }}
-                                >
+                                <div className="song-row" key={song._id}>
                                     <div className="song-image-container">
                                         <img 
                                             src={song.cover || artist.photo} 
@@ -163,8 +138,7 @@ function ArtistProfile() {
                     <div className="albums-grid">
                         {albums.length > 0 ? (
                             albums.map((album) => (
-                                <div className="album-card" key={album._id}
-                                onClick={() => navigate(`/albums/${album._id}`)}>
+                                <div className="album-card" key={album._id}>
                                     <img 
                                         src={album.cover || artist.photo} 
                                         alt={album.title} 
@@ -188,4 +162,4 @@ function ArtistProfile() {
     )
 }
 
-export default ArtistProfile;
+export default ArtistView;

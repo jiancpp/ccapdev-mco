@@ -3,14 +3,14 @@ import { useOutletContext } from "react-router-dom";
 
 import './Home.css'
 
-import Review from '../components/Review'
-import { ReviewSearchBar } from '../components/SearchBar'
-import { dummyReviews } from '../data/dummyReviews'
-import { trendingReviews } from '../data/trendingReviews'
-import { dummyUsers } from '../data/dummyUsers'
-import { dummyArtists } from '../data/dummyArtists'
-import { dummySongs } from '../data/dummySongs'
-import { dummyAlbums } from '../data/dummyAlbums'
+import Review from '../../features/review/Review'
+import { ReviewSearchBar } from '../../components/SearchBar'
+import { dummyReviews } from '../../data/dummyReviews'
+import { trendingReviews } from '../../data/trendingReviews'
+import { dummyUsers } from '../../data/dummyUsers'
+import { dummyArtists } from '../../data/dummyArtists'
+import { dummySongs } from '../../data/dummySongs'
+import { dummyAlbums } from '../../data/dummyAlbums'
 
 function Home() {
     const { openModal, activeUser } = useOutletContext();

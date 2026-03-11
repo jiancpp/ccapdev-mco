@@ -3,12 +3,13 @@ import { useOutletContext } from "react-router-dom"; // to use params passed fro
 import { useNavigate } from "react-router-dom";
 
 import "./UserProfile.css"
-import Review from "../components/Review";
-import NothingBlock from "../components/NothingBlock"
+import Review from "../../features/review/Review";
+import NothingBlock from "../../components/NothingBlock"
 
-import { dummyUsers } from "../data/dummyUsers";
-import { dummyReviews } from "../data/dummyReviews";
-import { trendingReviews } from "../data/trendingReviews";
+import { dummyUsers } from "../../data/dummyUsers";
+import { dummyReviews } from "../../data/dummyReviews";
+import { trendingReviews } from "../../data/trendingReviews";
+
 import { useState } from "react";
 
 /***** Utilities ******/

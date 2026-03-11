@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 
 import "./SongProfile.css"; 
-import Review from "../components/Review";
-import { StarRating } from "../components/StarRating";
+import Review from "../../features/review/Review";
+import { StarRating } from "../../components/StarRating";
 
-import { dummyArtists } from "../data/dummyArtists";
-import { dummyReviews } from "../data/dummyReviews";
-import { dummySongs } from "../data/dummySongs"; 
-import { dummyAlbums } from "../data/dummyAlbums";
+import { dummyArtists } from "../../data/dummyArtists";
+import { dummyReviews } from "../../data/dummyReviews";
+import { dummySongs } from "../../data/dummySongs"; 
+import { dummyAlbums } from "../../data/dummyAlbums";
 
 // FIX 2: Look inside dummyAlbums, not dummySongs
 const getAlbumById = (id) => dummyAlbums.find((album) => album._id === id);

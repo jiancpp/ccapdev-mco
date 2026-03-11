@@ -4,9 +4,9 @@ import { Outlet } from "react-router-dom";
 /**** Pages and Styling ****/
 import './MainLayout.css'
 import Navbar from './Navbar';
-import ReplyModal from '../pages/ReplyModal';
+import ReplyModal from '../modals/ReplyModal';
 import { dummyUsers } from "../data/dummyUsers";
-import EditProfileModal from "../pages/EditProfileModal";
+import EditProfileModal from "../modals/EditProfileModal";
 
 /***** Utilities ******/
 const getUserById = (id) => dummyUsers.find((user) => user._id === id );

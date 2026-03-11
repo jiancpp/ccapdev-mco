@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import './ArtistBlock.css'
-import { StarRating } from './StarRating';
+import { StarRating } from '../../components/StarRating';
 
 function ArtistBlock({ artist }) {
     const navigate = useNavigate();

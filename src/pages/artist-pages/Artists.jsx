@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';        
 import './Artists.css';
 
-import ArtistBlock from '../components/ArtistBlock';
-import { ArtistSearchBar } from '../components/SearchBar';
-import { FilterModal } from '../pages/FilterModal';
-import { dummyArtists } from '../data/dummyArtists';
+import ArtistBlock from '../../features/artist/ArtistBlock';
+import { ArtistSearchBar } from '../../components/SearchBar';
+import { FilterModal } from '../../modals/FilterModal';
+import { dummyArtists } from '../../data/dummyArtists';
 
 function Artists() {
     const [isFilterOpen, setIsFilterOpen] = useState(false);

@@ -2,21 +2,21 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 /******** Layouts ********/
-import MainLayout from './sections/MainLayout'
-import SecondLayout from "./sections/SecondLayout.jsx";
+import MainLayout from './layouts/MainLayout'
+import SecondLayout from "./layouts/SecondLayout.jsx";
 
 /******** Components ********/
-import Login from './pages/Login'
-import Register from './pages/Register.jsx'
-import Home from './pages/Home.jsx'
-import Artists from './pages/Artists.jsx'
-import UserProfile from './pages/UserProfile.jsx'
-import ArtistProfile from './pages/ArtistProfile.jsx'
-import SongProfile from './pages/SongProfile.jsx'
-import ArtistView from './pages/ArtistView.jsx'
-import AlbumProfile from "./pages/AlbumProfile.jsx";
+import AboutUnsynth from "./pages/about/AboutUnsynth";
+import Login from './pages/login/Login.jsx'
+import Register from './pages/register/Register.jsx'
+import Home from './pages/home/Home.jsx'
+import Artists from './pages/artist-pages/Artists.jsx'
+import UserProfile from './pages/user-profile/UserProfile.jsx'
+import ArtistProfile from './pages/artist-pages/ArtistProfile.jsx'
+import SongProfile from './pages/artist-pages/SongProfile.jsx'
+import AlbumProfile from "./pages/artist-pages/AlbumProfile.jsx";
+import ArtistView from './pages/artist-view/ArtistView.jsx'
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
-import AboutUnsynth from "./pages/AboutUnsynth";
 
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 

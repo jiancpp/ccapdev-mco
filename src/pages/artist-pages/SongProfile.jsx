@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 
 import "./SongProfile.css";
-import Review from "../components/Review";
-import { StarRating } from "../components/StarRating";
+import Review from "../../features/review/Review";
+import { StarRating } from "../../components/StarRating";
 
-import { dummyArtists } from "../data/dummyArtists";
-import { dummyReviews } from "../data/dummyReviews";
-import { dummySongs } from "../data/dummySongs"; 
+import { dummyArtists } from "../../data/dummyArtists";
+import { dummyReviews } from "../../data/dummyReviews";
+import { dummySongs } from "../../data/dummySongs"; 
 
 const getArtistById = (id) => dummyArtists.find((artist) => artist._id === id);
 const getSongById = (id) => dummySongs.find((song) => song._id === id);

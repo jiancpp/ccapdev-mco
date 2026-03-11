@@ -8,7 +8,7 @@ import {
     Inject
 } from '@syncfusion/ej2-react-richtexteditor';
 import './ReplyModal.css';
-import '../components/Review.css';
+import '../features/review/Review.css';
 
 function ReplyModal({ isOpen, onClose, }) {
     const toolbarSettings = {

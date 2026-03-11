@@ -1,6 +1,6 @@
 import './ReviewEmbed.css'
-import { dummySongs } from '../data/dummySongs'
-import { dummyAlbums } from '../data/dummyAlbums'
+import { dummySongs } from '../../data/dummySongs'
+import { dummyAlbums } from '../../data/dummyAlbums'
 
 /***** UTILITIES ******/
 const getSongById = (id) => dummySongs.find((song) => song._id === id);
