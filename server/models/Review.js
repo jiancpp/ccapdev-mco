@@ -1,0 +1,91 @@
+const mongoose = require('mongoose');
+
+const ReviewSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User', 
+        required: true
+    },
+
+    // polymorphic targeting to reduce required models
+    targetID: {
+        type: mongoose.Schema.ObjectId,
+        required: true
+    },
+
+    targetType: {
+        type: String,
+        enum: ['Album', 'Song'],
+        required: true
+    },
+
+    title: {
+        type: String,
+        required: [true, "Please add a title to your review"],
+        maxlength: 100
+    },
+
+    rating: {
+        type: Number,
+        required: true,
+        min: 1,
+        max: 5
+    },
+
+    description: String,
+
+    likes: {
+        type: Number, 
+        default: 0
+    },
+
+    dislikes: {
+        type: Number, 
+        default: 0
+    }
+}, { timestamps: true })
+
+ReviewSchema.index({ targetID: 1, targetType: 1 });
+ReviewSchema.index({ user: 1, targetID: 1 }, { unique: true });  // one review per user
+
+// updates average rating in the target model: albums and songs
+ReviewSchema.statics.getAverageRating = async function(targetID, targetModel) {
+    const obj = await this.aggregate([
+        { $match: { targetID: targetID } },
+        { $group: { _id: '$targetID', averageRating: { $avg: '$rating' } } }
+    ])
+
+    try {
+        await mongoose.model(targetModel).findByIdAndUpdate(targetID, {
+            aveRating: obj[0] ? Math.round(obj[0].averageRating * 10) / 10 : 0,
+        });
+    } catch (err) {
+        console.error("Error updating average rating", err);
+    }
+}
+
+ReviewSchema.post('save', function() {
+    this.constructor.getAverageRating(this.targetID, this.targetType);
+});
+
+// capture document in pre hook
+ReviewSchema.pre('findOneAndDelete', async function (next) {
+    // Get reviewId
+    this.r = await this.model.findOne(this.getQuery());
+
+    // Cascade deletion
+    if (this.r) {
+        await mongoose.model('ReviewReaction').deleteMany({ review: this.r._id });
+        await mongoose.model('ReviewReply').deleteMany({ review: this.r._id });
+    }
+
+    next();
+});
+
+ReviewSchema.post('findOneAndDelete', async function () {
+    if (this.r) {
+        await this.r.constructor.getAverageRating(this.r.targetID, this.r.targetType);
+    }
+});
+
+module.exports = mongoose.model('Review', ReviewSchema);
