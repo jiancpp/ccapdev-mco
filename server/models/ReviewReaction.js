@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ReviewReactionSchema = new mongoose.Schema({
     user: {
@@ -54,4 +54,4 @@ ReviewReactionSchema.post('findOneAndDelete', async function(doc) {
     }
 })
 
-module.exports = mongoose.model('ReviewReaction', ReviewReactionSchema);
+export default mongoose.model('ReviewReaction', ReviewReactionSchema);

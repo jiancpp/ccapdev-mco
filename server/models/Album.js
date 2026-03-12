@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const AlbumSchema = new mongoose.Schema({
     albumName: {
@@ -19,15 +19,10 @@ const AlbumSchema = new mongoose.Schema({
         default: 0
     },
 
-    description: {
-        type: String,
-        required: true
-    },
+    description: { type: String },
+    year: { type: Number, required: true },
+    cover: { type: String, required: true },
 
-    releaseDate: {
-        type: Date,
-        required: true
-    },
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
@@ -44,4 +39,4 @@ AlbumSchema.virtual('reviews', {
 // For fast lookups
 AlbumSchema.index({ artistID: 1 });
 
-module.exports = mongoose.model('Album', AlbumSchema);
+export default mongoose.model('Album', AlbumSchema);

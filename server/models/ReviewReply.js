@@ -2,7 +2,7 @@
  * Schema for artist replies in posted reviews about their albums or songs
  */
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ReviewReplySchema = new mongoose.Schema({
     artist: {
@@ -22,4 +22,4 @@ const ReviewReplySchema = new mongoose.Schema({
 
 ReviewReplySchema.index({ artist: 1, review: 1}, { unique: true });
 
-module.exports = mongoose.model('ReviewReply', ReviewReplySchema);
+export default mongoose.model('ReviewReply', ReviewReplySchema);

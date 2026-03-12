@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const SongSchema = new mongoose.Schema({
     songTitle: {
@@ -25,15 +25,9 @@ const SongSchema = new mongoose.Schema({
         default: 0
     },
 
-    description: {
-        type: String,
-        required: true
-    },
-
-    releaseDate: {
-        type: Date,
-        required: true
-    },
+    description: { type: String },
+    duration: { type: String, required: true },
+    cover: { type: String, required: true },
 }, {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
@@ -50,4 +44,4 @@ SongSchema.virtual('reviews', {
 SongSchema.index({ artistID: 1 });
 SongSchema.index({ albumID: 1 });
 
-module.exports = mongoose.model('Song', SongSchema);
+export default mongoose.model('Song', SongSchema);

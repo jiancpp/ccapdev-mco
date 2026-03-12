@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
     username: { 
@@ -12,12 +12,13 @@ const UserSchema = new mongoose.Schema({
         unique: true },
     bio: {
         type: String,
-        maxlength: 160
+        maxlength: 350
     },
-    followers: { 
-        type: Number, 
-        default: 0
-    },
+
+    avatar: String,
+    followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+    following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+    // liked: [{ type: mongoose.Schema.ObjectId, ref: 'Review' }],
 
     // Determine user role:
     role: {
@@ -27,4 +28,4 @@ const UserSchema = new mongoose.Schema({
     },
 }, { timestamps: true })
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);

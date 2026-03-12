@@ -2,17 +2,22 @@
  * Main Server Configuration
  * Stack: Express, MongoDB (Mongoose), Node.js
  */
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require('cors');
-const dotenv = require("dotenv");
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
 // Load environment variables from .env file
 dotenv.config();
 
 // Import MongoDB Models
-const User = require("./models/User");
-// <... continue to add models here from models folder ...> //
+import User from './models/User';
+import Artist from './models/Artist';
+import Album from './models/Album';
+import Song from './models/Song';
+import Review from './models/Review';
+import ReviewReaction from './models/ReviewReaction';
+import ReviewReply from './models/ReviewReply';
 
 const app = express();
 
@@ -53,7 +58,8 @@ app.listen(PORT, () => {
  
 app.get('/api/users', async (req, res) => {
     try {
-        const allUsers = await User.find();  // mongoose method that fetches all documents
+        // mongoose method that fetches all documents
+        const allUsers = await User.find(req.query).select("-password"); // hide passwords
         res.status(200).json(allUsers);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -67,14 +73,16 @@ app.get('/api/users', async (req, res) => {
 
 app.post('/api/users', async (req, res) => {
     try {
-        const newUser = new User({
-            username: req.body.username,
-            email: req.body.email,
-            bio: req.body.bio,
-            role: req.body.role
-        })
-
+        const newUser = new User(req.body);
         const savedUser = await newUser.save();
+
+        // New user is an artist
+        if (savedUser.role === 'artist') {
+            await Artist.create({ 
+                user: savedUser._id,
+            });
+        }
+
         res.status(201).json(savedUser);
     } catch (err) {
         res.status(400).json({ error: err.message });
