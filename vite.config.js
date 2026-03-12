@@ -10,4 +10,15 @@ export default defineConfig({
       },
     }),
   ],
+
+  server: {
+    proxy: {
+      // Address mongodb and vite/react port issue
+      '/api': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+    },
+  },
+  
 })
