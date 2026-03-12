@@ -19,11 +19,11 @@
 .profile-modal-content {
     display: flex;
     flex-direction: column;
-    background: #8d143d;
+    background: var(--bg-main);
     padding: 40px 40px 60px 40px;
     border-radius: 20px;
     width: 650px;
-    border: 1px solid #a11547;
+    border: 1px solid var(--primary-main);
     position: relative;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 
@@ -42,16 +42,16 @@
 }
 
 .profile-modal-title {
-    background: radial-gradient(circle at center, rgb(255, 87, 87), white);
+    background: var(--gr-accent);
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
     font-family: "Carollo Playscript", italic;
     letter-spacing: var(--ls-very-tight);
-    font-size: 1.5rem;
+    font-size: var(--fs-xxxl);
     margin-bottom: 25px;
     margin-top: -5px;
-    text-align: left;
+    text-align: center;
 }
 
 .edit-container {
@@ -64,7 +64,7 @@
     width: 200px;
     height: 200px;
     border-radius: 100%;
-    box-shadow: -1px 1px 8px rgba(83, 12, 36, 0.75);
+    /* box-shadow: -1px 1px 5px rgba(54, 52, 53, 0.5); */
     cursor: pointer;
 }
 
@@ -76,25 +76,23 @@
 
 .edit-details label {
     font-size: 15px;
-    color: #ffcaca;
+    color: var(--secondary-main);
+    font-weight: 600;
 }
 
 .edit-details input[type="text"], .edit-details textarea{
     padding: 10px;
-    background: #ffdada;
-    border: none;
+    background: var(--bg-main);
+    border: 1px solid var(--secondary-main);
     border-radius: 10px;
     width: 100%;
     transition:
-        background-color 0.25s ease,
         box-shadow 0.25s ease,
         transform 0.15s ease;
 }
 
 .edit-details input[type="text"]:focus, .edit-details textarea:focus {
-    border-color: #ffdada;
     outline: none; 
-    background: #ffcaca;
     transform: scale(1.01);
 }
 
@@ -104,18 +102,12 @@
 
 .edit-details .save {
     position: absolute;
-    background: #ffafaf;
+    background: var(--gr-accent);
+    color: var(--text-contrast);
+    font-weight: 600;
     right: 40px;
     padding: 10px 30px;
     border-radius: 10px;
     border: none;
     cursor: pointer;
-}
-
-.edit-details .save:hover {
-    background: #fba3a3;
-}
-
-.edit-details .save:active {
-    background: #fc9a9a;
 }
