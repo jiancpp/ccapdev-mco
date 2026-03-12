@@ -117,12 +117,14 @@ A recommended structure is shown below:
 ```
 src/
 │
+├── api/             # API calls and database interaction logic
 ├── assets/          # Images, icons, and static files
-├── components/      # Reusable UI components
-├── pages/           # Page-level components / views
-├── services/        # API calls and database interaction logic
+├── components/      # Reusable UI static components
+├── features/        # Reusable UI data-heavy components
 ├── hooks/           # Custom React hooks
-├── utils/           # Helper functions and utilities
+├── layouts/         # Website layout 
+├── modals/          # Data or feature heavy modals
+├── pages/           # Page-level components / views
 │
 ├── App.jsx          # Root React component
 ├── main.jsx         # Application entry point
@@ -137,23 +139,23 @@ Contains static resources such as images, fonts, or icons used throughout the ap
 **components**
 Reusable UI components that can be used across multiple pages.
 
+**features**
+Reusable UI data heavy components that can be used across multiple pages.
+
 **pages**
 High-level page components that represent different routes or screens in the application.
 
-**services**
+**api**
 Handles communication with APIs or backend services (including MongoDB-related endpoints).
 
 **hooks**
 Custom React hooks for reusable state and logic.
-
-**utils**
-Utility/helper functions used across the project.
 
 ---
 
 # 🧑‍💻 Tech Stack
 
 * **Frontend:** React + Vite
-* **Backend / API:** Node.js (if applicable)
+* **Backend / API:** Node.js 
 * **Database:** MongoDB
 * **Rich Text Editor:** Syncfusion React Rich Text Editor
