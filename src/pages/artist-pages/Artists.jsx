@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';        
 import './Artists.css';
 
-import ArtistBlock from '../../features/artist/ArtistBlock';
+import ArtistBlock from '../../features/artist-block/ArtistBlock';
 import { ArtistSearchBar } from '../../components/SearchBar';
 import { FilterModal } from '../../modals/FilterModal';
 import { dummyArtists } from '../../data/dummyArtists';
