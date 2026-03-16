@@ -12,7 +12,7 @@ function ArtistBlock({ artist }) {
         >
             <div className='block-content'>
                 <div className="profile">
-                    <img src={artist.photo} alt="" className="profile-img" />
+                    <img src={artist.user.avatar} alt="" className="profile-img" />
                 </div>
                 <div className="artist-details">
                     <div className="top-block">
@@ -25,7 +25,7 @@ function ArtistBlock({ artist }) {
                         </div>
                     </div>
                     <div className="bottom-block">
-                        <div className="description">{artist.description}</div>
+                        <div className="description">{artist.user.bio}</div>
                     </div>
                 </div>
             </div>

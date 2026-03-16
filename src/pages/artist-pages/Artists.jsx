@@ -8,16 +8,55 @@ import { FilterModal } from '../../modals/FilterModal';
 import { dummyArtists } from '../../data/dummyArtists';
 
 function Artists() {
+    const [allArtists, setAllArtists] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [activeFilters, setActiveFilters] = useState({ genres: [], rating: 0 });
     const [searchTerm, setSearchTerm] = useState("");
 
-    const displayedArtists = dummyArtists.filter(artist => {
-        const matchesSearch = artist.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-            artist.description.toLowerCase().includes(searchTerm.toLowerCase());
+    /**
+     * Fetch all artist data from database
+     */
+    useEffect(() => {
+        const getArtists = async () => {
+            try {
+                console.log("Checkpoint A");
+                const res = await fetch('http://localhost:5000/api/artists');
+
+                if (!res.ok) {
+                    throw new Error('Failed to fetch artists');
+                }
+
+                console.log("Checkpoint B");
+                const data = await res.json();
+
+                setAllArtists(data); // 2. Save fetched data to state
+            } catch (err) {
+                setError(err.message);
+                console.error("Fetch error:", err);
+            } finally {
+                setLoading(false);
+            }
+        }    
         
-        const matchesGenre = activeFilters.genres.length === 0 || 
-            activeFilters.genres.some(g => artist.genre.includes(g));
+        getArtists();
+    }, []);
+    
+    /**
+     * Handle artist filter features
+     */
+    const displayedArtists = allArtists.filter(artist => {
+        const name = artist.name || "Unknown artist";
+        const bio = artist.user?.bio || "No description yet";
+        const genre = artist.genre || "No genre specified";
+
+        const matchesSearch = name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                              bio.toLowerCase().includes(searchTerm.toLowerCase());
+        
+        const matchesGenre = 
+            activeFilters.genres.length === 0 || 
+            activeFilters.genres.includes(genre);
 
         const matchesRating = artist.rating >= activeFilters.rating;
 
