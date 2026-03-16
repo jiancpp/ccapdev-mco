@@ -21,7 +21,7 @@ dotenv.config();
 
 const seedData = async () => {
     try {
-        await mongoose.connect(process.env.MONGODB_URL);
+        await mongoose.connect(process.env.MONGO_URL);
         console.log("Connected to MongoDB...");
         // Clear existing data
         await User.deleteMany();
@@ -55,7 +55,7 @@ const seedData = async () => {
             const artistUser = await User.create({
                 _id: userObjectId,
                 username: a.name.replace(/\s+/g, '').toLowerCase(), // e.g., "Cup Of Joe" -> "cupofjoe"
-                email: `${a.name.replace(/\s+/g, '').toLowerCase()}@artist.com`,
+                email: `${a.name.replace(/\s+/g, '').toLowerCase()}@unsynth.com`,
                 role: 'artist', // Important to distinguish them from regular users
                 avatar: a.photo,
                 bio: a.description

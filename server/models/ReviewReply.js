@@ -6,13 +6,13 @@ import mongoose from 'mongoose';
 
 const ReviewReplySchema = new mongoose.Schema({
     artist: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Artist',
         required: true
     },
 
     review: { 
-        type: mongoose.Schema.ObjectId, 
+        type: mongoose.Schema.Types.ObjectId, 
         ref: 'Review', 
         required: true,
     },

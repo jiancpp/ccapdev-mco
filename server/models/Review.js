@@ -2,14 +2,14 @@ import mongoose from 'mongoose';
 
 const ReviewSchema = new mongoose.Schema({
     user: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User', 
         required: true
     },
 
     // polymorphic targeting to reduce required models
     targetID: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
 

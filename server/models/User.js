@@ -6,6 +6,12 @@ const UserSchema = new mongoose.Schema({
         required: true, 
         unique: true
     },
+    // password: {
+    //     type: String,
+    //     required: [true, "Please add a password"],
+    //     minlength: 8, // Validation: don't allow short passwords
+    //     select: false // Hide password from 
+    // },
     email: { 
         type: String, 
         required: true, 
@@ -16,8 +22,8 @@ const UserSchema = new mongoose.Schema({
     },
 
     avatar: String,
-    followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
-    following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     // liked: [{ type: mongoose.Schema.ObjectId, ref: 'Review' }],
 
     // Determine user role:
