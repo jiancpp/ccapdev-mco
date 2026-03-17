@@ -24,7 +24,7 @@ import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 
 function App() {
-  // TODO: Remove later
+  // TODO: Remove later for user validation
   const [activeUser, setActiveUser] = useState("u1");
 
   return (

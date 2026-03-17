@@ -80,8 +80,8 @@ function UserProfile() {
     }, [user_id]);
 
     // ----- Error Handling ------ //
-    if (!user) return <NothingBlock message={"User not found."} />
     if (loadingUser) return <LoadingBlock />;
+    if (!user) return <NothingBlock message={"User not found."} />
 
     return (
         <div className="user-profile">

@@ -15,12 +15,33 @@ import userRoutes from './routes/userRoutes.js'
 import reviewRoutes from './routes/reviewRoutes.js'
 import albumRoutes from './routes/albumRoutes.js';
 import songRoutes from './routes/songRoutes.js';
+import session from 'express-session';
+import { MongoStore } from 'connect-mongo';
 
 // Load environment variables from .env file
 dotenv.config();
+const PORT = process.env.PORT || 5001;
+const MONGOURL = process.env.MONGO_URL
 const app = express();
 
 // Middleware
+
+// // TODO: Login 
+// app.use(session({
+//     secret: 'very+very+secret',
+//     resave: false,   // see what this does later
+//     saveUninitialized: false,
+//     store: MongoStore.create({
+//         mongoUrl: MONGOURL,
+//         collectionName: 'sessions'
+//     }),
+//     cookie: {
+//         maxAge: 1000 * 60 * 60 * 24,
+//         secure: false,
+//         httpOnly: true
+//     }
+// }))
+
 app.use(cors({
     origin: 'http://localhost:5173', // Allow your frontend port
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
@@ -35,9 +56,6 @@ app.use('/api/songs', songRoutes);
 
 // <TODO:> add middleware to verify admin status //
 
-// Configuration Constants
-const PORT = process.env.PORT || 5001;
-const MONGOURL = process.env.MONGO_URL
 
 /**
  * MongoDB Connection Logic

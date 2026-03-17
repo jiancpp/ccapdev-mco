@@ -14,6 +14,7 @@ import { dummyAlbums } from '../../data/dummyAlbums'
 import { getAllData } from '../../api/api';
 
 function Home() {
+    // TODO: Filter using search terms, using filter button (recent, following, popular)
     const { openModal, activeUser } = useOutletContext();
     const [loading, setLoading] = useState(true);
     const [reviews, setReviews] = useState([]);

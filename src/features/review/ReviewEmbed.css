@@ -52,7 +52,7 @@
 .embed .line {
     display: flex;
     align-items: center;
-    margin-left: 3px;
+    margin: 0 0 3px 3px;
 }
 
 .embed .line-title {

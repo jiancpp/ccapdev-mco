@@ -12,9 +12,11 @@
   "dependencies": {
     "@syncfusion/ej2-react-richtexteditor": "^32.2.4",
     "bootstrap-icons": "^1.13.1",
+    "connect-mongo": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "mongodb": "^7.1.0",
     "mongoose": "^9.3.0",
     "react": "^19.2.0",
