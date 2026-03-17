@@ -33,4 +33,18 @@ router.get('/get/:id', async (req, res) => {
     }
 });
 
+/**
+ * Fetch ALL artists
+ * @route   GET /api/artists
+ */
+router.get('/', async (req, res) => {
+    try {
+        // This fetches every artist in the collection
+        const artists = await Artist.find().populate('user');
+        res.json(artists);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 export default router;
