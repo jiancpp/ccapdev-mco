@@ -79,3 +79,32 @@ export const getArtist = async (artistId) => {
 
     return await res.json();
 }  
+
+/********************* ALBUM & SONG APIs **********************/
+
+/**
+ * Fetches album based on id
+ */
+export const getAlbum = async (albumId) => {
+    const res = await fetch(`${BASE_URL}/albums/${albumId}`); // Update this path if it's nested under /artists
+    if (!res.ok) throw new Error(`Failed to fetch album ${albumId}`);
+    return await res.json();
+}
+
+/**
+ * Fetches all songs belonging to a specific album
+ */
+export const getSongsByAlbum = async (albumId) => {
+    const res = await fetch(`${BASE_URL}/songs?album_id=${albumId}`); 
+    if (!res.ok) throw new Error(`Failed to fetch songs for album ${albumId}`);
+    return await res.json();
+}
+
+/**
+ * Fetches all reviews for a specific album
+ */
+export const getReviewsByAlbum = async (albumId) => {
+    const res = await fetch(`${BASE_URL}/reviews?album_id=${albumId}`);
+    if (!res.ok) throw new Error(`Failed to fetch reviews for album ${albumId}`);
+    return await res.json();
+}

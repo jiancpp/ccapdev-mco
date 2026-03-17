@@ -1,20 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 
 import "./SongProfile.css"; 
 import Review from "../../features/review/Review";
 import { StarRating } from "../../components/StarRating";
 
-import { dummyArtists } from "../../data/dummyArtists";
-import { dummyReviews } from "../../data/dummyReviews";
-import { dummySongs } from "../../data/dummySongs"; 
-import { dummyAlbums } from "../../data/dummyAlbums";
-
-// FIX 2: Look inside dummyAlbums, not dummySongs
-const getAlbumById = (id) => dummyAlbums.find((album) => album._id === id);
-const getArtistById = (id) => dummyArtists.find((artist) => artist._id === id);
-const getReviewsByAlbum = (album_id) => dummyReviews.filter((review) => review.album_id === album_id);
-const getSongsByAlbum = (album_id) => dummySongs.filter((song) => song.album_id === album_id);
+import { getArtist, getAlbum, getSongsByAlbum, getReviewsByAlbum } from "../../api/api";
 
 function AlbumProfile() {
     const navigate = useNavigate();
@@ -23,14 +14,48 @@ function AlbumProfile() {
 
     const [activeTab, setActiveTab] = useState("reviews");
 
-    const album = getAlbumById(album_id);
+    // Live Database State
+    const [album, setAlbum] = useState(null);
+    const [artist, setArtist] = useState(null);
+    const [reviews, setReviews] = useState([]);
+    const [songs, setSongs] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    // Safety check
+    useEffect(() => {
+        const loadAlbumPageData = async () => {
+            try {
+                setLoading(true);
+
+                // Fetch the album first to get the artist_id
+                const albumData = await getAlbum(album_id);
+                setAlbum(albumData);
+
+                // Fetch the rest of the data simultaneously
+                const [artistData, songsData, reviewsData] = await Promise.all([
+                    getArtist(albumData.artist_id),
+                    getSongsByAlbum(album_id),
+                    getReviewsByAlbum(album_id)
+                ]);
+
+                setArtist(artistData);
+                setSongs(songsData);
+                setReviews(reviewsData);
+
+            } catch (error) {
+                console.error("Error loading album profile data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (album_id) {
+            loadAlbumPageData();
+        }
+    }, [album_id]);
+
+    if (loading) return <div className="indent" style={{padding:"20px"}}>Loading Album details...</div>;
     if (!album) return <div className="indent" style={{padding:"20px"}}>Album not found.</div>;
 
-    const artist = getArtistById(album.artist_id);
-    const reviews = getReviewsByAlbum(album_id);
-    const songs = getSongsByAlbum(album_id);
     return (
         <div className="song-profile">
             {/* TOP BAR */}
@@ -58,12 +83,10 @@ function AlbumProfile() {
                 />
                 
                 <div className="song-info-column">
-                    {/* FIX 3: Changed 'song.title' to 'album.title' */}
                     <h1 className="main-song-title">{album.title}</h1>
                     <div className="main-song-artist">
                         {artist ? artist.name : "Unknown Artist"}
                     </div>
-                    {/* FIX 4: Changed 'song.genre' to 'album.genre' */}
                     <div className="main-song-genre">
                         {album.genre || "Pop"}
                     </div>
@@ -85,7 +108,6 @@ function AlbumProfile() {
                 </button>
                 <button
                     className={`nav-item ${activeTab === 'tracklist' ? 'active' : ''}`}
-                    // FIX 5: Set state to 'tracklist'
                     onClick={() => setActiveTab('tracklist')}
                 >
                     Tracklist
@@ -98,7 +120,6 @@ function AlbumProfile() {
                     <>
                         <div className="rate-review-section">
                             <div className="user-input-row">
-                                {/* TODO: update next time */}
                                 <div className="user-avatar-placeholder">
                                     <i className="bi bi-person-fill"></i>
                                 </div>
