@@ -13,6 +13,8 @@ mongoose.set('toObject', { virtuals: true });
 import artistRoutes from './routes/artistRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import reviewRoutes from './routes/reviewRoutes.js'
+import albumRoutes from './routes/albumRoutes.js';
+import songRoutes from './routes/songRoutes.js';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -28,6 +30,8 @@ app.use(express.json());        // allows the server to parse JSON data in reque
 app.use('/api/artists', artistRoutes);     // allows api to fetch data
 app.use('/api/users', userRoutes);     // allows api to fetch data
 app.use('/api/reviews', reviewRoutes);     // allows api to fetch data
+app.use('/api/albums', albumRoutes);
+app.use('/api/songs', songRoutes);
 
 // <TODO:> add middleware to verify admin status //
 

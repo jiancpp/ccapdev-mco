@@ -87,7 +87,8 @@ export const getArtist = async (artistId) => {
  * Fetches album based on id
  */
 export const getAlbum = async (albumId) => {
-    const res = await fetch(`${BASE_URL}/albums/${albumId}`); // Update this path if it's nested under /artists
+    // Cleaned up path
+    const res = await fetch(`${BASE_URL}/albums/${albumId}`); 
     if (!res.ok) throw new Error(`Failed to fetch album ${albumId}`);
     return await res.json();
 }
@@ -96,6 +97,7 @@ export const getAlbum = async (albumId) => {
  * Fetches all songs belonging to a specific album
  */
 export const getSongsByAlbum = async (albumId) => {
+    // Cleaned up path
     const res = await fetch(`${BASE_URL}/songs?album_id=${albumId}`); 
     if (!res.ok) throw new Error(`Failed to fetch songs for album ${albumId}`);
     return await res.json();
