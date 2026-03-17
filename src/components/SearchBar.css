@@ -34,14 +34,14 @@
 
 .search-results {
     position: absolute;
-    top: 100%; 
+    top: 70%; 
     left: 0;
     right: 0;
     background: white;
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
-    z-index: 999;    
+    z-index: 9999;    
     max-height: 250px;
     overflow-y: auto; 
 }
@@ -66,4 +66,6 @@
 .res-subtitle {
     color: rgb(152, 152, 152);
     font-style: italic;
+    font-size: smaller;
+    line-height: 20px;
 }
