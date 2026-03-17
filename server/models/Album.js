@@ -28,6 +28,14 @@ const AlbumSchema = new mongoose.Schema({
     toObject: { virtuals: true },
 });
 
+// count songs in album
+AlbumSchema.virtual('songCount', {
+    ref: 'Song',
+    localField: '_id',
+    foreignField: 'album',
+    count: true // returns the number
+  });
+
 // reference reviews
 AlbumSchema.virtual('reviews', {
     ref: 'Review',

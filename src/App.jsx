@@ -1,3 +1,6 @@
+/**
+ * Main Routing for Front-end
+ */
 import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 

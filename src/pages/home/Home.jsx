@@ -5,53 +5,73 @@ import './Home.css'
 
 import Review from '../../features/review/Review'
 import { ReviewSearchBar } from '../../components/SearchBar'
-import { dummyReviews } from '../../data/dummyReviews'
-import { trendingReviews } from '../../data/trendingReviews'
 import { dummyUsers } from '../../data/dummyUsers'
 import { dummyArtists } from '../../data/dummyArtists'
 import { dummySongs } from '../../data/dummySongs'
 import { dummyAlbums } from '../../data/dummyAlbums'
+import { getAllData } from '../../api/api';
 
 function Home() {
     const { openModal, activeUser } = useOutletContext();
-
+    const [loading, setLoading] = useState(true);
     const [reviews, setReviews] = useState([]);
     const [filter, setFilter] = useState("recent")
     const [searchTerm, setSearchTerm] = useState("");
 
-    // Simulates API Fetching
+    /**
+     * Fetch all reviews data from database
+     */
     useEffect(() => {
-        if (filter==="recent") {
-            setReviews(dummyReviews);
-        } else {
-            setReviews(trendingReviews);
+        const getReviews = async () => {
+            try {
+                setLoading(true);
+                const data = await getAllData("reviews");   // function in api.js
+                setReviews(data);
+            } catch (err) {
+                console.error("Fetch error:", err);
+            } finally {
+                setLoading(false);
+            }
         }
-    }, [filter])
+
+        getReviews();
+    }, []);
+
+    // TODO: Work on API to filter recent, popular, and following
+    // useEffect(() => {
+    //     if (filter==="recent") {
+    //         setReviews(dummyReviews);
+    //     } else {
+    //         setReviews(trendingReviews);
+    //     }
+    // }, [filter])
 
     const toggle = (filter) => {
         setFilter((prev) => (prev!==filter ? filter : prev))
     }
 
-    const displayedReviews = reviews.filter(review => {
-        const user = dummyUsers.find(u => u._id === review.user_id);
-        const artist = dummyArtists.find(a => a._id === review.artist_id);
-        const song = dummySongs.find(s => s._id === review.song_id);
-        const album = dummyAlbums.find(a => a._id === review.album_id);
-        
-        const searchString = [
-            user?.username,
-            artist?.name,
-            song?.title, 
-            album?.title,
-            review.review_header,
-            review.review_content
-        ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase();
+    const displayedReviews = reviews;
 
-        return searchString.includes(searchTerm.toLowerCase());
-    });
+    // const displayedReviews = reviews.filter(review => {
+    //     const user = dummyUsers.find(u => u._id === review.user_id);
+    //     const artist = dummyArtists.find(a => a._id === review.artist_id);
+    //     const song = dummySongs.find(s => s._id === review.song_id);
+    //     const album = dummyAlbums.find(a => a._id === review.album_id);
+        
+    //     const searchString = [
+    //         user?.username,
+    //         artist?.name,
+    //         song?.title, 
+    //         album?.title,
+    //         review.review_header,
+    //         review.review_content
+    //     ]
+    //     .filter(Boolean)
+    //     .join(" ")
+    //     .toLowerCase();
+
+    //     return searchString.includes(searchTerm.toLowerCase());
+    // });
 
     return (
         <div id='home'>

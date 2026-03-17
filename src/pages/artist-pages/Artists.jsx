@@ -5,7 +5,7 @@ import './Artists.css';
 import ArtistBlock from '../../features/artist-block/ArtistBlock';
 import { ArtistSearchBar } from '../../components/SearchBar';
 import { FilterModal } from '../../modals/FilterModal';
-import { getAllArtists } from '../../api/api';
+import { getAllData } from '../../api/api';
 
 function Artists() {
     const [allArtists, setAllArtists] = useState([]);
@@ -22,7 +22,7 @@ function Artists() {
         const getArtists = async () => {
             try {
                 setLoading(true);
-                const data = await getAllArtists();   // function in api.js
+                const data = await getAllData("artists");   // function in api.js
                 setAllArtists(data);
             } catch (err) {
                 setError(err.message);

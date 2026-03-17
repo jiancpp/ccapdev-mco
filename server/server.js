@@ -8,6 +8,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import artistRoutes from './routes/artistRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import reviewRoutes from './routes/reviewRoutes.js'
 
 // Load environment variables from .env file
 dotenv.config();
@@ -16,8 +17,9 @@ const app = express();
 // Middleware
 app.use(cors());                // allows cross-origin resource sharing which is disabled by default (crucial for React)
 app.use(express.json());        // allows the server to parse JSON data in request bodies
-app.use('/api/artists', router);     // allows api to fetch data
+app.use('/api/artists', artistRoutes);     // allows api to fetch data
 app.use('/api/users', userRoutes);     // allows api to fetch data
+app.use('/api/reviews', reviewRoutes);     // allows api to fetch data
 
 // <TODO:> add middleware to verify admin status //
 

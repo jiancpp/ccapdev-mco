@@ -16,7 +16,8 @@ const ReviewSchema = new mongoose.Schema({
     // polymorphic targeting to reduce required models
     targetID: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true
+        required: true,
+        refPath: 'targetType'
     },
 
     targetType: {
