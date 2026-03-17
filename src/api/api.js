@@ -65,6 +65,24 @@ export const getLikedReviewsByUser = async (userId) => {
     return await res.json();
 }  
 
+/**
+ * Creates a new review record in MongoDB
+ * @param {Object} reviewData formatted according to the MongoDB schema
+ * @returns JSON of the saved record
+ */
+export const createReview = async (reviewData) => {
+    const res = await fetch(`${BASE_URL}/reviews/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(reviewData),
+    });
+
+    if (!res.ok) {
+        throw new Error('Failed to create the review record.');
+    }
+    return await res.json();
+}
+
 /********************* ARTIST APIs **********************/
 /**
  * Fetches artist based on id
