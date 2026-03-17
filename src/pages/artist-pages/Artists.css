@@ -9,23 +9,24 @@
 }
 
 #artists .filters {
-    background: linear-gradient(to right, #9e005d, #d74a4a, #9e005d );
+    background: #9e005d;
     color: white;
     height: 45px;
     width: 140px;
     border: none;
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 0 20px;
     margin-bottom: auto;
 
-    font-size: var(--fs-sm);
+    font-size: 15px;
     font-weight: 500;
 
     cursor: pointer;
+    transition: ease-out 0.1s;
 }
 
 #artists .filters:hover {
-    background: linear-gradient(to right, #770045, #bd3f3f, #770045 );
+    scale: 1.05;
 }
 
 #artists .filters .search-container {

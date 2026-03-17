@@ -27,6 +27,10 @@ h2 {
     cursor: pointer;
 }
 
+.tag-btn:hover, .rating-btn:hover {
+    background: #df648f1f;
+}
+
 .tag-btn.active, .rating-btn.active {
     background: #df6490;
     color: white;
@@ -39,7 +43,7 @@ h2 {
 }
 
 .clear-btn, .apply-btn {
-    background: linear-gradient(to right, #9e005d, #d74a4a, #9e005d );
+    background: #9e005d;
     color: white;
     height: 40px;
     width: 130px;
@@ -52,6 +56,7 @@ h2 {
     font-weight: 300;
 
     cursor: pointer;
+    transition: ease-out 0.1s;
 }
 
 .modal-footer {
@@ -59,8 +64,9 @@ h2 {
     justify-content: center;
     gap: 20px;
     margin-top: 50px;
+    
 }
 
 .clear-btn:hover, .apply-btn:hover {
-    background: linear-gradient(to right, #770045, #bd3f3f, #770045 );
+    scale: 1.05;
 }
