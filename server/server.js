@@ -32,7 +32,7 @@ app.use('/api/reviews', reviewRoutes);     // allows api to fetch data
 // <TODO:> add middleware to verify admin status //
 
 // Configuration Constants
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 const MONGOURL = process.env.MONGO_URL
 
 /**
