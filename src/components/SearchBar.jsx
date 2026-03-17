@@ -1,34 +1,37 @@
 import { useState } from 'react';
 import './SearchBar.css';
 
-export function SearchBar({ songs, albums, artists, onSelect }) {
+export function SearchBar({ songs = [], albums = [], artists = [], onSelect }) {
     const [searchTerm, setSearchTerm] = useState("");
 
     const getArtistName = (id) => {
         const artist = artists.find(a => a._id === id);
-        return artist ? artist.name : "Unknown Artist";
+        return artist ? (artist.name) : "Unknown Artist";
     };
 
     const filteredSongs = songs.filter(song => {
-        const artistName = getArtistName(song.artist_id);
+        const title = song.songTitle || ""; 
+        const artistName = getArtistName(song.artistID);
         return (
-            song.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             artistName.toLowerCase().includes(searchTerm.toLowerCase())
         );
     });
 
     const filteredAlbums = albums.filter(album => {
-        const albumTitle = album.title || "";
-        const artistName = getArtistName(album.artist_id);
+        const title = album.albumName || "";
+        const artistName = getArtistName(album.artistID);
         return (
-            albumTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             artistName.toLowerCase().includes(searchTerm.toLowerCase())
         );
     });
 
     const handleSelect = (item) => {
-        onSelect(item);
-        setSearchTerm("");
+        if (onSelect) {
+            onSelect(item);
+        }
+        setSearchTerm(""); // Clears the search text
     };
 
     return (
@@ -48,13 +51,13 @@ export function SearchBar({ songs, albums, artists, onSelect }) {
                     {filteredSongs.map(song => (
                         <div key={song._id} className="result-item" onClick={() => handleSelect(song)}>
                             <i className="bi bi-music-note song-icon"></i>
-                            <span className='res-title'>{song.title} </span><span className="res-subtitle">{getArtistName(song.artist_id)}</span>
+                            <span className='res-title'>{song.songTitle} </span><span className="res-subtitle">{getArtistName(song.artistID)}</span>
                         </div>
                     ))}
                     {filteredAlbums.map(album => (
                         <div key={album._id} className="result-item" onClick={() => handleSelect(album)}>
                             <i className="bi bi-vinyl album-icon"></i>
-                            <span className='res-title'>{album.name || album.title} </span><span className="res-subtitle">{getArtistName(album.artist_id)}</span>
+                            <span className='res-title'>{album.albumName} </span><span className="res-subtitle">{getArtistName(album.artistID)}</span>
                         </div>
                     ))}
                 </div>
