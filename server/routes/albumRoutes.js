@@ -32,4 +32,17 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+/**
+ * Fetch ALL albums
+ * @route   GET /api/albums
+ */
+router.get('/', async (req, res) => {
+    try {
+        const albums = await Album.find();
+        res.json(albums);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 export default router;
