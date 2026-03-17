@@ -34,7 +34,7 @@ const ReviewSchema = new mongoose.Schema({
 
     review_content: {
         type: String,
-        required: [true, "Please add a title to your review"],
+        required: [true, "Please add a content to your review"],
     },
 
     rating: {
