@@ -6,7 +6,8 @@ export const userData = [
         bio: `ꉂ(˵˃ ᗜ ˂˵)`,
         followers: ["u2", "u5"],
         following: ["u2", "u3", "u4", "u5"],
-        liked: ["r4", "r5"]
+        liked: ["r4", "r5"],
+        password: "password:))"
     },
     {
         _id: "u2",
@@ -15,7 +16,8 @@ export const userData = [
         bio: "hater for life",
         followers: ["u1","u3", "u4"],
         following: ["u1","u3", "u4", "u5"],
-        liked: []
+        liked: [],
+        password: "password:))"
     },
     {
         _id: "u3",
@@ -24,7 +26,8 @@ export const userData = [
         bio: "Live Love Laugh",
         followers: ["u1", "u2","u4", "u5"],
         following: ["u2", "u4", "u5"],
-        liked: ["r4", "r5", "r1", "r2"]
+        liked: ["r4", "r5", "r1", "r2"],
+        password: "password:))"
     },
     {
         _id: "u4",
@@ -33,7 +36,8 @@ export const userData = [
         bio: "Where there's a wee, there's a wae",
         followers: ["u1", "u2", "u3", "u5"],
         following: ["u2", "u3", "u5"],
-        liked: ["r4", "r5", "r1", "r2", "r3"]
+        liked: ["r4", "r5", "r1", "r2", "r3"],
+        password: "password:))"
     },
     {
         _id: "u5",
@@ -42,6 +46,7 @@ export const userData = [
         bio: "i stan raisins.",
         followers: ["u1", "u2", "u3", "u4"],
         following: ["u1", "u2", "u3", "u4"],
-        liked: []
+        liked: [],
+        password: "password:))"
     },
 ]
