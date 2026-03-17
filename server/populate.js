@@ -39,7 +39,7 @@ const seedData = async () => {
 
         // --- SEED USERS --- //
         console.log("Populating users...");
-        const createdUsers = await User.insertMany(userData.map(u => {
+        await User.insertMany(userData.map(u => {
             const newID = new mongoose.Types.ObjectId();
             idMap[u._id] = newID;
             return {
@@ -62,6 +62,7 @@ const seedData = async () => {
                 _id: userObjectId,
                 username: a.name.replace(/\s+/g, '').toLowerCase(), // e.g., "Cup Of Joe" -> "cupofjoe"
                 email: `${a.name.replace(/\s+/g, '').toLowerCase()}@unsynth.com`,
+                password: "password:))",
                 role: 'artist', // Important to distinguish them from regular users
                 avatar: a.photo,
                 bio: a.description
