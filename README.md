@@ -1,6 +1,6 @@
 # 🌐 Unsynth
-
-A web-based application built using React, Vite, and MongoDB for music album and song reviews
+## Description
+Unsynth is a web-based application built using React, Vite, and MongoDB for music album and song reviews
 
 ---
 
