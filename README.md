@@ -1,5 +1,5 @@
 # 🌐 Unsynth
-### Description
+## Description
 A web-based application built using React, Vite, and MongoDB for music album and song reviews
 
 ---
