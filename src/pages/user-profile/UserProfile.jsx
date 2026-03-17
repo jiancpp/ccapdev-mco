@@ -5,25 +5,12 @@ import { useNavigate } from "react-router-dom";
 import "./UserProfile.css"
 import Review from "../../features/review/Review";
 import NothingBlock from "../../components/NothingBlock"
-
-import { dummyUsers } from "../../data/dummyUsers";
-import { dummyReviews } from "../../data/dummyReviews";
-import { trendingReviews } from "../../data/trendingReviews";
+import LoadingBlock from "../../components/LoadingBlock"
+import BackButton from "../../components/BackButton"
 
 import { useState } from "react";
-
-/***** Utilities ******/
-const getUserById = (id) => dummyUsers.find((user) => user._id === id);
-const getReviewById = (id) => {
-    var review = dummyReviews.find((review) => review._id === id);
-    if (!review) review = trendingReviews.find((review) => review._id === id);
-    return review;
-}
-const getReviewsByUser = (user_id) => {
-    const reviews = dummyReviews.filter((review) => review.user_id === user_id);
-    const trending = trendingReviews.filter((review) => review.user_id === user_id)
-    return reviews.concat(trending);
-}
+import { useEffect } from "react";
+import { getLikedReviewsByUser, getReviewsByUser, getUser } from "../../api/api";
 
 /***** Main Component *****/
 function UserProfile() {
@@ -36,25 +23,69 @@ function UserProfile() {
     const [openFollowers, setOpenFollowers] = useState(false);
     const [openFollowing, setOpenFollowing] = useState(false);
 
-
+    // -------- Fetch API --------- //
     const { user_id } = useParams();
-    const user = getUserById(user_id);
+    const [user, setUser] = useState(null);
+    const [reviews, setReviews] = useState([]);
+    const [liked_reviews, setLikedReviews] = useState([]);
+    const [loadingUser, setLoadingUser] = useState(true);
+    const [loadingReviews, setLoadingReviews] = useState(true);
+    const [loadingLikes, setLoadingLikes] = useState(true);
+    const [error, setError] = useState(null);
+
+    // Fetch user
+    useEffect(() => {
+        const loadUser = async () => {
+            try {
+                const userData = await getUser(user_id);
+                setUser(userData);
+            } catch (error) {
+                setError(error.message);
+                console.log(error);
+            } finally {
+                setLoadingUser(false);
+            }
+        }
+        loadUser();
+    }, [user_id]);
+
+    // Fetch reviews created by user
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const reviewsData = await getReviewsByUser(user_id);
+                setReviews(reviewsData);
+            } catch (error) {
+                console.log(error.message);
+            } finally {
+                setLoadingReviews(false);
+            }
+        }
+        fetchReviews();
+    }, [user_id]);
+
+    // Fetch liked reviews created by user
+    useEffect(() => {
+        const fetchLikedReviews = async () => {
+            try {
+                const reviewsData = await getLikedReviewsByUser(user_id);
+                setLikedReviews(reviewsData);
+            } catch (error) {
+                console.log(error.message);
+            } finally {
+                setLoadingLikes(false);
+            }
+        }
+        fetchLikedReviews();
+    }, [user_id]);
 
     // ----- Error Handling ------ //
-    if (!user) return (<div style={{ padding: "20px" }}>User not found</div>)
-
-    // ------ Data from User ------ //
-    const followers = user.followers.map((id) => getUserById(id));
-    const following = user.following.map((id) => getUserById(id));
-    const reviews = getReviewsByUser(user_id);
-    const liked_reviews = user.liked.map((id) => getReviewById(id));
+    if (!user) return <NothingBlock message={"User not found."}/>
+    if (loadingUser) return <LoadingBlock />;
 
     return (
         <div className="user-profile">
-            <button className="back-btn" onClick={() => navigate(-1)}>
-                <i className="bi bi-chevron-left"></i> Back
-            </button>
-
+            <BackButton />
             {/* HEADER PROFILE */}
             <div className="header">
                 <div className="banner"></div>
@@ -79,7 +110,7 @@ function UserProfile() {
                             onMouseLeave={() => setOpenFollowers(false)}>
                             <ul>
                                 {user.followers.map((follower) => (
-                                    <li onClick={() => navigate(`/profile/${follower}`)}>{getUserById(follower).username}</li>
+                                    <li onClick={() => navigate(`/profile/${follower._id}`)}>{follower.username}</li>
                                 ))}
                             </ul>
                         </div>
@@ -92,7 +123,7 @@ function UserProfile() {
                             onMouseLeave={() => setOpenFollowing(false)}>
                             <ul>
                                 {user.following.map((followed) => (
-                                    <li onClick={() => navigate(`/profile/${followed}`)}>{getUserById(followed).username}</li>
+                                    <li onClick={() => navigate(`/profile/${followed._id}`)}>{followed.username}</li>
                                 ))}
                             </ul>
                         </div>
@@ -123,9 +154,13 @@ function UserProfile() {
                 </label>
             </div>
             <div className={`user-reviews indent ${section !== "reviews" ? "hidden" : ""}`}>
-                {reviews.map((review) => (
-                    <Review key={review._id} review={review} activeUser={activeUser} />
-                ))}
+                { reviews.length > 0 ?
+                    reviews.map((review) => (
+                        <Review key={review._id} review={review} activeUser={activeUser} />
+                    )) 
+                    :
+                    (<NothingBlock />)
+                }
             </div>
             <div className={`user-likes indent ${section !== "likes" ? "hidden" : ""}`}>
                 {liked_reviews.length > 0 ?

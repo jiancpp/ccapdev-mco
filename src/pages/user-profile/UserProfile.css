@@ -11,20 +11,6 @@
     margin-left: 22px;
 }
 
-.back-btn {
-    background: linear-gradient(to right, #9e005d, #ff5757, #9e005d); /* gradient colors */
-    -webkit-background-clip: text; /* clip gradient to text */
-    -webkit-text-fill-color: transparent; /* make text fill transparent */
-    background-clip: text; /* standard property (for non-webkit browsers) */
-    border: none;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.back-btn:hover {
-    opacity: 0.5;
-}
-
 /***** HEADER PROFILE ******/
 
 .user-profile .header {

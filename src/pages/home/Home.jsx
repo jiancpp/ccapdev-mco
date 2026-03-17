@@ -4,13 +4,14 @@ import { useOutletContext } from "react-router-dom";
 import './Home.css'
 
 import Review from '../../features/review/Review'
+import NothingBlock from '../../components/NothingBlock';
+import LoadingBlock from '../../components/LoadingBlock';
 import { ReviewSearchBar } from '../../components/SearchBar'
 import { dummyUsers } from '../../data/dummyUsers'
 import { dummyArtists } from '../../data/dummyArtists'
 import { dummySongs } from '../../data/dummySongs'
 import { dummyAlbums } from '../../data/dummyAlbums'
 import { getAllData } from '../../api/api';
-import NothingBlock from '../../components/NothingBlock';
 
 function Home() {
     const { openModal, activeUser } = useOutletContext();
@@ -73,6 +74,8 @@ function Home() {
 
     //     return searchString.includes(searchTerm.toLowerCase());
     // });
+
+    if (loading) return <LoadingBlock />;
 
     return (
         <div id='home'>

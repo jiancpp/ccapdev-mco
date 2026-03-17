@@ -1,4 +1,4 @@
-import './NothingBlock.css'
+import './Component.css'
 
 function NothingBlock(props) {
     const message = props.message || "Nothing here yet."

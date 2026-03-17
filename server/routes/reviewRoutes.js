@@ -33,22 +33,36 @@ router.get('/', async (req, res) => {
 })
 
 /**
- * Find review based on id
- * @route   GET /api/reviews/get/:id
+ * Find reviews based on id
+ * @route   GET /api/reviews/get/:user_id
  * @desc    Get review based on id
  */
-router.get('/get/:id', async (req, res) => {
+router.get('/get/:user_id', async (req, res) => {
     try {
-        const reviewId = req.params.id;
-        const review = await Review.findById(reviewId).populate(reviewPopulate)
+        const userId = req.params.user_id;
+        const reviews = await Review.find({ user: userId }).populate(reviewPopulate)
 
-        // Handle review not found
-        if(!review) {
-            return res.status(404).json({ message: 'Review not found'})
-        }
+       // Return review data
+        res.status(200).json(reviews);
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+})
 
-        // Return review data
-        res.status(200).json(review);
+/**
+ * Find liked reviews based on user id
+ * @route   GET /api/reviews/get/liked/:user_id
+ * @desc    Get review based on id
+ */
+router.get('/get/liked/:user_id', async (req, res) => {
+    try {
+        const userId = req.params.user_id;
+        const reactions = await ReviewReactions.find({ user: userId, type: "like" })
+        const likedReviewIds = reactions.map(reaction => reaction.reviewId);
+        const reviews = await Review.find({ _id: { $in: likedReviewIds } }).populate(reviewPopulate);
+
+       // Return review data
+        res.status(200).json(reviews);
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

@@ -33,6 +33,37 @@ export const getUser = async (userId) => {
     return await res.json();
 }  
 
+/********************* REVIEW APIs **********************/
+/**
+ * Fetches reviews created by user
+ * @param {String} userId id used to filter reviews
+ * @returns JSON of reviews data
+ */
+export const getReviewsByUser = async (userId) => {
+    const res = await fetch(`${BASE_URL}/reviews/get/${userId}`);
+    if (!res.ok) 
+    { 
+        throw new Error(`Failed to fetch reviews by ${userId}`); 
+    }
+
+    return await res.json();
+}  
+
+/**
+ * Fetches reviews liked by user
+ * @param {String} userId id used to filter reviews
+ * @returns JSON of reviews data
+ */
+export const getLikedReviewsByUser = async (userId) => {
+    const res = await fetch(`${BASE_URL}/reviews/get/liked/${userId}`);
+    if (!res.ok) 
+    { 
+        throw new Error(`Failed to fetch liked reviews by ${userId}`); 
+    }
+
+    return await res.json();
+}  
+
 /********************* ARTIST APIs **********************/
 /**
  * Fetches artist based on id

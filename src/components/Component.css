@@ -1,0 +1,62 @@
+
+.nothing-block, .loading-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.nothing-block div{
+    color: #aaa;
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.nothing-block i{
+    display: inline-block;
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+.loading-block .loading-frame {
+    margin-top: 200px;
+    min-width: 80px;
+    min-height: 80px;
+    background: white;
+    border-radius: 100%;
+    position: relative;
+
+    /* animation */
+    border: 12px solid var(--primary-light);
+    border-right-color: var(--primary-dark);
+    animation: spin 0.8s ease infinite;
+}
+
+.loading-block .message{
+    display: inline-block;
+    color: var(--primary-dark);
+    margin-top: 10px;
+    font-size: 20px;
+    font-size: 50px;
+    margin-top: 50px;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.back-btn {
+    background: var(--gr-accent); /* gradient colors */
+    -webkit-background-clip: text; /* clip gradient to text */
+    -webkit-text-fill-color: transparent; /* make text fill transparent */
+    background-clip: text; /* standard property (for non-webkit browsers) */
+    border: none;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    opacity: 0.5;
+}
