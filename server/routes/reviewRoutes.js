@@ -12,7 +12,7 @@ const reviewPopulate = [
     { 
         path: 'targetID', 
         // select: 'albumName songTitle cover albumID songCount',
-        populate: { path: 'albumID', select: 'albumName cover', options: { strictPopulate: false } },
+        populate: { path: 'albumID', select: '_id albumName cover', options: { strictPopulate: false } },
         options: { strictPopulate: false }
     }
 ];

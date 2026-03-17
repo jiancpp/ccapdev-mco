@@ -58,3 +58,16 @@
 .embed .line-title {
     margin: 0 5px 5px 0;
 }
+
+.embed .link{
+    color: var(--text-brand);
+    text-decoration: underline;
+}
+
+.embed .link-title{
+    color: var(--text-brand);
+}
+
+.embed .link-title:hover, .embed .link:hover {
+    opacity: 0.5;
+}
