@@ -7,7 +7,7 @@ import './index.css';
 import App from './App.jsx';
 
 
-registerLicense('Ngo9BigBOggjHTQxAR8/V1JGaF1cXmhLYVJ+WmFZfVhgfF9CaVZVTWY/P1ZhSXxVdkdiWH1edH1RT2JYV0R9XEA=');
+registerLicense('Ngo9BigBOggjHTQxAR8/V1JHaF5cWWdCekx3QHxbf1x2ZFxMZVxbRX5PMyBoS35RcEVgWHleeXFWR2NVUkVzVEFe');
 
 const container = document.getElementById('root');
 const root = createRoot(container);
