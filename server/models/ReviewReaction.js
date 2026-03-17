@@ -18,15 +18,17 @@ const ReviewReactionSchema = new mongoose.Schema({
         enum: ['like', 'dislike'], 
         required: true 
     }
-})
+}, { timestamps: true })
 
 // user can have one reaction for a review
 ReviewReactionSchema.index({user: 1, review: 1}, {unique: true})
 
 // update counters on review
 ReviewReactionSchema.statics.updateCounters = async function(reviewId) {
+    const targetId = new mongoose.Types.ObjectId(reviewId);
+
     const stats = await this.aggregate([
-        { $match: { review: reviewId }},
+        { $match: { review: targetId }},
         { $group: {
             _id: '$type',
             count: { $sum: 1 }
@@ -35,16 +37,18 @@ ReviewReactionSchema.statics.updateCounters = async function(reviewId) {
 
     const update = { likes: 0, dislikes: 0};
     stats.forEach(s => {
-        if (s._id === 'likes') update.likes = s.count;
-        if (s._id === 'dislikes') update.dislikes = s.count;
+        if (s._id === 'like') update.likes = s.count ;
+        if (s._id === 'dislike') update.dislikes = s.count;
     })
-
-    await mongoose.model('Review').findByIdAndUpdate(reviewId, update);
+    const updatedReview = await mongoose
+        .model('Review')
+        .findByIdAndUpdate(reviewId, update, { returnDocument: 'after' });
+        console.log(`   - Update complete for ${reviewId}:`, update);
 };
 
 // Update after saving or updating
-ReviewReactionSchema.post('save', function() {
-    this.constructor.updateCounters(this.review);
+ReviewReactionSchema.post('save', async function() {
+    await this.constructor.updateCounters(this.review);
 });
 
 // Update after removing

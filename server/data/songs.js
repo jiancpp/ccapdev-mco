@@ -1,4 +1,4 @@
-export const dummySongs = [
+export const songData = [
     {
         _id: "s1",
         title: "Tangerine Boulevard",

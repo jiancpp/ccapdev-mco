@@ -1,4 +1,4 @@
-export const dummyArtists = [
+export const artistData = [
     {
         _id: "a1",
         name: "Cup Of Joe",

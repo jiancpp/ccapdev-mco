@@ -7,6 +7,12 @@ const ReviewSchema = new mongoose.Schema({
         required: true
     },
 
+    artist: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Artist',
+        required: true,
+    },
+
     // polymorphic targeting to reduce required models
     targetID: {
         type: mongoose.Schema.Types.ObjectId,
@@ -19,10 +25,15 @@ const ReviewSchema = new mongoose.Schema({
         required: true
     },
 
-    title: {
+    review_header: {
         type: String,
         required: [true, "Please add a title to your review"],
         maxlength: 100
+    },
+
+    review_content: {
+        type: String,
+        required: [true, "Please add a title to your review"],
     },
 
     rating: {
@@ -32,8 +43,6 @@ const ReviewSchema = new mongoose.Schema({
         max: 5
     },
 
-    description: String,
-
     likes: {
         type: Number, 
         default: 0
@@ -42,6 +51,12 @@ const ReviewSchema = new mongoose.Schema({
     dislikes: {
         type: Number, 
         default: 0
+    },
+
+    isEdited: {
+        type: Boolean,
+        required: true,
+        default: false,
     }
 }, { timestamps: true })
 

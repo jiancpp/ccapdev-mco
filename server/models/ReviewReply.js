@@ -16,7 +16,6 @@ const ReviewReplySchema = new mongoose.Schema({
         ref: 'Review', 
         required: true,
     },
-
     replyContent: String
 }, { timestamps: true })
 

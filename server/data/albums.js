@@ -1,4 +1,4 @@
-export const dummyAlbums = [
+export const albumData = [
     // --- CUP OF JOE (a1) ---
     {
         _id: "al101",
