@@ -32,7 +32,7 @@ function AlbumProfile() {
 
                 // Fetch the rest of the data simultaneously
                 const [artistData, songsData, reviewsData] = await Promise.all([
-                    getArtist(albumData.artist_id),
+                    getArtist(albumData.artistID),
                     getSongsByAlbum(album_id),
                     getReviewsByAlbum(album_id)
                 ]);
@@ -83,7 +83,7 @@ function AlbumProfile() {
                 />
                 
                 <div className="song-info-column">
-                    <h1 className="main-song-title">{album.title}</h1>
+                    <h1 className="main-song-title">{album.albumName}</h1>
                     <div className="main-song-artist">
                         {artist ? artist.name : "Unknown Artist"}
                     </div>
@@ -92,8 +92,8 @@ function AlbumProfile() {
                     </div>
                     
                     <div className="main-song-rating" style={{marginBottom: "20px"}}>
-                        <span className="rating-number">{album.rating}</span>
-                        <StarRating rating={Number(album.rating)} />
+                        <span className="rating-number">{album.aveRating}</span>
+                        <StarRating rating={Number(album.aveRating)} />
                     </div>
                 </div>
             </div>
@@ -166,7 +166,7 @@ function AlbumProfile() {
                                             />
                                         </div>
                                         <div className="song-info">
-                                            <span className="song-title">{index + 1}. {song.title}</span>
+                                            <span className="song-title">{index + 1}. {song.songTitle}</span>
                                         </div>
                                         <div className="song-rating-container">
                                             <StarRating rating={Number(song.rating)} />
