@@ -79,7 +79,7 @@ function Review({ review, activeUser }) {
                         ))}
                     </div>
                     <ReviewEmbed review={review} navigate={navigate}/>
-                    <div className="description">{review.review_content}</div>
+                    <div className="description" dangerouslySetInnerHTML={{ __html: review.review_content }} />
                 </div>
             </div>
             <div className="post-actions flex">
