@@ -72,6 +72,7 @@
 .selected-card {
     display: flex;
     align-items: center;
+    height: 80px;
     background: linear-gradient(to right, #FFC5D9, #FFF0F5);
     padding: 10px 20px;
     border-radius: 15px;
@@ -86,7 +87,7 @@
     margin-right: 15px;
 }
 
-.song-title { 
+.item-title { 
     font-weight: 600; 
     margin: 0; 
     color: #000; 
@@ -144,6 +145,12 @@ textarea::placeholder {
     overflow-y: scroll;
 }
 
+.e-rte-elements, 
+.e-dialog.e-lib.e-popup.e-control, 
+.e-quick-popup {
+    z-index: 99999 !important;
+}
+
 .submit-btn {
     color: white;
     background: radial-gradient(circle at center, rgb(255, 87, 87), rgb(158, 0, 93));
@@ -156,6 +163,11 @@ textarea::placeholder {
     margin-right: auto;
     cursor: pointer;
     margin-top: 25px;
+}
+
+.submit-btn:disabled {
+    cursor: not-allowed;
+    background-color: #ccc;
 }
 
 .close-btn {
