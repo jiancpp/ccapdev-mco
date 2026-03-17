@@ -19,7 +19,11 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());                // allows cross-origin resource sharing which is disabled by default (crucial for React)
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow your frontend port
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
 app.use(express.json());        // allows the server to parse JSON data in request bodies
 app.use('/api/artists', artistRoutes);     // allows api to fetch data
 app.use('/api/users', userRoutes);     // allows api to fetch data
