@@ -78,4 +78,20 @@ router.get('/', async (req, res) => {
     }
 })
 
+/**
+ * Create a new review
+ * @route   POST /api/reviews/create
+ */
+router.post('/create', async (req, res) => {
+    try {
+        console.log("Incoming review data:", req.body);
+        const newReview = new Review(req.body);
+        const savedReview = await newReview.save();
+        res.status(201).json(savedReview);
+    } catch (error) {
+        console.error("Error creating review:", error);
+        res.status(400).json({ message: error.message });
+    }
+});
+
 export default router;
