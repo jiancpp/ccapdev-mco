@@ -6,6 +6,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
+
+mongoose.set('toJSON', { virtuals: true });
+mongoose.set('toObject', { virtuals: true });
+
 import artistRoutes from './routes/artistRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import reviewRoutes from './routes/reviewRoutes.js'

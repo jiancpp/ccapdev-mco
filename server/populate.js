@@ -82,6 +82,7 @@ const seedData = async () => {
         const createdAlbums = await Album.insertMany(albumData.map(al => {
             const newId = new mongoose.Types.ObjectId();
             idMap[al._id] = newId;
+
             return { 
                 ...al, 
                 _id: newId, 
@@ -101,7 +102,7 @@ const seedData = async () => {
                 _id: newId,
                 songTitle: s.title,
                 artistID: idMap[s.artist_id],
-                albumID: s.album_id ? idMap[s.album_id] : null 
+                albumID: idMap[s.album_id]
             };
         }));
 
@@ -131,8 +132,8 @@ const seedData = async () => {
                 _id: newId,
                 user: userId,
                 artist: artistId,
+                targetType: targetType,
                 targetID: targetId,
-                targetType: targetType
             }
         }));
 

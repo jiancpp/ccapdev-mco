@@ -14,16 +14,16 @@ const ReviewSchema = new mongoose.Schema({
     },
 
     // polymorphic targeting to reduce required models
-    targetID: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        refPath: 'targetType'
-    },
-
     targetType: {
         type: String,
         enum: ['Album', 'Song'],
         required: true
+    },
+
+    targetID: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        refPath: 'targetType'
     },
 
     review_header: {

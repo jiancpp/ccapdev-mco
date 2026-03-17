@@ -10,6 +10,7 @@ import { dummyArtists } from '../../data/dummyArtists'
 import { dummySongs } from '../../data/dummySongs'
 import { dummyAlbums } from '../../data/dummyAlbums'
 import { getAllData } from '../../api/api';
+import NothingBlock from '../../components/NothingBlock';
 
 function Home() {
     const { openModal, activeUser } = useOutletContext();
@@ -98,7 +99,7 @@ function Home() {
                         <Review key={review._id} review={review} activeUser={activeUser}/>
                     ))
                 ) : (
-                    <p className="no-results">No reviews match your search.</p>
+                    <NothingBlock message={"No reviews found."}/>
                 )}
             </div>
         </div>

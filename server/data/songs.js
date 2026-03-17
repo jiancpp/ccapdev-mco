@@ -3,6 +3,7 @@ export const songData = [
         _id: "s1",
         title: "Tangerine Boulevard",
         cover: "/assets/IVOfSpades.jfif",
+        album_id: null,
         artist_id: "a6",
         duration: "3:52",
         rating: 5
@@ -11,6 +12,7 @@ export const songData = [
         _id: "s2",
         title: "Juno",
         cover: "/assets/SabrinaCarpenter.jpg",
+        album_id: null,
         artist_id: "a3",
         duration: "3:02",
         rating: 4.8

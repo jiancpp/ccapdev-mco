@@ -6,6 +6,17 @@ import ReviewReply from '../models/ReviewReply.js';
 
 const router = express.Router();
 
+const reviewPopulate = [
+    { path: 'user', select: 'username avatar' },
+    { path: 'artist', select: 'name' },
+    { 
+        path: 'targetID', 
+        // select: 'albumName songTitle cover albumID songCount',
+        populate: { path: 'albumID', select: 'albumName cover', options: { strictPopulate: false } },
+        options: { strictPopulate: false }
+    }
+];
+
 /**
  * Fetch ALL review data from the database
  * @route   GET /api/reviews
@@ -13,18 +24,7 @@ const router = express.Router();
  */
 router.get('/', async (req, res) => {
     try {
-        const reviews = await Review.find(req.query)
-            .populate('user', 'username avatar')
-            .populate('artist', 'name')
-            .populate({
-                path: 'targetID',
-                select: 'albumName songTitle cover album songCount',
-                populate: { 
-                    path: 'album',
-                    select: 'albumName cover'
-                }
-            })
-        console.log("Fetching review data")
+        const reviews = await Review.find(req.query).populate(reviewPopulate);
         res.status(200).json(reviews);
     } catch (err) {
         console.error("Error fetching reviews:", err);
@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 router.get('/get/:id', async (req, res) => {
     try {
         const reviewId = req.params.id;
-        const review = await Review.findById(reviewId);
+        const review = await Review.findById(reviewId).populate(reviewPopulate)
 
         // Handle review not found
         if(!review) {
@@ -48,7 +48,7 @@ router.get('/get/:id', async (req, res) => {
         }
 
         // Return review data
-        res.status(200).json(user);
+        res.status(200).json(review);
     } catch (error) {
         res.status(500).json({ message: error.message })
     }

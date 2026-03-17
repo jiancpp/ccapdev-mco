@@ -4,10 +4,7 @@ import './Review.css'
 import ReviewEmbed from './ReviewEmbed';
 import ReviewReply from './ReviewReply';
 
-import { dummyUsers } from "../../data/dummyUsers";
 import { useState } from "react";
-import { useEffect } from 'react';
-import { getUser } from '../../api/api';
 
 function Review({ review, activeUser }) {
     // Settings
@@ -23,6 +20,8 @@ function Review({ review, activeUser }) {
             setSelected((prev) => (prev===reaction ? null : reaction))
         }
 
+        console.log("Review User Data:", review.user);
+
         return (
             <div 
                 className={`post ${deleteReview}`} 
@@ -37,7 +36,7 @@ function Review({ review, activeUser }) {
                 </div>
                 <div className={`options-modal ${openOptions}`}>
                     <ul onClick={ (e) => (e.stopPropagation())}>
-                        {activeUser && activeUser._id === review.user ? 
+                        {activeUser && activeUser._id === review.user._id ? 
                             (   <>
                                 <li>
                                     <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
@@ -60,14 +59,14 @@ function Review({ review, activeUser }) {
 
             <div className='post-content'>
                 <div className="profile">
-                    <img src={review.user.avatar || "/assets/torotottie.jpg"} alt="" />
+                    <img src={review.user?.avatar || "/assets/torotottie.jpg"} alt="" />
                 </div>
                 <div className="review-details">
                     <div className='user'>
                         <span 
                             className="username" 
-                            onClick={ () => navigate(`/profile/${review.user}`) }>
-                                {review.user.username}</span>  3hrs ago <span className={`edited ${review.isEdited ? "" : "hidden"}`}>(Edited)</span>
+                            onClick={ () => navigate(`/profile/${review.user._id}`) }>
+                                {review.user?.username || "User unknown"}</span>  3hrs ago <span className={`edited ${review.isEdited ? "" : "hidden"}`}>(Edited)</span>
                     </div>
 
                     <div className='title'>{review.review_header}</div>

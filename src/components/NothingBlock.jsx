@@ -1,10 +1,11 @@
 import './NothingBlock.css'
 
-function NothingBlock() {
+function NothingBlock(props) {
+    const message = props.message || "Nothing here yet."
     return (
         <div className="nothing-block">
             <div><i className="bi bi-emoji-neutral"></i></div>
-            <div>Nothing here yet.</div>
+            <div>{message}</div>
         </div>
     )
 }
