@@ -30,9 +30,16 @@ export function StarRating({ rating = 0 }) {
     );
 }
 
-export function InteractiveStarRating({ totalStars = 5 }) {
+export function InteractiveStarRating({ totalStars = 5, onRate }) { 
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
+
+    const handleRating = (starValue) => {
+        setRating(starValue);
+        if (onRate) {
+            onRate(starValue);
+        }
+    };
 
     return (
         <div className="star-rating">
@@ -48,7 +55,7 @@ export function InteractiveStarRating({ totalStars = 5 }) {
                             fontSize: '24px',
                             marginRight: '5px'
                         }}
-                        onClick={() => setRating(starValue)}
+                        onClick={() => handleRating(starValue)} 
                         onMouseEnter={() => setHover(starValue)}
                         onMouseLeave={() => setHover(0)}
                     ></i>
