@@ -26,7 +26,7 @@ function MainLayout({ activeUserID, setActiveUser}) {
         <>
             <Navbar activeUser={activeUser} setActiveUser={setActiveUser}/>
             <div className="layout-container flex">
-                <Sidebar openModal={openModal}/>
+                <Sidebar openModal={openModal} />
 
                 {/* Main Content Panel */}
                 <div className="content">
@@ -35,7 +35,7 @@ function MainLayout({ activeUserID, setActiveUser}) {
             </div>
 
             {/* Global Modal/s */}
-            <ReviewModal isOpen={isModalOpen} onClose={closeModal} />
+            <ReviewModal isOpen={isModalOpen} onClose={closeModal} activeUserID={activeUserID}/>
             <EditProfileModal isOpen={isProfileOpen} onClose={closeProfileEdit} user={activeUser} />
         </>
     )
