@@ -5,7 +5,7 @@ import './Artists.css';
 import ArtistBlock from '../../features/artist-block/ArtistBlock';
 import { ArtistSearchBar } from '../../components/SearchBar';
 import { FilterModal } from '../../modals/FilterModal';
-import { dummyArtists } from '../../data/dummyArtists';
+import { getAllArtists } from '../../api/api';
 
 function Artists() {
     const [allArtists, setAllArtists] = useState([]);
@@ -21,17 +21,9 @@ function Artists() {
     useEffect(() => {
         const getArtists = async () => {
             try {
-                console.log("Checkpoint A");
-                const res = await fetch('http://localhost:5000/api/artists');
-
-                if (!res.ok) {
-                    throw new Error('Failed to fetch artists');
-                }
-
-                console.log("Checkpoint B");
-                const data = await res.json();
-
-                setAllArtists(data); // 2. Save fetched data to state
+                setLoading(true);
+                const data = await getAllArtists();   // function in api.js
+                setAllArtists(data);
             } catch (err) {
                 setError(err.message);
                 console.error("Fetch error:", err);
