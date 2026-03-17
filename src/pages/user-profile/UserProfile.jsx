@@ -80,7 +80,7 @@ function UserProfile() {
     }, [user_id]);
 
     // ----- Error Handling ------ //
-    if (!user) return <NothingBlock message={"User not found."}/>
+    if (!user) return <NothingBlock message={"User not found."} />
     if (loadingUser) return <LoadingBlock />;
 
     return (
@@ -154,20 +154,20 @@ function UserProfile() {
                 </label>
             </div>
             <div className={`user-reviews indent ${section !== "reviews" ? "hidden" : ""}`}>
-                { reviews.length > 0 ?
+                {!loadingReviews ?
                     reviews.map((review) => (
                         <Review key={review._id} review={review} activeUser={activeUser} />
-                    )) 
+                    ))
                     :
-                    (<NothingBlock />)
+                    (<LoadingBlock padding={"40px"} />)
                 }
             </div>
             <div className={`user-likes indent ${section !== "likes" ? "hidden" : ""}`}>
-                {liked_reviews.length > 0 ?
+                {!loadingLikes ?
                     (liked_reviews.map((review) => (
                         <Review key={review._id} review={review} activeUser={activeUser} />
                     ))) :
-                    (<NothingBlock />)
+                    (<LoadingBlock padding={"40px"} />)
                 }
             </div>
         </div>

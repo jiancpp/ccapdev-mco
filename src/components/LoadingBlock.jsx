@@ -1,9 +1,10 @@
 import './Component.css'
 
-function LoadingBlock(props) {
-    const message = props.message || ""
+function LoadingBlock({ msg, padding }) {
+    const pad = padding || "200px";
+    const message = msg || ""
     return (
-        <div className="loading-block">
+        <div className="loading-block" style={{ paddingTop: pad }}>
             <div className="loading-frame"> 
                 <div className="loading-overlay"></div>
             </div>

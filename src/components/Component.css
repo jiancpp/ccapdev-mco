@@ -18,13 +18,12 @@
     margin-top: 50px;
 }
 
+
 .loading-block .loading-frame {
-    margin-top: 200px;
-    min-width: 80px;
-    min-height: 80px;
+    width: 80px;
+    height: 80px;
     background: white;
     border-radius: 100%;
-    position: relative;
 
     /* animation */
     border: 12px solid var(--primary-light);

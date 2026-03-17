@@ -192,3 +192,8 @@
 .user-profile .hidden {
     display: none;
 }
+
+.user-reviews, .user-likes {
+    min-height: 10vw;
+    position: relative
+}

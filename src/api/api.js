@@ -55,7 +55,8 @@ export const getReviewsByUser = async (userId) => {
  * @returns JSON of reviews data
  */
 export const getLikedReviewsByUser = async (userId) => {
-    const res = await fetch(`${BASE_URL}/reviews/get/liked/${userId}`);
+    // console.log("Fetching liked reviews by user...");
+    const res = await fetch(`${BASE_URL}/reviews/liked/${userId}`);
     if (!res.ok) 
     { 
         throw new Error(`Failed to fetch liked reviews by ${userId}`); 
