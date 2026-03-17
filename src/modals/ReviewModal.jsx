@@ -13,6 +13,11 @@ function ReviewModal({ isOpen, onClose, activeUserID }) {
         items: ['Bold', 'Italic', 'Underline', 'StrikeThrough', '|', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|', 'CreateLink', 'Image', '|', 'Undo', 'Redo']
     };
 
+    const insertImageSettings = {
+        saveUrl: 'http://localhost:5001/api/reviews/uploadImage',
+        path: 'http://localhost:5001/uploads/'
+    };
+
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [artists, setArtists] = useState([]);
@@ -63,8 +68,6 @@ function ReviewModal({ isOpen, onClose, activeUserID }) {
     };
 
     const handleSubmit = async () => {
-        console.log("Submitting:", { selectedItem, header, rating, rteRef });
-
         if (!selectedItem || !header || !rating) {
             return;
         }
@@ -161,6 +164,7 @@ function ReviewModal({ isOpen, onClose, activeUserID }) {
                         <RichTextEditorComponent 
                             className="review-rte" 
                             toolbarSettings={toolbarSettings} 
+                            insertImageSettings={insertImageSettings} 
                             htmlAttributes={{ "data-gramm": "false", "data-gramm_editor": "false" }}
                             ref={rteRef}
                         >
