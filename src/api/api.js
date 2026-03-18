@@ -17,6 +17,17 @@ export const getAllData = async (model) => {
     return await res.json();
 }    
 
+/**
+ * For error handling 
+ * @param {*} res response
+ * @param {String} errorMsg error messgae
+ * @returns JSON response
+ */
+const handleResponse = async (res, errorMsg) => {
+    if (!res.ok) throw new Error(errorMsg);
+    return await res.json();
+};
+
 /********************* USER APIs **********************/
 /**
  * Fetches user based on id
@@ -25,12 +36,7 @@ export const getAllData = async (model) => {
  */
 export const getUser = async (userId) => {
     const res = await fetch(`${BASE_URL}/users/get/${userId}`);
-    if (!res.ok) 
-    { 
-        throw new Error(`Failed to fetch user ${userId}`); 
-    }
-
-    return await res.json();
+    return await handleResponse(res, `Failed to fetch user ${userId}`);
 }  
 
 /********************* REVIEW APIs **********************/
@@ -41,12 +47,7 @@ export const getUser = async (userId) => {
  */
 export const getReviewsByUser = async (userId) => {
     const res = await fetch(`${BASE_URL}/reviews/get/${userId}`);
-    if (!res.ok) 
-    { 
-        throw new Error(`Failed to fetch reviews by ${userId}`); 
-    }
-
-    return await res.json();
+    return await handleResponse(res, `Failed to fetch reviews by ${userId}`);
 }  
 
 /**
@@ -57,12 +58,7 @@ export const getReviewsByUser = async (userId) => {
 export const getLikedReviewsByUser = async (userId) => {
     // console.log("Fetching liked reviews by user...");
     const res = await fetch(`${BASE_URL}/reviews/liked/${userId}`);
-    if (!res.ok) 
-    { 
-        throw new Error(`Failed to fetch liked reviews by ${userId}`); 
-    }
-
-    return await res.json();
+    return await handleResponse(res, `Failed to fetch liked reviews by ${userId}`);
 }  
 
 /**
@@ -77,10 +73,7 @@ export const createReview = async (reviewData) => {
         body: JSON.stringify(reviewData),
     });
 
-    if (!res.ok) {
-        throw new Error('Failed to create the review record.');
-    }
-    return await res.json();
+    return await handleResponse(res, `Failed to create the review record.`);
 }
 
 /********************* ARTIST APIs **********************/

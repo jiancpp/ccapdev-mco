@@ -2,7 +2,7 @@
  * Main Routing for Front-end
  */
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /******** Layouts ********/
 import MainLayout from './layouts/MainLayout'
@@ -21,11 +21,25 @@ import AlbumProfile from "./pages/artist-pages/AlbumProfile.jsx";
 import ArtistView from './pages/artist-view/ArtistView.jsx'
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 
+// TODO: Remove later
+import { getUser } from "./api/api";
+
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
+
+const MOCK_USER = {
+  _id: '69b9202a78b9e30e03f59186',
+  username: "Torotottie",
+  password: "password:))",
+  email: "Torotottie@gmail.com",
+  bio: "ꉂ(˵˃ ᗜ ˂˵)",
+  avatar: "/assets/torotottie.jpg",
+  role: "user",    
+}
 
 function App() {
   // TODO: Remove later for user validation
-  const [activeUser, setActiveUser] = useState("u1");
+  const [activeUser, setActiveUser] = useState(MOCK_USER);
+  console.log(`User: ${MOCK_USER}`)
 
   return (
     <>
@@ -36,7 +50,7 @@ function App() {
           <Route path='/register' element={<Register />} />
 
           {/* MAIN PAGES (w/ Navbar and Sidebar) */}
-          <Route element={<MainLayout activeUserID={activeUser} setActiveUser={setActiveUser}/>}>
+          <Route element={<MainLayout activeUser={activeUser} setActiveUser={setActiveUser}/>}>
             <Route path='/' element={<Home />}></Route>
             <Route path='/artists' element={<Artists />}></Route>
             <Route path='/profile/:user_id' element={<UserProfile />}></Route>
@@ -47,7 +61,7 @@ function App() {
           </Route>
 
           {/* SECONDARY PAGES (w/ Navbar) */}
-          <Route element={<SecondLayout activeUserID={activeUser} setActiveUser={setActiveUser}/>}>
+          <Route element={<SecondLayout activeUser={activeUser} setActiveUser={setActiveUser}/>}>
             <Route path='/artist-view/:artist_id' element={<ArtistView />}></Route>
             <Route path='/about' element={<AboutUnsynth />} />
           </Route>
