@@ -13,7 +13,12 @@ function ReviewEmbed({ review, navigate }) {
                 <div className='album-details'>
                     <div className="line line-title" >
                         <span className='icon album-title'><i className="bi bi-music-note"></i></span>
-                        <span className='album-title'> {review.targetID.songTitle}</span>
+                        <span className='album-title link-title'
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigate(`/songs/${targetID._id}`);
+                            }}>
+                            {targetID.songTitle}</span>
                     </div>
                     <div className="line">
                         <span className='icon'><i className="bi bi-person-fill"></i></span>
