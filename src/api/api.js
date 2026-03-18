@@ -129,3 +129,30 @@ export const getReviewsByAlbum = async (albumId) => {
     if (!res.ok) throw new Error(`Failed to fetch reviews for album ${albumId}`);
     return await res.json();
 }
+
+export const getSong = async (songId) => {
+    // Make sure this matches app.use('/api/songs', songRoutes) in server.js
+    const res = await fetch(`${BASE_URL}/songs/${songId}`); 
+    if (!res.ok) throw new Error(`Failed to fetch song ${songId}`);
+    return await res.json();
+};
+
+/**
+ * Fetches all reviews for a specific song
+ */
+export const getReviewsBySong = async (songId) => {
+    // This assumes your reviewRoutes.js handles ?song_id= query params
+    const res = await fetch(`${BASE_URL}/reviews?song_id=${songId}`);
+    if (!res.ok) throw new Error(`Failed to fetch reviews for song ${songId}`);
+    return await res.json();
+}
+
+/**
+ * Fetches reviews based on target (can be song or album)
+ * This is a 'bonus' helper in case your backend uses a generic targetID query
+ */
+export const getReviewsByTarget = async (targetId) => {
+    const res = await fetch(`${BASE_URL}/reviews?targetID=${targetId}`);
+    if (!res.ok) throw new Error(`Failed to fetch reviews for target ${targetId}`);
+    return await res.json();
+}
