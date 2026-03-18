@@ -113,15 +113,6 @@ export const getSongsByAlbum = async (albumId) => {
     return await res.json();
 }
 
-/**
- * Fetches all reviews for a specific album
- */
-export const getReviewsByAlbum = async (albumId) => {
-    const res = await fetch(`${BASE_URL}/reviews?album_id=${albumId}`);
-    if (!res.ok) throw new Error(`Failed to fetch reviews for ${albumId}`);
-    return await res.json();
-}
-
 export const getSong = async (songId) => {
     const res = await fetch(`${BASE_URL}/songs/${songId}`); 
     if (!res.ok) throw new Error(`Failed to fetch song ${songId}`);
@@ -129,10 +120,19 @@ export const getSong = async (songId) => {
 };
 
 /**
+ * Fetches all reviews for a specific album
+ */
+export const getReviewsByAlbum = async (albumId) => {
+    const res = await fetch(`${BASE_URL}/reviews?targetID=${albumId}`);
+    if (!res.ok) throw new Error(`Failed to fetch reviews for ${albumId}`);
+    return await res.json();
+}
+
+/**
  * Fetches all reviews for a specific song
  */
 export const getReviewsBySong = async (songId) => {
-    const res = await fetch(`${BASE_URL}/reviews?song_id=${songId}`);
+    const res = await fetch(`${BASE_URL}/reviews?targetID=${songId}`);
     if (!res.ok) throw new Error(`Failed to fetch reviews for song ${songId}`);
     return await res.json();
 }
