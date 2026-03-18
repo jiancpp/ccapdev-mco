@@ -26,15 +26,14 @@ function AlbumProfile() {
             try {
                 setLoading(true);
 
-                // Fetch the album first to get the artist_id
                 const albumData = await getAlbum(album_id);
                 setAlbum(albumData);
 
-                // Fetch the rest of the data simultaneously
                 const [artistData, songsData, reviewsData] = await Promise.all([
                     getArtist(albumData.artistID),
-                    getSongsByAlbum(album_id),
-                    getReviewsByAlbum(album_id)
+                    // CHANGE THIS LINE: Use albumData._id instead of album_id
+                    getSongsByAlbum(albumData._id), 
+                    getReviewsByAlbum(albumData._id)
                 ]);
 
                 setArtist(artistData);
@@ -58,47 +57,35 @@ function AlbumProfile() {
 
     return (
         <div className="song-profile">
-            {/* TOP BAR */}
             <div className="top-bar">
                 <button className="back-btn" onClick={() => navigate(-1)}>
                     <i className="bi bi-chevron-left"></i>
                 </button>
-                
-                <div className="search-container hidden">
-                    <input 
-                        type="text" 
-                        placeholder="Search songs, artists, and albums" 
-                        className="search-input"
-                    />
-                    <i className="bi bi-search search-icon"></i>
-                </div>
             </div>
 
-            {/* MAIN BANNER CARD */}
             <div className="song-header-card">
                 <img 
                     src={album.cover || album?.photo} 
-                    alt={album.title} 
+                    alt={album.albumName} 
                     className="main-song-cover"
                 />
                 
                 <div className="song-info-column">
                     <h1 className="main-song-title">{album.albumName}</h1>
                     <div className="main-song-artist">
-                        {artist ? artist.name : "Unknown Artist"}
+                        {artist ? artist.name : "Loading Artist..."}
                     </div>
                     <div className="main-song-genre">
                         {album.genre || "Pop"}
                     </div>
                     
                     <div className="main-song-rating" style={{marginBottom: "20px"}}>
-                        <span className="rating-number">{album.aveRating}</span>
-                        <StarRating rating={Number(album.aveRating)} />
+                        <span className="rating-number">{album.aveRating || 0}</span>
+                        <StarRating rating={Number(album.aveRating || 0)} />
                     </div>
                 </div>
             </div>
 
-            {/* NAVIGATION TABS */}
             <div className="song-nav">
                 <button 
                     className={`nav-item ${activeTab === 'reviews' ? 'active' : ''}`}
@@ -114,7 +101,6 @@ function AlbumProfile() {
                 </button>
             </div>
 
-            {/* TAB CONTENT */}
             <div className="tab-content">
                 {activeTab === 'reviews' && (
                     <>
@@ -124,11 +110,7 @@ function AlbumProfile() {
                                     <i className="bi bi-person-fill"></i>
                                 </div>
                                 <div className="interactive-stars" onClick={ openModal }>
-                                    <i className="bi bi-star-fill"></i>
-                                    <i className="bi bi-star-fill"></i>
-                                    <i className="bi bi-star-fill"></i>
-                                    <i className="bi bi-star-fill"></i>
-                                    <i className="bi bi-star-fill"></i>
+                                    {[...Array(5)].map((_, i) => <i key={i} className="bi bi-star-fill"></i>)}
                                 </div>
                             </div>
                         </div>
@@ -145,40 +127,35 @@ function AlbumProfile() {
                     </>
                 )}
 
-                {/* TRACKLIST TAB */}
                 {activeTab === 'tracklist' && (
                     <div className="album-tracklist">
                         <h3>Tracklist</h3>
                         <div className="songs-list">
-                            {songs.length > 0 ? (
-                                songs.map((song, index) => (
-                                    <div 
-                                        className="song-row" 
-                                        key={song._id}
-                                        onClick={() => navigate(`/songs/${song._id}`)} 
-                                        style={{ cursor: "pointer" }}
-                                    >
-                                        <div className="song-image-container">
-                                            <img 
-                                                src={song.cover || album.cover} 
-                                                alt={song.title} 
-                                                className="song-cover"
-                                            />
-                                        </div>
-                                        <div className="song-info">
-                                            <span className="song-title">{index + 1}. {song.songTitle}</span>
-                                        </div>
-                                        <div className="song-rating-container">
-                                            <StarRating rating={Number(song.rating)} />
-                                        </div>
-                                        <div className="song-duration">
-                                            {song.duration}
-                                        </div>
+                            {songs.map((song, index) => (
+                                <div 
+                                    className="song-row" 
+                                    key={song._id}
+                                    onClick={() => navigate(`/songs/${song._id}`)} 
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    <div className="song-image-container">
+                                        <img 
+                                            src={song.cover || album.cover} 
+                                            alt={song.songTitle} 
+                                            className="song-cover"
+                                        />
                                     </div>
-                                ))
-                            ) : (
-                                <p className="no-data-msg">No songs found for this album.</p>
-                            )}
+                                    <div className="song-info">
+                                        <span className="song-title">{index + 1}. {song.songTitle || song.title}</span>
+                                    </div>
+                                    <div className="song-rating-container">
+                                        <StarRating rating={Number(song.aveRating || song.rating || 0)} />
+                                    </div>
+                                    <div className="song-duration">
+                                        {song.duration}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 )}

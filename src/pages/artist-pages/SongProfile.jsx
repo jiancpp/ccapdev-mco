@@ -5,13 +5,8 @@ import "./SongProfile.css";
 import Review from "../../features/review/Review";
 import { StarRating } from "../../components/StarRating";
 
-import { dummyArtists } from "../../data/dummyArtists";
-import { dummyReviews } from "../../data/dummyReviews";
-import { dummySongs } from "../../data/dummySongs"; 
-
-const getArtistById = (id) => dummyArtists.find((artist) => artist._id === id);
-const getSongById = (id) => dummySongs.find((song) => song._id === id);
-const getReviewsBySong = (song_id) => dummyReviews.filter((review) => review.song_id === song_id);
+// Ensure these match the exact exports in your src/api/api.js
+import { getArtist, getSong, getReviewsBySong } from "../../api/api";
 
 function SongProfile() {
     const navigate = useNavigate();
@@ -20,18 +15,51 @@ function SongProfile() {
 
     const [activeTab, setActiveTab] = useState("reviews");
     
+    // Live Database State
+    const [song, setSong] = useState(null);
+    const [artist, setArtist] = useState(null);
+    const [reviews, setReviews] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     const [lyrics, setLyrics] = useState("");
     const [loadingLyrics, setLoadingLyrics] = useState(false);
 
-    const song = getSongById(song_id);
-
-    if (!song) return <div className="indent" style={{padding:"20px"}}>Song not found.</div>;
-
-    const artist = getArtistById(song.artist_id);
-    const reviews = getReviewsBySong(song_id);
-
-    // LYRIC API FETCHING
+    // 1. DATA FETCHING
     useEffect(() => {
+        const loadSongPageData = async () => {
+            try {
+                setLoading(true);
+
+                // Fetch song first
+                const songData = await getSong(song_id);
+                if (!songData) throw new Error("Song data is null");
+                setSong(songData);
+
+                // Fetch artist and reviews in parallel
+                // Using songData.artistID (capital ID) to match your Atlas schema
+                const [artistData, reviewsData] = await Promise.all([
+                    getArtist(songData.artistID).catch(() => null), 
+                    getReviewsBySong(song_id).catch(() => [])
+                ]);
+
+                setArtist(artistData);
+                setReviews(reviewsData || []);
+
+            } catch (error) {
+                console.error("Error loading song profile:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (song_id) {
+            loadSongPageData();
+        }
+    }, [song_id]);
+
+    // 2. LYRIC API FETCHING
+    useEffect(() => {
+        // Safety check to prevent crashing if data hasn't arrived yet
         if (!song || !artist) return;
 
         if (song.lyrics) {
@@ -42,87 +70,63 @@ function SongProfile() {
         const fetchLyrics = async () => {
             setLoadingLyrics(true);
             try {
-                const response = await fetch(`https://api.lyrics.ovh/v1/${artist.name}/${song.title}`);
+                const aName = artist.artistName || artist.name || "Unknown";
+                const sTitle = song.songTitle || song.title || "Unknown";
+
+                const response = await fetch(`https://api.lyrics.ovh/v1/${aName}/${sTitle}`);
                 const data = await response.json();
 
                 if (data.lyrics) {
-                    const cleanLyrics = data.lyrics
-                        .replace(/\r/g, "")
-                        .replace(/\n\n/g, "\n");
-
-                    setLyrics(cleanLyrics);
+                    setLyrics(data.lyrics.replace(/\r/g, "").replace(/\n\n/g, "\n"));
                 } else {
                     setLyrics("Lyrics not found for this song.");
                 }
             } catch (error) {
-                console.error("Error fetching lyrics:", error);
                 setLyrics("Could not load lyrics at this time.");
+            } finally {
+                setLoadingLyrics(false);
             }
-            setLoadingLyrics(false);
         };
 
         fetchLyrics();
     }, [song, artist]);
 
+    if (loading) return <div className="indent" style={{padding:"20px"}}>Loading Song details...</div>;
+    
+    // Fallback if the fetch returned nothing
+    if (!song) return <div className="indent" style={{padding:"20px"}}>Song not found (ID: {song_id}).</div>;
+
     return (
         <div className="song-profile">
-            {/* TOP BAR */}
             <div className="top-bar">
                 <button className="back-btn" onClick={() => navigate(-1)}>
                     <i className="bi bi-chevron-left"></i>
                 </button>
-                
-                <div className="search-container hidden">
-                    <input 
-                        type="text" 
-                        placeholder="Search songs, artists, and albums" 
-                        className="search-input"
-                    />
-                    <i className="bi bi-search search-icon"></i>
-                </div>
             </div>
 
-            {/* MAIN BANNER CARD */}
             <div className="song-header-card">
                 <img 
                     src={song.cover || artist?.photo} 
-                    alt={song.title} 
+                    alt={song.songTitle || "Song Cover"} 
                     className="main-song-cover"
                 />
                 
                 <div className="song-info-column">
-                    <h1 className="main-song-title">{song.title}</h1>
+                    <h1 className="main-song-title">{song.songTitle || song.title}</h1>
                     <div className="main-song-artist">
-                        {artist ? artist.name : "Unknown Artist"}
+                        {artist ? (artist.artistName || artist.name) : "Unknown Artist"}
                     </div>
                     <div className="main-song-genre">
                         {song.genre || "Pop"}
                     </div>
                     
                     <div className="main-song-rating" style={{marginBottom: "20px"}}>
-                        <span className="rating-number">{song.rating}</span>
-                        <StarRating rating={Number(song.rating)} />
+                        <span className="rating-number">{song.aveRating || 0}</span>
+                        <StarRating rating={Number(song.aveRating || 0)} />
                     </div>
-
-                    {/* SPOTIFY EMBED */}
-                    {song.spotify_id && (
-                        <div className="spotify-embed-container">
-                            <iframe 
-                                style={{borderRadius: "12px"}} 
-                                src={`https://open.spotify.com/embed/track/${song.spotify_id}?utm_source=generator&theme=0`} 
-                                width="100%" 
-                                height="80" 
-                                frameBorder="0" 
-                                allowFullScreen="" 
-                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                                loading="lazy">
-                            </iframe>
-                        </div>
-                    )}
                 </div>
             </div>
 
-            {/* NAVIGATION TABS */}
             <div className="song-nav">
                 <button 
                     className={`nav-item ${activeTab === 'reviews' ? 'active' : ''}`}
@@ -138,7 +142,6 @@ function SongProfile() {
                 </button>
             </div>
 
-            {/* TAB CONTENT */}
             <div className="tab-content">
                 {activeTab === 'reviews' && (
                     <>
@@ -147,12 +150,8 @@ function SongProfile() {
                                 <div className="user-avatar-placeholder">
                                     <i className="bi bi-person-fill"></i>
                                 </div>
-                                <div className="interactive-stars" onClick={ openModal }>
-                                    <i className="bi bi-star-fill"></i>
-                                    <i className="bi bi-star-fill"></i>
-                                    <i className="bi bi-star-fill"></i>
-                                    <i className="bi bi-star-fill"></i>
-                                    <i className="bi bi-star-fill"></i>
+                                <div className="interactive-stars" onClick={openModal}>
+                                    {[...Array(5)].map((_, i) => <i key={i} className="bi bi-star-fill"></i>)}
                                 </div>
                             </div>
                         </div>
@@ -169,15 +168,14 @@ function SongProfile() {
                     </>
                 )}
 
-                {/* UPDATED LYRICS TAB */}
                 {activeTab === 'lyrics' && (
                     <div className="lyrics-section">
-                        <h3>{song.title}</h3>
+                        <h3>{song.songTitle || song.title}</h3>
                         {loadingLyrics ? (
-                            <p style={{color: "#888", fontStyle: "Helvetica"}}>Fetching lyrics...</p>
+                            <p style={{color: "#888"}}>Fetching lyrics...</p>
                         ) : (
                             <>
-                                <p className="lyrics-text">
+                                <p className="lyrics-text" style={{ whiteSpace: "pre-line" }}>
                                     {lyrics}
                                 </p>
                                 <div className="lyrics-footer">
