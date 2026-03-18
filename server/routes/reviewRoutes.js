@@ -72,14 +72,21 @@ router.get('/get/:user_id', async (req, res) => {
  */
 router.get('/', async (req, res) => {
     try {
-        console.log(`Fetching all reviews...`);
-        const reviews = await Review.find(req.query).populate(reviewPopulate);
-        res.status(200).json(reviews);
+        const { album_id, song_id } = req.query;
+        let query = {};
+
+        if (album_id) {
+            query = { targetID: album_id, targetType: 'Album' };
+        } else if (song_id) {
+            query = { targetID: song_id, targetType: 'Song' };
+        }
+
+        const reviews = await Review.find(query).populate('user');
+        res.json(reviews);
     } catch (err) {
-        console.error("Error fetching reviews:", err);
         res.status(500).json({ error: err.message });
     }
-})
+});
 
 /**
  * Create a new review

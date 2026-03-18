@@ -31,8 +31,7 @@ function AlbumProfile() {
 
                 const [artistData, songsData, reviewsData] = await Promise.all([
                     getArtist(albumData.artistID),
-                    // CHANGE THIS LINE: Use albumData._id instead of album_id
-                    getSongsByAlbum(albumData._id), 
+                    getSongsByAlbum(albumData._id),
                     getReviewsByAlbum(albumData._id)
                 ]);
 

@@ -105,7 +105,6 @@ export const getArtist = async (artistId) => {
  * Fetches album based on id
  */
 export const getAlbum = async (albumId) => {
-    // Cleaned up path
     const res = await fetch(`${BASE_URL}/albums/${albumId}`); 
     if (!res.ok) throw new Error(`Failed to fetch album ${albumId}`);
     return await res.json();
@@ -126,12 +125,11 @@ export const getSongsByAlbum = async (albumId) => {
  */
 export const getReviewsByAlbum = async (albumId) => {
     const res = await fetch(`${BASE_URL}/reviews?album_id=${albumId}`);
-    if (!res.ok) throw new Error(`Failed to fetch reviews for album ${albumId}`);
+    if (!res.ok) throw new Error(`Failed to fetch reviews for ${albumId}`);
     return await res.json();
 }
 
 export const getSong = async (songId) => {
-    // Make sure this matches app.use('/api/songs', songRoutes) in server.js
     const res = await fetch(`${BASE_URL}/songs/${songId}`); 
     if (!res.ok) throw new Error(`Failed to fetch song ${songId}`);
     return await res.json();
@@ -141,7 +139,6 @@ export const getSong = async (songId) => {
  * Fetches all reviews for a specific song
  */
 export const getReviewsBySong = async (songId) => {
-    // This assumes your reviewRoutes.js handles ?song_id= query params
     const res = await fetch(`${BASE_URL}/reviews?song_id=${songId}`);
     if (!res.ok) throw new Error(`Failed to fetch reviews for song ${songId}`);
     return await res.json();
