@@ -182,6 +182,7 @@ textarea::placeholder {
 
 
 /** MEDIA **/
+
 .media-header {
     padding-top: 15px;
     font-weight: bold;
@@ -190,68 +191,14 @@ textarea::placeholder {
     color: #df6490;
 }
 
-.media-preview-strip {
+.media-group {
     display: flex;
     gap: 10px;
-    padding: 15px 0px;
-    overflow-x: scroll;
-    scroll-padding-top: 10px;
-    scrollbar-width: thin;
-    scrollbar-color: #df6490 #ffffff00;
-}
-
-.media-preview-thumb {
-    position: relative;
-    min-width: 105px;
-    height: 105px;
-    border-radius: 10px;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.media-thumb {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.media-preview-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.3);
-    color: #df6490;
-    display: flex;
+    margin: 15px 0px;
     align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.1s;
-    font-size: 2rem;
 }
 
-.media-delete-btn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: rgba(0, 0, 0, 0.403);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.media-preview-thumb:hover .media-preview-overlay {
-    opacity: 1;
-    border: 2px solid #df6490;
-    border-radius: 10px;
-}
-
-/* Upload button in the strip */
+/* Upload button */
 .media-upload-btn {
     min-width: 100px;
     height: 100px;
@@ -268,49 +215,4 @@ textarea::placeholder {
 .media-upload-btn:hover {
     border-color: #888;
     color: #888;
-}
-
-/* Lightbox */
-.lightbox-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
-}
-
-.lightbox-content {
-    position: relative;
-    width: 90vw;
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lightbox-media {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    border-radius: 10px;
-    display: block;
-}
-
-.lightbox-close {
-    position: absolute;
-    top: -16px;
-    right: -16px;
-    color: #a11547;
-    background: white;
-    border: none;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
