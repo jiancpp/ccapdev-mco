@@ -30,8 +30,8 @@ export function StarRating({ rating = 0 }) {
     );
 }
 
-export function InteractiveStarRating({ totalStars = 5, onRate }) { 
-    const [rating, setRating] = useState(0);
+export function InteractiveStarRating({ totalStars = 5, onRate, currentRating = 0}) { 
+    const [rating, setRating] = useState(currentRating);
     const [hover, setHover] = useState(0);
 
     const handleRating = (starValue) => {

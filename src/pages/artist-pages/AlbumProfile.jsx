@@ -3,6 +3,7 @@ import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 
 import "./SongProfile.css"; 
 import Review from "../../features/review/Review";
+import BackButton from "../../components/BackButton"
 import { StarRating } from "../../components/StarRating";
 
 import { getArtist, getAlbum, getSongsByAlbum, getReviewsByAlbum } from "../../api/api";
@@ -10,7 +11,7 @@ import { getArtist, getAlbum, getSongsByAlbum, getReviewsByAlbum } from "../../a
 function AlbumProfile() {
     const navigate = useNavigate();
     const { album_id } = useParams();
-    const { activeUser, openModal } = useOutletContext();
+    const { activeUser, preSelectReviewParams } = useOutletContext();
 
     const [activeTab, setActiveTab] = useState("reviews");
 
@@ -57,9 +58,7 @@ function AlbumProfile() {
     return (
         <div className="song-profile">
             <div className="top-bar">
-                <button className="back-btn" onClick={() => navigate(-1)}>
-                    <i className="bi bi-chevron-left"></i>
-                </button>
+                <BackButton />
             </div>
 
             <div className="song-header-card">
@@ -108,8 +107,23 @@ function AlbumProfile() {
                                 <div className="user-avatar-placeholder">
                                     <i className="bi bi-person-fill"></i>
                                 </div>
-                                <div className="interactive-stars" onClick={ openModal }>
-                                    {[...Array(5)].map((_, i) => <i key={i} className="bi bi-star-fill"></i>)}
+                                <div className="interactive-stars">
+                                    {[...Array(5)].map((_, i) => 
+                                        <i  key={i} 
+                                            className="bi bi-star-fill" 
+                                            onClick={() => {
+                                                    if (!album || !artist) return;
+                                                    preSelectReviewParams({
+                                                        targetID: album_id,
+                                                        targetType: 'Album',
+                                                        selectedRating: i + 1,
+                                                        title: album.albumName,
+                                                        artistID: artist._id, 
+                                                        cover: album.cover,
+                                                    });
+                                                }
+                                             }></i>
+                                    )}
                                 </div>
                             </div>
                         </div>

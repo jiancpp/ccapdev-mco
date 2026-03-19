@@ -6,7 +6,7 @@ import { getIsReactedByUser, postReaction, getTimeAgo, isReviewEdited } from '..
 import './Review.css'
 import ReviewEmbed from './ReviewEmbed';
 import ReviewReply from './ReviewReply';
-
+import { StarRating } from "../../components/StarRating";
 
 function Review({ review, activeUser }) {
     // Settings
@@ -120,12 +120,7 @@ function Review({ review, activeUser }) {
 
                     <div className='title'>{review.review_header}</div>
                     <div className='rating'>
-                        { Array.from({ length: Math.floor(review.rating) }).map((_, i) => (
-                            <i className="bi bi-star-fill" key={i}></i>
-                        ))}
-                        { Array.from({ length: 5 - Math.floor(review.rating) }).map((_, i) => (
-                            <i className="bi bi-star-fill grey" key={i}></i>
-                        ))}
+                        <StarRating rating={Number(review.rating || 0)} />
                     </div>
                     <ReviewEmbed review={review} navigate={navigate}/>
                     <div className="description" dangerouslySetInnerHTML={{ __html: review.review_content }} />

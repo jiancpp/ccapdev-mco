@@ -8,7 +8,7 @@ import { createReview, getAllData, getArtist } from '../api/api';
 
 import './ReviewModal.css';
 
-function ReviewModal({ isOpen, onClose, activeUserID }) {
+function ReviewModal({ isOpen, onClose, preSelected, currentRating = null }) { 
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [artists, setArtists] = useState([]);
@@ -89,6 +89,22 @@ function ReviewModal({ isOpen, onClose, activeUserID }) {
             }
         }
     }, [isOpen]);
+
+    // fetch preselected review parameters (added by jia)
+    useEffect(() => {
+        const { targetID, targetType, title, artistID, cover } = preSelected || {};
+        if (targetID && targetType) {
+            setSelectedItem({
+                _id: targetID,
+                title: title,
+                artistID: artistID, 
+                cover: cover,
+                type: targetType
+            });
+        } else {
+            setSelectedItem(null)
+        }
+    }, [isOpen, preSelected])
 
     const handleSelect = (item) => {
         const isAlbum = !!item.albumName;
@@ -184,7 +200,7 @@ function ReviewModal({ isOpen, onClose, activeUserID }) {
                         
                         <div className="rating-section">
                             <p className="rating-label">Star Rating</p>
-                            <InteractiveStarRating totalStars={5} onRate={(val) => setRating(val)} />
+                            <InteractiveStarRating totalStars={5} currentRating={currentRating || rating} onRate={(val) => setRating(val)} />
                         </div>
                     </div>
 
