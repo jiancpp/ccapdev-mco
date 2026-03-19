@@ -3,6 +3,7 @@ import {
 } from '@syncfusion/ej2-react-richtexteditor';
 import { InteractiveStarRating } from '../components/StarRating';
 import { SearchBar } from '../components/SearchBar';
+import { MediaPreviewStrip } from '../components/MediaPreviewStrip';
 import { useState, useRef, useEffect } from 'react';
 import { createReview, getAllData } from '../api/api';
 
@@ -117,24 +118,14 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
 
         let html = rteRef.current.getHtml();
 
-        // Append media attachments at the end
-        if (mediaAttachments.length > 0) {
-            const mediaHtml = mediaAttachments.map(media =>
-                media.isVideo
-                    ? `<video src="${media.url}" controls style="width:100%; border-radius:8px; margin: 8px 0;"></video>`
-                    : `<img src="${media.url}" style="width:100%; border-radius:8px; margin: 8px 0;" />`
-            ).join('');
-
-            html += mediaHtml;
-        }
-
         const reviewData = {
             user: activeUserID,
             artist: selectedItem.artistID,
             targetType: selectedItem.type,
             targetID: selectedItem._id,
             review_header: header,
-            review_content: html,
+            review_content: rteRef.current.getHtml(),
+            media: mediaAttachments,
             rating,
             likes: 0,
             dislikes: 0,
@@ -221,7 +212,7 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
 
                     {/* Media preview strip with upload button */}
                     <div className="media-header">Upload Media</div>
-                    <div className="media-preview-strip">
+                    <div className="media-group">
                         {/* Upload button */}
                         <label
                             className="media-upload-btn"
@@ -236,47 +227,11 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
                                 style={{ display: 'none' }}
                             />
                         </label>
-
-                        {mediaAttachments.map((media, i) => (
-                            <div
-                                key={i}
-                                className="media-preview-thumb"
-                                onClick={() => setLightbox(media)}
-                            >
-                                {media.isVideo ? (
-                                    <video src={media.url} className="media-thumb" />
-                                ) : (
-                                    <img src={media.url} alt={`attachment-${i}`} className="media-thumb" />
-                                )}
-                                <div className="media-preview-overlay">
-                                    <span>{media.isVideo ? "▶" : ""}</span>
-                                </div>
-                                <button
-                                    className="media-delete-btn"
-                                    onClick={(e) => {
-                                        e.stopPropagation(); // prevent lightbox from opening
-                                        setMediaAttachments(prev => prev.filter((_, idx) => idx !== i));
-                                    }}
-                                >
-                                    &times;
-                                </button>
-                            </div>
-                        ))}
+                        <MediaPreviewStrip
+                            media={mediaAttachments}
+                            onDelete={(i) => setMediaAttachments(prev => prev.filter((_, idx) => idx !== i))}
+                        />
                     </div>
-
-                    {/* Lightbox popup */}
-                    {lightbox && (
-                        <div className="lightbox-overlay" onClick={() => setLightbox(null)}>
-                            <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-                                <button className="lightbox-close" onClick={() => setLightbox(null)}>&times;</button>
-                                {lightbox.isVideo ? (
-                                    <video src={lightbox.url} controls autoPlay className="lightbox-media" />
-                                ) : (
-                                    <img src={lightbox.url} alt="preview" className="lightbox-media" />
-                                )}
-                            </div>
-                        </div>
-                    )}
 
                     <div className="footer">
                         <button

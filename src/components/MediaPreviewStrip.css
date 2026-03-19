@@ -1,0 +1,59 @@
+.media-preview-strip {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #df6490 #ffffff00;
+}
+
+.media-preview-thumb {
+    position: relative;
+    min-width: 105px;
+    height: 105px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.media-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.media-preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    color: #df6490;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.1s;
+    font-size: 2rem;
+}
+
+.media-delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.403);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-preview-thumb:hover .media-preview-overlay {
+    opacity: 1;
+    border: 2px solid #df6490;
+    border-radius: 10px;
+}

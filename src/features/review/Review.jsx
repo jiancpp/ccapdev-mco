@@ -7,6 +7,7 @@ import './Review.css'
 import ReviewEmbed from './ReviewEmbed';
 import ReviewReply from './ReviewReply';
 import { StarRating } from "../../components/StarRating";
+import { MediaPreviewStrip } from '../../components/MediaPreviewStrip';
 
 function Review({ review, activeUser }) {
     // Settings
@@ -141,6 +142,9 @@ function Review({ review, activeUser }) {
                     </div>
                     <ReviewEmbed review={review} navigate={navigate}/>
                     <div className="description" dangerouslySetInnerHTML={{ __html: review.review_content }} />
+                    <div className="description media">
+                        <MediaPreviewStrip media={review.media} />
+                    </div>
                 </div>
             </div>
             <div className="post-actions flex">

@@ -69,7 +69,6 @@ function Login({ setActiveUser }) {
                             <button type="submit" className="login-button">LOGIN</button>
                         </form>
                     </div>
-                    {/* <button onClick={() => navigate('/artist-view/:artist_id')} className="login-button">ARTIST LOGIN</button> */}
                     <div className="create-account">
                         <p className="no-account">Don't have an account? <a onClick={() => navigate("/register")} className="sign-up-link">Sign-up.</a></p>
                     </div>

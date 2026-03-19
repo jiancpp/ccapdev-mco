@@ -6,7 +6,7 @@ const router = express.Router();
 
 // POST /api/users/register
 router.post('/register', async (req, res) => {
-
+    
 });
 
 // POST /api/users/login
