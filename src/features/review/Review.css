@@ -7,6 +7,9 @@
 }
 
 .post {
+    background: linear-gradient(to bottom, rgb(249, 249, 249), white, white, white);
+    margin: 30px;
+
     border: 1px solid transparent;
     color: black;
     border-radius: 20px;

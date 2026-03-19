@@ -12,8 +12,9 @@ import EditProfileModal from "../modals/EditProfileModal";
 /***** Utilities ******/
 const getUserById = (id) => dummyUsers.find((user) => user._id === id );
 
-function MainLayout({ activeUserID, setActiveUser}) {
-    const activeUser = getUserById(activeUserID);
+function MainLayout({ activeUser, setActiveUser}) {
+    // const activeUser = getUserById(activeUserID);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -35,7 +36,7 @@ function MainLayout({ activeUserID, setActiveUser}) {
             </div>
 
             {/* Global Modal/s */}
-            <ReviewModal isOpen={isModalOpen} onClose={closeModal} activeUserID={activeUserID}/>
+            <ReviewModal isOpen={isModalOpen} onClose={closeModal} activeUserID={activeUser._id}/>
             <EditProfileModal isOpen={isProfileOpen} onClose={closeProfileEdit} user={activeUser} />
         </>
     )

@@ -5,15 +5,20 @@ function ReviewEmbed({ review, navigate }) {
 
 
     if (targetType === 'Song') {
-        console.log(` + Fetching Song Embed | Album: ${targetID.albumID}`)
         return (
-            <div className="embed embed-album" onClick={() => navigate(`/artists/artist-profile/${review.artist._id}`)}>
+            <div className="embed embed-album" onClick={() => navigate(`/songs/${targetID._id}`)}>
                 <div className="album-cover">
-                    <img src={targetID.cover || targetID.albumID?.cover || "/assets/torotottie.jpg"} alt="" />                </div>
+                    <img src={targetID.cover || targetID.albumID?.cover || "/assets/torotottie.jpg"} alt="" />                
+                </div>
                 <div className='album-details'>
                     <div className="line line-title" >
                         <span className='icon album-title'><i className="bi bi-music-note"></i></span>
-                        <span className='album-title'> {review.targetID.songTitle}</span>
+                        <span className='album-title link-title'
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigate(`/songs/${targetID._id}`);
+                            }}>
+                            {targetID.songTitle}</span>
                     </div>
                     <div className="line">
                         <span className='icon'><i className="bi bi-person-fill"></i></span>
@@ -29,7 +34,7 @@ function ReviewEmbed({ review, navigate }) {
                     <div className="line">
                         <span className='icon'><i className="bi bi-disc-fill"></i></span>
                         <span
-                            className='link'
+                            className={`${targetID.albumID ? "link" : ""}`}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 navigate(`/albums/${targetID.albumID?._id}`);

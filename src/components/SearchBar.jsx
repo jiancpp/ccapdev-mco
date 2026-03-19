@@ -67,15 +67,37 @@ export function SearchBar({ songs = [], albums = [], artists = [], onSelect }) {
 }
 
 export function ReviewSearchBar({ onSearchChange }) {
+    const [localVal, setLocalVal] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSearchChange(localVal);
+    }
     return (
         <div className="search-parent">
             <div className="search-container">
                 <i className="bi bi-search search-icon"></i>
-                <input 
-                    type="text" 
-                    placeholder="Search reviews" 
-                    onChange={(e) => onSearchChange(e.target.value)}
-                />
+                <form onSubmit={ handleSubmit }>
+                    <span 
+                        htmlFor="search" 
+                        className={`review-search-clear ${localVal=="" ? "hidden": ""}`}
+                        onClick={ () => {
+                            setLocalVal("");
+                            onSearchChange("");
+                        }}>
+                        &times;
+                    </span>
+                    <input 
+                        name='search'
+                        type="text" 
+                        value={localVal}
+                        onChange={e => {
+                            setLocalVal(e.target.value);
+                        }}
+                        placeholder="Search reviews" 
+                    />
+                    <button type="submit" style={{ display: 'none' }} />  
+                </form>  
             </div>
         </div>
     );

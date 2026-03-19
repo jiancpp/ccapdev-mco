@@ -11,8 +11,7 @@ import EditProfileModal from "../modals/EditProfileModal";
 /***** Utilities ******/
 const getUserById = (id) => dummyUsers.find((user) => user._id === id );
 
-function SecondLayout({ activeUserID, setActiveUser}) {
-    const activeUser = getUserById(activeUserID);
+function SecondLayout({ activeUser, setActiveUser}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
