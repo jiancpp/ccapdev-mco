@@ -10,13 +10,24 @@ const reviewPopulate = [
     { path: 'user', select: 'username avatar' },
     { path: 'artist', select: 'name' },
     { 
-        path: 'targetID', 
-        // select: 'albumName songTitle cover albumID songCount',
-        populate: { path: 'albumID', select: '_id albumName cover', options: { strictPopulate: false } },
-        options: { strictPopulate: false }
+        path: 'targetID',
+        populate: [
+            // 1. If it's an Album, get the songCount virtual
+            { 
+                path: 'songCount', 
+                model: 'Album',
+                options: { strictPopulate: false } 
+            },
+            // 2. If it's a Song, populate its albumID field to get the cover/name
+            { 
+                path: 'albumID', 
+                model: 'Album', 
+                select: 'albumName cover',
+                options: { strictPopulate: false }
+            }
+        ]
     }
 ];
-
 /**
  * Find liked reviews based on user id
  * @route   GET /api/reviews/liked/:user_id
@@ -74,7 +85,7 @@ router.get('/filter', async (req, res) => {
         let query = {};
 
         filters.forEach(key => {
-            if (req.query[key]) {
+            if (req.query[key] && req.query[key] !== "") {
                 query[key] = req.query[key];
             }
         })
@@ -87,7 +98,14 @@ router.get('/filter', async (req, res) => {
         }
 
         console.log(`Fetching all reviews based on filters...`);
-        const reviews = await Review.find(query).populate(reviewPopulate);
+        const reviews = await Review.find(query).populate(reviewPopulate).setOptions({ strictPopulate: false });;
+
+        reviews.forEach(review => {
+            if (review.targetType == 'Album') {
+                console.log(` + Check album tracks: ${review.targetID.albumName} - ${review.targetID.songCount}`)
+            }
+        })
+        
         res.status(200).json(reviews);
     } catch (err) {
         console.error("Error fetching reviews:", err);

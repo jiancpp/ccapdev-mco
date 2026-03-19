@@ -32,7 +32,7 @@ const AlbumSchema = new mongoose.Schema({
 AlbumSchema.virtual('songCount', {
     ref: 'Song',
     localField: '_id',
-    foreignField: 'album',
+    foreignField: 'albumID',
     count: true // returns the number
   });
 
