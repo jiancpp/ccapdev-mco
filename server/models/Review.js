@@ -37,6 +37,16 @@ const ReviewSchema = new mongoose.Schema({
         required: [true, "Please add a content to your review"],
     },
 
+    media: {
+        type: [
+            {
+                url: { type: String, required: true },
+                isVideo: { type: Boolean, required: true }
+            }
+        ],
+        default: []
+    },
+
     rating: {
         type: Number,
         required: true,
