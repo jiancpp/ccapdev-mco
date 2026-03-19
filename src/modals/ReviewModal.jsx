@@ -3,21 +3,12 @@ import {
 } from '@syncfusion/ej2-react-richtexteditor';
 import { InteractiveStarRating } from '../components/StarRating';
 import { SearchBar } from '../components/SearchBar';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { createReview, getAllData, getArtist } from '../api/api';
 
 import './ReviewModal.css';
 
 function ReviewModal({ isOpen, onClose, activeUserID }) {
-    const toolbarSettings = {
-        items: ['Bold', 'Italic', 'Underline', 'StrikeThrough', '|', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|', 'CreateLink', 'Image', '|', 'Undo', 'Redo']
-    };
-
-    const insertImageSettings = {
-        saveUrl: 'http://localhost:5001/api/reviews/uploadImage',
-        path: 'http://localhost:5001/uploads/'
-    };
-
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [artists, setArtists] = useState([]);
@@ -26,6 +17,50 @@ function ReviewModal({ isOpen, onClose, activeUserID }) {
     const [header, setHeader] = useState("");
     const [rating, setRating] = useState(0);
     const rteRef = useRef(null); // Grabs content from  RTE
+
+    const toolbarSettings = {
+        items: ['Bold', 'Italic', 'Underline', 'StrikeThrough', '|', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|', 'CreateLink', 'Image', '|', 'Undo', 'Redo']
+    };
+
+    const uploadToCloudinary = async (file) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'my_review_preset'); // From Cloudinary Settings
+
+        const response = await fetch('https://api.cloudinary.com/v1_1/dnldcpojq/image/upload', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) throw new Error('Cloudinary upload failed');
+
+        const data = await response.json();
+        return data.secure_url; // This is the final HTTPS link
+    };
+
+    const cloudinaryUrlRef = useRef(null);
+
+    const onImageUploading = useCallback((args) => {
+        const file = args.fileData.rawFile;
+
+        uploadToCloudinary(file).then(url => {
+            cloudinaryUrlRef.current = url;
+        });
+
+        args.fileData.rawFile = new File([], args.fileData.name);
+    }, []);
+
+    const onImageUploadSuccess = useCallback((args) => {
+        const imgs = rteRef.current?.contentDocument?.querySelectorAll('img');
+        if (imgs && cloudinaryUrlRef.current) {
+            imgs.forEach(img => {
+                if (img.src.startsWith('blob:') || img.src.startsWith('data:')) {
+                    img.src = cloudinaryUrlRef.current;
+                    cloudinaryUrlRef.current = null;
+                }
+            });
+        }
+    }, []);
 
     useEffect(() => {
         if (isOpen) {
@@ -164,7 +199,12 @@ function ReviewModal({ isOpen, onClose, activeUserID }) {
                         <RichTextEditorComponent 
                             className="review-rte" 
                             toolbarSettings={toolbarSettings} 
-                            insertImageSettings={insertImageSettings} 
+                            insertImageSettings={{ 
+                                saveUrl: 'http://localhost:5001/api/upload-image',
+                                saveFormat: 'Base64'
+                            }}
+                            imageUploading={onImageUploading} 
+                            imageUploadSuccess={onImageUploadSuccess}
                             htmlAttributes={{ "data-gramm": "false", "data-gramm_editor": "false" }}
                             ref={rteRef}
                         >

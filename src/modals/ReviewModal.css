@@ -146,10 +146,10 @@ textarea::placeholder {
     overflow-y: scroll;
 }
 
-.e-rte-elements, 
-.e-dialog.e-lib.e-popup.e-control, 
-.e-quick-popup {
-    z-index: 99999 !important;
+.e-rte-content img {
+    border-radius: 10px;
+    max-width: 500px;
+    max-height: 500px;
 }
 
 .submit-btn {

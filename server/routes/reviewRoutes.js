@@ -1,7 +1,4 @@
 import express from 'express';
-import multer from 'multer';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 import Review from '../models/Review.js';
 import ReviewReaction from '../models/ReviewReaction.js';
@@ -94,33 +91,6 @@ router.post('/create', async (req, res) => {
     } catch (error) {
         console.error("Error creating review:", error);
         res.status(400).json({ message: error.message });
-    }
-});
-
-//========= FOR IMAGE UPLOADS =========//
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        const uploadPath = path.join(__dirname, '../../public/uploads');
-        cb(null, uploadPath);
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({ storage: storage });
-
-router.post('/uploadImage', upload.single('UploadFiles'), (req, res) => {
-    try {
-        const fileUrl = `http://localhost:5001/uploads/${req.file.filename}`;
-        
-        res.status(200).json({ link: fileUrl });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
     }
 });
 

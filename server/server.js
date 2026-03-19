@@ -5,10 +5,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import path from 'path';
 import mongoose from 'mongoose';
-
-import { fileURLToPath } from 'url';
 
 mongoose.set('toJSON', { virtuals: true });
 mongoose.set('toObject', { virtuals: true });
@@ -26,9 +23,6 @@ dotenv.config();
 const PORT = process.env.PORT || 5001;
 const MONGOURL = process.env.MONGO_URL
 const app = express();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // Middleware
 
@@ -54,13 +48,12 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.json());        // allows the server to parse JSON data in request bodies
+app.use(express.urlencoded({ extended: true }));
 app.use('/api/artists', artistRoutes);     // allows api to fetch data
 app.use('/api/users', userRoutes);     // allows api to fetch data
 app.use('/api/reviews', reviewRoutes);     // allows api to fetch data
 app.use('/api/albums', albumRoutes);
 app.use('/api/songs', songRoutes);
-
-app.use('/uploads', express.static(path.resolve(__dirname, '../public/uploads')));
 
 // <TODO:> add middleware to verify admin status //
 
@@ -83,6 +76,10 @@ app.get('/', (req,res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on: ${PORT}`)
 })
+
+app.post('/api/upload-image', async (req, res) => {
+    res.json({ success: true });
+});
 
 
 /**
