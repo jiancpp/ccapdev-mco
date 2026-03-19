@@ -68,7 +68,7 @@ function ReviewEmbed({ review, navigate }) {
                             className='link'
                             onClick={(e) => {
                                 e.stopPropagation();
-                                navigate(`/artists/artist-profile/${review}`);
+                                navigate(`/artists/artist-profile/${review.artist._id}`);
                             }}>
                             {artist.name}
                         </span>
