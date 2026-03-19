@@ -168,7 +168,8 @@ textarea::placeholder {
 
 .submit-btn:disabled {
     cursor: not-allowed;
-    background-color: #ccc;
+    background: none;
+    background-color: #797979;
 }
 
 .close-btn {

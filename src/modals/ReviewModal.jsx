@@ -216,7 +216,7 @@ function ReviewModal({ isOpen, onClose, activeUserID }) {
                         <button 
                             className="submit-btn" 
                             onClick={handleSubmit}
-                            // disabled={!selectedItem || !header || !rating}
+                            disabled={!selectedItem || !header || !rating}
                         >
                             Submit Review
                         </button>

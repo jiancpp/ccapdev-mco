@@ -47,8 +47,8 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
-app.use(express.json());        // allows the server to parse JSON data in request bodies
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));        // allows the server to parse JSON data in request bodies
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use('/api/artists', artistRoutes);     // allows api to fetch data
 app.use('/api/users', userRoutes);     // allows api to fetch data
 app.use('/api/reviews', reviewRoutes);     // allows api to fetch data
