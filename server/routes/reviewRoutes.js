@@ -48,24 +48,6 @@ router.get('/liked/:user_id', async (req, res) => {
 })
 
 /**
- * Find reviews based on id
- * @route   GET /api/reviews/get/:user_id
- * @desc    Get review based on id
- */
-router.get('/get/:user_id', async (req, res) => {
-    try {
-        console.log(`Fetching reviews by user...`);
-        const userId = req.params.user_id;
-        const reviews = await Review.find({ user: userId }).populate(reviewPopulate)
-
-       // Return review data
-        res.status(200).json(reviews);
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-})
-
-/**
  * Fetch ALL review data from the database
  * @route   GET /api/reviews
  * @desc    Get all reviews
@@ -73,6 +55,8 @@ router.get('/get/:user_id', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         console.log(`Fetching all reviews...`);
+
+        // req.query uses query string
         const reviews = await Review.find(req.query).populate(reviewPopulate);
         res.status(200).json(reviews);
     } catch (err) {

@@ -5,7 +5,7 @@ import ReviewEmbed from './ReviewEmbed';
 import ReviewReply from './ReviewReply';
 
 import { useEffect, useState } from "react";
-import { getIsReactedByUser, postReaction } from '../../api/api';
+import { getIsReactedByUser, postReaction, getTimeAgo, isReviewEdited } from '../../api/api';
 
 function Review({ review, activeUser }) {
     // Settings
@@ -115,7 +115,8 @@ function Review({ review, activeUser }) {
                         <span 
                             className="username" 
                             onClick={ () => navigate(`/profile/${review.user._id}`) }>
-                                {review.user?.username || "User unknown"}</span>  3hrs ago <span className={`edited ${review.isEdited ? "" : "hidden"}`}>(Edited)</span>
+                                {review.user?.username || "User unknown"}</span> · {getTimeAgo(review.createdAt)} 
+                                <span className={`edited ${isReviewEdited(review.createdAt, review.updatedAt) ? "" : "hidden"}`}> (Edited)</span>
                     </div>
 
                     <div className='title'>{review.review_header}</div>

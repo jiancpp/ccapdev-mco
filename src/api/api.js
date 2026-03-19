@@ -46,7 +46,7 @@ export const getUser = async (userId) => {
  * @returns JSON of reviews data
  */
 export const getReviewsByUser = async (userId) => {
-    const res = await fetch(`${BASE_URL}/reviews/get/${userId}`);
+    const res = await fetch(`${BASE_URL}/reviews?user=${userId}`);
     return await handleResponse(res, `Failed to fetch reviews by ${userId}`);
 }  
 
@@ -92,6 +92,27 @@ export const postReaction = async (reviewId, userId, reactType) => {
 export const getIsReactedByUser = async (reviewId, userId) => {
     const res = await fetch(`${BASE_URL}/reviews/check_react/${reviewId}/${userId}`);
     return await handleResponse(res, `Failed to check if user reacted to review`);
+}
+
+export function getTimeAgo(timestamp) {
+    const date = new Date(timestamp);
+    const now = new Date();
+
+    const secondsDiff = Math.round((now - date) / 1000);
+    const minutesDiff = Math.round(secondsDiff/ 60);
+    const hoursDiff = Math.round(minutesDiff / 60);
+    const daysDiff = Math.round(hoursDiff / 24);
+
+    if (secondsDiff < 60) return "Just now";
+    if (minutesDiff < 60) return `${minutesDiff}m ago`;
+    if (hoursDiff < 24) return `${hoursDiff}h ago`;
+    if (daysDiff < 7) return `${daysDiff}d ago`;
+
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric'})
+} 
+
+export function isReviewEdited(created, updated) {
+    return created === updated;
 }
 
 /********************* ARTIST APIs **********************/

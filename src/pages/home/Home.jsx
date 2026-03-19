@@ -28,6 +28,7 @@ function Home() {
     useEffect(() => {
         const getReviews = async () => {
             try {
+                setLoading(true);
                 const data = await getAllData(fetchKey);   // function in api.js
                 setReviews(data);
             } catch (err) {
@@ -65,8 +66,6 @@ function Home() {
         setFilter((prev) => (prev!==filter ? filter : prev))
     }
 
-    if (loading) return <LoadingBlock />;
-
     return (
         <div id='home'>
             <div className="buttons flex f-center">
@@ -91,15 +90,20 @@ function Home() {
                     </div>
                 </div>
             </div>
-            <div className="review-list-main">
-                {reviews.length > 0 ? (
-                    reviews.map((review) => (
-                        <Review key={review._id} review={review} activeUser={activeUser}/>
-                    ))
+            { !loading ? (
+                    <div className="review-list-main">
+                        {reviews.length > 0 ? (
+                            reviews.map((review) => (
+                                <Review key={review._id} review={review} activeUser={activeUser}/>
+                            ))
+                        ) : (
+                            <NothingBlock message={"No reviews found."}/>
+                        )}
+                    </div>
                 ) : (
-                    <NothingBlock message={"No reviews found."}/>
-                )}
-            </div>
+                    <LoadingBlock />
+                )
+            }
         </div>
     )
 }
