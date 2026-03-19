@@ -59,3 +59,43 @@
 .back-btn:hover {
     opacity: 0.5;
 }
+
+.alert-message {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    width: 80%;
+    border-radius: 15px;
+    margin: 15px;
+    padding: 15px;
+    z-index: 50;
+
+    /* Styling */
+    box-shadow: 1px 2px 5px rgba(160, 160, 160, 0.3);
+    animation: slideInOut 2s ease-in-out forwards;
+}
+
+@keyframes slideInOut {
+    /* 0% to 15%: Slide In */
+    0% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    15% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    /* 15% to 85%: Pause */
+    85% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    /* 85% to 100%: Slide out */
+    100% {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+}

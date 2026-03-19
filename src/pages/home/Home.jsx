@@ -6,11 +6,8 @@ import './Home.css'
 import Review from '../../features/review/Review'
 import NothingBlock from '../../components/NothingBlock';
 import LoadingBlock from '../../components/LoadingBlock';
+import AlertBlock from '../../components/AlertBlock';
 import { ReviewSearchBar } from '../../components/SearchBar'
-import { dummyUsers } from '../../data/dummyUsers'
-import { dummyArtists } from '../../data/dummyArtists'
-import { dummySongs } from '../../data/dummySongs'
-import { dummyAlbums } from '../../data/dummyAlbums'
 import { getAllData } from '../../api/api';
 
 function Home() {

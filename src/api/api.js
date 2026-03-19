@@ -9,12 +9,26 @@ const BASE_URL = 'http://localhost:5001/api'
  */
 export const getAllData = async (model) => {
     const res = await fetch(`${BASE_URL}/${model}`);
-    if (!res.ok) 
-    { 
-        throw new Error(`Failed to fetch ${model}`);
-    }
+    return await handleResponse(res, `Failed to fetch ${model}`);
+}    
 
-    return await res.json();
+/**
+ * Deletes an instance/document for a specified schema or model
+ * @param {String} model identifier for which schema is being fetched (e.g. "reviews" for Review)
+ * @returns JSON of model data
+ */
+export const deleteData = async (model, id) => {
+    console.log('Attempting to delete...');
+    console.log(`  + checking api ${BASE_URL}/${model}/delete/${id} compare: http://localhost:5173/api/reviews/delete/:id`);
+    
+    const res = await fetch(`${BASE_URL}/${model}/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    return await handleResponse(res, `Failed to delete ${model} - ${id}`);
 }    
 
 /**
@@ -28,6 +42,17 @@ const handleResponse = async (res, errorMsg) => {
     return await res.json();
 };
 
+export const copyLink = (model, id, showAlert) => { 
+    const link = `${window.location.origin}/${model}/${id}`;
+    const alertProps = {
+        message: 'Link copied',
+        icon: 'bi-check-circle-fill',
+        bgColor: 'var(--success-light)',
+        textColor: 'var(--success-dark)'
+    }
+    navigator.clipboard.writeText(link).then(() => showAlert(alertProps));
+}
+
 /********************* USER APIs **********************/
 /**
  * Fetches user based on id
@@ -40,6 +65,18 @@ export const getUser = async (userId) => {
 }  
 
 /********************* REVIEW APIs **********************/
+/**
+ * Fetches reviews created by user
+ * @param {String} userId id used to filter reviews
+ * @returns JSON of reviews data
+ */
+export const getReview = async (reviewId) => {
+    console.log('api');
+    const res = await fetch(`${BASE_URL}/reviews/get/${reviewId}`); 
+    if (!res.ok) throw new Error(`Failed to fetch review ${reviewId}`);
+    return await res.json();
+};
+
 /**
  * Fetches reviews created by user
  * @param {String} userId id used to filter reviews

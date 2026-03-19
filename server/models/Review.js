@@ -85,7 +85,7 @@ ReviewSchema.post('save', function() {
 });
 
 // capture document in pre hook
-ReviewSchema.pre('findOneAndDelete', async function (next) {
+ReviewSchema.pre('deleteOne', async function (next) {
     // Get reviewId
     this.r = await this.model.findOne(this.getQuery());
 
@@ -98,7 +98,7 @@ ReviewSchema.pre('findOneAndDelete', async function (next) {
     next();
 });
 
-ReviewSchema.post('findOneAndDelete', async function () {
+ReviewSchema.post('deleteOne', async function () {
     if (this.r) {
         await this.r.constructor.getAverageRating(this.r.targetID, this.r.targetType);
     }

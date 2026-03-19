@@ -193,3 +193,7 @@
 .post .username {
     font-weight: 600;
 }
+
+div.review-page {
+    margin: 50px;
+}
