@@ -20,6 +20,7 @@ function Home() {
     const [reviews, setReviews] = useState([]);
     const [filter, setFilter] = useState("recent")
     const [searchTerm, setSearchTerm] = useState("");
+    const [fetchKey, setFetchKey] = useState("reviews/filter");
 
     /**
      * Fetch all reviews data from database
@@ -28,7 +29,7 @@ function Home() {
         const getReviews = async () => {
             try {
                 setLoading(true);
-                const data = await getAllData("reviews");   // function in api.js
+                const data = await getAllData(fetchKey);   // function in api.js
                 setReviews(data);
             } catch (err) {
                 console.error("Fetch error:", err);
@@ -38,43 +39,32 @@ function Home() {
         }
 
         getReviews();
-    }, []);
+    }, [fetchKey]);
 
     // TODO: Work on API to filter recent, popular, and following
-    // useEffect(() => {
-    //     if (filter==="recent") {
-    //         setReviews(dummyReviews);
-    //     } else {
-    //         setReviews(trendingReviews);
-    //     }
-    // }, [filter])
+    useEffect(() => {
+        const params = new URLSearchParams();
+
+        if (filter === 'albums') {
+            params.append('targetType', 'Album');
+        }
+
+        if (filter === 'songs') {
+            params.append('targetType', 'Song');
+        }
+
+        if (searchTerm) {
+            params.append('searchContent', searchTerm);
+        }
+
+        const queryString = params.toString();
+        const newKey = queryString ? `reviews/filter?${queryString}` : "reviews/filter";
+        setFetchKey(newKey);
+    }, [filter, searchTerm])
 
     const toggle = (filter) => {
         setFilter((prev) => (prev!==filter ? filter : prev))
     }
-
-    const displayedReviews = reviews;
-
-    // const displayedReviews = reviews.filter(review => {
-    //     const user = dummyUsers.find(u => u._id === review.user_id);
-    //     const artist = dummyArtists.find(a => a._id === review.artist_id);
-    //     const song = dummySongs.find(s => s._id === review.song_id);
-    //     const album = dummyAlbums.find(a => a._id === review.album_id);
-        
-    //     const searchString = [
-    //         user?.username,
-    //         artist?.name,
-    //         song?.title, 
-    //         album?.title,
-    //         review.review_header,
-    //         review.review_content
-    //     ]
-    //     .filter(Boolean)
-    //     .join(" ")
-    //     .toLowerCase();
-
-    //     return searchString.includes(searchTerm.toLowerCase());
-    // });
 
     if (loading) return <LoadingBlock />;
 
@@ -88,9 +78,14 @@ function Home() {
                         Recent
                     </button>
                     <button 
-                        className={`${filter==="trending" ? "selected" : ""}`}
-                        onClick={() => toggle("trending")}>
-                        Trending
+                        className={`${filter==="albums" ? "selected" : ""}`}
+                        onClick={() => toggle("albums")}>
+                        Albums
+                    </button>
+                    <button 
+                        className={`${filter==="songs" ? "selected" : ""}`}
+                        onClick={() => toggle("songs")}>
+                        Songs
                     </button>
                     <div className="search-container">
                         <ReviewSearchBar onSearchChange={setSearchTerm} />
@@ -98,8 +93,8 @@ function Home() {
                 </div>
             </div>
             <div className="review-list-main">
-                {displayedReviews.length > 0 ? (
-                    displayedReviews.map((review) => (
+                {reviews.length > 0 ? (
+                    reviews.map((review) => (
                         <Review key={review._id} review={review} activeUser={activeUser}/>
                     ))
                 ) : (

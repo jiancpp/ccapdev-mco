@@ -82,6 +82,39 @@ router.get('/', async (req, res) => {
 })
 
 /**
+ * Fetch ALL review data from the database based on optional filter/s
+ * @route   GET /api/reviews/filter?user_id&target_id&review_body
+ * @desc    Get all reviews
+ */
+router.get('/filter', async (req, res) => {
+    try {
+        const filters = [ 'user', 'targetID', 'targetType' ];
+        const searchContent = req.query['searchContent']
+        let query = {};
+
+        filters.forEach(key => {
+            if (req.query[key]) {
+                query[key] = req.query[key];
+            }
+        })
+
+        if (searchContent) {
+            query.$or = [
+                { review_header: { $regex: searchContent, $options: 'i' } },
+                { review_content: { $regex: searchContent, $options: 'i' } }
+            ];
+        }
+
+        console.log(`Fetching all reviews based on filters...`);
+        const reviews = await Review.find(query).populate(reviewPopulate);
+        res.status(200).json(reviews);
+    } catch (err) {
+        console.error("Error fetching reviews:", err);
+        res.status(500).json({ error: err.message });
+    }
+})
+
+/**
  * Create a new review
  * @route   POST /api/reviews/create
  */
