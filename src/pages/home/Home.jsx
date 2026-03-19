@@ -28,7 +28,6 @@ function Home() {
     useEffect(() => {
         const getReviews = async () => {
             try {
-                setLoading(true);
                 const data = await getAllData(fetchKey);   // function in api.js
                 setReviews(data);
             } catch (err) {
