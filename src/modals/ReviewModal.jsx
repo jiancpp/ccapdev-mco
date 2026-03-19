@@ -1,26 +1,45 @@
 import {
   RichTextEditorComponent, Toolbar, Link, HtmlEditor, QuickToolbar, Inject
 } from '@syncfusion/ej2-react-richtexteditor';
+
 import { InteractiveStarRating } from '../components/StarRating';
 import { SearchBar } from '../components/SearchBar';
 import { MediaPreviewStrip } from '../components/MediaPreviewStrip';
+import AlertBlock from '../components/AlertBlock';
+
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import { createReview, getAllData } from '../api/api';
 
 import './ReviewModal.css';
 
-function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating = null }) {
+function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating = null}) {
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [artists, setArtists] = useState([]);
+    
     const [selectedItem, setSelectedItem] = useState(null);
     const [header, setHeader] = useState("");
     const [rating, setRating] = useState(0);
-    const [uploading, setUploading] = useState(false);
     const [mediaAttachments, setMediaAttachments] = useState([]);
-    const [lightbox, setLightbox] = useState(null); 
+    const [uploading, setUploading] = useState(false);
+    
+    const [isAlertOn, setIsAlertOn] = useState(false);
     const rteRef = useRef(null);
     const mediaInputRef = useRef(null);
+
+    const [alertConfig, setAlertConfig] = useState({
+        message: '',
+        icon: '',
+        bgColor: 'var(--success-light)',
+        textColor: 'var(--success-dark)'
+    });
+    
+    const showAlert = (config) => {
+        setAlertConfig(config);
+        setIsAlertOn(true);
+        setTimeout(() => setIsAlertOn(false), 2000); // Reset after 2 seconds
+    };
 
     const toolbarSettings = {
         items: ['Bold', 'Italic', 'Underline', 'StrikeThrough', '|', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|', 'CreateLink', '|', 'Undo', 'Redo']
@@ -87,7 +106,6 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
             setHeader("");
             setRating(0);
             setMediaAttachments([]);
-            setLightbox(null);
             if (rteRef.current) rteRef.current.value = "";
         }
     }, [isOpen]);
@@ -134,14 +152,24 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
 
         try {
             await createReview(reviewData);
-            alert("Review submitted successfully!");
+            showAlert({
+                message: 'Review successfully posted!',
+                icon: '',
+                bgColor: 'var(--error)', 
+                textColor: '#000000'
+            });
             setSelectedItem(null);
             setHeader("");
             setRating(0);
             if (rteRef.current) rteRef.current.value = "";
             onClose();
         } catch (error) {
-            alert("Error saving review: " + error.message);
+            showAlert({
+                message: 'Failed to create review.',
+                icon: '',
+                bgColor: 'var(--error)', 
+                textColor: '#000000'
+            });
         }
     };
 
@@ -155,6 +183,12 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+                {isAlertOn && <AlertBlock
+                    message={ alertConfig.message }
+                    icon={alertConfig.icon }
+                    bgColor={alertConfig.bgColor} 
+                    textColor={alertConfig.textColor}
+                />}
                 <button className="close-btn" onClick={onClose}>&times;</button>
                 <h2 className="modal-title">Write a Review</h2>
 
