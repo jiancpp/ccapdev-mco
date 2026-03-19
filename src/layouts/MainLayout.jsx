@@ -6,6 +6,7 @@ import './MainLayout.css'
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import ReviewModal from '../modals/ReviewModal';
+import AlertBlock from "../components/AlertBlock";
 import { dummyUsers } from "../data/dummyUsers";
 import EditProfileModal from "../modals/EditProfileModal";
 import { useNavigate } from "react-router-dom";
@@ -19,8 +20,13 @@ function MainLayout({ activeUser, setActiveUser}) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [isAlertOn, setIsAlertOn] = useState(false);
     const [preSelected, setPreSelected] = useState(null);
     const [selectedRating, setSelectedRating] = useState(0);
+    const [alertConfig, setAlertConfig] = useState({
+        message: '',
+        icon: 'bi-check-circle-fill'
+    });
 
     const openModal = (params = null) => {
         if (!activeUser) {
@@ -40,6 +46,12 @@ function MainLayout({ activeUser, setActiveUser}) {
     const closeModal = () => setIsModalOpen(false);
     const openProfileEdit = () => setIsProfileOpen(true);
     const closeProfileEdit = () => setIsProfileOpen(false);
+
+    const showAlert = (config) => {
+        setAlertConfig(config);
+        setIsAlertOn(true);
+        setTimeout(() => setIsAlertOn(false), 2000); // Reset after 2 seconds
+    };
 
     /**
      * Automatically fills up the 
@@ -61,7 +73,15 @@ function MainLayout({ activeUser, setActiveUser}) {
 
                 {/* Main Content Panel */}
                 <div className="content">
-                    <Outlet context={{ activeUser, openModal, openProfileEdit, preSelectReviewParams }}/>
+                {isAlertOn && (
+                    <AlertBlock
+                        message={alertConfig.message}
+                        icon={alertConfig.icon || 'bi-check-circle-fill'}
+                        bgColor={'var(--success-light)'}
+                        textColor={'var(--success-dark)'}
+                    />
+                )}
+                    <Outlet context={{ activeUser, openModal, openProfileEdit, preSelectReviewParams, showAlert}}/>
                 </div>
             </div>
 

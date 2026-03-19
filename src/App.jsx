@@ -20,9 +20,7 @@ import SongProfile from './pages/artist-pages/SongProfile.jsx'
 import AlbumProfile from "./pages/artist-pages/AlbumProfile.jsx";
 import ArtistView from './pages/artist-view/ArtistView.jsx'
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
-
-// TODO: Remove later
-// import { getUser } from "./api/api";
+import ReviewPage from "./features/review/ReviewPage";
 
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 
@@ -85,6 +83,7 @@ const [activeUser, setActiveUser] = useState(null); // Start with null
             <Route path="/artists/artist-profile/:artist_idsongs/:song_id" element={<SongProfile />} />
             <Route path ="/albums/:album_id" element={<AlbumProfile />} />
             <Route path ="/songs/:song_id" element={<SongProfile />} />
+            <Route path ="/review/:id" element={<ReviewPage activeUser={activeUser}/>} />
           </Route>
 
           {/* SECONDARY PAGES (w/ Navbar) */}

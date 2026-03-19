@@ -28,6 +28,35 @@ const reviewPopulate = [
         ]
     }
 ];
+
+/**
+ * Fetch ONE reviews by ID (Bulletproof version)
+ * @route   GET /api/reviews/get/:id
+ */
+router.get('/get/:id', async (req, res) => {
+    try {
+        console.log('routes');
+
+        const id = req.params.id;
+        let review = null;
+
+        // Try searching by MongoDB ObjectId
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+            review = await Review.findById(id).populate(reviewPopulate);
+        }
+
+        // Fallback: Search by your custom artistID field
+        if (!review) {
+            review = await Review.findOne({ artistID: id }).populate(reviewPopulate);
+        }
+
+        if (!review) return res.status(404).json({ message: "Review not found" });
+        res.json(review);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 /**
  * Find liked reviews based on user id
  * @route   GET /api/reviews/liked/:user_id

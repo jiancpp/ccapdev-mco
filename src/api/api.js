@@ -28,6 +28,17 @@ const handleResponse = async (res, errorMsg) => {
     return await res.json();
 };
 
+export const copyLink = (model, id, showAlert) => { 
+    const link = `${window.location.origin}/${model}/${id}`;
+    const alertProps = {
+        message: 'Link copied',
+        icon: 'bi-check-circle-fill',
+        bgColor: 'var(--success-light)',
+        textColor: 'var(--success-dark)'
+    }
+    navigator.clipboard.writeText(link).then(() => showAlert(alertProps));
+}
+
 /********************* USER APIs **********************/
 /**
  * Fetches user based on id
@@ -40,6 +51,18 @@ export const getUser = async (userId) => {
 }  
 
 /********************* REVIEW APIs **********************/
+/**
+ * Fetches reviews created by user
+ * @param {String} userId id used to filter reviews
+ * @returns JSON of reviews data
+ */
+export const getReview = async (reviewId) => {
+    console.log('api');
+    const res = await fetch(`${BASE_URL}/reviews/get/${reviewId}`); 
+    if (!res.ok) throw new Error(`Failed to fetch review ${reviewId}`);
+    return await res.json();
+};
+
 /**
  * Fetches reviews created by user
  * @param {String} userId id used to filter reviews

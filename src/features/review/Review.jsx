@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom'; 
-import { getIsReactedByUser, postReaction, getTimeAgo, isReviewEdited } from '../../api/api';
+import { useNavigate, useOutletContext } from 'react-router-dom'; 
+import { getIsReactedByUser, postReaction, getTimeAgo, isReviewEdited, copyLink } from '../../api/api';
 
 // import '@syncfusion/ej2-react-richtexteditor/styles/material.css';
 import './Review.css'
@@ -12,6 +12,7 @@ function Review({ review, activeUser }) {
     // Settings
     const [openOptions, setOpenOptions] = useState("hidden");
     const [deleteReview, setDeleteReview] = useState("visible");
+    const { showAlert } = useOutletContext();
 
     // Review Data
     const [likes, setLikes] = useState(review.likes);
@@ -69,6 +70,8 @@ function Review({ review, activeUser }) {
             setDislikes(prev => prev + 1); // increment
         }
     }
+
+    console.log(review._id);
 
     return (
         <div 
@@ -147,7 +150,7 @@ function Review({ review, activeUser }) {
                     <span className="gap"></span>
                     <span>{dislikes}</span>
                 </div>
-                <div className="post-btn share">
+                <div className="post-btn share" onClick={() => copyLink('review', review._id, showAlert)}>
                     <span className='icon'><i className="bi bi-share-fill"></i></span>
                 </div>
             </div>
