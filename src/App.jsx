@@ -29,7 +29,7 @@ import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 const MOCK_USER = {
   _id: '69b9202a78b9e30e03f59186',
   username: "Torotottie",
-  password: "password:))",
+  password: "password-Torotottie",
   email: "Torotottie@gmail.com",
   bio: "ꉂ(˵˃ ᗜ ˂˵)",
   avatar: "/assets/torotottie.jpg",
