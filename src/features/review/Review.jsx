@@ -43,6 +43,7 @@ function Review({ review, activeUser }) {
 
     // Handle Toggle Reactions
     const toggle = (clickedReact) => {
+        if (!activeUser) return;
         const oldReact = selected;
         const newReact = oldReact === clickedReact ? null : clickedReact;
         setSelected(newReact);

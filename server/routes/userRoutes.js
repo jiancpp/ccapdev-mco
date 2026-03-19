@@ -54,7 +54,7 @@ router.get('/check-session', async (req, res) => {
         const userId = req.session.user?.id;
 
         if (!userId) {
-            return res.status(401).json({ message: "Not logged in" });
+            res.status(200).json({ user: null });
         }
 
         const user = await User.findById(userId)
@@ -76,7 +76,7 @@ router.get('/check-session', async (req, res) => {
 router.post('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) return res.status(500).json({ message: "Could not log out" });
-        res.clearCookie('connect.sid');
+        res.clearCookie('connect.sid', { path: '/' });
         return res.status(200).json({ message: "Logged out successfully" });
     });
 });

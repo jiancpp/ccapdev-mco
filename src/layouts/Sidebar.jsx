@@ -5,7 +5,7 @@ function Sidebar({ openModal }) {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const goToHome = () => navigate("/");
+    const goToHome = () => navigate('/home');
     const goToArtists = () => navigate("/artists");
     const goToLogIn = () => navigate("/login")
 

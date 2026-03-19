@@ -19,7 +19,7 @@ function AboutUnsynth() {
                     </div>
                     <h1>un<span>s<span className="yn">y</span><span className="nth">nth</span></span></h1>
                     <p>Review songs, albums, and artists. Share your take, <em>unsynthesized</em>.</p>
-                    <button onClick={() => navigate("/")}>START SHARING</button>
+                    <button onClick={() => navigate('/home')}>START SHARING</button>
                 </div>
                 <div className='linear-border'></div>
             </div>

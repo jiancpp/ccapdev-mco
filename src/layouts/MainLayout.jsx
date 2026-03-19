@@ -8,12 +8,14 @@ import Sidebar from './Sidebar';
 import ReviewModal from '../modals/ReviewModal';
 import { dummyUsers } from "../data/dummyUsers";
 import EditProfileModal from "../modals/EditProfileModal";
+import { useNavigate } from "react-router-dom";
 
 /***** Utilities ******/
 const getUserById = (id) => dummyUsers.find((user) => user._id === id );
 
 function MainLayout({ activeUser, setActiveUser}) {
     // const activeUser = getUserById(activeUserID);
+    const navigate = useNavigate();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -21,6 +23,10 @@ function MainLayout({ activeUser, setActiveUser}) {
     const [selectedRating, setSelectedRating] = useState(0);
 
     const openModal = (params = null) => {
+        if (!activeUser) {
+        navigate('/login');
+        return;
+    }
         if (params) {
             setPreSelected(params); // Update state for record keeping - resolve state lag rendering bug
             setSelectedRating(params.selectedRating);

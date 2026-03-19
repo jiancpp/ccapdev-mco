@@ -7,7 +7,6 @@ function Login({ setActiveUser }) {
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const [message, setMessage] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -25,7 +24,7 @@ function Login({ setActiveUser }) {
 
             if (response.ok) {
                 setActiveUser(data.user);
-                navigate('/');
+                navigate('/home');
             } else {
                 setError(data.message || "Invalid credentials");
             }

@@ -16,41 +16,54 @@ function Navbar({ activeUser, setActiveUser }) {
                     onMouseLeave={() => setOpenSettings("hidden")}>
                     <ul>
                         <li onClick={() => activeUser && navigate(`/profile/${activeUser._id}`)}>View Profile</li>
-                        <li onClick={() => {
-                            setActiveUser(null);
-                            navigate("/about")
-                        }}>Logout</li>
+                        <li onClick={
+                            async () => {
+                                try {
+                                    const response = await fetch('http://localhost:5001/api/users/logout', {
+                                        method: 'POST',
+                                        credentials: 'include'
+                                    });
+
+                                    if (response.ok) {
+                                        setActiveUser(null);
+                                        navigate('/');
+                                    }
+                                } catch (err) {
+                                    console.error("Logout failed", err);
+                                }
+                            }
+                        }>Logout</li>
                     </ul>
                 </div>
                 <div className="logo flex" onClick={() => {
                     setActiveUser(null)
-                    navigate("/about");
+                    navigate("/");
                 }}>
                     <img src="https://eepy-elo.github.io/font-hosting/unsynth-logo.png" alt="" className="logo flex" />
                 </div>
                 <div className="buttons flex">
                     {
-                        pathname.startsWith("/artist-view") ? 
-                        (                               
-                            <div className="login-btn" onClick={() => navigate("/about")}>Log Out</div>
-                        ) :
-                        activeUser ?
+                        pathname.startsWith("/artist-view") ?
                             (
-                                <>
-                                    <i id='notifications' className="bi bi-bell-fill"></i>
-                                    <div
-                                        id="profile-pic"
-                                        title='Open settings menu'
-                                        onClick={() => setOpenSettings("visible")}>
-                                        {activeUser ?
-                                            (<img src={activeUser.avatar}></img>) : ""
-                                        }
-                                    </div>
-                                </>
+                                <div className="login-btn" onClick={() => navigate("/")}>Log Out</div>
                             ) :
-                            (
-                                <div className="login-btn" onClick={() => navigate("/login")}>Log-in</div>
-                            )
+                            activeUser ?
+                                (
+                                    <>
+                                        <i id='notifications' className="bi bi-bell-fill"></i>
+                                        <div
+                                            id="profile-pic"
+                                            title='Open settings menu'
+                                            onClick={() => setOpenSettings("visible")}>
+                                            {activeUser ?
+                                                (<img src={activeUser.avatar}></img>) : ""
+                                            }
+                                        </div>
+                                    </>
+                                ) :
+                                (
+                                    <div className="login-btn" onClick={() => navigate("/login")}>Log-in</div>
+                                )
                     }
 
                 </div>

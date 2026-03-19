@@ -22,7 +22,7 @@ import ArtistView from './pages/artist-view/ArtistView.jsx'
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 
 // TODO: Remove later
-import { getUser } from "./api/api";
+// import { getUser } from "./api/api";
 
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 
@@ -78,7 +78,7 @@ const [activeUser, setActiveUser] = useState(null); // Start with null
 
           {/* MAIN PAGES (w/ Navbar and Sidebar) */}
           <Route element={<MainLayout activeUser={activeUser} setActiveUser={setActiveUser}/>}>
-            <Route path='/' element={<Home />}></Route>
+            <Route path='/home' element={<Home />}></Route>
             <Route path='/artists' element={<Artists />}></Route>
             <Route path='/profile/:user_id' element={<UserProfile />}></Route>
             <Route path='/artists/artist-profile/:artist_id' element={<ArtistProfile />}></Route>
@@ -90,7 +90,7 @@ const [activeUser, setActiveUser] = useState(null); // Start with null
           {/* SECONDARY PAGES (w/ Navbar) */}
           <Route element={<SecondLayout activeUser={activeUser} setActiveUser={setActiveUser}/>}>
             <Route path='/artist-view/:artist_id' element={<ArtistView />}></Route>
-            <Route path='/about' element={<AboutUnsynth />} />
+            <Route path='/' element={<AboutUnsynth />} />
           </Route>
 
         </Route>
