@@ -4,17 +4,20 @@ import Song from '../models/Song.js';
 const router = express.Router();
 
 /**
- * Fetch ALL songs or FILTER by album
+ * Fetch ALL songs or FILTER by album/artist
  * @route   GET /api/songs?album_id=...
  */
 router.get('/', async (req, res) => {
     try {
         const { album_id } = req.query; // This is the long ID coming from frontend now
+        const { artist_id } = req.query;
         let songs = [];
 
         if (album_id) {
             // Check your Song model in Atlas—make sure this key matches!
             songs = await Song.find({ albumID: album_id }); 
+        } else if (artist_id) {
+            songs = await Song.find({ artistID: artist_id }); 
         } else {
             songs = await Song.find();
         }

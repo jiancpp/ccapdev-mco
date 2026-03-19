@@ -62,6 +62,16 @@ export const getLikedReviewsByUser = async (userId) => {
 }  
 
 /**
+ * Fetches reviews for an artist
+ * @param {String} artistId id used to filter reviews
+ * @returns JSON of reviews data
+ */
+export const getReviewsForArtist = async (artistId) => {
+    const res = await fetch(`${BASE_URL}/reviews?artist=${artistId}`);
+    return await handleResponse(res, `Failed to fetch reviews for artist ${artistId}`);
+}  
+
+/**
  * Creates a new review record in MongoDB
  * @param {Object} reviewData formatted according to the MongoDB schema
  * @returns JSON of the saved record
@@ -123,11 +133,7 @@ export function isReviewEdited(created, updated) {
  */
 export const getArtist = async (artistId) => {
     const res = await fetch(`${BASE_URL}/artists/get/${artistId}`);
-    if (!res.ok) 
-    { 
-        throw new Error(`Failed to fetch artist ${artistId}`); 
-    }
-
+    if (!res.ok) throw new Error(`Failed to fetch artist ${artistId}`); 
     return await res.json();
 }  
 
@@ -139,6 +145,24 @@ export const getArtist = async (artistId) => {
 export const getAlbum = async (albumId) => {
     const res = await fetch(`${BASE_URL}/albums/${albumId}`); 
     if (!res.ok) throw new Error(`Failed to fetch album ${albumId}`);
+    return await res.json();
+}
+
+/**
+ * Fetches all albums belonging to a specific artist
+ */
+export const getAlbumsByArtist = async (artistId) => {
+    const res = await fetch(`${BASE_URL}/albums?artist_id=${artistId}`); 
+    if (!res.ok) throw new Error(`Failed to fetch albums for artist ${artistId}`);
+    return await res.json();
+}
+
+/**
+ * Fetches all songs belonging to a specific artist
+ */
+export const getSongsByArtist = async (artistId) => {
+    const res = await fetch(`${BASE_URL}/songs?artist_id=${artistId}`); 
+    if (!res.ok) throw new Error(`Failed to fetch songs for artist ${artistId}`);
     return await res.json();
 }
 
