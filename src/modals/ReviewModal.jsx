@@ -8,7 +8,7 @@ import { createReview, getAllData, getArtist } from '../api/api';
 
 import './ReviewModal.css';
 
-function ReviewModal({ isOpen, onClose, preSelected, currentRating = null }) { 
+function ReviewModal({ isOpen, onClose, preSelected, currentRating = null, activeUserID}) { 
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [artists, setArtists] = useState([]);
@@ -124,7 +124,7 @@ function ReviewModal({ isOpen, onClose, preSelected, currentRating = null }) {
         }
 
         const reviewData = {
-            user: "69b9202a78b9e30e03f59186",           
+            user: activeUserID,           
             artist: selectedItem.artistID, 
             targetType: selectedItem.type, 
             targetID: selectedItem._id,    

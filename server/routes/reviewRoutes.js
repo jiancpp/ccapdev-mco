@@ -35,7 +35,6 @@ const reviewPopulate = [
  */
 router.get('/get/:id', async (req, res) => {
     try {
-        console.log('routes');
 
         const id = req.params.id;
         let review = null;
@@ -67,9 +66,7 @@ router.get('/liked/:user_id', async (req, res) => {
         console.log(`Fetching liked reviews...`);
         const userId = req.params.user_id;
 
-        console.log(`Checkpoint A`);
         const reactions = await ReviewReaction.find({ user: userId, type: "like" }).populate("review", "_id")
-        console.log(`Checkpoint B`);
 
         const likedReviewIds = reactions.map(reaction => reaction.review._id);
         for (let id of likedReviewIds) {
@@ -196,6 +193,24 @@ router.get("/check_react/:review_id/:user_id", async (req, res) => {
     } catch (error) {
         console.error(error.message, error);
         res.status(400).json({ message: error.message });
+    }
+})
+
+/***** Review Actions ******/
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        console.log(`  + checking routes ${id}`);
+        const result = await Review.findByIdAndDelete(id.trim());
+        console.log("Delete Result:", result); // If null, the ID doesn't exist in the DB
+        if (!result) {
+            return res.status(404).json({ message: "Review not found" });
+        }
+        await review.deleteOne();
+
+        res.status(200).json({message: 'Successfully deleted.'})
+    } catch (error) {
+        res.status(500).json({error: error.message})
     }
 })
 

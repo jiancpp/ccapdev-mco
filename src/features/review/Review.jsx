@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from 'react-router-dom'; 
-import { getIsReactedByUser, postReaction, getTimeAgo, isReviewEdited, copyLink } from '../../api/api';
+import { getIsReactedByUser, postReaction, getTimeAgo, isReviewEdited, copyLink, deleteData } from '../../api/api';
 
 // import '@syncfusion/ej2-react-richtexteditor/styles/material.css';
 import './Review.css'
@@ -70,9 +70,7 @@ function Review({ review, activeUser }) {
             setDislikes(prev => prev + 1); // increment
         }
     }
-
-    console.log(review._id);
-
+    
     return (
         <div 
             className={`post ${deleteReview}`} 
@@ -93,7 +91,10 @@ function Review({ review, activeUser }) {
                             <li>
                                 <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
                             </li>
-                            <li onClick={ () => setDeleteReview("hidden") } >
+                            <li onClick={ () => {
+                                setDeleteReview("hidden");
+                                deleteData('reviews', review._id);
+                            } } >
                                 <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
                             </li>
                             </>
