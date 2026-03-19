@@ -62,6 +62,16 @@ export const getLikedReviewsByUser = async (userId) => {
 }  
 
 /**
+ * Fetches reviews for an artist
+ * @param {String} artistId id used to filter reviews
+ * @returns JSON of reviews data
+ */
+export const getReviewsForArtist = async (artistId) => {
+    const res = await fetch(`${BASE_URL}/reviews?artist=${artistId}`);
+    return await handleResponse(res, `Failed to fetch reviews for artist ${artistId}`);
+}  
+
+/**
  * Creates a new review record in MongoDB
  * @param {Object} reviewData formatted according to the MongoDB schema
  * @returns JSON of the saved record
