@@ -36,7 +36,7 @@ function MainLayout({ activeUser, setActiveUser}) {
             </div>
 
             {/* Global Modal/s */}
-            <ReviewModal isOpen={isModalOpen} onClose={closeModal} activeUserID={activeUser._id}/>
+            <ReviewModal isOpen={isModalOpen} onClose={closeModal} activeUserID={activeUser?._id}/>
             <EditProfileModal isOpen={isProfileOpen} onClose={closeProfileEdit} user={activeUser} />
         </>
     )

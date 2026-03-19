@@ -37,16 +37,43 @@ const MOCK_USER = {
 }
 
 function App() {
-  // TODO: Remove later for user validation
-  const [activeUser, setActiveUser] = useState(MOCK_USER);
-  console.log(`User: ${MOCK_USER}`)
+const [activeUser, setActiveUser] = useState(null); // Start with null
+  const [isLoading, setIsLoading] = useState(true);   // Add a loading state
 
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/users/check-session', {
+          method: 'GET',
+          credentials: 'include'
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setActiveUser(data.user); 
+        } else {
+          setActiveUser(null); 
+        }
+      } catch (err) {
+        console.error("Session check failed:", err);
+        setActiveUser(null);
+      } finally {
+        setIsLoading(false); 
+      }
+    };
+
+    checkUser();
+  }, []);
+
+  if (isLoading) {
+    return <div className="loading-screen">Loading Unsynth...</div>;
+  }
   return (
     <>
       <Routes>
         <Route element={<ScrollToTopWrapper />}>
           {/* AUTH PAGES */}
-          <Route path='/login' element={<Login />} />
+          <Route path='/login' element={<Login setActiveUser={setActiveUser} />} />
           <Route path='/register' element={<Register />} />
 
           {/* MAIN PAGES (w/ Navbar and Sidebar) */}

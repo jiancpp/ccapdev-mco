@@ -24,7 +24,18 @@ const PORT = process.env.PORT || 5001;
 const MONGOURL = process.env.MONGO_URL
 const app = express();
 
+// <TODO:> add middleware to verify admin status //
+
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow your frontend port
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
+
 // Middleware
+
+app.use(express.json());        // allows the server to parse JSON data in request bodies
+app.use(express.urlencoded({ extended: true }));
 
 // TODO: Login 
 app.use(session({
@@ -40,23 +51,13 @@ app.use(session({
         secure: false,
         httpOnly: true
     }
-}))
-
-app.use(cors({
-    origin: 'http://localhost:5173', // Allow your frontend port
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true
 }));
-app.use(express.json());        // allows the server to parse JSON data in request bodies
-app.use(express.urlencoded({ extended: true }));
+
 app.use('/api/artists', artistRoutes);     // allows api to fetch data
 app.use('/api/users', userRoutes);     // allows api to fetch data
 app.use('/api/reviews', reviewRoutes);     // allows api to fetch data
 app.use('/api/albums', albumRoutes);
 app.use('/api/songs', songRoutes);
-
-// <TODO:> add middleware to verify admin status //
-
 
 /**
  * MongoDB Connection Logic
