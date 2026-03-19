@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css"
 import { useState } from 'react';
 
-function Login() {
+function Login({ setActiveUser }) {
     const navigate = useNavigate();
-    const [email, setEmail] = useState('');
+    const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const [message, setMessage] = useState('');
@@ -17,14 +17,14 @@ function Login() {
             const response = await fetch('http://localhost:5001/api/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({ identifier, password }),
                 credentials: 'include'
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                setMessage("Login successful! Redirecting...");
+                setActiveUser(data.user);
                 navigate('/');
             } else {
                 setError(data.message || "Invalid credentials");
@@ -56,7 +56,7 @@ function Login() {
                     </div>
                     <div className="login-forms">
                         <form onSubmit={handleLogin} className="login-forms">
-                            <input type="text" id="user" className="login-details" placeholder="Username/Email" value={email} onChange={(e) => setEmail(e.target.value)} required></input>
+                            <input type="text" id="user" className="login-details" placeholder="Username/Email" value={identifier} onChange={(e) => setIdentifier(e.target.value)} required></input>
                             <input type="password" id="password" className="login-details" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required></input>
                             <div className="login-options">
                                 <input type="checkbox" id="remember" className="checkbox"></input>

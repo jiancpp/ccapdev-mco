@@ -63,7 +63,7 @@ function MainLayout({ activeUser, setActiveUser}) {
             <ReviewModal 
                 isOpen={isModalOpen} 
                 onClose={closeModal} 
-                activeUserID={activeUser._id} 
+                activeUserID={activeUser?._id} 
                 preSelected={preSelected}
                 currentRating={selectedRating}/>
             <EditProfileModal isOpen={isProfileOpen} onClose={closeProfileEdit} user={activeUser} />
