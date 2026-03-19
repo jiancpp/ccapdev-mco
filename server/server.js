@@ -32,21 +32,21 @@ const __dirname = path.dirname(__filename);
 
 // Middleware
 
-// // TODO: Login 
-// app.use(session({
-//     secret: 'very+very+secret',
-//     resave: false,   // see what this does later
-//     saveUninitialized: false,
-//     store: MongoStore.create({
-//         mongoUrl: MONGOURL,
-//         collectionName: 'sessions'
-//     }),
-//     cookie: {
-//         maxAge: 1000 * 60 * 60 * 24,
-//         secure: false,
-//         httpOnly: true
-//     }
-// }))
+// TODO: Login 
+app.use(session({
+    secret: 'very+very+secret',
+    resave: false,   // see what this does later
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: MONGOURL,
+        collectionName: 'sessions'
+    }),
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24,
+        secure: false,
+        httpOnly: true
+    }
+}))
 
 app.use(cors({
     origin: 'http://localhost:5173', // Allow your frontend port
