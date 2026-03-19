@@ -29,6 +29,26 @@ export const deleteData = async (model, id) => {
     });
 
     return await handleResponse(res, `Failed to delete ${model} - ${id}`);
+}  
+
+/**
+ * Deletes an instance/document for a specified schema or model
+ * @param {String} model identifier for which schema is being fetched (e.g. "reviews" for Review)
+ * @returns JSON of model data
+ */
+export const updateData = async (model, id, data) => {
+    console.log('Attempting to update...');
+    console.log(`  + checking api ${BASE_URL}/${model}/update/${id}`);
+    
+    const res = await fetch(`${BASE_URL}/${model}/update    /${id}`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    return await handleResponse(res, `Failed to delete ${model} - ${id}`);
 }    
 
 /**

@@ -214,5 +214,24 @@ router.delete('/delete/:id', async (req, res) => {
     }
 })
 
+router.put('/update/:id', async (req, res) => {
+    try {
+        console.log(`  + checking routes ${id}`);
+        const review = await Review.findById(req.params.id);
+        if (!review) {
+            return res.status(404).json({ message: "Review not found" });
+        }
+
+        review.review_header = req.body.review_header || review.review_header;
+        review.review_content = req.body.review_content || review.review_content;
+        review.rating = req.body.rating || review.rating;
+        review.isEdited = true;
+
+        await review.save();
+        res.status(200).json({message: 'Successfully updated.'})
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+})
 
 export default router;

@@ -12,7 +12,7 @@ function Review({ review, activeUser }) {
     // Settings
     const [openOptions, setOpenOptions] = useState("hidden");
     const [deleteReview, setDeleteReview] = useState("visible");
-    const { showAlert } = useOutletContext();
+    const { showAlert, preSelectReviewParams } = useOutletContext();
 
     // Review Data
     const [likes, setLikes] = useState(review.likes);
@@ -88,13 +88,25 @@ function Review({ review, activeUser }) {
                 <ul onClick={ (e) => (e.stopPropagation())}>
                     {activeUser && activeUser._id === review.user._id ? 
                         (   <>
-                            <li>
+                            <li onClick={ () => {
+                                const {targetID, targetType, artist} = review
+                                console.log(` + checking retrieved ${review} ${artist} ${artist?._id} `);
+                                const title = targetType === 'Album' ? targetID?.albumName : targetID?.songTitle;
+                                preSelectReviewParams({
+                                    targetID: targetID, 
+                                    targetType: targetType, 
+                                    title: title, 
+                                    artistID: artist?._id, 
+                                    cover: review.targetID?.cover,
+                                    selectedRating: review.rating
+                                });
+                            }}>
                                 <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
                             </li>
                             <li onClick={ () => {
                                 setDeleteReview("hidden");
                                 deleteData('reviews', review._id);
-                            } } >
+                            }}>
                                 <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
                             </li>
                             </>
@@ -120,7 +132,7 @@ function Review({ review, activeUser }) {
                             className="username" 
                             onClick={ () => navigate(`/profile/${review.user._id}`) }>
                                 {review.user?.username || "User unknown"}</span> · {getTimeAgo(review.createdAt)} 
-                                <span className={`edited ${isReviewEdited(review.createdAt, review.updatedAt) ? "" : "hidden"}`}> (Edited)</span>
+                                <span className={`edited ${review.isEdited ? "" : "hidden"}`}> (Edited)</span>
                     </div>
 
                     <div className='title'>{review.review_header}</div>
