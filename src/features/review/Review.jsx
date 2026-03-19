@@ -4,58 +4,107 @@ import './Review.css'
 import ReviewEmbed from './ReviewEmbed';
 import ReviewReply from './ReviewReply';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getIsReactedByUser, postReaction } from '../../api/api';
 
 function Review({ review, activeUser }) {
     // Settings
-        const [openOptions, setOpenOptions] = useState("hidden");
-        const [deleteReview, setDeleteReview] = useState("visible");
+    const [openOptions, setOpenOptions] = useState("hidden");
+    const [deleteReview, setDeleteReview] = useState("visible");
 
-        // Navigation
-        const navigate = useNavigate();
+    // Review Data
+    const [likes, setLikes] = useState(review.likes);
+    const [dislikes, setDislikes] = useState(review.dislikes);
+    const [selected, setSelected] = useState(null);
 
-        // Reactions
-        const [selected, setSelected] = useState(null);
-        const toggle = (reaction) => {
-            setSelected((prev) => (prev===reaction ? null : reaction))
+    useEffect(() => {
+        const checkReaction = async () => {
+            const data = await getIsReactedByUser(review._id, activeUser._id);
+
+            // Add error handling
+            if (data && data.reacted) {
+                setSelected(data.type === 'like' ? 'heart' : 'dislike');
+            }
+        }
+        if (activeUser?._id) checkReaction();
+    }, [review._id, activeUser?._id]);
+
+    const handleReact = async (reactType) => {
+        try {
+            await postReaction(review._id, activeUser._id, reactType);
+        } catch (error) {
+            alert("Error saving review: " + error.message);
+        }
+    }
+
+    // Navigation
+    const navigate = useNavigate();
+
+    // Handle Toggle Reactions
+    const toggle = (clickedReact) => {
+        const oldReact = selected;
+        const newReact = oldReact === clickedReact ? null : clickedReact;
+        setSelected(newReact);
+
+        updateLocalCounts(oldReact, newReact);
+
+        const reactType = newReact === 'heart' ? 'like' : (newReact || null);
+        handleReact(reactType); 
+    }
+
+    const updateLocalCounts = (oldReact, newReact) => {
+        // Case 1: Unclick like button or click dislike 
+        if (oldReact === 'heart' && newReact !== 'heart') {
+            setLikes(prev => prev - 1); // decrement
+        } else if (oldReact !== 'heart' && newReact === 'heart') {
+            setLikes(prev => prev + 1); // increment
         }
 
-        console.log("Review User Data:", review.user);
+        // Case 2: Unclick dislike button or click like 
+        if (oldReact === 'dislike' && newReact !== 'dislike') {
+            setDislikes(prev => prev - 1); // decrement
+        } else if (oldReact !== 'dislike' && newReact === 'dislike') {
+            setDislikes(prev => prev + 1); // increment
+        }
+    }
 
-        return (
-            <div 
-                className={`post ${deleteReview}`} 
-                onClick={ () => setOpenOptions("hidden")} 
-                onMouseLeave={ () => setOpenOptions("hidden") }>
-                <div className="options" 
-                    onClick={ (e) => {
-                    e.stopPropagation(); // stops triggering parent event
-                    setOpenOptions("visible")
-                }}>
-                    <i className="bi bi-three-dots"></i>
-                </div>
-                <div className={`options-modal ${openOptions}`}>
-                    <ul onClick={ (e) => (e.stopPropagation())}>
-                        {activeUser && activeUser._id === review.user._id ? 
-                            (   <>
-                                <li>
-                                    <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
-                                </li>
-                                <li onClick={ () => setDeleteReview("hidden") } >
-                                    <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
-                                </li>
-                                </>
-                            ) :
-                            (
-                                <>
-                                <li onClick={ () => setDeleteReview("hidden") } >
-                                    <span><i className="bi bi-eye-slash-fill"></i></span><span>Hide Review</span>
-                                </li>
-                                </>
-                            )
-                        }
-                    </ul>
-                </div>
+    console.log("Review User Data:", review.user);
+
+    return (
+        <div 
+            className={`post ${deleteReview}`} 
+            onClick={ () => setOpenOptions("hidden")} 
+            onMouseLeave={ () => setOpenOptions("hidden") }>
+            <div className="options" 
+                onClick={ (e) => {
+                e.stopPropagation(); // stops triggering parent event
+                setOpenOptions("visible")
+            }}>
+                <i className="bi bi-three-dots"></i>
+            </div>
+
+            <div className={`options-modal ${openOptions}`}>
+                <ul onClick={ (e) => (e.stopPropagation())}>
+                    {activeUser && activeUser._id === review.user._id ? 
+                        (   <>
+                            <li>
+                                <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>
+                            </li>
+                            <li onClick={ () => setDeleteReview("hidden") } >
+                                <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
+                            </li>
+                            </>
+                        ) :
+                        (
+                            <>
+                            <li onClick={ () => setDeleteReview("hidden") } >
+                                <span><i className="bi bi-eye-slash-fill"></i></span><span>Hide Review</span>
+                            </li>
+                            </>
+                        )
+                    }
+                </ul>
+            </div>
 
             <div className='post-content'>
                 <div className="profile">
@@ -90,16 +139,17 @@ function Review({ review, activeUser }) {
                         <i className={`bi ${selected === "heart" ? "bi-heart-fill" : "bi-heart"}`}></i>
                     </span>
                     <span className="gap"></span>
-                    <span>{review.likes + (selected === "heart" ? 1 : 0)}</span>
+                    <span>{likes}</span>
                 </div>
                 <div 
                     className={`post-btn dislike ${selected === "dislike" ? "active" : ""}`}
                     onClick={() => toggle("dislike")}>
+
                     <span className='icon'>
                         <i className={`bi ${selected === "dislike" ? "bi-hand-thumbs-down-fill" : "bi-hand-thumbs-down"}`}></i>
                     </span>
                     <span className="gap"></span>
-                    <span>{review.dislikes + (selected === "dislike" ? 1 : 0)}</span>
+                    <span>{dislikes}</span>
                 </div>
                 <div className="post-btn share">
                     <span className='icon'><i className="bi bi-share-fill"></i></span>

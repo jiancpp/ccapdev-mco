@@ -131,4 +131,47 @@ router.post('/uploadImage', upload.single('UploadFiles'), (req, res) => {
     }
 });
 
+
+/******************** Reactions **********************/
+
+router.post('/react', async (req, res) => {
+    try {
+        console.log("Update review reaction:", req.body);
+        const { reviewId, userId, type } = req.body;
+        await ReviewReaction.findByIdAndDelete({ user: user_id, review: review_id })
+
+        // User unclicked a reaction
+        if (!type) return res.status(200).json({ message: "Reaction removed" });;
+
+        const newReaction = new ReviewReaction({
+            type: type,
+            review: reviewId,
+            user: userId
+        });
+
+        const savedReaction = await newReaction.save();
+        res.status(200).json(savedReaction);
+
+    } catch (error) {
+        console.error("Error updating reactions:", error);
+        res.status(400).json({ message: error.message });
+    }
+})
+
+
+router.get("/check_react/:review_id/:user_id", async (req, res) => {
+    try {
+        const { review_id, user_id } = req.params;
+        const reaction = await ReviewReaction.findOne({ user: user_id, review: review_id });
+        res.status(200).json({
+            reacted: !!reaction,   // convert to boolean
+            type: reaction ? reaction.type : null
+        });
+    } catch (error) {
+        console.error(error.message, error);
+        res.status(400).json({ message: error.message });
+    }
+})
+
+
 export default router;

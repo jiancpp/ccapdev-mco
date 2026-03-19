@@ -24,7 +24,7 @@ export const getAllData = async (model) => {
  * @returns JSON response
  */
 const handleResponse = async (res, errorMsg) => {
-    if (!res.ok) throw new Error(errorMsg);
+    if (!res.ok) throw new Error(errorMsg || 'Failed to handle response.');
     return await res.json();
 };
 
@@ -74,6 +74,24 @@ export const createReview = async (reviewData) => {
     });
 
     return await handleResponse(res, `Failed to create the review record.`);
+}
+
+export const postReaction = async (reviewId, userId, reactType) => {
+    const res = await fetch(`${BASE_URL}/reviews/react`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            reviewId,
+            userId,
+            type: reactType 
+        }),
+    });
+    return await handleResponse(res, `Failed to update review reaction.`);
+}
+
+export const getIsReactedByUser = async (reviewId, userId) => {
+    const res = await fetch(`${BASE_URL}/reviews/check_react/${reviewId}/${userId}`);
+    return await handleResponse(res, `Failed to check if user reacted to review`);
 }
 
 /********************* ARTIST APIs **********************/
