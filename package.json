@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@syncfusion/ej2-react-richtexteditor": "^32.2.4",
+    "bcrypt": "^6.0.0",
     "bootstrap-icons": "^1.13.1",
     "connect-mongo": "^6.0.0",
     "cors": "^2.8.6",
