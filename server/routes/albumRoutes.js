@@ -33,12 +33,20 @@ router.get('/:id', async (req, res) => {
 });
 
 /**
- * Fetch ALL albums
- * @route   GET /api/albums
+ * Fetch ALL albums or FILTER by artist
+ * @route   GET /api/albums?album_id=...
  */
 router.get('/', async (req, res) => {
     try {
-        const albums = await Album.find();
+        const { artist_id } = req.query;
+        let albums = [];
+
+        if (artist_id) {
+            albums = await Album.find({ artistID: artist_id }); 
+        } else {
+            albums = await Album.find();
+        }
+
         res.json(albums);
     } catch (err) {
         res.status(500).json({ error: err.message });
