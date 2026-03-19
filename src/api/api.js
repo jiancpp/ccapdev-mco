@@ -9,12 +9,26 @@ const BASE_URL = 'http://localhost:5001/api'
  */
 export const getAllData = async (model) => {
     const res = await fetch(`${BASE_URL}/${model}`);
-    if (!res.ok) 
-    { 
-        throw new Error(`Failed to fetch ${model}`);
-    }
+    return await handleResponse(res, `Failed to fetch ${model}`);
+}    
 
-    return await res.json();
+/**
+ * Deletes an instance/document for a specified schema or model
+ * @param {String} model identifier for which schema is being fetched (e.g. "reviews" for Review)
+ * @returns JSON of model data
+ */
+export const deleteData = async (model, id) => {
+    console.log('Attempting to delete...');
+    console.log(`  + checking api ${BASE_URL}/${model}/delete/${id} compare: http://localhost:5173/api/reviews/delete/:id`);
+    
+    const res = await fetch(`${BASE_URL}/${model}/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    return await handleResponse(res, `Failed to delete ${model} - ${id}`);
 }    
 
 /**
