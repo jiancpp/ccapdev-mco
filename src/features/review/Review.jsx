@@ -20,7 +20,7 @@ function Review({ review, activeUser }) {
 
     useEffect(() => {
         const checkReaction = async () => {
-            const data = await getIsReactedByUser(review._id, activeUser._id);
+            const data = await getIsReactedByUser(review._id, activeUser?._id);
 
             // Add error handling
             if (data && data.reacted) {
