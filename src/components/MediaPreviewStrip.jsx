@@ -18,7 +18,7 @@ export function MediaPreviewStrip({ media, onDelete }) {
                         onClick={() => setLightbox(item)}
                     >
                         {item.isVideo ? (
-                            <video src={item.url} className="media-thumb" preload="none" />
+                            <video src={item.url} className="media-thumb" preload="metadata" />
                         ) : (
                             <img src={item.url} alt={`media-${i}`} className="media-thumb" />
                         )}
