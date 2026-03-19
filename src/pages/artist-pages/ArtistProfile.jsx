@@ -1,37 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, useOutletContext } from "react-router-dom";
 
 import "./ArtistProfile.css";
 import Review from "../../features/review/Review";
 import { StarRating } from "../../components/StarRating";
 
-import { dummyArtists } from "../../data/dummyArtists";
-import { dummyReviews } from "../../data/dummyReviews";
-import { trendingReviews } from "../../data/trendingReviews";
-import { dummySongs } from "../../data/dummySongs"; 
-import { dummyAlbums } from "../../data/dummyAlbums"; 
-
-const getArtistById = (id) => dummyArtists.find((artist) => artist._id === id);
-const getReviewsByArtist = (artist_id) => {
-    const recent = dummyReviews.filter((review) => review.artist_id === artist_id);
-    const trending = trendingReviews.filter((review) => review.artist_id === artist_id);
-    return recent.concat(trending)
-};
-const getSongsByArtist = (artist_id) => dummySongs.filter((song) => song.artist_id === artist_id);
-const getAlbumsByArtist = (artist_id) => dummyAlbums.filter((album) => album.artist_id === artist_id);
+import { getArtist, getAlbumsByArtist, getSongsByArtist, getSongsByAlbum, getReviewsForArtist } from '../../api/api';
 
 function ArtistProfile() {
     const navigate = useNavigate();
     const { artist_id } = useParams();
-    const { activeUser } = useOutletContext();
+    const { activeUser, openModal } = useOutletContext();
     
     const [activeTab, setActiveTab] = useState("reviews");
 
-    const artist = getArtistById(artist_id);    
-    const reviews = getReviewsByArtist(artist_id);
-    reviews.concat(trendingReviews);
-    const songs = getSongsByArtist(artist_id);
-    const albums = getAlbumsByArtist(artist_id);
+    // Live Database State
+    const [artist, setArtist] = useState(null);
+    const [albums, setAlbums] = useState([]);
+    const [albSongCounts, setAlbSongCounts] = useState([]);
+    const [songs, setSongs] = useState([]);
+    const [reviews, setReviews] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const loadArtistPageData = async () => {
+            try {
+                setLoading(true);
+
+                const artistData = await getArtist(artist_id);
+                setArtist(artistData);
+
+                const [albumsData, songsData, reviewsData] = await Promise.all([
+                    getAlbumsByArtist(artist_id),
+                    getSongsByArtist(artist_id),
+                    getReviewsForArtist(artist_id)
+                ]);
+
+                const albumSongCounts = await Promise.all(
+                    albumsData.map(album => getSongsByAlbum(album._id).then(s => s?.length ?? 0))
+                );
+
+                setAlbums(albumsData ?? []);
+                setAlbSongCounts(albumSongCounts);
+                setSongs(songsData ?? []);
+                setReviews(reviewsData ?? []);
+
+            } catch (error) {
+                console.error("Error loading artist profile data:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (artist_id) {
+            loadArtistPageData();
+        }
+    }, [artist_id]);
 
     if (!artist) return( <div style={{ padding: "20px" }}>Artist not found</div> );
 
@@ -55,7 +79,7 @@ function ArtistProfile() {
             <div className="header">
                 <div className="banner"></div>
                 <div className="profile-pic">
-                    <img src={artist.photo} alt={artist.name} />
+                    <img src={artist.user.avatar} alt={artist.name} />
                 </div>
             </div>
 
@@ -70,7 +94,7 @@ function ArtistProfile() {
                     <span className="country">{artist.country}</span>
                 </div>
                 <div className="description">
-                    <p>{artist.description}</p>
+                    <p>{artist.user.bio}</p>
                 </div>
             </div>
 
@@ -133,16 +157,16 @@ function ArtistProfile() {
                                 >
                                     <div className="song-image-container">
                                         <img 
-                                            src={song.cover || artist.photo} 
-                                            alt={song.title} 
+                                            src={song.cover || artist.user.avatar} 
+                                            alt={song.songTitle} 
                                             className="song-cover"
                                         />
                                     </div>
                                     <div className="song-info">
-                                        <span className="song-title">{index + 1}. {song.title}</span>
+                                        <span className="song-title">{index + 1}. {song.songTitle}</span>
                                     </div>
                                     <div className="song-rating-container">
-                                        <StarRating rating={Number(song.rating)} />
+                                        <StarRating rating={Number(song.aveRating)} />
                                     </div>
                                     <div className="song-duration">
                                         {song.duration}
@@ -162,18 +186,17 @@ function ArtistProfile() {
                     <h3>Albums</h3>
                     <div className="albums-grid">
                         {albums.length > 0 ? (
-                            albums.map((album) => (
+                            albums.map((album, i) => (
                                 <div className="album-card" key={album._id}
                                 onClick={() => navigate(`/albums/${album._id}`)}>
                                     <img 
                                         src={album.cover || artist.photo} 
-                                        alt={album.title} 
+                                        alt={album.albumName} 
                                         className="album-cover" 
                                     />
                                     <div className="album-info">
-                                        <div className="album-title">{album.title}</div>
-                                        <div className="album-year">
-                                            {album.year} • {album.songs} Songs
+                                        <div className="album-title">{album.albumName}</div>
+                                        <div className="album-year">{album.year} • {albSongCounts[i]} Songs
                                         </div>
                                     </div>
                                 </div>
