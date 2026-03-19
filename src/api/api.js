@@ -133,11 +133,7 @@ export function isReviewEdited(created, updated) {
  */
 export const getArtist = async (artistId) => {
     const res = await fetch(`${BASE_URL}/artists/get/${artistId}`);
-    if (!res.ok) 
-    { 
-        throw new Error(`Failed to fetch artist ${artistId}`); 
-    }
-
+    if (!res.ok) throw new Error(`Failed to fetch artist ${artistId}`); 
     return await res.json();
 }  
 
