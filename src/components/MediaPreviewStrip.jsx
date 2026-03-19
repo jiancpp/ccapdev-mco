@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import MediaLightBox from './MediaLightBox';
+import { MediaLightBox } from './MediaLightBox';
 
-import './MediaLightBox.css';
+import './MediaPreviewStrip.css';
 
 export function MediaPreviewStrip({ media, onDelete }) {
     const [lightbox, setLightbox] = useState(null);
