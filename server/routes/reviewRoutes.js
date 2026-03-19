@@ -146,9 +146,9 @@ router.post('/uploadImage', upload.single('UploadFiles'), (req, res) => {
 
 router.post('/react', async (req, res) => {
     try {
-        console.log("Update review reaction:", req.body);
+        console.log("Update review reaction:"   );
         const { reviewId, userId, type } = req.body;
-        await ReviewReaction.findByIdAndDelete({ user: user_id, review: review_id })
+        await ReviewReaction.findOneAndDelete({ user: userId, review: reviewId })
 
         // User unclicked a reaction
         if (!type) return res.status(200).json({ message: "Reaction removed" });;

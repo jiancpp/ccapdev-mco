@@ -1,11 +1,12 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom'; 
+import { getIsReactedByUser, postReaction, getTimeAgo, isReviewEdited } from '../../api/api';
 
+// import '@syncfusion/ej2-react-richtexteditor/styles/material.css';
 import './Review.css'
 import ReviewEmbed from './ReviewEmbed';
 import ReviewReply from './ReviewReply';
 
-import { useEffect, useState } from "react";
-import { getIsReactedByUser, postReaction, getTimeAgo, isReviewEdited } from '../../api/api';
 
 function Review({ review, activeUser }) {
     // Settings
@@ -67,8 +68,6 @@ function Review({ review, activeUser }) {
             setDislikes(prev => prev + 1); // increment
         }
     }
-
-    console.log("Review User Data:", review.user);
 
     return (
         <div 

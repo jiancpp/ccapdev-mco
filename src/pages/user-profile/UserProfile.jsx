@@ -53,6 +53,7 @@ function UserProfile() {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
+                setLoadingReviews(true);
                 const reviewsData = await getReviewsByUser(user_id);
                 setReviews(reviewsData);
             } catch (error) {
@@ -62,12 +63,13 @@ function UserProfile() {
             }
         }
         fetchReviews();
-    }, [user_id]);
+    }, [user_id, section]);
 
     // Fetch liked reviews created by user
     useEffect(() => {
         const fetchLikedReviews = async () => {
             try {
+                setLoadingLikes(true);
                 const reviewsData = await getLikedReviewsByUser(user_id);
                 setLikedReviews(reviewsData);
             } catch (error) {
@@ -77,7 +79,7 @@ function UserProfile() {
             }
         }
         fetchLikedReviews();
-    }, [user_id]);
+    }, [user_id, section]);
 
     // ----- Error Handling ------ //
     if (loadingUser) return <LoadingBlock />;

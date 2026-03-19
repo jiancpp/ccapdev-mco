@@ -81,8 +81,8 @@ export const postReaction = async (reviewId, userId, reactType) => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
-            reviewId,
-            userId,
+            reviewId: reviewId,
+            userId: userId,
             type: reactType 
         }),
     });
