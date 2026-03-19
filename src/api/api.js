@@ -153,6 +153,24 @@ export const getAlbum = async (albumId) => {
 }
 
 /**
+ * Fetches all albums belonging to a specific artist
+ */
+export const getAlbumsByArtist = async (artistId) => {
+    const res = await fetch(`${BASE_URL}/albums?artist_id=${artistId}`); 
+    if (!res.ok) throw new Error(`Failed to fetch albums for artist ${artistId}`);
+    return await res.json();
+}
+
+/**
+ * Fetches all songs belonging to a specific artist
+ */
+export const getSongsByArtist = async (artistId) => {
+    const res = await fetch(`${BASE_URL}/songs?artist_id=${artistId}`); 
+    if (!res.ok) throw new Error(`Failed to fetch songs for artist ${artistId}`);
+    return await res.json();
+}
+
+/**
  * Fetches all songs belonging to a specific album
  */
 export const getSongsByAlbum = async (albumId) => {
