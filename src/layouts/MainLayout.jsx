@@ -17,11 +17,35 @@ function MainLayout({ activeUser, setActiveUser}) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [preSelected, setPreSelected] = useState(null);
+    const [selectedRating, setSelectedRating] = useState(0);
 
-    const openModal = () => setIsModalOpen(true);
+    const openModal = (params = null) => {
+        if (params) {
+            setPreSelected(params); // Update state for record keeping - resolve state lag rendering bug
+            setSelectedRating(params.selectedRating);
+            setIsModalOpen(true);
+        } 
+        else {
+            setPreSelected(null);
+            setIsModalOpen(true);
+        }
+    } 
     const closeModal = () => setIsModalOpen(false);
     const openProfileEdit = () => setIsProfileOpen(true);
     const closeProfileEdit = () => setIsProfileOpen(false);
+
+    /**
+     * Automatically fills up the 
+     * @param {String} targetID 
+     * @param {String} targetType 
+     * @param {Number} rating 
+     * @returns 
+     */
+    const preSelectReviewParams = (params) => {
+        if (!params.targetID || !params.targetType) return;
+        openModal(params);
+    }
 
     return (
         <>
@@ -31,12 +55,17 @@ function MainLayout({ activeUser, setActiveUser}) {
 
                 {/* Main Content Panel */}
                 <div className="content">
-                    <Outlet context={{ activeUser, openModal, openProfileEdit }}/>
+                    <Outlet context={{ activeUser, openModal, openProfileEdit, preSelectReviewParams }}/>
                 </div>
             </div>
 
             {/* Global Modal/s */}
-            <ReviewModal isOpen={isModalOpen} onClose={closeModal} activeUserID={activeUser?._id}/>
+            <ReviewModal 
+                isOpen={isModalOpen} 
+                onClose={closeModal} 
+                activeUserID={activeUser?._id} 
+                preSelected={preSelected}
+                currentRating={selectedRating}/>
             <EditProfileModal isOpen={isProfileOpen} onClose={closeProfileEdit} user={activeUser} />
         </>
     )
