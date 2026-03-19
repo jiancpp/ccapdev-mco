@@ -24,7 +24,13 @@ function Login({ setActiveUser }) {
 
             if (response.ok) {
                 setActiveUser(data.user);
-                navigate('/home');
+                const userRole = data.user.role;
+
+                if (userRole === 'artist') {
+                    navigate(`/profile/${data.user.id}`);
+                } else {
+                    navigate('/home'); 
+                }
             } else {
                 setError(data.message || "Invalid credentials");
             }
