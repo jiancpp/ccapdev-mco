@@ -52,8 +52,8 @@ function UserProfile() {
                 if (!isMounted) return;
 
                 setUser(userData);
-                if (followData && typeof followData.isFollowing !== 'undefined') {
-                    setIsFollowing(followData.isFollowing);
+                if (followStatus && typeof followStatus.isFollowing !== 'undefined') {
+                    setIsFollowing(followStatus.isFollowing);
                 }
 
             } catch (error) {
