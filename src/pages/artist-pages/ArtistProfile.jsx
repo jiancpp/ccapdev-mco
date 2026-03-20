@@ -87,7 +87,7 @@ function ArtistProfile() {
                 <div className="artist-name">{artist.name}</div>
                 <div className="artist-rating">
                     <span className="stars">
-                        <StarRating rating={Number(artist.rating)} />
+                        <StarRating rating={Number(artist.aveRating)} />
                     </span> 
                 </div>
                 <div className="artist-meta">

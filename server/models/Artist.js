@@ -10,7 +10,7 @@ const ArtistSchema = new mongoose.Schema ({
         type: String,
         required: true
     },
-    rating: {
+    aveRating: {
         type: Number,
         required: true,
         min: 1,
