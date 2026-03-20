@@ -1,15 +1,23 @@
 import './EditProfileModal.css'
 
 import { useMediaUpload } from '../components/useMediaUpload';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { updateData } from '../api/api';
 
 
 
 function EditProfileModal({ isOpen, onClose, user, showAlert }) {
-    // const { mediaAttachments, avatar, uploading, handleMediaUpload, deleteMedia, resetMedia, setMedia } = useMediaUpload(null, { multiple: false });
+    const { mediaAttachments: avatar, uploading, handleMediaUpload, deleteMedia, resetMedia, setMedia } = useMediaUpload(null, { multiple: false });
     const [newUsername, setNewUserName] = useState(user?.username || '');
     const [newBio, setNewBio] = useState(user?.bio || '');
+
+    useEffect(() => {
+        if (!isOpen) {
+            resetMedia();
+        } else {
+            setMedia(user?.avatar ? { url: user.avatar } : null);
+        }
+    }, [isOpen, user?.avatar]);
 
     const handleReset = () => {
         setNewUserName(user?.username);
@@ -20,7 +28,8 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
         const userData = {
             ...user,
             username: newUsername,
-            bio: newBio 
+            bio: newBio,
+            avatar: avatar?.url || user?.avatar
         };
 
         try {
@@ -39,36 +48,37 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
                 <h2 className="profile-modal-title">Profile Details</h2>
                 <div className="edit-container">
                     <div className="edit-picture">
-                        {/* <div
-                            className="picture"
-                            style={{
-                                backgroundImage: mediaAttachments?.url ? `url(${mediaAttachments.url})` : `url(${user.ava})`
+                        {avatar?.url && (
+                            <button
+                                className="avatar-delete-btn"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    deleteMedia();
+                                }}
+                            >
+                                &times;
+                            </button>
+                        )}
+                        <label
+                            className="media-upload-btn avatar-upload"
+                            style={{ 
+                                pointerEvents: uploading ? 'none' : 'auto',
+                                backgroundImage: avatar?.url ? `url(${avatar.url})` : 'none',
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
                             }}
                         >
-                            {uploading && (
-                                <div className="upload-progress-container">
-                                    <div className="upload-progress-bar"></div>
-                                </div>
-                            )}
-                        </div>
-
-                        <div className="upload">
-                                <label className="media-upload-btn" data-tooltip="Upload Avatar">
-                                    <i className={`bi ${uploading ? "bi-arrow-repeat" : "bi bi-cloud-upload"}`}></i>
-                                    <input
-                                        type="file"
-                                        accept="image/*"
-                                        onChange={handleMediaUpload}
-                                        style={{ display: 'none' }}
-                                        disabled={uploading}
-                                    />
-                                </label>
-                            </div> */}
-                        <img src={`${user?.avatar || '/assets/default.jpg'}`} alt="" />
-                        <div className="change-picture">
-                            <i className="bi bi-upload"></i>
-                            <span>Upload File</span>
-                        </div>
+                            {!avatar?.url && (uploading ? "↻" : "")}
+                            <div className="avatar-edit-overlay">
+                                {uploading ? "↻" : "✎"}
+                            </div>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleMediaUpload}
+                                style={{ display: 'none' }}
+                            />
+                        </label>
                     </div>
                     <div className="edit-details">
                         <div className="edit-item-container">
