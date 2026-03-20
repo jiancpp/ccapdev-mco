@@ -12,7 +12,7 @@ function Artists() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isFilterOpen, setIsFilterOpen] = useState(false);
-    const [activeFilters, setActiveFilters] = useState({ genres: [], rating: 0 });
+    const [activeFilters, setActiveFilters] = useState({ genres: [], aveRating: 0 });
     const [searchTerm, setSearchTerm] = useState("");
 
     /**
@@ -50,7 +50,7 @@ function Artists() {
             activeFilters.genres.length === 0 || 
             activeFilters.genres.includes(genre);
 
-        const matchesRating = artist.rating >= activeFilters.rating;
+        const matchesRating = artist.aveRating >= activeFilters.aveRating;
 
         return matchesSearch && matchesGenre && matchesRating;
     });

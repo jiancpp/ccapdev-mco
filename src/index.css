@@ -66,9 +66,10 @@
   --border-medium: #cbd5e1;  /* For input fields */
   
   /* Status */
-  --success-light: #c4f1e2;
-  --success-dark: #268867;
-  --error: #ef4444;
+  --success-light: #d4edda;
+  --success-dark: #155724;
+  --error-light: #f8d7da;
+  --error-dark: #721c24;
 }
 
 * {

@@ -74,43 +74,50 @@ const ReviewSchema = new mongoose.Schema({
 ReviewSchema.index({ targetID: 1, targetType: 1 });
 ReviewSchema.index({ user: 1, targetID: 1 }, { unique: true });  // one review per user
 
-// updates average rating in the target model: albums and songs
-ReviewSchema.statics.getAverageRating = async function(targetID, targetModel) {
-    const obj = await this.aggregate([
-        { $match: { targetID: targetID } },
-        { $group: { _id: '$targetID', averageRating: { $avg: '$rating' } } }
-    ])
+ReviewSchema.statics.calculateAverage = async function(idToUpdate, TargetModel, isArtist = false) {
+    const matchField = isArtist ? 'artist' : 'targetID';
+    
+    const stats = await this.aggregate([
+        { 
+            $match: { [matchField]: new mongoose.Types.ObjectId(idToUpdate) } 
+        },
+        {
+            $group: {
+                _id: null, 
+                avgRating: { $avg: '$rating' }
+            }
+        }
+    ]);
 
     try {
-        await mongoose.model(targetModel).findByIdAndUpdate(targetID, {
-            aveRating: obj[0] ? Math.round(obj[0].averageRating * 10) / 10 : 0,
+        const finalRating = stats.length > 0 ? Number(stats[0].avgRating.toFixed(1)) : 0;
+        
+        await TargetModel.findByIdAndUpdate(idToUpdate, {
+            aveRating: finalRating
         });
-    } catch (err) {
-        console.error("Error updating average rating", err);
+        
+        console.log(`Updated ${isArtist ? 'Artist' : 'Target'}: ${idToUpdate} to ${finalRating}`);
+    } catch (error) {
+        console.error("Aggregation Error:", error);
     }
 }
 
-ReviewSchema.post('save', function() {
-    this.constructor.getAverageRating(this.targetID, this.targetType);
-});
-
-// capture document in pre hook
-ReviewSchema.pre('deleteOne', async function (next) {
-    // Get reviewId
-    this.r = await this.model.findOne(this.getQuery());
-
-    // Cascade deletion
-    if (this.r) {
-        await mongoose.model('ReviewReaction').deleteMany({ review: this.r._id });
-        await mongoose.model('ReviewReply').deleteMany({ review: this.r._id });
-    }
-
-    next();
+// Update hooks to be 'async' to ensure they complete
+ReviewSchema.post('save', async function() {
+    const ReviewModel = this.constructor;
+    
+    // Update Song or Album
+    await ReviewModel.calculateAverage(this.targetID, mongoose.model(this.targetType), false);
+    
+    // Update Artist
+    await ReviewModel.calculateAverage(this.artist, mongoose.model('Artist'), true);
 });
 
 ReviewSchema.post('deleteOne', async function () {
     if (this.r) {
-        await this.r.constructor.getAverageRating(this.r.targetID, this.r.targetType);
+        const ReviewModel = this.r.constructor;
+        await ReviewModel.calculateAverage(this.r.targetID, mongoose.model(this.r.targetType), false);
+        await ReviewModel.calculateAverage(this.r.artist, mongoose.model('Artist'), true);
     }
 });
 

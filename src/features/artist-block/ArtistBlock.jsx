@@ -45,7 +45,7 @@ function ArtistBlock({ artist }) {
                         <div className="details">{artistReviews.length} reviews</div>
                         </div>
                         <div className="stars">
-                            <StarRating rating={Number(artist.rating)} />
+                            <StarRating rating={Number(artist.aveRating || 0)} />
                         </div>
                     </div>
                     <div className="bottom-block">

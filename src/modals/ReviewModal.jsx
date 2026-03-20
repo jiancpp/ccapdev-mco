@@ -137,7 +137,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
             console.log(modalMode);
             if (modalMode === "Edit") {
                 await updateData('reviews', preSelected.id, reviewData);
-                alert("Review updated successfully!");
+                showAlert({message: 'Review updated successfully!'})
             }
             else {
                 await createReview(reviewData);
@@ -261,7 +261,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
                         onClick={handleSubmit}
                         disabled={isFormInvalid}
                     >
-                        {modalMode == "Write" ? "Submit" : "Save"} Review
+                        {modalMode == "Edit" ? "Save" : "Submit"} Review
                     </button>
                 </div>
             </div>
