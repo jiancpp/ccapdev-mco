@@ -65,9 +65,9 @@ function Register() {
         }
 
         const userData = {
-            username: username,
+            username: username.toLowerCase(),
             password: password,
-            email: email,
+            email: email.toLowerCase(),
             bio: shortDesc,
             role: 'user',
             avatar: mediaAttachments?.url || '/assets/default.jpg',
