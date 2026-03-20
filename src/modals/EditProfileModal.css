@@ -60,12 +60,49 @@
     gap: 30px
 }
 
-.edit-picture, .edit-picture img{
+.edit-picture {
+    position: relative;
+}
+
+.edit-picture, .edit-picture img {
     width: 200px;
     height: 200px;
     border-radius: 100%;
     /* box-shadow: -1px 1px 5px rgba(54, 52, 53, 0.5); */
     cursor: pointer;
+}
+
+.edit-picture .change-picture { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    background: cyan;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--secondary-main);
+    color: var(--secondary-light);
+    font-weight: 600;
+    opacity: 0; 
+    transition: opacity 0.3s;
+}
+
+.edit-picture .change-picture:hover {
+    opacity: 0.5; 
+}
+
+.edit-picture .change-picture i {
+    font-size: var(--fs-xxxl);
+}
+.edit-picture .change-picture span {
+    text-align: center;
+    width: 50%;
+    font-size: var(--fs-m);
 }
 
 .edit-item-container {

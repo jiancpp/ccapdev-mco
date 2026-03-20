@@ -112,7 +112,7 @@ function UserProfile() {
                             onMouseLeave={() => setOpenFollowers(false)}>
                             <ul>
                                 {user.followers.map((follower) => (
-                                    <li onClick={() => navigate(`/profile/${follower._id}`)}>{follower.username}</li>
+                                    <li key={follower._id} onClick={() => navigate(`/profile/${follower._id}`)}>{follower.username}</li>
                                 ))}
                             </ul>
                         </div>
@@ -125,7 +125,7 @@ function UserProfile() {
                             onMouseLeave={() => setOpenFollowing(false)}>
                             <ul>
                                 {user.following.map((followed) => (
-                                    <li onClick={() => navigate(`/profile/${followed._id}`)}>{followed.username}</li>
+                                    <li key={followed._id} onClick={() => navigate(`/profile/${followed._id}`)}>{followed.username}</li>
                                 ))}
                             </ul>
                         </div>
@@ -156,20 +156,23 @@ function UserProfile() {
                 </label>
             </div>
             <div className={`user-reviews indent ${section !== "reviews" ? "hidden" : ""}`}>
-                {!loadingReviews ?
-                    reviews.map((review) => (
-                        <Review key={review._id} review={review} activeUser={activeUser} />
-                    ))
-                    :
-                    (<LoadingBlock padding={"40px"} />)
+                {
+                    !loadingReviews && reviews.length == 0 ? <NothingBlock /> :
+                    !loadingReviews ?
+                        reviews.map((review) => (
+                            <Review key={review._id} review={review} activeUser={activeUser} />
+                        )) :
+                     <LoadingBlock padding={"40px"} />
                 }
             </div>
             <div className={`user-likes indent ${section !== "likes" ? "hidden" : ""}`}>
-                {!loadingLikes ?
-                    (liked_reviews.map((review) => (
-                        <Review key={review._id} review={review} activeUser={activeUser} />
-                    ))) :
-                    (<LoadingBlock padding={"40px"} />)
+                { 
+                    !loadingLikes && liked_reviews.length == 0 ? <NothingBlock /> :
+                    !loadingLikes ?
+                        (liked_reviews.map((review) => (
+                            <Review key={review._id} review={review} activeUser={activeUser} />
+                        ))) : 
+                    <LoadingBlock padding={"40px"} />
                 }
             </div>
         </div>

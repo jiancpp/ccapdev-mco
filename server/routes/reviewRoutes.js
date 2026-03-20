@@ -8,7 +8,12 @@ const router = express.Router();
 
 const reviewPopulate = [
     { path: 'user', select: 'username avatar' },
-    { path: 'artist', select: 'name' },
+    {   
+        path: 'artist', 
+        populate: {
+            path: 'user',
+        }
+    },
     { 
         path: 'targetID',
         populate: [
@@ -195,6 +200,27 @@ router.get("/check_react/:review_id/:user_id", async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 })
+
+/******************** Replies **********************/
+
+router.get('/reply/get/:review_id/:artist_id', async (req, res) => {
+    try {
+        const { review_id, artist_id } = req.params.id;
+        let reply = null;
+
+        // Try searching by MongoDB ObjectId
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+            reply = await ReviewReply
+                .findOne({ artist: artist_id, review: review_id })
+                .populate("artist");
+        }
+
+        if (!reply) return res.status(404).json({ message: "reply not found" });
+        res.json(reply);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 /***** Review Actions ******/
 router.delete('/delete/:id', async (req, res) => {

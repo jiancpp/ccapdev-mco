@@ -12,6 +12,10 @@ function EditProfileModal({ isOpen, onClose, user }) {
                         {
                             user ? <img src={user.avatar} alt="" /> : ""
                         }
+                        <div className="change-picture">
+                            <i className="bi bi-upload"></i>
+                            <span>Upload File</span>
+                        </div>
                     </div>
                     <div className="edit-details">
                         <div className="edit-item-container">
