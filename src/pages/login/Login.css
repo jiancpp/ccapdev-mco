@@ -99,7 +99,7 @@
     margin-bottom: 10px;
 }
 
-.alert-message {
+#login .alert-message {
     width: 200px;
     height: 45px;
 }
