@@ -1,6 +1,8 @@
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import AlertBlock from '../../components/AlertBlock';
+import { useMediaUpload } from '../../components/useMediaUpload';
+import { MediaPreviewStrip } from '../../components/MediaPreviewStrip';
 import "./Register.css"
 
 function Register() {
@@ -12,6 +14,7 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [shortDesc, setShortDesc] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const { mediaAttachments, avatar, uploading, handleMediaUpload, deleteMedia, resetMedia, setMedia } = useMediaUpload(null, { multiple: false });
 
     const [alert, setAlert] = useState({ show: false, message: '', icon: '', type: 'error' });
 
@@ -40,16 +43,10 @@ function Register() {
         e.preventDefault();
         setAlert({ show: false });
 
-        // console.log(username);
-        // console.log(email);
-        // console.log(password);
-        // console.log(confirmPassword);
-        // console.log(shortDesc);
-
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!emailRegex.test(email)) {
-        return showAlert('Please enter a valid email address', 'bi-envelope-exclamation');
+            return showAlert('Please enter a valid email address', 'bi-envelope-exclamation');
         }
 
         if (password.length < 8) {
@@ -62,13 +59,18 @@ function Register() {
             return;
         }
 
+        if (shortDesc.length > 100) {
+            showAlert('Short description should be less than 100 characters', 'bi-exclamation-triangle-fill', 'error');
+            return;
+        }
+
         const userData = {
             username: username,
             password: password,
             email: email,
             bio: shortDesc,
             role: 'user',
-            avatar: '/assets/default.jpg',
+            avatar: mediaAttachments?.url || '/assets/default.jpg',
             followers: [],
             following: []
         };
@@ -87,10 +89,10 @@ function Register() {
                 showAlert('Account Successfully Registered', 'bi-check-circle-fill', 'success');
                 setTimeout(() => navigate('/login'), 1500);
             } else {
-                showAlert(data.message || 'Registration failed', 'bi-exclamation-circle-fill', 'error');
+                showAlert(data.message || 'User already exists', 'bi-exclamation-circle-fill', 'error');
             }
         } catch (err) {
-            console.error("fucked");
+            console.error("handle-register error");
         }
     };
 
@@ -115,8 +117,8 @@ function Register() {
                         <AlertBlock
                             message={alert.message}
                             icon={alert.icon}
-                            bgColor={alert.bgColor}   
-                            textColor={alert.textColor} 
+                            bgColor={alert.bgColor}
+                            textColor={alert.textColor}
                         />
                     )}
                 </div>
@@ -129,10 +131,31 @@ function Register() {
 
                         <div className="avatar span-v">
                             <div className="picture-container">
-                                <div className="picture"></div>
+                                <div
+                                    className="picture"
+                                    style={{
+                                        backgroundImage: mediaAttachments?.url ? `url(${mediaAttachments.url})` : undefined
+                                    }}
+                                >
+                                    {uploading && (
+                                        <div className="upload-progress-container">
+                                            <div className="upload-progress-bar"></div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
+
                             <div className="upload">
-                                Upload <i className="bi bi-cloud-upload"></i>
+                                <label className="media-upload-btn" data-tooltip="Upload Avatar">
+                                    <i className={`bi ${uploading ? "bi-arrow-repeat" : "bi bi-cloud-upload"}`}></i>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleMediaUpload}
+                                        style={{ display: 'none' }}
+                                        disabled={uploading}
+                                    />
+                                </label>
                             </div>
                         </div>
 
