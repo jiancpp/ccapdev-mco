@@ -12,6 +12,7 @@ const reviewPopulate = [
         path: 'artist', 
         populate: {
             path: 'user',
+            options: { strictPopulate: false } 
         }
     },
     { 

@@ -41,7 +41,7 @@ function ReviewReply({ review, activeUser }) {
 
                 <div className='post-content'>
                     <div className="profile">
-                        <img src={review.user.avatar} alt="" />
+                        <img src={review.artist.user.avatar} alt="" />
                     </div>
                     <div className="review-details">
                         <div className='user'>
