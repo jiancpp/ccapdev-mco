@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import './MainLayout.css'
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import ReviewModal from '../modals/ReviewModal';
+import ReviewModal, { EditReviewModal } from '../modals/ReviewModal';
 import AlertBlock from "../components/AlertBlock";
 import { dummyUsers } from "../data/dummyUsers";
 import EditProfileModal from "../modals/EditProfileModal";
@@ -19,6 +19,7 @@ function MainLayout({ activeUser, setActiveUser}) {
     const navigate = useNavigate();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [isAlertOn, setIsAlertOn] = useState(false);
     const [preSelected, setPreSelected] = useState(null);
@@ -34,16 +35,26 @@ function MainLayout({ activeUser, setActiveUser}) {
         return;
     }
         if (params) {
-            setPreSelected(params); // Update state for record keeping - resolve state lag rendering bug
-            setSelectedRating(params.selectedRating);
-            setIsModalOpen(true);
-        } 
-        else {
+            setPreSelected(params);
+            setSelectedRating(params.selectedRating || 0); // Use .rating from your review object
+        } else {
             setPreSelected(null);
+            setSelectedRating(0);
+        }
+
+        if (params?.mode === 'Edit') {
+            setIsEditModalOpen(true);
+            setIsModalOpen(false); // Ensure create modal is closed
+        } else {
             setIsModalOpen(true);
+            setIsEditModalOpen(false); // Ensure edit modal is closed
         }
     } 
-    const closeModal = () => setIsModalOpen(false);
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setIsEditModalOpen(false);
+        setPreSelected(null);
+    };
     const openProfileEdit = () => setIsProfileOpen(true);
     const closeProfileEdit = () => setIsProfileOpen(false);
 
@@ -91,6 +102,12 @@ function MainLayout({ activeUser, setActiveUser}) {
                 onClose={closeModal} 
                 activeUserID={activeUser?._id} 
                 preSelected={preSelected}
+                currentRating={selectedRating}/>
+            <EditReviewModal
+                isOpen={isEditModalOpen} 
+                onClose={closeModal} 
+                activeUserID={activeUser?._id} 
+                review={preSelected}
                 currentRating={selectedRating}/>
             <EditProfileModal isOpen={isProfileOpen} onClose={closeProfileEdit} user={activeUser} />
         </>

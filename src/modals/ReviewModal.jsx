@@ -5,19 +5,25 @@ import { InteractiveStarRating } from '../components/StarRating';
 import { SearchBar } from '../components/SearchBar';
 import { MediaPreviewStrip } from '../components/MediaPreviewStrip';
 import { useState, useRef, useEffect } from 'react';
-import { createReview, getAllData } from '../api/api';
+import { createReview, getAllData, updateData } from '../api/api';
 
 import './ReviewModal.css';
 
-function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating = null }) {
+export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating = null }) {
+    // List of data
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
     const [artists, setArtists] = useState([]);
+
+    // Review content
     const [selectedItem, setSelectedItem] = useState(null);
     const [header, setHeader] = useState("");
     const [rating, setRating] = useState(0);
     const [uploading, setUploading] = useState(false);
     const [mediaAttachments, setMediaAttachments] = useState([]);
+    const [modalMode, setModalMode] = useState("Write")
+
+    // Settings
     const [lightbox, setLightbox] = useState(null); 
     const rteRef = useRef(null);
     const mediaInputRef = useRef(null);
@@ -66,39 +72,56 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
 
     // Fetch search data when modal opens, reset state when it closes
     useEffect(() => {
-        if (isOpen) {
-            const fetchData = async () => {
-                try {
-                    const [sData, albData, artData] = await Promise.all([
-                        getAllData('songs'),
-                        getAllData('albums'),
-                        getAllData('artists')
-                    ]);
-                    setSongs(sData);
-                    setAlbums(albData);
-                    setArtists(artData);
-                } catch (err) {
-                    console.error("Error loading search data:", err);
-                }
-            };
-            fetchData();
-        } else {
+        if (!isOpen) {
             setSelectedItem(null);
             setHeader("");
             setRating(0);
             setMediaAttachments([]);
             setLightbox(null);
             if (rteRef.current) rteRef.current.value = "";
+            setModalMode("Write"); // <--- Add this reset!
+            return;
         }
-    }, [isOpen]);
 
-    // Pre-select item if passed in from parent
-    useEffect(() => {
-        const { targetID, targetType, title, artistID, cover } = preSelected || {};
-        if (targetID && targetType) {
-            setSelectedItem({ _id: targetID, title, artistID, cover, type: targetType });
-        } else {
-            setSelectedItem(null);
+    
+        const fetchData = async () => {
+            try {
+                const [sData, albData, artData] = await Promise.all([
+                    getAllData('songs'),
+                    getAllData('albums'),
+                    getAllData('artists')
+                ]);
+                setSongs(sData);
+                setAlbums(albData);
+                setArtists(artData);
+            } catch (err) {
+                console.error("Error loading search data:", err);
+            }
+        };
+        fetchData();
+
+        // Handle edit and quick create mode
+        if (preSelected) {
+            console.log("ACTUAL OBJECT KEYS:", Object.keys(preSelected));
+            setHeader(preSelected.header || "");
+            setRating(preSelected.rating || 0);
+            setMediaAttachments(preSelected.media || []);
+            setSelectedItem({
+                _id: preSelected.targetID,
+                title: preSelected.title,
+                artistID: preSelected.artistID,
+                cover: preSelected.cover,
+                type: preSelected.targetType
+            });
+            // Update the Rich Text Editor value
+            setTimeout(() => {
+                if (rteRef.current) {
+                    rteRef.current.value = preSelected.content || "";
+                }
+            }, 0);
+
+            // Determine whether user is creating or editing a review
+            setModalMode(preSelected.mode);
         }
     }, [isOpen, preSelected]);
 
@@ -114,8 +137,8 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
     };
 
     const handleSubmit = async () => {
-        if (!selectedItem || !header || !rating) return;
-
+        const finalRating = rating || currentRating; 
+        if (!selectedItem || !header || !finalRating) return;
         let html = rteRef.current.getHtml();
 
         const reviewData = {
@@ -124,17 +147,26 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
             targetType: selectedItem.type,
             targetID: selectedItem._id,
             review_header: header,
-            review_content: rteRef.current.getHtml(),
+            review_content: rteRef.current.getHtml(),  // check if this breaks it
             media: mediaAttachments,
-            rating,
+            rating: currentRating || rating,
             likes: 0,
             dislikes: 0,
             isEdited: false
         };
 
         try {
-            await createReview(reviewData);
-            alert("Review submitted successfully!");
+            console.log("FINAL REVIEW DATA: " + JSON.stringify(reviewData));
+            console.log(modalMode);
+            if (modalMode === "Edit") {
+                await updateData('reviews', preSelected.id, reviewData);
+                alert("Review updated successfully!");
+            }
+            else {
+                await createReview(reviewData);
+                alert("Review submitted successfully!");
+            }
+            
             setSelectedItem(null);
             setHeader("");
             setRating(0);
@@ -150,13 +182,15 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
         return artist ? artist.name : "Unknown Artist";
     };
 
+    console.log("Current State Render Check:", { header, rating, selectedItem });
+    const isFormInvalid = !selectedItem || !header.trim() || !(rating || currentRating) || uploading;
     if (!isOpen) return null;
 
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <button className="close-btn" onClick={onClose}>&times;</button>
-                <h2 className="modal-title">Write a Review</h2>
+                <h2 className="modal-title">{modalMode || "Write"} a Review</h2>
 
                 <SearchBar
                     songs={songs}
@@ -237,9 +271,9 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
                         <button
                             className="submit-btn"
                             onClick={handleSubmit}
-                            disabled={!selectedItem || !header || !rating || uploading}
+                            disabled={isFormInvalid}
                         >
-                            Submit Review
+                            {modalMode == "Write" ? "Submit" : "Save"} Review
                         </button>
                     </div>
                 </div>
@@ -248,4 +282,34 @@ function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating
     );
 }
 
-export default ReviewModal;
+export function EditReviewModal({ isOpen, onClose, review, activeUserID }) {
+    if (!review) return null;
+    const reviewData = {
+        id: review._id,
+        header: review.review_header,
+        content: review.review_content,
+        media: review.media || [],
+        rating: review.rating, // ADD THIS LINE
+        // Polymorphic target
+        title: review.targetType === 'Album' ? review.targetID?.albumName : review.targetID?.songTitle,
+        targetID: review.targetID?._id,
+        targetType: review.targetType,
+        artistID: review.artist?._id || review.artist,
+        cover: review.targetID?.cover,
+        mode: review.mode || 'Write'
+    };
+    console.log(` + checking before edit review ${review.review_header} ${review.review_content} ${review.media} `);
+    console.log(` + checking edit review ${reviewData.header} ${reviewData.content} ${reviewData.media} `);
+
+
+    return (
+        <ReviewModal 
+            key={review._id}
+            isOpen={isOpen}
+            onClose={onClose}
+            activeUserID={activeUserID}
+            preSelected={reviewData} // ONLY ONE PROP for the data!
+            currentRating={review.rating}
+        />
+    );
+}

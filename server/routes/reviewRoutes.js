@@ -225,6 +225,7 @@ router.put('/update/:id', async (req, res) => {
         review.review_header = req.body.review_header || review.review_header;
         review.review_content = req.body.review_content || review.review_content;
         review.rating = req.body.rating || review.rating;
+        review.media = req.body.media || review.media;
         review.isEdited = true;
 
         await review.save();
