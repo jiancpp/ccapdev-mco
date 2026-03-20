@@ -68,7 +68,7 @@ function Register() {
             email: email,
             bio: shortDesc,
             role: 'user',
-            avatar: 'default.jpg',
+            avatar: '/assets/default.jpg',
             followers: [],
             following: []
         };

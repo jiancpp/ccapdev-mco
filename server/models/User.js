@@ -21,7 +21,12 @@ const UserSchema = new mongoose.Schema({
         maxlength: 350
     },
 
-    avatar: String,
+    avatar: {
+        type: String,
+        required: true,
+        default: '/assets/default.jpg'
+    },
+    
     followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 
