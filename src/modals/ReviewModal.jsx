@@ -5,6 +5,7 @@ import {
 import { InteractiveStarRating } from '../components/StarRating';
 import { SearchBar } from '../components/SearchBar';
 import { MediaPreviewStrip } from '../components/MediaPreviewStrip';
+import { useMediaUpload } from '../components/useMediaUpload';
 import AlertBlock from '../components/AlertBlock';
 
 import { useNavigate, useOutletContext } from 'react-router-dom';
@@ -23,14 +24,12 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
     const [selectedItem, setSelectedItem] = useState(null);
     const [header, setHeader] = useState("");
     const [rating, setRating] = useState(0);
-    const [mediaAttachments, setMediaAttachments] = useState([]);
     const [modalMode, setModalMode] = useState("Write")
+    const { mediaAttachments, uploading, handleMediaUpload, deleteMedia, resetMedia, setMedia } = useMediaUpload([], { multiple: true });
 
     // Settings
     const rteRef = useRef(null);
-    const mediaInputRef = useRef(null);
 
-    const [uploading, setUploading] = useState(false);
     const [isAlertOn, setIsAlertOn] = useState(false);
     const [alertConfig, setAlertConfig] = useState({
         message: '',
@@ -49,51 +48,13 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
         items: ['Bold', 'Italic', 'Underline', 'StrikeThrough', '|', 'Alignments', '|', 'OrderedList', 'UnorderedList', '|', 'CreateLink', '|', 'Undo', 'Redo']
     };
 
-    const uploadToCloudinary = async (file) => {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', 'my_review_preset');
-
-        const response = await fetch('https://api.cloudinary.com/v1_1/dnldcpojq/auto/upload', {
-            method: 'POST',
-            body: formData,
-        });
-
-        if (!response.ok) throw new Error('Cloudinary upload failed');
-
-        const data = await response.json();
-        return data.secure_url;
-    };
-
-    const handleMediaUpload = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const isVideo = file.type.startsWith('video/');
-
-        try {
-            setUploading(true);
-            const url = await uploadToCloudinary(file);
-
-            // Adds new media to the start of the list
-            setMediaAttachments(prev => [{ url, isVideo }, ...prev]);
-
-        } catch (err) {
-            console.error("Media upload failed:", err);
-            alert("Media upload failed: " + err.message);
-        } finally {
-            setUploading(false);
-            e.target.value = "";
-        }
-    };
-
     // Fetch search data when modal opens, reset state when it closes
     useEffect(() => {
         if (!isOpen) {
             setSelectedItem(null);
             setHeader("");
             setRating(0);
-            setMediaAttachments([]);
+            resetMedia();
             if (rteRef.current) rteRef.current.value = "";
             setModalMode("Write"); // <--- Add this reset!
             return;
@@ -121,7 +82,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
             // console.log("ACTUAL OBJECT KEYS:", Object.keys(preSelected));
             setHeader(preSelected.header || "");
             setRating(preSelected.rating || 0);
-            setMediaAttachments(preSelected.media || []);
+            setMedia(preSelected.media || []);
             setSelectedItem({
                 _id: preSelected.targetID,
                 title: preSelected.title,
@@ -230,7 +191,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
                         <div className="review-row">
                             <div className="selected-card">
                                 {selectedItem ? (
-                                    <img src={selectedItem.cover} alt="Cover" />
+                                    <img src={selectedItem.cover} alt="" />
                                 ) : (
                                     <div className="empty-box" />
                                 )}
@@ -281,7 +242,6 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
                             >
                                 {uploading ? "↻" : "＋"}
                                 <input
-                                    ref={mediaInputRef}
                                     type="file"
                                     accept="image/*,video/*"
                                     onChange={handleMediaUpload}
@@ -290,7 +250,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
                             </label>
                             <MediaPreviewStrip
                                 media={mediaAttachments}
-                                onDelete={(i) => setMediaAttachments(prev => prev.filter((_, idx) => idx !== i))}
+                                onDelete={deleteMedia}
                             />
                         </div>
                     </div>
