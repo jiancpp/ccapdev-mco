@@ -140,7 +140,9 @@ function UserProfile() {
                     activeUser && user._id === activeUser._id ?
                     <div
                         className="user-edit-profile-btn"
-                        onClick={openProfileEdit}>
+                        onClick={() => { 
+                            openProfileEdit();
+                        }}>
                         Edit Profile <i className="bi bi-pencil"></i>
                     </div> :
                     <div 
