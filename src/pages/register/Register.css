@@ -2,14 +2,14 @@
     box-sizing: border-box;
 }
 
-#register{
+#register {
     background-image: linear-gradient(to right, #f3599e, #fffcb7);
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: 'helvetica';
     overflow: hidden;
-    height: 120vh;
+    height: 100vh;
     position: relative;
     justify-content: center;
 }
@@ -64,12 +64,23 @@
 #register .register-background {
     color: white;
     /* margin-top: 125px; */
-    width: 500px;
-    height: 750px;
+    width: 1000px;
+    height: 560px;
     border-radius: 25px;
     background-image: linear-gradient(135deg, #a11547, #5c0627);
-    box-shadow: 0px 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.5);
     z-index: 2;
+}
+
+#register .alert {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.alert-message {
+    width: 500px;
 }
 
 #register .logo-container {
@@ -84,46 +95,72 @@
 
 #register .register {
     margin-top: 50px;
-    margin-left: 100px;
-    margin-right: 100px;
-    align-items: center;
+    padding: 0 100px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
 }
 
-#register .register-title {
+.register-title {
     font-size: 50px;
     font-family: 'Carollo Playscript';
     letter-spacing: -0.03em;
     margin-bottom: 20px;
 }
 
+#register .full-width {
+    grid-column: span 2;
+}
+
+#register .span-v {
+    grid-row: span 2;
+}
+
 #register .register-forms {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 40px;
+    width: 100%;
 }
 
 #register .register-details {
-    width: 250px;
+    width: 100%;
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 0px;
     background-color: white;
     color: #a11547;
     border: none;
     border-radius: 10px;
     font-size: 13px;
+    padding-right: 40px;
 }
 
 #register .description {
     height: 100px;
-    width: 250px;
+    width: 100%;
     overflow-wrap: break-word;
     font-family: "Helvetica Now";
 }
 
-#register .view-password {
+#register .password {
+    position: relative;
+    width: 100%;
+}
 
+.password-toggle-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #a11547;
+    font-size: 1.2rem;
+    z-index: 10;
+}
+
+.password-toggle-icon:hover {
+    color: #84123a;
 }
 
 #register .avatar {
@@ -146,8 +183,6 @@
     background-image: url("../../public/assets/default-profile.jpg");
 }
 
- 
-
 #register .avatar .upload {
     margin-top: 40px;
     margin-left: 20px;
@@ -167,8 +202,7 @@
     margin-top: -0.5px;
 }
 
-#register .remember-me {
-}
+#register .remember-me {}
 
 #register .forgot-password {
     align-items: right;
@@ -181,12 +215,22 @@
     text-decoration: underline;
 }
 
+#register .register-button-wrapper {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+    margin-top: 20px;
+}
+
 #register .register-button {
     margin-top: 15px;
     width: 150px;
     padding: 10px;
     background-image: linear-gradient(to right, #fbc2d8, #fff4e0);
     border-radius: 10px;
+    border: none;
     color: #a11547;
     text-align: center;
     font-weight: bold;
@@ -201,12 +245,10 @@
     font-size: 10px;
 }
 
-#register .no-account {
-    
-}
+#register .no-account {}
 
 #register .sign-up-link {
-    color:#ffde59;
+    color: #ffde59;
     text-decoration: underline;
     cursor: pointer;
 }

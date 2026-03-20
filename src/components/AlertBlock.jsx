@@ -5,7 +5,7 @@ function AlertBlock({ message, icon, bgColor, textColor }) {
     const displayIcon = icon || "bi-exclamation-circle-fill"
     return (
         <div className="alert-message" style={{background: bgColor, color: textColor}}>
-            <span><i class={`bi ${displayIcon}`}></i> {displayMessage}</span>
+            <span><i className={`bi ${displayIcon}`}></i> {displayMessage}</span>
         </div>
     )
 }

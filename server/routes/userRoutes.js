@@ -6,7 +6,36 @@ const router = express.Router();
 
 // POST /api/users/register
 router.post('/register', async (req, res) => {
-    
+    const userData = req.body.userData; 
+    // const confirmPassword = req.body.confirmPassword;
+
+    try {
+        const user = await User.findOne({
+            $or: [
+                { email: userData.email },
+                { username: userData.username }
+            ]
+        });
+
+        if (user) {
+            return res.status(409).json({ message: "User Already Exists" });
+        }
+
+        const newUser = new User(req.body.userData);
+        const savedUser = await newUser.save();
+
+        console.log(savedUser);
+        return res.status(201).json({
+            newUser: savedUser,
+            message: "Login successful!"
+        });
+
+    } catch (error) {
+        return res.status(500).json({ 
+            message: "Server error", 
+            details: error.message 
+        });
+    }
 });
 
 // POST /api/users/login
@@ -14,10 +43,12 @@ router.post('/login', async (req, res) => {
     const { identifier, password } = req.body;
 
     try {
-        const user = await User.findOne({ $or: [
+        const user = await User.findOne({
+            $or: [
                 { email: identifier },
                 { username: identifier }
-            ] }).select('+password');
+            ]
+        }).select('+password');
 
         if (!user) {
             return res.status(401).json({ message: "User not found" });
@@ -39,13 +70,13 @@ router.post('/login', async (req, res) => {
 
         userObj.id = userObj._id;
 
-        res.status(200).json({
+        return res.status(200).json({
             message: "Login successful!",
             user: userObj
         });
 
     } catch (error) {
-        res.status(500).json({ message: "Server error" });
+        return res.status(500).json({ message: "Server error" });
     }
 });
 
@@ -54,7 +85,7 @@ router.get('/check-session', async (req, res) => {
         const userId = req.session.user?.id;
 
         if (!userId) {
-            res.status(200).json({ user: null });
+            return res.status(200).json({ user: null });
         }
 
         const user = await User.findById(userId)
@@ -66,9 +97,9 @@ router.get('/check-session', async (req, res) => {
             return res.status(404).json({ message: 'User not found' })
         }
 
-        res.status(200).json({ user });
+        return res.status(200).json({ user });
     } catch (err) {
-        res.status(500).json({ message: "Server error" });
+       return res.status(500).json({ message: "Server error" });
     }
 });
 

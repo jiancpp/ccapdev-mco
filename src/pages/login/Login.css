@@ -23,6 +23,7 @@
     height: 100%;
     z-index: 0;
 
+
 }
 
 #login .circle-element {
@@ -89,6 +90,18 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+}
+
+#login .alert {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.alert-message {
+    width: 200px;
+    height: 45px;
 }
 
 #login .login-title {
