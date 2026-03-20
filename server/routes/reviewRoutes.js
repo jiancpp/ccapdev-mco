@@ -216,7 +216,7 @@ router.delete('/delete/:id', async (req, res) => {
 
 router.put('/update/:id', async (req, res) => {
     try {
-        console.log(`  + checking routes ${id}`);
+        console.log(`  + checking routes`);
         const review = await Review.findById(req.params.id);
         if (!review) {
             return res.status(404).json({ message: "Review not found" });
@@ -227,6 +227,8 @@ router.put('/update/:id', async (req, res) => {
         review.rating = req.body.rating || review.rating;
         review.media = req.body.media || review.media;
         review.isEdited = true;
+
+        console.log(`rating: ${req.body.rating}`);
 
         await review.save();
         res.status(200).json({message: 'Successfully updated.'})

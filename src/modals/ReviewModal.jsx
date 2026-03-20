@@ -118,7 +118,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
 
         // Handle edit and quick create mode
         if (preSelected) {
-            console.log("ACTUAL OBJECT KEYS:", Object.keys(preSelected));
+            // console.log("ACTUAL OBJECT KEYS:", Object.keys(preSelected));
             setHeader(preSelected.header || "");
             setRating(preSelected.rating || 0);
             setMediaAttachments(preSelected.media || []);
@@ -165,7 +165,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
             review_header: header,
             review_content: rteRef.current.getHtml(),  // check if this breaks it
             media: mediaAttachments,
-            rating: currentRating || rating,
+            rating: finalRating,
             likes: 0,
             dislikes: 0,
             isEdited: false
@@ -203,7 +203,6 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
         return artist ? artist.name : "Unknown Artist";
     };
 
-    console.log("Current State Render Check:", { header, rating, selectedItem });
     const isFormInvalid = !selectedItem || !header.trim() || !(rating || currentRating) || uploading;
     if (!isOpen) return null;
 
