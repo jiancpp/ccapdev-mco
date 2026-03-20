@@ -17,13 +17,13 @@ const reviewPopulate = [
     { 
         path: 'targetID',
         populate: [
-            // 1. If it's an Album, get the songCount virtual
+            // populate album attributes
             { 
                 path: 'songCount', 
                 model: 'Album',
                 options: { strictPopulate: false } 
             },
-            // 2. If it's a Song, populate its albumID field to get the cover/name
+            // populate song attributes
             { 
                 path: 'albumID', 
                 model: 'Album', 
@@ -96,7 +96,9 @@ router.get('/', async (req, res) => {
         console.log(`Fetching all reviews...`);
 
         // req.query uses query string
-        const reviews = await Review.find(req.query).populate(reviewPopulate);
+        const reviews = await Review.find(req.query)
+            .sort({ createdAt: -1 })
+            .populate(reviewPopulate);
         res.status(200).json(reviews);
     } catch (err) {
         console.error("Error fetching reviews:", err);
@@ -129,7 +131,11 @@ router.get('/filter', async (req, res) => {
         }
 
         console.log(`Fetching all reviews based on filters...`);
-        const reviews = await Review.find(query).populate(reviewPopulate).setOptions({ strictPopulate: false });;
+        const reviews = await Review
+            .find(query)
+            .sort({ createdAt: -1 })
+            .populate(reviewPopulate)
+            .setOptions({ strictPopulate: false });;
 
         reviews.forEach(review => {
             if (review.targetType == 'Album') {

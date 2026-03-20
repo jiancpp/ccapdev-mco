@@ -10,7 +10,7 @@ import BackButton from "../../components/BackButton"
 
 import { useState } from "react";
 import { useEffect } from "react";
-import { getLikedReviewsByUser, getReviewsByUser, getUser } from "../../api/api";
+import { checkIsFollowing, getLikedReviewsByUser, getReviewsByUser, getUser, toggleFollow } from "../../api/api";
 
 /***** Main Component *****/
 function UserProfile() {
@@ -19,7 +19,7 @@ function UserProfile() {
     const [section, setSection] = useState("reviews");
 
     // ------------ Modals ---------- //
-    const { activeUser, openProfileEdit } = useOutletContext();
+    const { activeUser, openProfileEdit, showAlert } = useOutletContext();
     const [openFollowers, setOpenFollowers] = useState(false);
     const [openFollowing, setOpenFollowing] = useState(false);
 
@@ -33,21 +33,39 @@ function UserProfile() {
     const [loadingLikes, setLoadingLikes] = useState(true);
     const [error, setError] = useState(null);
 
+    // -------- States --------- //
+    const [isFollowing, setIsFollowing] = useState(false);
+
     // Fetch user
     useEffect(() => {
-        const loadUser = async () => {
+        let isMounted = true;
+
+        const fetchData = async () => {
             try {
-                const userData = await getUser(user_id);
+                const [userData, followStatus] = await Promise.all([
+                    getUser(user_id),
+                    activeUser?._id && activeUser._id !== user_id 
+                        ? checkIsFollowing(activeUser._id, user_id) 
+                        : Promise.resolve({ isFollowing: false })
+                ]);
+
+                if (!isMounted) return;
+
                 setUser(userData);
+                if (followData && typeof followData.isFollowing !== 'undefined') {
+                    setIsFollowing(followData.isFollowing);
+                }
+
             } catch (error) {
-                setError(error.message);
+                if (isMounted) setError(error.message);
                 console.log(error);
             } finally {
-                setLoadingUser(false);
+                if (isMounted) setLoadingUser(false);
             }
         }
-        loadUser();
-    }, [user_id]);
+        fetchData();    
+        return () => { isMounted = false; };   
+    }, [user_id, activeUser?._id]);
 
     // Fetch reviews created by user
     useEffect(() => {
@@ -81,6 +99,32 @@ function UserProfile() {
         fetchLikedReviews();
     }, [user_id, section]);
 
+    const handleFollow = async () => {
+        const wasFollowing = isFollowing;
+        setIsFollowing(!wasFollowing);
+
+        try {
+            await toggleFollow(activeUser._id, user_id);
+            
+            // Local state update:
+            setUser(prevUser => {
+                const updatedFollowers = wasFollowing 
+                    ? prevUser.followers.filter(f => String(f._id) !== String(activeUser._id)) // Forced string comparison
+                    : [...prevUser.followers, { _id: activeUser._id, username: activeUser.username }];                
+                return { ...prevUser, followers: updatedFollowers };
+            });
+
+            showAlert({message: 'Successfully updated following status.'})            
+        } catch (error) {
+            showAlert({
+                message: 'Error updating following status.', 
+                icon: 'bi-exclamation-circle-fill',
+                bgColor: 'var(--error-light)',
+                textColor: 'var(--error-dark)'
+            })            
+        }
+    }
+
     // ----- Error Handling ------ //
     if (loadingUser) return <LoadingBlock />;
     if (!user) return <NothingBlock message={"User not found."} />
@@ -92,13 +136,18 @@ function UserProfile() {
             <div className="header">
                 <div className="banner"></div>
                 <div className="profile-pic"><img src={user.avatar} alt="" /></div>
-                {activeUser && user._id === activeUser._id ?
-                    (<div
+                {
+                    activeUser && user._id === activeUser._id ?
+                    <div
                         className="user-edit-profile-btn"
                         onClick={openProfileEdit}>
                         Edit Profile <i className="bi bi-pencil"></i>
-                    </div>) :
-                    (<div className="user-follow-btn">Follow</div>)
+                    </div> :
+                    <div 
+                        className={`user-follow-btn ${isFollowing ? 'following' : ''}`}
+                        onClick={handleFollow}>
+                        {isFollowing ? 'Following' : 'Follow'}
+                    </div> 
                 }
 
             </div>
@@ -107,28 +156,32 @@ function UserProfile() {
                 <div className="user-stats">
                     <span onMouseEnter={() => setOpenFollowers(true)} onMouseLeave={() => setOpenFollowers(false)}>
                         {user.followers.length} followers
-                        <div
-                            className={`user-stats-modal ${openFollowers ? "" : "hidden"}`}
-                            onMouseLeave={() => setOpenFollowers(false)}>
-                            <ul>
-                                {user.followers.map((follower) => (
-                                    <li key={follower._id} onClick={() => navigate(`/profile/${follower._id}`)}>{follower.username}</li>
-                                ))}
-                            </ul>
-                        </div>
+                        {user.followers.length > 0 &&
+                            <div
+                                className={`user-stats-modal ${openFollowers ? "" : "hidden"}`}
+                                onMouseLeave={() => setOpenFollowers(false)}>
+                                <ul>
+                                    {user.followers.map((follower) => (
+                                        <li key={follower._id} onClick={() => navigate(`/profile/${follower._id}`)}>{follower.username}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        }
                     </span>
                     <span>•</span>
                     <span onMouseEnter={() => setOpenFollowing(true)} onMouseLeave={() => setOpenFollowing(false)}>
                         {user.following.length} following
-                        <div
-                            className={`user-stats-modal ${openFollowing ? "" : "hidden"}`}
-                            onMouseLeave={() => setOpenFollowing(false)}>
-                            <ul>
-                                {user.following.map((followed) => (
-                                    <li key={followed._id} onClick={() => navigate(`/profile/${followed._id}`)}>{followed.username}</li>
-                                ))}
-                            </ul>
-                        </div>
+                        {user.following.length > 0 &&
+                            <div
+                                className={`user-stats-modal ${openFollowing ? "" : "hidden"}`}
+                                onMouseLeave={() => setOpenFollowing(false)}>
+                                <ul>
+                                    {user.following.map((followed) => (
+                                        <li key={followed._id} onClick={() => navigate(`/profile/${followed._id}`)}>{followed.username}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        }
                     </span>
                 </div>
                 <div className="user-bio">{user.bio}</div>

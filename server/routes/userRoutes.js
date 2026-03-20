@@ -159,4 +159,55 @@ router.get('/get/:id', async (req, res) => {
     }
 })
 
+/**
+ * Check if user is following query user
+ * @route   GET /api/users/is_following/:current_user/:query_user
+ * @desc    Get user based on id
+ */
+router.get("/is_following/:current_user/:query_user", async (req, res) => {
+    try {
+        const { current_user, query_user } = req.params;
+        const isFollowing = await User.exists({ _id: current_user, following: query_user });
+        res.status(200).json({isFollowing: !!isFollowing});
+    } catch (error) {
+        console.error(error.message, error);
+        res.status(400).json({ message: error.message });
+    }
+})
+
+/**
+ * Follow target user
+ * @route   POST /api/users/toggle_follow/:current_user/:query_user
+ * @desc    Update target user's followers list and current user's following list
+ */
+router.post("/toggle_follow/:current_user/:target_user", async (req, res) => {
+    try {
+        const { current_user, target_user } = req.params;
+        // add middleware later: req.user.id
+
+        if (current_user === target_user) {
+            return res.status(400).json({ message: "Unable to follow own account." });
+        }
+
+        const currentUser = await User.findById(current_user);
+        const isFollowing = currentUser.following.includes(target_user);
+
+        if (isFollowing) {
+            // unfollow user
+            await User.findByIdAndUpdate(current_user, { $pull: { following: target_user } });
+            await User.findByIdAndUpdate(target_user, { $pull: { followers: current_user } });
+            res.status(200).json({ isFollowing: false });
+        } else {
+            // follow user
+            await User.findByIdAndUpdate(current_user, { $addToSet: { following: target_user } });
+            await User.findByIdAndUpdate(target_user, { $addToSet: { followers: current_user } });
+            res.status(200).json({ isFollowing: true });
+        }
+
+    } catch (error) {
+        console.error(error.message, error);
+        res.status(400).json({ message: error.message });
+    }
+})
+
 export default router;

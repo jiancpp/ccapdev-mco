@@ -42,6 +42,7 @@
     position: absolute;
     right: 0;
     bottom: -60px;
+    cursor: pointer;
 
     background: var(--gr-accent);
     padding: 10px 50px;
@@ -52,8 +53,10 @@
     border-radius: 30px;
 }
 
-.user-profile .header .user-follow-btn:hover {
-    background: var(--gr-accent);
+.user-profile .header .following {
+    background: var(--bg-main);
+    border: 1px solid var(--secondary-main);
+    color: var(--secondary-main);
 }
 
 .user-profile .header .user-edit-profile-btn {

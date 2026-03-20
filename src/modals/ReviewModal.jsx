@@ -261,7 +261,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
                         onClick={handleSubmit}
                         disabled={isFormInvalid}
                     >
-                        {modalMode == "Write" ? "Submit" : "Save"} Review
+                        {modalMode == "Edit" ? "Save" : "Submit"} Review
                     </button>
                 </div>
             </div>

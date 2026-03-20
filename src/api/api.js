@@ -84,6 +84,23 @@ export const getUser = async (userId) => {
     return await handleResponse(res, `Failed to fetch user ${userId}`);
 }  
 
+
+export const toggleFollow = async (userId, targetId) => {
+    const res = await fetch(`${BASE_URL}/users/toggle_follow/${userId}/${targetId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            // 'Authorization': `Bearer ${token}` // TODO: add authmiddleware later (express-sesion)
+        }
+    });
+    return await handleResponse(res, "Failed to update follow status");
+};
+
+export const checkIsFollowing = async (userId, queryId) => {
+    const res = await fetch(`${BASE_URL}/users/is_following/${userId}/${queryId}`);
+    return await handleResponse(res, `Failed to check follow status.`);
+}  
+
 /********************* REVIEW APIs **********************/
 /**
  * Fetches reviews created by user
