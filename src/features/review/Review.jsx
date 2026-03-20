@@ -174,8 +174,7 @@ function Review({ review, activeUser }) {
                     <span className='icon'><i className="bi bi-share-fill"></i></span>
                 </div>
             </div>
-            
-            {/* <ReviewReply key={review._id} review={review} activeUser={activeUser}/> */}
+            {review.reply && <ReviewReply key={review._id} review={review} activeUser={activeUser}/> }
         </div>
     )
 }
