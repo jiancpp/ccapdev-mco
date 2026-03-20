@@ -91,15 +91,18 @@ function Review({ review, activeUser }) {
                         (   <>
                             <li onClick={ () => {
                                 const {targetID, targetType, artist} = review
-                                console.log(` + checking retrieved ${review} ${artist} ${artist?._id} `);
+                                // console.log(` + checking retrieved ${review} ${artist} ${artist?._id} `);
                                 const title = targetType === 'Album' ? targetID?.albumName : targetID?.songTitle;
                                 preSelectReviewParams({
+                                    ...review,
+                                    review_header: review.review_header,
                                     targetID: targetID, 
                                     targetType: targetType, 
                                     title: title, 
                                     artistID: artist?._id, 
                                     cover: review.targetID?.cover,
-                                    selectedRating: review.rating
+                                    selectedRating: review.rating,
+                                    mode: 'Edit',
                                 });
                             }}>
                                 <span><i className="bi bi-pencil-fill"></i></span><span>Edit</span>

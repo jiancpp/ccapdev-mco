@@ -40,7 +40,7 @@ export const updateData = async (model, id, data) => {
     console.log('Attempting to update...');
     console.log(`  + checking api ${BASE_URL}/${model}/update/${id}`);
     
-    const res = await fetch(`${BASE_URL}/${model}/update    /${id}`, {
+    const res = await fetch(`${BASE_URL}/${model}/update/${id}`, {
         method: "PUT",
         headers: {
             'Content-Type': 'application/json'
