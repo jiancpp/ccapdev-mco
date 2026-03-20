@@ -102,7 +102,8 @@ function MainLayout({ activeUser, setActiveUser}) {
                 onClose={closeModal} 
                 activeUserID={activeUser?._id} 
                 preSelected={preSelected}
-                currentRating={selectedRating}/>
+                currentRating={selectedRating}
+                showAlert={showAlert} />
             <EditReviewModal
                 isOpen={isEditModalOpen} 
                 onClose={closeModal} 

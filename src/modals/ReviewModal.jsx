@@ -8,8 +8,9 @@ import { useState, useRef, useEffect } from 'react';
 import { createReview, getAllData, updateData } from '../api/api';
 
 import './ReviewModal.css';
+import { useOutletContext } from 'react-router-dom';
 
-export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating = null }) {
+export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating = null, showAlert }) {
     // List of data
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
@@ -164,7 +165,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
             }
             else {
                 await createReview(reviewData);
-                alert("Review submitted successfully!");
+                showAlert({message: 'Review submitted successfully!'})
             }
             
             setSelectedItem(null);
