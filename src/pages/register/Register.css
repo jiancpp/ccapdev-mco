@@ -165,6 +165,7 @@
 }
 
 #register .avatar .picture-container {
+    position: relative;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -192,13 +193,13 @@
 }
 
 #register .media-upload-btn {
-    min-width: 50px;
-    height: 50px;
+    min-width: 30px;
+    height: 30px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
     border: none;
     color: white;
@@ -245,6 +246,23 @@
 
 #register .media-upload-btn:hover .avatar-edit-overlay {
     opacity: 1;
+}
+
+.avatar-delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.403);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #register .upload-progress-container {

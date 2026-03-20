@@ -2,7 +2,6 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import AlertBlock from '../../components/AlertBlock';
 import { useMediaUpload } from '../../components/useMediaUpload';
-import { MediaPreviewStrip } from '../../components/MediaPreviewStrip';
 import "./Register.css"
 
 function Register() {
@@ -131,6 +130,17 @@ function Register() {
 
                         <div className="avatar span-v">
                             <div className="picture-container">
+                                {mediaAttachments?.url && (
+                                    <button
+                                        className="avatar-delete-btn"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            deleteMedia();
+                                        }}
+                                    >
+                                        &times;
+                                    </button>
+                                )}
                                 <div
                                     className="picture"
                                     style={{
