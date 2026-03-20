@@ -8,12 +8,12 @@ import { updateData } from '../api/api';
 
 function EditProfileModal({ isOpen, onClose, user, showAlert }) {
     // const { mediaAttachments, avatar, uploading, handleMediaUpload, deleteMedia, resetMedia, setMedia } = useMediaUpload(null, { multiple: false });
-    const [newUsername, setNewUserName] = useState(user.username);
-    const [newBio, setNewBio] = useState(user.bio);
+    const [newUsername, setNewUserName] = useState(user?.username || '');
+    const [newBio, setNewBio] = useState(user?.bio || '');
 
     const handleReset = () => {
-        setNewUserName(user.username);
-        setNewBio(user.bio);
+        setNewUserName(user?.username);
+        setNewBio(user?.bio);
     };
 
     const handleSave = async () => {
@@ -24,7 +24,7 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
         };
 
         try {
-            await updateData('users', user._id, userData);
+            await updateData('users', user?._id, userData);
             onClose();
             handleReset();
             window.location.reload(); // fix this later
@@ -64,7 +64,7 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
                                     />
                                 </label>
                             </div> */}
-                        <img src={`${user.avatar}`} alt="" />
+                        <img src={`${user?.avatar || '/assets/default.jpg'}`} alt="" />
                         <div className="change-picture">
                             <i className="bi bi-upload"></i>
                             <span>Upload File</span>
