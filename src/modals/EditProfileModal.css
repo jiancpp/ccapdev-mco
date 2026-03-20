@@ -62,47 +62,12 @@
 
 .edit-picture {
     position: relative;
-}
-
-.edit-picture, .edit-picture img {
     width: 200px;
     height: 200px;
-    border-radius: 100%;
-    /* box-shadow: -1px 1px 5px rgba(54, 52, 53, 0.5); */
-    cursor: pointer;
-}
-
-.edit-picture .change-picture { 
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: inherit;
-    height: inherit;
-    border-radius: inherit;
-    background: cyan;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    background-color: var(--secondary-main);
-    color: var(--secondary-light);
-    font-weight: 600;
-    opacity: 0; 
-    transition: opacity 0.3s;
-}
-
-.edit-picture .change-picture:hover {
-    opacity: 0.5; 
-}
-
-.edit-picture .change-picture i {
-    font-size: var(--fs-xxxl);
-}
-.edit-picture .change-picture span {
-    text-align: center;
-    width: 50%;
-    font-size: var(--fs-m);
+    background-image: url("/assets/default.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
 }
 
 .edit-item-container {
@@ -118,6 +83,7 @@
 }
 
 .edit-details input[type="text"], .edit-details textarea{
+    color: black;
     padding: 10px;
     background: var(--bg-main);
     border: 1px solid var(--secondary-main);
@@ -147,4 +113,60 @@
     border-radius: 10px;
     border: none;
     cursor: pointer;
+}
+
+.media-upload-btn {
+    width: 200px;
+    height: 200px;
+    border-radius: 500px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 4rem;
+    cursor: pointer;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+.media-upload-btn:hover {
+    border-color: #888;
+    color: #888;
+}
+
+.avatar-edit-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 3rem;
+    color: white;
+    border-radius: inherit;
+}
+
+.media-upload-btn:hover .avatar-edit-overlay {
+    opacity: 1;
+}
+
+.avatar-delete-btn {
+    margin-top: 8px;
+    margin-right: 8px;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.403);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px !important;
+    height: 30px !important;
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
