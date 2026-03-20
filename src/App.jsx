@@ -23,6 +23,7 @@ import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 import ReviewPage from "./features/review/ReviewPage";
 
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
+import LoadingBlock from "./components/LoadingBlock";
 
 const MOCK_USER = {
   _id: '69b9202a78b9e30e03f59186',
@@ -64,7 +65,7 @@ const [activeUser, setActiveUser] = useState(null); // Start with null
   }, []);
 
   if (isLoading) {
-    return <div className="loading-screen">Loading Unsynth...</div>;
+    return <LoadingBlock />;
   }
   return (
     <>
