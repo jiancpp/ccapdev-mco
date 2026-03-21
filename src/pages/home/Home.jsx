@@ -83,7 +83,7 @@ function Home() {
                         Songs
                     </button>
                     <div className="search-container">
-                        <ReviewSearchBar onSearchChange={setSearchTerm} />
+                        <ReviewSearchBar onSearchChange={setSearchTerm} placeholder={'Search reviews, music, or artists...'}/>
                     </div>
                 </div>
             </div>

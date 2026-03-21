@@ -40,18 +40,17 @@ function ReviewReply({ review, activeUser }) {
                 </div> */}
 
                 <div className='post-content'>
-                    <div className="profile">
-                        <img src={review.artist.user.avatar} alt="" />
+                    <div className="profile avatar-picture"
+                        style={{
+                            backgroundImage: review?.artist?.user ? `url(${review.artist.user.avatar})` : undefined
+                        }}>
                     </div>
                     <div className="review-details">
-                        <div className='user'>
-                            <span
-                                className="username"
-                                onClick={() => navigate(`/profile/${artist._id}`)}>
-                                {review.artist.name}</span>  3hrs ago
-                        </div>
-
-                        <div className="description">{review.reply.content}</div>
+                        <span
+                            className="username"
+                            onClick={() => navigate(`/profile/${artist._id}`)}>
+                            {review.artist.name}</span>
+                        <div className="reply-content">{review.reply.content}</div>
                     </div>
                 </div>
             </div>
