@@ -79,7 +79,7 @@ router.get('/liked/:user_id', async (req, res) => {
         for (let id of likedReviewIds) {
             console.log(`  + Liked review id ${id} stored.`);
         }
-        const reviews = await Review.find({ _id: { $in: likedReviewIds } }).populate(reviewPopulate);
+        const reviews = await Review.find({ _id: { $in: likedReviewIds } }).populate(reviewPopulate).sort({ createdAt: -1 });
 
        // Return review data
         res.status(200).json(reviews);
