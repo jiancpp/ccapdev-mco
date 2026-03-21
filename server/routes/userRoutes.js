@@ -212,16 +212,14 @@ router.post("/toggle_follow/:current_user/:target_user", async (req, res) => {
 
 router.put('/update/:id', async (req, res) => {
     try {
-        console.log(`  + checking routes`);
-        const user = await User.findById(req.params.id);
+        const user = await User.findByIdAndUpdate(req.params.id);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
         user.username = req.body.username || user.username;
         user.bio = req.body.bio || user.bio;
-        
-        console.log(user);
+        user.avatar = req.body.avatar;
 
         await user.save();
         res.status(200).json({message: 'Successfully updated.'})
