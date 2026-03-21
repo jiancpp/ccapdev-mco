@@ -81,39 +81,3 @@ app.listen(PORT, () => {
 app.post('/api/upload-image', async (req, res) => {
     res.json({ success: true });
 });
-
-
-/**
- * Fetch Data from MongoDB
- */
-// app.get('/api/users', async (req, res) => {
-//     try {
-//         // mongoose method that fetches all documents
-//         const allUsers = await User.find(req.query).select("-password"); // hide passwords
-//         res.status(200).json(allUsers);
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
-//     }
-// })
-
-// /**
-//  *  Create new model data in MongoDB
-//  */
-
-// app.post('/api/users', async (req, res) => {
-//     try {
-//         const newUser = new User(req.body);
-//         const savedUser = await newUser.save();
-
-//         // New user is an artist
-//         if (savedUser.role === 'artist') {
-//             await Artist.create({ 
-//                 user: savedUser._id,
-//             });
-//         }
-
-//         res.status(201).json(savedUser);
-//     } catch (err) {
-//         res.status(400).json({ error: err.message });
-//     }
-// })

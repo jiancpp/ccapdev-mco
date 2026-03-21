@@ -25,16 +25,6 @@ import ReviewPage from "./features/review/ReviewPage";
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 import LoadingBlock from "./components/LoadingBlock";
 
-const MOCK_USER = {
-  _id: '69b9202a78b9e30e03f59186',
-  username: "Torotottie",
-  password: "password-Torotottie",
-  email: "Torotottie@gmail.com",
-  bio: "ꉂ(˵˃ ᗜ ˂˵)",
-  avatar: "/assets/torotottie.jpg",
-  role: "user",    
-}
-
 function App() {
 const [activeUser, setActiveUser] = useState(null); // Start with null
   const [isLoading, setIsLoading] = useState(true);   // Add a loading state
