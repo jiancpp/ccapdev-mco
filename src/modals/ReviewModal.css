@@ -217,8 +217,9 @@ textarea::placeholder {
 }
 
 /* Upload button */
-.media-upload-btn {
+.media-group .media-upload-btn {
     min-width: 100px;
+    width: 100px;
     height: 100px;
     border-radius: 8px;
     border: 2px dashed #ccc;
