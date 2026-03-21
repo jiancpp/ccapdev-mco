@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import express from 'express';
 
 import Review from '../models/Review.js';
@@ -114,10 +115,10 @@ router.get('/', async (req, res) => {
  */
 router.get('/filter', async (req, res) => {
     try {
-        const filters = [ 'user', 'targetID', 'targetType' ];
-        const searchContent = req.query['searchContent']
+        const { user, targetID, targetType, searchContent, artistName, songTitle, albumTitle } = req.query;
         let query = {};
 
+        const filters = [ 'user', 'targetID', 'targetType' ];
         filters.forEach(key => {
             if (req.query[key] && req.query[key] !== "") {
                 query[key] = req.query[key];
@@ -125,25 +126,32 @@ router.get('/filter', async (req, res) => {
         })
 
         if (searchContent) {
+            const [users, artists, songs, albums] = await Promise.all([
+                mongoose.model('User').find({ username: { $regex: searchContent, $options: 'i' } }).select('_id'),
+                mongoose.model('Artist').find({ name: { $regex: searchContent, $options: 'i' } }).select('_id'),
+                mongoose.model('Song').find({ title: { $regex: searchContent, $options: 'i' } }).select('_id'),
+                mongoose.model('Album').find({ albumName: { $regex: searchContent, $options: 'i' } }).select('_id')
+            ]);
+
+            const userIds = users.map(a => a._id);
+            const artistIds = artists.map(a => a._id);
+            const targetIds = [...songs.map(s => s._id), ...albums.map(a => a._id)];
+
             query.$or = [
                 { review_header: { $regex: searchContent, $options: 'i' } },
-                { review_content: { $regex: searchContent, $options: 'i' } }
+                { review_content: { $regex: searchContent, $options: 'i' } },
+                { user: { $in: userIds } },
+                { artist: { $in: artistIds } },
+                { targetID: { $in: targetIds } }
             ];
         }
 
         console.log(`Fetching all reviews based on filters...`);
         const reviews = await Review
             .find(query)
-            .sort({ createdAt: -1 })
             .populate(reviewPopulate)
-            .setOptions({ strictPopulate: false });;
-
-        reviews.forEach(review => {
-            if (review.targetType == 'Album') {
-                console.log(` + Check album tracks: ${review.targetID.albumName} - ${review.targetID.songCount}`)
-            }
-        })
-        
+            .sort({ createdAt: -1 })
+            .setOptions({ strictPopulate: false });;        
         res.status(200).json(reviews);
     } catch (err) {
         console.error("Error fetching reviews:", err);

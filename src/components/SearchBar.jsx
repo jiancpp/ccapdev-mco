@@ -66,7 +66,7 @@ export function SearchBar({ songs = [], albums = [], artists = [], onSelect }) {
     );
 }
 
-export function ReviewSearchBar({ onSearchChange }) {
+export function ReviewSearchBar({ onSearchChange, placeholder = null }) {
     const [localVal, setLocalVal] = useState("");
 
     const handleSubmit = (e) => {
@@ -94,7 +94,7 @@ export function ReviewSearchBar({ onSearchChange }) {
                         onChange={e => {
                             setLocalVal(e.target.value);
                         }}
-                        placeholder="Search reviews" 
+                        placeholder={placeholder || "Search reviews"}
                     />
                     <button type="submit" style={{ display: 'none' }} />  
                 </form>  
