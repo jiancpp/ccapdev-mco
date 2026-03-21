@@ -86,11 +86,15 @@
     margin: 10px;
 }
 
-.post .profile img {
-    width: inherit;
-    height: inherit;
-    border-radius: inherit;
-}
+.post .avatar-picture {
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../../../public/assets/default.jpg);
+    background-color: white;
+    /* Fallback color */
+  }
 
 .edited {
     color: #928b8b;

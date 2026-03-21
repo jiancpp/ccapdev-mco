@@ -220,6 +220,7 @@ router.put('/update/:id', async (req, res) => {
 
         user.username = req.body.username || user.username;
         user.bio = req.body.bio || user.bio;
+        user.avatar = req.body.avatar || user.avatar;
         
         console.log(user);
 

@@ -28,6 +28,7 @@
     width: 120px;
     height: 120px;
     border-radius: 60px;
+    border: 3px solid var(--bg-main)
 }
 
 .user-profile .header .profile-pic img {

@@ -32,6 +32,8 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
             avatar: avatar?.url || user?.avatar
         };
 
+        console.log(userData);
+
         try {
             await updateData('users', user?._id, userData);
             onClose();
@@ -48,12 +50,13 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
                 <h2 className="profile-modal-title">Profile Details</h2>
                 <div className="edit-container">
                     <div className="edit-picture">
-                        {avatar?.url && (
+                        {avatar?.url && avatar?.url !== '/assets/default.jpg' && (
                             <button
                                 className="avatar-delete-btn"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     deleteMedia();
+                                    setMedia({ url: '/assets/default.jpg' });
                                 }}
                             >
                                 &times;

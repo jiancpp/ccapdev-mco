@@ -135,7 +135,11 @@ function UserProfile() {
             {/* HEADER PROFILE */}
             <div className="header">
                 <div className="banner"></div>
-                <div className="profile-pic"><img src={user.avatar} alt="" /></div>
+                <div className="profile-pic avatar-picture"
+                    style={{
+                        backgroundImage: user ? `url(${user.avatar})` : undefined
+                    }}>
+                </div>
                 {
                     activeUser && user._id === activeUser._id ?
                     <div
