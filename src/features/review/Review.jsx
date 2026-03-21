@@ -127,8 +127,10 @@ function Review({ review, activeUser }) {
             </div>
 
             <div className='post-content'>
-                <div className="profile">
-                    <img src={review.user?.avatar || "/assets/torotottie.jpg"} alt="" />
+                <div className="profile avatar-picture"
+                    style={{
+                        backgroundImage: review.user ? `url(${review.user.avatar})` : undefined
+                    }}>
                 </div>
                 <div className="review-details">
                     <div className='user'>

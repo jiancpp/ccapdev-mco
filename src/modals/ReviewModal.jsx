@@ -154,8 +154,8 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
             showAlert({
                 message: 'Failed to create review.',
                 icon: '',
-                bgColor: 'var(--error)', 
-                textColor: '#000000'
+                bgColor: 'var(--error-light)', 
+                textColor: 'var(--error-dark)'
             });
         }
     };

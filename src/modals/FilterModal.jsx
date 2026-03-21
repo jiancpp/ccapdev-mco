@@ -18,6 +18,8 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
         }));
     };
 
+    console.log(currentFilters);
+
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div className="modal-content filter-modal" onClick={e => e.stopPropagation()}>
@@ -47,8 +49,8 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                         {ratings.map(star => (
                             <button 
                                 key={star}
-                                className={`rating-btn ${tempFilters.rating === star ? 'active' : ''}`}
-                                onClick={() => setTempFilters({...tempFilters, rating: star})}
+                                className={`rating-btn ${tempFilters.aveRating === star ? 'active' : ''}`}
+                                onClick={() => setTempFilters({...tempFilters, aveRating: star})}
                             >
                                 <i className="bi-star-fill" style={{color: '#ffc107'}}></i> {star}-Star +
                             </button>
@@ -57,7 +59,7 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                 </div>
 
                 <div className="modal-footer">
-                    <button className="clear-btn" onClick={() => setTempFilters({ genres: [], rating: 0 })}>Reset</button>
+                    <button className="clear-btn" onClick={() => setTempFilters({ genres: [], aveRating: 0 })}>Reset</button>
                     <button className="apply-btn" onClick={() => onApply(tempFilters)}>Apply Filters</button>
                 </div>
             </div>

@@ -87,13 +87,15 @@
     overflow: hidden;
 }
 
-.post .profile img {
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    object-fit: cover;
-    object-position: center;
-}
+.post .avatar-picture {
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url(../../../public/assets/default.jpg);
+    background-color: white;
+    /* Fallback color */
+  }
 
 .edited {
     color: #928b8b;

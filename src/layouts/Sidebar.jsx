@@ -13,7 +13,7 @@ function Sidebar({ openModal }) {
 
     return (
         <div className="sidebar">
-            <button className={ currentPath === "/" || currentPath.startsWith("/profile") ? "nav-button current-page" : "nav-button" } 
+            <button className={ currentPath === "/home" || currentPath.startsWith("/home/profile") ? "nav-button current-page" : "nav-button" } 
                     onClick={ goToHome }>
                 <i className="bi bi-house-fill"></i>
                 <span>Home</span>

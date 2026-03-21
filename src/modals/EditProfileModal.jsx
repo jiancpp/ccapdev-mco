@@ -34,6 +34,8 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
             avatar: avatar?.url ?? user?.avatar
         };
 
+        console.log(userData);
+
         try {
             await updateData('users', user?._id, userData);
             onClose();
