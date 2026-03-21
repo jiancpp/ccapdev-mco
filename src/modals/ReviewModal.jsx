@@ -149,12 +149,13 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
             setRating(0);
             if (rteRef.current) rteRef.current.value = "";
             onClose();
+            window.location.reload();
         } catch (error) {
             showAlert({
                 message: 'Failed to create review.',
                 icon: '',
-                bgColor: 'var(--error)', 
-                textColor: '#000000'
+                bgColor: 'var(--error-dark)', 
+                textColor: 'var(--error-light)'
             });
         }
     };
