@@ -10,26 +10,28 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
     const { mediaAttachments: avatar, uploading, handleMediaUpload, deleteMedia, resetMedia, setMedia } = useMediaUpload(null, { multiple: false });
     const [newUsername, setNewUserName] = useState(user?.username || '');
     const [newBio, setNewBio] = useState(user?.bio || '');
+    const [newAvatar, setNewAvatar] = useState(user?.avatar || '/assets/default.jpg');
 
     useEffect(() => {
         if (!isOpen) {
             resetMedia();
         } else {
+            // Only initialize when modal opens, don't re-run if user.avatar changes
             setMedia(user?.avatar ? { url: user.avatar } : null);
         }
-    }, [isOpen, user?.avatar]);
+    }, [isOpen]);
 
     const handleReset = () => {
         setNewUserName(user?.username);
         setNewBio(user?.bio);
+        setNewAvatar(user?.avatar);
     };
 
     const handleSave = async () => {
         const userData = {
-            ...user,
             username: newUsername,
             bio: newBio,
-            avatar: avatar?.url || user?.avatar
+            avatar: avatar?.url ?? user?.avatar
         };
 
         console.log(userData);
@@ -38,11 +40,12 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
             await updateData('users', user?._id, userData);
             onClose();
             handleReset();
-            window.location.reload(); // fix this later
+            window.location.reload();
         } catch (error) {
-            showAlert({message: 'Error updating profile'})
+            showAlert({ message: 'Error updating profile' });
         }
-    }
+    };
+
     return (
         <div className={`profile-modal-overlay ${isOpen ? "open" : ""}`} onClick={ onClose }>
             <div className="profile-modal-content" onClick={ (e) => e.stopPropagation()}>
@@ -50,13 +53,12 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
                 <h2 className="profile-modal-title">Profile Details</h2>
                 <div className="edit-container">
                     <div className="edit-picture">
-                        {avatar?.url && avatar?.url !== '/assets/default.jpg' && (
+                        {avatar?.url && !avatar?.url?.includes('default') && (
                             <button
                                 className="avatar-delete-btn"
                                 onClick={(e) => {
                                     e.preventDefault();
-                                    deleteMedia();
-                                    setMedia({ url: '/assets/default.jpg' });
+                                    setMedia({ url: "/assets/default.jpg" });
                                 }}
                             >
                                 &times;
@@ -103,7 +105,9 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
                                 onChange={(e) => setNewBio(e.target.value)}
                             />
                         </div>
-                        <button className='save' onClick={handleSave}>Save</button>
+                        <button className='save' onClick={handleSave} disabled={uploading}>
+                            {uploading ? 'Uploading...' : 'Save'}
+                        </button>
                     </div>
                 </div>
             </div>
