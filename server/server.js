@@ -71,6 +71,13 @@ app.post('/api/upload-image', async (req, res) => {
   res.json({ success: true });
 });
 
+app.get('/api/debug-session', (req, res) => {
+    res.json({
+      sessionID: req.sessionID,
+      session: req.session
+    });
+  });
+
 // Serve React frontend (dist folder)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
