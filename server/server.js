@@ -78,11 +78,11 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, '../dist')));
 
 // Catch-all: send React's index.html for any non-API route
-app.get('*', (req, res) => {
-  if (!req.path.startsWith('/api')) {
-    res.sendFile(path.join(__dirname, '../dist', 'index.html'));
-  }
-});
+app.get('/{*splat}', (req, res) => {
+    if (!req.path.startsWith('/api')) {
+      res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+    }
+  });
 
 // Connect to MongoDB, then start server
 mongoose
