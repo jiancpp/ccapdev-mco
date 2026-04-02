@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import './Navbar.css'
 import { act, useState } from "react";
-
+import { BASE_URL } from "../api/api";
 
 function Navbar({ activeUser, setActiveUser }) {
     const navigate = useNavigate();
@@ -53,7 +53,7 @@ function Navbar({ activeUser, setActiveUser }) {
                             onClick={
                             async () => {
                                 try {
-                                    const response = await fetch('http://localhost:5001/api/users/logout', {
+                                    const response = await fetch(`${BASE_URL}/users/logout`, {
                                         method: 'POST',
                                         credentials: 'include'
                                     });

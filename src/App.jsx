@@ -3,6 +3,7 @@
  */
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "./api/api";
 
 /******** Layouts ********/
 import MainLayout from './layouts/MainLayout'
@@ -32,7 +33,7 @@ function App() {
   useEffect(() => {
     const checkUser = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/users/check-session', {
+        const response = await fetch(`${BASE_URL}/users/check-session`, {
           method: 'GET',
           credentials: 'include'
         });

@@ -1,8 +1,10 @@
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { useState } from "react";
-import AlertBlock from '../../components/AlertBlock';
+import { BASE_URL } from "../../api/api";
 import { useMediaUpload } from '../../components/useMediaUpload';
+import AlertBlock from '../../components/AlertBlock';
 import "./Register.css"
+
 
 function Register() {
     const navigate = useNavigate();
@@ -75,7 +77,7 @@ function Register() {
         };
 
         try {
-            const response = await fetch('http://localhost:5001/api/users/register', {
+            const response = await fetch(`${BASE_URL}/users/register`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ userData, confirmPassword }),
