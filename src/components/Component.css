@@ -99,3 +99,106 @@
         opacity: 0;
     }
 }
+
+
+/* REPLY FORM */
+.reply-form {
+    background: linear-gradient(to bottom, rgb(249, 249, 249), white, white, white);
+    box-shadow: 1px 2px 5px rgba(160, 160, 160, 0.3);
+
+    margin: 20px;
+    padding: 5px 0;
+    border-radius: 20px;
+}
+
+.reply-form .post-content {
+    display: flex;
+    align-items: flex-start; /* Keeps avatar at the top even if text is long */
+}
+
+/* AVATAR FIX */
+.avatar-picture {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0; /* Prevents avatar from squishing */
+}
+
+/* HEADER TEXT */
+.review-details {
+    flex-grow: 1;
+}
+
+.reply-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.reply-form .username {
+    font-weight: 700;
+    color: var(--secondary-main, #333);
+}
+
+/* INPUT BOX */
+.reply-input-container {
+    position: relative;
+    padding: 12px;
+    border-radius: 12px;
+    background: #f9f9f9;
+    border: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.reply-input-container:focus-within {
+    background: #fff;
+    border-color: var(--secondary-main);
+    box-shadow: 0 0 0 3px rgba(var(--secondary-rgb), 0.1);
+}
+
+.reply-form textarea {
+    border: none;
+    width: 100%;
+    min-height: 60px; /* Shorter initial height for replies */
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical; /* Allows user to drag it taller if needed */
+    margin-bottom: 30px; /* Leave space for the button */
+}
+
+.reply-form textarea:focus{
+    outline: none;
+} 
+
+/* SEND BUTTON */
+.post-reply-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--secondary-main, --primary-main);
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.post-reply-btn:hover {
+    background: var(--primary-main);
+    transform: scale(1.05);
+}
+
+.post-reply-btn:active {
+    transform: scale(0.95);
+}

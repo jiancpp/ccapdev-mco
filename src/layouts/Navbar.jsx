@@ -15,7 +15,10 @@ function Navbar({ activeUser, setActiveUser }) {
                     <ul>
                         {activeUser && (
                             <li onClick={() => {
-                                if (activeUser?.role === 'artist') return;
+                                if (activeUser?.role === 'artist') {
+                                    navigate(`/artist-view/${activeUser._id}`);
+                                    return;
+                                };
                                 navigate(`/profile/${activeUser._id}`)
                             }}>
                                 <img src={activeUser?.avatar}></img>

@@ -195,6 +195,14 @@
     color: #ff751f;
 }
 
+.post .post-actions .reply-btn {
+    background: var(--gr-primary);
+}
+
+.post .post-actions .reply-btn span{
+    color: var(--text-contrast);
+}
+
 .post .username {
     font-weight: 600;
 }

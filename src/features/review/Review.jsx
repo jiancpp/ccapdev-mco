@@ -6,6 +6,7 @@ import { getIsReactedByUser, postReaction, getTimeAgo, isReviewEdited, copyLink,
 import './Review.css'
 import ReviewEmbed from './ReviewEmbed';
 import ReviewReply from './ReviewReply';
+import ReplyForm from "../../components/ReplyForm";
 import { StarRating } from "../../components/StarRating";
 import { MediaPreviewStrip } from '../../components/MediaPreviewStrip';
 
@@ -13,6 +14,7 @@ function Review({ review, activeUser }) {
     // Settings
     const [openOptions, setOpenOptions] = useState("hidden");
     const [deleteReview, setDeleteReview] = useState("visible");
+    const [replyTrigger, setReplyTrigger] = useState(false); 
     const { showAlert, preSelectReviewParams } = useOutletContext();
 
     // Review Data
@@ -179,7 +181,14 @@ function Review({ review, activeUser }) {
                 <div className="post-btn share" onClick={() => copyLink('review', review._id, showAlert)}>
                     <span className='icon'><i className="bi bi-share-fill"></i></span>
                 </div>
+
+                {activeUser?.role == 'artist' && activeUser?._id == review.artist.user._id &&
+                    <div className="post-btn reply-btn" onClick={() => setReplyTrigger((prev) => !prev)}>
+                        <span className='icon'><i className="bi bi-reply-fill"></i></span>
+                    </div>
+                }
             </div>
+            {replyTrigger &&  <ReplyForm key={review._id} review={review} activeUser={activeUser}/>}
             {review.reply && <ReviewReply key={review._id} review={review} activeUser={activeUser}/> }
         </div>
     )
