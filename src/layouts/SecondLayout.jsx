@@ -7,15 +7,27 @@ import Navbar from './Navbar';
 import ReplyModal from '../modals/ReplyModal';
 import EditProfileModal from "../modals/EditProfileModal";
 import LoadingBlock from "../components/LoadingBlock";
+import AlertBlock from "../components/AlertBlock";
 
 function SecondLayout({ activeUser, setActiveUser}) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isProfileOpen, setIsProfileOpen] = useState(false);
+    const [isAlertOn, setIsAlertOn] = useState(false);
+    const [alertConfig, setAlertConfig] = useState({
+        message: '',
+        icon: 'bi-check-circle-fill'
+    });
 
-    const openModal = () => setIsModalOpen(true);
-    const closeModal = () => setIsModalOpen(false);
     const openProfileEdit = () => setIsProfileOpen(true);
     const closeProfileEdit = () => setIsProfileOpen(false);
+
+    const showAlert = (config) => {
+        setAlertConfig(prev => ({
+            ...prev,    
+            ...config
+        }));
+        setIsAlertOn(true);
+        setTimeout(() => setIsAlertOn(false), 2000); // Reset after 2 seconds
+    };
 
     console.log(activeUser);
     
@@ -26,12 +38,22 @@ function SecondLayout({ activeUser, setActiveUser}) {
 
                 {/* Main Content Panel */}
                 <div className="content">
-                    <Outlet context={{ activeUser, openModal, openProfileEdit }}/>
+                    {isAlertOn && (
+                        <AlertBlock
+                            message={alertConfig.message}
+                            icon={alertConfig.icon}
+                            bgColor={alertConfig.bgColor}
+                            textColor={alertConfig.textColor}
+                            styling={{
+                                width: '96%'
+                            }}
+                        />
+                    )}
+                    <Outlet context={{ activeUser, openProfileEdit, showAlert, setAlertConfig}}/>
                 </div>
             </div>
 
             {/* Global Modal/s */}
-            <ReplyModal isOpen={isModalOpen} onClose={closeModal} />
             <EditProfileModal isOpen={isProfileOpen} onClose={closeProfileEdit} user={activeUser} />
         </>
     )

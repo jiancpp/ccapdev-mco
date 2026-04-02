@@ -47,4 +47,23 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.put('/update/:id', async (req, res) => {
+    try {
+        const artist = await Artist.findByIdAndUpdate(req.params.id);
+        if (!artist) {
+            return res.status(404).json({ message: "Artist not found" });
+        }
+
+        console.log(req.body.genre)
+        artist.name = req.body.name || artist.name;
+        artist.genre = req.body.genre || artist.genre;
+
+        await artist.save();
+        res.status(200).json({message: 'Successfully updated.'})
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({error: error.message});
+    }
+})
+
 export default router;

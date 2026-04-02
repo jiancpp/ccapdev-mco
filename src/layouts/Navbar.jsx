@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import './Navbar.css'
-import { useState } from "react";
+import { act, useState } from "react";
 
 
 function Navbar({ activeUser, setActiveUser }) {
@@ -21,7 +21,11 @@ function Navbar({ activeUser, setActiveUser }) {
                                 };
                                 navigate(`/profile/${activeUser._id}`)
                             }}>
-                                <img src={activeUser?.avatar}></img>
+                                <span className="profile avatar-picture"
+                                    style={{
+                                        backgroundImage: activeUser ? `url(${activeUser?.avatar})` : undefined,
+                                    }}>
+                                </span>
                                 <div>
                                     <b>{activeUser?.username}</b><br/>
                                     <span style={{
@@ -33,6 +37,14 @@ function Navbar({ activeUser, setActiveUser }) {
                                 </div>
                             </li> 
                         )}
+                        <li 
+                            style={{
+                                fontSize: 'var(--fs-sm)',
+                                color: 'var(--text-muted)'                
+                            }}
+                            onClick={() => navigate("/home")}>
+                            Go to Feed
+                        </li>
                         <li 
                             style={{
                                 fontSize: 'var(--fs-sm)',

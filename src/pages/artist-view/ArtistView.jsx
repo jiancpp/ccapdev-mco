@@ -5,21 +5,29 @@ import "./ArtistView.css";
 import Review from "../../features/review/Review";
 import NothingBlock from "../../components/NothingBlock";
 import { StarRating } from "../../components/StarRating";
-import { getAllData, getAlbumsByArtist, getSongsByArtist, getReviewsForArtist } from "../../api/api";
+import { getAllData, getAlbumsByArtist, getSongsByArtist, getReviewsForArtist, updateData } from "../../api/api";
 
+const getGenres = (genreString) => {
+    if (genreString == '') return [];
+    const genres = genreString.split('/');
+    console.log(genres);
+    return genres
+}
 
 function ArtistView() {
     const navigate = useNavigate();
     const { artist_id } = useParams();
-    const { activeUser } = useOutletContext();
-    
+    const { activeUser, openProfileEdit, showAlert } = useOutletContext();
     const [activeTab, setActiveTab] = useState("reviews");
+    const [editGenreTrigger, setEditGenreTrigger] = useState(false);
 
     // Data
     const [artist, setArtist] = useState(null);
     const [reviews, setReviews] = useState([]);
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
+    const [genres, setGenres] = useState([]);
+    const [editGenreText, setEditGenreText] = useState("");
  
     useEffect(() => {
         const fetchData = async () => {
@@ -37,14 +45,53 @@ function ArtistView() {
                 setAlbums(albumsData ?? []);
                 setSongs(songsData ?? []);
                 setReviews(reviewsData ?? []);
+                setGenres(getGenres(tempArtist.genre));
             } catch (error) {
                 console.error("Error loading artist profile data:", error);
             }
         }
         fetchData();
-    }, [artist_id])
+    }, [artist_id]);
 
-    if (!artist) return( <div style={{ padding: "20px" }}>Artist not found</div> );
+    const toggleEditGenre = () => {
+        if (!editGenreTrigger) {
+            setEditGenreText(genres.join(', ')); // Sync array to string for editing
+        }
+        setEditGenreTrigger(!editGenreTrigger);
+    };
+
+    const saveGenres = async () => {
+        try {
+            const genreArray = editGenreText.split(', ')
+            .map(g => g.trim())
+            .filter(g => g !== "");
+
+            await updateData('artists', artist?._id, { 
+                genre: genreArray.join('/') // Keep your DB format (slashes)
+            });
+
+            setGenres(genreArray); // Update local UI state
+            setEditGenreTrigger(false); // Close the edit box
+            showAlert({ 
+                message: 'Genres updated!', 
+                icon: 'bi-check-circle-fill',
+                bgColor: 'var(--success-light',
+                textColor: 'var(--success-dark)'
+            });
+        } catch (error) {
+            console.error(error.message);
+            showAlert({ 
+                message: 'Error updating genres',
+                icon: 'bi-exclamation-circle-fill',
+                status: 'error',
+                styling: {
+                    width: '100%'
+                }
+            });
+        }
+    }
+
+    if (!artist) return <></>;
 
     return (
         <div className="artist-view-container">
@@ -186,14 +233,14 @@ function ArtistView() {
                 <div className="dashboard-item">
                     <div className="item-header">
                     <h3>Public Profile</h3>
-                    <button className="edit-icon-btn" title="Edit Profile">
+                    <button className="edit-icon-btn" title="Edit Profile" onClick={() => openProfileEdit()}>
                         <i className="bi bi-pencil-fill"></i>
                     </button>
                     </div>                    
                     <dl className="profile-details">
                         <div className="detail-group">
-                            <dt>Display Name</dt>
-                            <dd>{artist.name}</dd>
+                            <dt>Username</dt>
+                            <dd>{activeUser.username}</dd>
                         </div>
                         <div className="detail-group">
                             <dt>Description</dt>
@@ -206,14 +253,31 @@ function ArtistView() {
                 <div className="dashboard-item">
                     <div className="item-header">
                     <h3>Genre/s</h3>
-                    <button className="edit-icon-btn">
+                    <button className="edit-icon-btn" onClick={() => toggleEditGenre()}>
                         <i className="bi bi-pencil-fill"></i>
                     </button>
                     </div>                    
                     <div className="tag-container">
-                        <span className="genre-tag">Pop</span>
-                        <span className="genre-tag">R&B</span>
+                        {!genres.length 
+                        ? <span>No genres set.</span>                        
+                        : genres.map((genre, index) => (
+                            // Use .map() and make sure to provide a unique 'key'
+                            <span key={index} className="genre-tag">{genre}</span>
+                        ))}
                     </div>
+                    {editGenreTrigger && <div className="edit-tags-container">
+                        <textarea 
+                            id='genres-input' 
+                            placeholder="e.g. Rock, Jazz, Techno"
+                            value={editGenreText}
+                            onChange={(e) => setEditGenreText(e.target.value)}
+                            rows="4"
+                        />
+                        <small style={{ color: '#888', marginTop: '5px', display: 'block' }}>
+                            Separate genres with commas.
+                        </small>
+                        <button onClick={() => saveGenres()}>Save</button>
+                    </div>}
                 </div>
             </div>
         </div>

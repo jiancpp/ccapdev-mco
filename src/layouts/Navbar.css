@@ -101,6 +101,7 @@ nav div {
 
 .profile-settings-modal li {
     display: flex;
+    justify-content: flex-start;
     align-items: center;
     margin: 6px;
     padding: 5px 10px;

@@ -355,6 +355,37 @@
     /* font-weight: 500; */
 }
 
-.tag-container {
+.tag-container, .edit-tags-container {
+    width: inherit;
     margin: 20px; 
+}
+
+.edit-tags-container textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.edit-tags-container textarea:focus {
+    outline: none;
+}
+
+.edit-tags-container button{
+    background: var(--secondary-main, --primary-main);
+    color: white;
+    border: none;
+    margin-top: 12px;
+    width: 50px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.edit-tags-container button:hover {
+    background: var(--accent-main);
+    transform: scale(1.03);
 }

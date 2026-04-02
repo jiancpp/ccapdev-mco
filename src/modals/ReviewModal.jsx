@@ -9,12 +9,12 @@ import { useMediaUpload } from '../components/useMediaUpload';
 import AlertBlock from '../components/AlertBlock';
 
 import { useNavigate, useOutletContext } from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, act } from 'react';
 import { createReview, getAllData, updateData } from '../api/api';
 
 import './ReviewModal.css';
 
-export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected, currentRating = null }) {
+export default function ReviewModal({ isOpen, onClose, activeUser, preSelected, currentRating = null }) {
     // List of data
     const [songs, setSongs] = useState([]);
     const [albums, setAlbums] = useState([]);
@@ -114,12 +114,22 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
     };
 
     const handleSubmit = async () => {
+        if (activeUser?.role != 'user') {
+            showAlert({
+                message: 'Not authorized to create review. Log in using User account',
+                icon: '',
+                bgColor: 'var(--error-light)', 
+                textColor: 'var(--error-dark)'
+            });
+            return;
+        }
+
         const finalRating = rating || currentRating; 
         if (!selectedItem || !header || !finalRating) return;
         let html = rteRef.current.getHtml();
 
         const reviewData = {
-            user: activeUserID,
+            user: activeUser?._id,
             artist: selectedItem.artistID,
             targetType: selectedItem.type,
             targetID: selectedItem._id,
@@ -270,7 +280,7 @@ export default function ReviewModal({ isOpen, onClose, activeUserID, preSelected
     );
 }
 
-export function EditReviewModal({ isOpen, onClose, review, activeUserID }) {
+export function EditReviewModal({ isOpen, onClose, review, activeUser }) {
     if (!review) return null;
     const reviewData = {
         id: review._id,
@@ -295,7 +305,7 @@ export function EditReviewModal({ isOpen, onClose, review, activeUserID }) {
             key={review._id}
             isOpen={isOpen}
             onClose={onClose}
-            activeUserID={activeUserID}
+            activeUser={activeUser}
             preSelected={reviewData} // ONLY ONE PROP for the data!
             currentRating={review.rating}
         />
