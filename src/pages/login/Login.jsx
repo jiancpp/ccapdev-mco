@@ -37,9 +37,9 @@ function Login({ setActiveUser }) {
         try {
             const response = await fetch(`${BASE_URL}/users/login`, {
                 method: 'POST',
+                credentials: 'include',  
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ identifier, password }),
-                credentials: 'include'
             });
 
             const data = await response.json();
