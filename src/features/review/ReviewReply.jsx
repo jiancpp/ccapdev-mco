@@ -2,9 +2,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import './ReviewReply.css'
 import './Review.css'
+import { getTimeAgo } from '../../api/api';
 
-import { dummyUsers } from "../../data/dummyUsers";
-import { dummyArtists } from "../../data/dummyArtists";
 import { useState } from "react";
 
 function ReviewReply({ review, activeUser }) {
@@ -18,7 +17,7 @@ function ReviewReply({ review, activeUser }) {
     if (review?.reply !== "") {
         return (
             <div
-                className={`post ${deleteReview} reply`}
+                className={`post ${deleteReview} artist-reply`}
                 onClick={() => setOpenOptions("hidden")}
                 onMouseLeave={() => setOpenOptions("hidden")}>
                 {/* <div className="options"
@@ -46,10 +45,19 @@ function ReviewReply({ review, activeUser }) {
                         }}>
                     </div>
                     <div className="review-details">
-                        <span
-                            className="username"
-                            onClick={() => navigate(`/profile/${artist._id}`)}>
-                            {review.artist.name}</span>
+                        <div className="username-row">
+                            <span className="username" onClick={() => navigate(`/profile/${artist._id}`)}>
+                                {review.artist.name}
+                            </span> 
+                            
+                            <span className='edited'>
+                                {getTimeAgo(review.reply.createdAt)}
+                            </span>
+                            
+                            <span className={`edited ${review.reply.updatedAt ? "" : "hidden"}`}>
+                                (Edited)
+                            </span>
+                        </div>
                         <div className="reply-content">{review.reply.content}</div>
                     </div>
                 </div>

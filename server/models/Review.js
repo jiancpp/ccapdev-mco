@@ -64,6 +64,12 @@ const ReviewSchema = new mongoose.Schema({
         default: 0
     },
 
+    reply: {
+        content: String,
+        createdAt: Date,
+        updatedAt: Date
+    },
+
     isEdited: {
         type: Boolean,
         required: true,

@@ -196,7 +196,14 @@
 }
 
 .post .post-actions .reply-btn {
-    background: var(--gr-primary);
+    background: var(--secondary-main);
+    transition: transform 0.2s, background 0.2s;
+}
+
+.post .post-actions .reply-btn:hover {
+    background: var(--primary-main);
+    transform: scale(1.03);
+
 }
 
 .post .post-actions .reply-btn span{

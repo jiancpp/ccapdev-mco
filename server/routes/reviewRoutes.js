@@ -237,6 +237,45 @@ router.get('/reply/get/:review_id/:artist_id', async (req, res) => {
     }
 });
 
+router.post('/reply', async (req, res) => {
+    try {
+        console.log("Post artist reply:"   );
+        const { reviewId, content } = req.body;
+        const review = await Review.findById(reviewId);
+
+        if (!review) {
+            return res.status(404).json({ message: "Review not found" });
+        }        
+
+        if (!review.reply || !review.reply.content) {
+            console.log('You should show');
+            review.reply = {
+                content: content,
+                createdAt: Date.now()
+            }; 
+        }
+        else {
+            console.log('You should NOT show');
+
+            const newReply = {
+                content: content,
+                createdAt: review.reply.createdAt,
+                updatedAt: Date.now() // replies don't have updatedAt initially
+            } 
+            review.reply = newReply;
+        }
+        
+        review.markModified('reply');
+
+        await review.save();
+        res.status(200).json({ message: 'Successfully posted reply.'});
+
+    } catch (error) {
+        console.error("Error adding or updating artist reply:", error);
+        res.status(400).json({ message: error.message });
+    }
+})
+
 /***** Review Actions ******/
 router.delete('/delete/:id', async (req, res) => {
     try {

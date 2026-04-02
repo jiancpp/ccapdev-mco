@@ -1,5 +1,51 @@
-.reply {
+.artist-reply {
     /* background-color: #fdf7f7; */
     background: linear-gradient(to bottom, rgb(249, 249, 249), white, white, white);
     box-shadow: 1px 2px 5px rgba(160, 160, 160, 0.3);
+}
+
+/* CONTAINER FOR THE WHOLE POST */
+.artist-reply .post-content {
+    display: flex;
+    align-items: flex-start; /* Keeps avatar at the top */
+    gap: 12px;
+}
+
+/* THE RIGHT SIDE DETAILS */
+.artist-reply .review-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* HEADER ROW: Username + Time + Edited */
+.artist-reply .review-details .username-row {
+    display: flex;
+    align-items: baseline; /* KEY: This aligns the bottom of the text strings */
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.artist-reply .username {
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.artist-reply .username:hover {
+    text-decoration: underline;
+}
+
+/* TIMESTAMP & EDITED TAGS */
+.artist-reply .edited {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* THE ACTUAL REPLY TEXT */
+.artist-reply .reply-content {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #333;
+    word-break: break-word; /* Prevents long text from breaking layout */
 }

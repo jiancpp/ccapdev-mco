@@ -172,6 +172,18 @@ export const postReaction = async (reviewId, userId, reactType) => {
     return await handleResponse(res, `Failed to update review reaction.`);
 }
 
+export const postArtistReply = async (reviewId, content) => {
+    const res = await fetch(`${BASE_URL}/reviews/reply`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+            reviewId: reviewId,
+            content: content 
+        }),
+    });
+    return await handleResponse(res, `Failed to post or update artist reply.`);
+}
+
 export const getIsReactedByUser = async (reviewId, userId) => {
     const res = await fetch(`${BASE_URL}/reviews/check_react/${reviewId}/${userId}`);
     return await handleResponse(res, `Failed to check if user reacted to review`);

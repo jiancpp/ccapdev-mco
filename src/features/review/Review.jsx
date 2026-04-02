@@ -188,8 +188,8 @@ function Review({ review, activeUser }) {
                     </div>
                 }
             </div>
-            {replyTrigger &&  <ReplyForm key={review._id} review={review} activeUser={activeUser}/>}
-            {review.reply && <ReviewReply key={review._id} review={review} activeUser={activeUser}/> }
+            {replyTrigger && <ReplyForm key={review._id} review={review} activeUser={activeUser}/>}
+            {!replyTrigger && review.reply && <ReviewReply key={review._id} review={review} activeUser={activeUser}/> }
         </div>
     )
 }
