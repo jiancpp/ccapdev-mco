@@ -263,3 +263,98 @@
     font-style: italic;
     margin-top: 20px;
 }
+
+/* DASHBOARD */
+.artist-view-container {
+    display: flex;
+}
+
+.dashboard {
+    width: 30%;
+    min-width: 300px; /* Prevent it from getting too squished */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 45px 20px 20px 0;
+}
+
+/* CARD ITEM */
+.dashboard-item {
+    background-color: #ffffff;
+    border: 1px solid #eef0f2; /* Use a very soft border */
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); /* Subtle depth */
+    transition: transform 0.2s ease;
+}
+
+/* HEADER WITHIN ITEM */
+.item-header {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+
+    background: var(--secondary-light);
+    color: var(--secondary-main);
+}
+
+.item-header h3 {
+    margin: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.edit-icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin: 20px;
+
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--secondary-main);    
+}
+
+.genre-tag {
+    display: inline-block;
+    padding: 4px 14px;
+    background-color: var(--secondary-main);
+    color: var(--text-contrast);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: default;
+    user-select: none;
+}
+
+.profile-details {
+    margin: 20px; /* Matching your existing margin */
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Spacing between the Display Name and Description blocks */
+}
+
+.profile-details dt {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8a8a8a; /* Muted color so it doesn't compete with the actual data */
+    margin-bottom: 4px;
+}
+
+.profile-details dd {
+    margin: 0; /* Resetting default browser margin */
+    font-size: 1rem;
+    color: var(--text-main, #333);
+    line-height: 1.5;
+    /* font-weight: 500; */
+}
+
+.tag-container {
+    margin: 20px; 
+}

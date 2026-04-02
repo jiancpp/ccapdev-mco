@@ -113,11 +113,28 @@ ReviewSchema.post('save', async function() {
     await ReviewModel.calculateAverage(this.artist, mongoose.model('Artist'), true);
 });
 
-ReviewSchema.post('deleteOne', async function () {
-    if (this.r) {
-        const ReviewModel = this.r.constructor;
-        await ReviewModel.calculateAverage(this.r.targetID, mongoose.model(this.r.targetType), false);
-        await ReviewModel.calculateAverage(this.r.artist, mongoose.model('Artist'), true);
+ReviewSchema.pre('deleteOne', { document: true, query: false }, function () {
+    console.log("Capturing data for averages...");
+    this._targetID = this.targetID;
+    this._targetType = this.targetType;
+    this._artist = this.artist;
+});
+
+ReviewSchema.post('deleteOne', { document: true, query: false }, async function () {
+    if (this._targetID && this._targetType && this._artist) {
+        const ReviewModel = mongoose.model('Review');       
+        
+        try {
+            const TargetModel = mongoose.model(this._targetType);
+            const ArtistModel = mongoose.model('Artist');
+
+            await Promise.all([
+                ReviewModel.calculateAverage(this._targetID, TargetModel, false),
+                ReviewModel.calculateAverage(this._artist, ArtistModel, true)]);
+            console.log("  + averages recalculated successfully after deletion");
+        } catch (error) {
+            console.error("MIDDLEWARE ERROR:", error.message);
+        }
     }
 });
 

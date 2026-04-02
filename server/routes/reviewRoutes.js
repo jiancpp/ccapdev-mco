@@ -241,16 +241,20 @@ router.get('/reply/get/:review_id/:artist_id', async (req, res) => {
 router.delete('/delete/:id', async (req, res) => {
     try {
         const { id } = req.params;
+        
         console.log(`  + checking routes ${id}`);
-        const result = await Review.findByIdAndDelete(id.trim());
-        console.log("Delete Result:", result); // If null, the ID doesn't exist in the DB
-        if (!result) {
+        const review = await Review.findById(id.trim());
+        console.log(`  + checking review: ${review}`);
+        
+        if (!review) {
             return res.status(404).json({ message: "Review not found" });
         }
-        await review.deleteOne();
 
+        await review.deleteOne();
         res.status(200).json({message: 'Successfully deleted.'})
+
     } catch (error) {
+        console.error("DETAILED BACKEND ERROR:", error);
         res.status(500).json({error: error.message})
     }
 })

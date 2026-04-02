@@ -153,7 +153,12 @@ function SongProfile() {
                                     {[...Array(5)].map((_, i) => 
                                         <i  key={i} 
                                             className="bi bi-star-fill" 
-                                            onClick={() => preSelectReviewParams(
+                                            onClick={() => {
+                                                if (!activeUser) {
+                                                    navigate("/login");
+                                                    return;
+                                                }
+                                                preSelectReviewParams(
                                                 {
                                                     targetID: song_id,
                                                     targetType: 'Song',
@@ -162,7 +167,7 @@ function SongProfile() {
                                                     artistID: artist._id, 
                                                     cover: song.cover,
                                                 }
-                                             )}></i>
+                                             )}}></i>
                                     )}
                                 </div>
                             </div>

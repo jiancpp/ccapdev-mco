@@ -13,12 +13,29 @@ function Navbar({ activeUser, setActiveUser }) {
                     className={`profile-settings-modal ${openSettings}`}
                     onMouseLeave={() => setOpenSettings("hidden")}>
                     <ul>
-                        {activeUser?.role !== 'artist' && (
-                            <li onClick={() => navigate(`/profile/${activeUser._id}`)}>
-                                View Profile
-                            </li>
+                        {activeUser && (
+                            <li onClick={() => {
+                                if (activeUser?.role === 'artist') return;
+                                navigate(`/profile/${activeUser._id}`)
+                            }}>
+                                <img src={activeUser?.avatar}></img>
+                                <div>
+                                    <b>{activeUser?.username}</b><br/>
+                                    <span style={{
+                                        fontSize: 'var(--fs-sm)',
+                                        color: 'var(--text-muted)'                
+                                    }}>
+                                        View Profile
+                                    </span>
+                                </div>
+                            </li> 
                         )}
-                        <li onClick={
+                        <li 
+                            style={{
+                                fontSize: 'var(--fs-sm)',
+                                color: 'var(--text-muted)'                
+                            }}
+                            onClick={
                             async () => {
                                 try {
                                     const response = await fetch('http://localhost:5001/api/users/logout', {
@@ -48,7 +65,7 @@ function Navbar({ activeUser, setActiveUser }) {
                         activeUser ? 
                         (
                             <>
-                                <i id='notifications' className="bi bi-bell-fill"></i>
+                                {/* <i id='notifications' className="bi bi-bell-fill"></i> */}
                                 <div
                                     id="profile-pic"
                                     title='Open settings menu'

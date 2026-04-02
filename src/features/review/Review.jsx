@@ -45,7 +45,10 @@ function Review({ review, activeUser }) {
 
     // Handle Toggle Reactions
     const toggle = (clickedReact) => {
-        if (!activeUser) return;
+        if (!activeUser) {
+            navigate("/login");
+            return;
+        }
         const oldReact = selected;
         const newReact = oldReact === clickedReact ? null : clickedReact;
         setSelected(newReact);
@@ -110,6 +113,7 @@ function Review({ review, activeUser }) {
                             <li onClick={ () => {
                                 setDeleteReview("hidden");
                                 deleteData('reviews', review._id);
+                                window.location.reload();
                             }}>
                                 <span><i className="bi bi-trash-fill"></i></span><span>Delete</span>
                             </li>

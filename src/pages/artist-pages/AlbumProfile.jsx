@@ -109,10 +109,14 @@ function AlbumProfile() {
                                 </div>
                                 <div className="interactive-stars">
                                     {[...Array(5)].map((_, i) => 
-                                        <i  key={i} 
+                                        <i key={i} 
                                             className="bi bi-star-fill" 
                                             onClick={() => {
-                                                    if (!album || !artist) return;
+                                                    if (!activeUser) {
+                                                        navigate("/login");
+                                                        return;
+                                                    }
+                                                    else if (!album || !artist) return;
                                                     preSelectReviewParams({
                                                         targetID: album_id,
                                                         targetType: 'Album',

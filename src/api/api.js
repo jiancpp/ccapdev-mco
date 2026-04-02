@@ -19,7 +19,6 @@ export const getAllData = async (model) => {
  */
 export const deleteData = async (model, id) => {
     console.log('Attempting to delete...');
-    console.log(`  + checking api ${BASE_URL}/${model}/delete/${id} compare: http://localhost:5173/api/reviews/delete/:id`);
     
     const res = await fetch(`${BASE_URL}/${model}/delete/${id}`, {
         method: "DELETE",
@@ -48,7 +47,7 @@ export const updateData = async (model, id, data) => {
         body: JSON.stringify(data)
     });
 
-    return await handleResponse(res, `Failed to delete ${model} - ${id}`);
+    return await handleResponse(res, `Failed to update ${model} - ${id}`);
 }    
 
 /**

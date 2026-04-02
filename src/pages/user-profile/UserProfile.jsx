@@ -100,6 +100,11 @@ function UserProfile() {
     }, [user_id, section]);
 
     const handleFollow = async () => {
+        if (!activeUser) {
+            navigate("/login");
+            return;
+        }
+        
         const wasFollowing = isFollowing;
         setIsFollowing(!wasFollowing);
 
