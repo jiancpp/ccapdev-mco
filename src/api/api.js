@@ -89,6 +89,7 @@ export const getUser = async (userId) => {
 export const toggleFollow = async (userId, targetId) => {
     const res = await fetch(`${BASE_URL}/users/toggle_follow/${userId}/${targetId}`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
             // 'Authorization': `Bearer ${token}` // TODO: add authmiddleware later (express-sesion)
