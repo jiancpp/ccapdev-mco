@@ -36,6 +36,14 @@ AlbumSchema.virtual('songCount', {
     count: true // returns the number
   });
 
+// count reviews for album
+AlbumSchema.virtual('reviewCount', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'targetID',
+    count: true // returns the number
+  });
+
 // reference reviews
 AlbumSchema.virtual('reviews', {
     ref: 'Review',

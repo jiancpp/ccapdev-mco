@@ -40,7 +40,7 @@ router.get('/get/:id', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         // This fetches every artist in the collection
-        const artists = await Artist.find().populate('user');
+        const artists = await Artist.find(req.query).populate({path: 'user', select: '-password'});
         res.json(artists);
     } catch (err) {
         res.status(500).json({ error: err.message });

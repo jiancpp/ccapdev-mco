@@ -5,9 +5,7 @@ import { useState } from "react";
 
 function Navbar({ activeUser, setActiveUser }) {
     const navigate = useNavigate();
-    const { pathname } = useLocation();
     const [openSettings, setOpenSettings] = useState("hidden");
-
     return (
         <div className="nav-container">
             <nav>
@@ -15,7 +13,11 @@ function Navbar({ activeUser, setActiveUser }) {
                     className={`profile-settings-modal ${openSettings}`}
                     onMouseLeave={() => setOpenSettings("hidden")}>
                     <ul>
-                        <li onClick={() => activeUser && navigate(`/profile/${activeUser._id}`)}>View Profile</li>
+                        {activeUser?.role !== 'artist' && (
+                            <li onClick={() => navigate(`/profile/${activeUser._id}`)}>
+                                View Profile
+                            </li>
+                        )}
                         <li onClick={
                             async () => {
                                 try {
@@ -43,27 +45,23 @@ function Navbar({ activeUser, setActiveUser }) {
                 </div>
                 <div className="buttons flex">
                     {
-                        pathname.startsWith("/artist-view") ?
-                            (
-                                <div className="login-btn" onClick={() => navigate("/")}>Log Out</div>
-                            ) :
-                            activeUser ?
-                                (
-                                    <>
-                                        <i id='notifications' className="bi bi-bell-fill"></i>
-                                        <div
-                                            id="profile-pic"
-                                            title='Open settings menu'
-                                            onClick={() => setOpenSettings("visible")}>
-                                            {activeUser ?
-                                                (<img src={activeUser.avatar}></img>) : ""
-                                            }
-                                        </div>
-                                    </>
-                                ) :
-                                (
-                                    <div className="login-btn" onClick={() => navigate("/login")}>Log-in</div>
-                                )
+                        activeUser ? 
+                        (
+                            <>
+                                <i id='notifications' className="bi bi-bell-fill"></i>
+                                <div
+                                    id="profile-pic"
+                                    title='Open settings menu'
+                                    onClick={() => setOpenSettings("visible")}>
+                                    {activeUser ?
+                                        (<img src={activeUser.avatar}></img>) : ""
+                                    }
+                                </div>
+                            </>
+                        ) :
+                        (
+                            <div className="login-btn" onClick={() => navigate("/login")}>Log-in</div>
+                        )                     
                     }
 
                 </div>

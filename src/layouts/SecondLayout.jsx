@@ -5,11 +5,8 @@ import { Outlet } from "react-router-dom";
 import './MainLayout.css'
 import Navbar from './Navbar';
 import ReplyModal from '../modals/ReplyModal';
-import { dummyUsers } from "../data/dummyUsers";
 import EditProfileModal from "../modals/EditProfileModal";
-
-/***** Utilities ******/
-const getUserById = (id) => dummyUsers.find((user) => user._id === id );
+import LoadingBlock from "../components/LoadingBlock";
 
 function SecondLayout({ activeUser, setActiveUser}) {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,6 +17,8 @@ function SecondLayout({ activeUser, setActiveUser}) {
     const openProfileEdit = () => setIsProfileOpen(true);
     const closeProfileEdit = () => setIsProfileOpen(false);
 
+    console.log(activeUser);
+    
     return (
         <>
             <Navbar activeUser={activeUser} setActiveUser={setActiveUser}/>

@@ -2,6 +2,7 @@ import express from 'express';
 import Album from '../models/Album.js';
 
 const router = express.Router();
+const albumPopulate = { path: 'songCount reviewCount' }
 
 /**
  * Fetch ONE album by ID (Supports both MongoDB _id and custom albumID)
@@ -42,9 +43,9 @@ router.get('/', async (req, res) => {
         let albums = [];
 
         if (artist_id) {
-            albums = await Album.find({ artistID: artist_id }); 
+            albums = await Album.find({ artistID: artist_id }).populate(albumPopulate); 
         } else {
-            albums = await Album.find();
+            albums = await Album.find().populate(albumPopulate);
         }
 
         res.json(albums);

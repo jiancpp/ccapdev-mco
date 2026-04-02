@@ -26,7 +26,7 @@ import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";
 import LoadingBlock from "./components/LoadingBlock";
 
 function App() {
-const [activeUser, setActiveUser] = useState(null); // Start with null
+  const [activeUser, setActiveUser] = useState(null); // Start with null
   const [isLoading, setIsLoading] = useState(true);   // Add a loading state
 
   useEffect(() => {

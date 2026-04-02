@@ -48,7 +48,7 @@ function Login({ setActiveUser }) {
                 const userRole = data.user.role;
 
                 if (userRole === 'artist') {
-                    navigate(`/profile/${data.user.id}`);
+                    navigate(`/artist-view/${data.user.id}`);
                 } else {
                     navigate('/home');
                 }

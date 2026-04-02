@@ -137,6 +137,11 @@
     letter-spacing: 5px;
 }
 
+.artist-view .review-count {
+    color: var(--secondary-main);
+    font-size: var(--fs-sm);
+}
+
 /* SONGS TAB */
 
 .songs-list {

@@ -41,6 +41,14 @@ SongSchema.virtual('reviews', {
     justOne: false
 })
 
+// count reviews for album
+SongSchema.virtual('reviewCount', {
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'targetID',
+    count: true // returns the number
+  });
+
 SongSchema.index({ artistID: 1 });
 SongSchema.index({ albumID: 1 });
 

@@ -2,6 +2,7 @@ import express from 'express';
 import Song from '../models/Song.js';
 
 const router = express.Router();
+const songPopulate =  { path: 'reviewCount'}
 
 /**
  * Fetch ALL songs or FILTER by album/artist
@@ -15,11 +16,11 @@ router.get('/', async (req, res) => {
 
         if (album_id) {
             // Check your Song model in Atlas—make sure this key matches!
-            songs = await Song.find({ albumID: album_id }); 
+            songs = await Song.find({ albumID: album_id }).populate(songPopulate); 
         } else if (artist_id) {
-            songs = await Song.find({ artistID: artist_id }); 
+            songs = await Song.find({ artistID: artist_id }).populate(songPopulate); 
         } else {
-            songs = await Song.find();
+            songs = await Song.find().populate(songPopulate);
         }
         res.json(songs);
     } catch (err) {
