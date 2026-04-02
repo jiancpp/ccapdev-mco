@@ -63,17 +63,21 @@ router.post('/login', async (req, res) => {
             id: user._id
         }
 
-        const userObj = user.toObject();
-
-        delete userObj.password;
-        delete userObj.__v;
-
-        userObj.id = userObj._id;
-
-        return res.status(200).json({
-            message: "Login successful!",
-            user: userObj
-        });
+        req.session.save((err) => {
+            if (err) {
+              return res.status(500).json({ message: "Session save failed" });
+            }
+          
+            const userObj = user.toObject();
+            delete userObj.password;
+            delete userObj.__v;
+            userObj.id = userObj._id;
+          
+            return res.status(200).json({
+              message: "Login successful!",
+              user: userObj
+            });
+          });
 
     } catch (error) {
         return res.status(500).json({ message: "Server error" });
