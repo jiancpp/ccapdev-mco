@@ -61,6 +61,7 @@ function Navbar({ activeUser, setActiveUser }) {
                                     if (response.ok) {
                                         setActiveUser(null);
                                         navigate('/');
+                                        window.location.reload();
                                     }
                                 } catch (err) {
                                     console.error("Logout failed", err);
@@ -70,7 +71,6 @@ function Navbar({ activeUser, setActiveUser }) {
                     </ul>
                 </div>
                 <div className="logo flex" onClick={() => {
-                    setActiveUser(null)
                     navigate("/");
                 }}>
                     <img src="https://eepy-elo.github.io/font-hosting/unsynth-logo.png" alt="" className="logo flex" />
