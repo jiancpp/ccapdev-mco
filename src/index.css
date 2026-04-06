@@ -28,7 +28,7 @@
   --fs-xl: 1.375rem;
   --fs-xxl: 1.75rem;
   --fs-xxxl: 2rem;
-
+  --fs-xxxxl: 2.5rem;
   /* letter spacing */
   --ls-very-tight: -0.06em;
   --ls-tight: -0.02em;
@@ -50,6 +50,7 @@
   /* Gradients */
   --gr-primary: linear-gradient(135deg,#a11547, #5c0627);
   --gr-secondary: linear-gradient(90deg, #edb7cc, #e8decb);
+  --gr-secondary-lighter: linear-gradient(90deg, #ffc6dc, #fff4e1); 
   --gr-accent: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
 
   /* Text & Contrast */
