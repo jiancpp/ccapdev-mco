@@ -142,16 +142,14 @@ This app is deployed using render. The set-up for the project is as follows:
 
 # 📁 `src` Organization
 
-The `src` folder contains the main source code of the application.
-A recommended structure is shown below:
-
+The `src` folder contains the main source code for the front-end of the application.
 ```
 src/
 │
 ├── api/             # API calls and database interaction logic
 ├── assets/          # Images, icons, and static files
 ├── components/      # Reusable UI static components
-├── features/        # Reusable UI data-heavy components
+├── features/        # Reusable UI data-driven components
 ├── layouts/         # Website layout 
 ├── modals/          # Data or feature heavy modals
 ├── pages/           # Page-level components / views
