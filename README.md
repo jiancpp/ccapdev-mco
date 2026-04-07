@@ -41,7 +41,27 @@ npm install @syncfusion/ej2-react-richtexteditor --save
 
 ---
 
-## 4️⃣ Run the App Locally for Testing and Debugging
+## 4️⃣ Setup environment variables
+
+Each contributor must create an ``.env`` file containing the following
+
+```
+PORT=5001
+MONGO_URL=mongodb://<username>:<password>@<cluster-hosts>/<database-name>?options
+SESSION_SECRET=your_random_secret_string
+```
+⚠️ **Important:** Never commit or upload your .env file to the repository.
+Make sure .env is included in your .gitignore file. 
+
+## 5️⃣ Setup MongoDB Atlas Account
+Log in to MongoDB Atlas at mongodb.com and accept the project invitation as a collaborator. Then, create a new database user or request credentials from an existing one to use for your ``MONGO_URL``.
+
+**📝 Notes**
+* Make sure your database user has the necessary permissions (e.g., read/write access).
+* You can find your connection string in Database → Connect → Drivers.
+* Replace the placeholders in your .env file with your actual credentials.
+
+## 6️⃣ Run the App Locally for Testing and Debugging
 
 Start the development server:
 
@@ -167,7 +187,7 @@ Custom React hooks for reusable state and logic.
 
 * **Frontend:** React, Vite, CSS, Bootstrap Icons
 * **Backend / API:** Node.js, Expres.js, lyrics.ovh API
-* **Database:** MongoDB
+* **Database:** MongoDB, Mongoose
 * **Rich Text Editor:** Syncfusion React Rich Text Editor
 * **Authentication & Security** bcrypt
 * **Media Management** Cloudinary
