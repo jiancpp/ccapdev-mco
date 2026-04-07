@@ -141,15 +141,18 @@
     width: 100%;
 }
 
-.password-toggle-icon {
-    margin-top: 4px;
+#login .password-toggle-icon {
+    position: absolute;
+    right: 15px;
+    top: 60%;
+    transform: translateY(-50%);
     cursor: pointer;
     color: #a11547;
     font-size: 1.2rem;
     z-index: 10;
 }
 
-.password-toggle-icon:hover {
+#login .password-toggle-icon:hover {
     color: #84123a;
 }
 
