@@ -170,3 +170,12 @@ Custom React hooks for reusable state and logic.
 * **Backend / API:** Node.js 
 * **Database:** MongoDB
 * **Rich Text Editor:** Syncfusion React Rich Text Editor
+
+---
+
+# 💻 Contributors
+
+* **Joshua Calibo**
+* **Jessica Dela Cruz**
+* **Shielo Lunario**
+* **Jianna Moraga**
