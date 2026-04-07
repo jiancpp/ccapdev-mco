@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Sidebar.css"
 
-function Sidebar({ openModal }) {
+function Sidebar({ openModal, activeUser, setActiveUser}) {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -30,9 +30,10 @@ function Sidebar({ openModal }) {
                 <i className="bi bi-bar-chart-line-fill"></i>
                 <span>Charts</span>
             </button> */}
-            <button className="review-button review-button-dynamic" onClick={openModal}>
+            {activeUser?.role == 'user' &&
+            (<button className="review-button review-button-dynamic" onClick={openModal}>
                 <span>Review +</span>
-            </button>
+            </button>)}
         </div>        
     )
 }

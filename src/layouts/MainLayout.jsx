@@ -80,7 +80,7 @@ function MainLayout({ activeUser, setActiveUser}) {
         <>
             <Navbar activeUser={activeUser} setActiveUser={setActiveUser}/>
             <div className="layout-container flex">
-                <Sidebar openModal={openModal} />
+                <Sidebar openModal={openModal} activeUser={activeUser} setActiveUser={setActiveUser}/>
 
                 {/* Main Content Panel */}
                 <div className="content">
