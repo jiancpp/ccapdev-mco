@@ -36,7 +36,7 @@ router.post('/register', async (req, res) => {
 
         const savedUser = await newUser.save();
 
-        console.log(savedUser);
+        // console.log(savedUser);
         return res.status(201).json({
             newUser: savedUser,
             message: "Account Successfully Created!"
@@ -257,7 +257,7 @@ router.get('/fetch-notifs/:recipientId', async (req, res) => {
             .sort({ createdAt: -1 })
             .limit(20);
 
-        console.log(JSON.stringify(notifs))
+        // console.log(JSON.stringify(notifs))
         res.status(200).json(notifs);
     } catch (error) {
         console.error(error.message, error);
