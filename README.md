@@ -24,8 +24,8 @@ npm -v
 ## 2️⃣ Clone Repository
 
 ```
-git clone https://github.com/your-username/your-repository.git
-cd your-repository
+git clone https://github.com/jiancpp/ccapdev-mco.git
+cd ccapdev-mco
 ```
 
 ---
