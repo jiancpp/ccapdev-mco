@@ -4,6 +4,7 @@ import './FilterModal.css';
 export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
     const [tempFilters, setTempFilters] = useState(currentFilters);
     const [customGenre, setCustomGenre] = useState([]);
+    const [customGenreText, setCustomGenreText] = useState('');
 
     const genres = ["Pop", "K-Pop", "OPM", "Rock", "R&B", "Others"];
     const ratings = [5, 4, 3, 2, 1];
@@ -50,11 +51,13 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                                     name="others-genre"
                                     placeholder="Type custom tags (separate with comma)"
                                     className="custom-tag-input"
+                                    value={customGenreText}
                                     onChange={(e) => {
                                         const tags = e.target.value.split(',')
                                             .map(tag => tag.trim())
                                             .filter(tag => tag !== "");
-                                            setCustomGenre(tags || [])
+                                        setCustomGenreText(e.target.value);
+                                        setCustomGenre(tags || []);
                                     }}
                                     autoFocus/>
                             </div>
