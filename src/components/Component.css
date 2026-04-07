@@ -168,6 +168,7 @@
     background: transparent;
     font-family: inherit;
     font-size: 0.95rem;
+    color: black;
     resize: vertical; /* Allows user to drag it taller if needed */
     margin-bottom: 30px; /* Leave space for the button */
 }
