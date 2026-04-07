@@ -200,7 +200,7 @@
 .avatar-delete-btn {
     margin-top: 8px;
     margin-right: 8px;
-    z-index: 9999;
+    z-index: 2500;
     background: rgba(0, 0, 0, 0.403);
     color: white;
     border: none;
