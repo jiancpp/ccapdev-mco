@@ -33,15 +33,17 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                 <div className="filter-section">
                     <p className="filter-label">Tags</p>
                     <div className="tag-container">
-                        {genres.map(genre => (
-                            <button 
-                                key={genre}
-                                className={`tag-btn ${tempFilters.genres.includes(genre) ? 'active' : ''}`}
-                                onClick={() => toggleGenre(genre)}
-                            >
-                                {genre}
-                            </button>
-                        ))}
+                        <div className="genres">
+                            {genres.map(genre => (
+                                <button 
+                                    key={genre}
+                                    className={`tag-btn ${tempFilters.genres.includes(genre) ? 'active' : ''}`}
+                                    onClick={() => toggleGenre(genre)}
+                                >
+                                    {genre}
+                                </button>
+                            ))}
+                        </div>
                         {tempFilters.genres.includes("Others") &&
                             <div className={`other-input-wrapper`}>
                                 {/* <label htmlFor="others-genre" className="sr-only">Specify other genre</label> */}
@@ -84,7 +86,7 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                     <button className="clear-btn" onClick={() => {
                         setTempFilters({ genres: [], aveRating: 0 });
                         window.location.reload();
-                    }}>Reset</button>
+                    }}>RESET</button>
                     <button 
                         className="apply-btn" 
                         onClick={() => {
@@ -97,7 +99,7 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                                 genres: finalGenres
                             });
                         }}>
-                        Apply Filters
+                        APPLY
                     </button>
                 </div>
             </div>
