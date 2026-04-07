@@ -41,11 +41,14 @@ npm install @syncfusion/ej2-react-richtexteditor --save
 
 ---
 
-## 4️⃣ Run the App
+## 4️⃣ Run the App Locally for Testing and Debugging
 
 Start the development server:
 
 ```
+cd server
+node server.js
+cd ..
 npm run dev
 ```
 
@@ -54,7 +57,6 @@ The application will run at:
 ```
 http://localhost:5173
 ```
-
 ---
 
 # 📦 Dependencies
@@ -97,7 +99,7 @@ Refer to the React + TypeScript Vite template:
 
 ## Database
 
-This project uses **MongoDB** as its database for storing and retrieving application data.
+This project uses **MongoDB Atlas** as its database for storing and retrieving application data.
 
 MongoDB allows flexible document-based storage and integrates easily with JavaScript applications.
 
@@ -106,6 +108,15 @@ Typical usage includes:
 * Storing application data
 * Managing user-generated content
 * Backend API data persistence
+
+## Render
+
+This app is deployed using render. The set-up for the project is as follows:
+*  **Deployment Branch:** deployment
+*  **Build Command:** npm install --include=dev && npm run build
+*  **Start Command:** npm start
+
+*All other dependencies and external libraries are found in package.json*
 
 ---
 
