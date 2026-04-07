@@ -3,6 +3,7 @@ import { useState } from "react";
 import { BASE_URL } from "../../api/api";
 import { useMediaUpload } from '../../components/useMediaUpload';
 import AlertBlock from '../../components/AlertBlock';
+import CropModal from '../../modals/CropModal';
 import "./Register.css"
 
 
@@ -15,7 +16,12 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [shortDesc, setShortDesc] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const { mediaAttachments, avatar, uploading, handleMediaUpload, deleteMedia, resetMedia, setMedia } = useMediaUpload(null, { multiple: false });
+    const { 
+            mediaAttachments, avatar, uploading, handleMediaUpload, 
+            deleteMedia, resetMedia, setMedia,
+            cropImageSrc, handleCropDone, handleCropCancel
+        } = useMediaUpload(null, { multiple: false });
+
 
     const [alert, setAlert] = useState({ show: false, message: '', icon: '', type: 'error' });
 
@@ -133,6 +139,15 @@ function Register() {
                     <div className="register-title">
                         Register
                     </div>
+
+                    {cropImageSrc && (
+                        <CropModal
+                            imageSrc={cropImageSrc}
+                            onCancel={handleCropCancel}
+                            onCropDone={handleCropDone}
+                        />
+                    )}
+
                     <form onSubmit={handleRegister} className="register-forms">
                         <input type="text" className="register-details" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} required />
 

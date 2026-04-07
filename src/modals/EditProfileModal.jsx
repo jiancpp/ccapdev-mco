@@ -1,16 +1,20 @@
 import './EditProfileModal.css'
 import AlertBlock from '../components/AlertBlock';
 import { useMediaUpload } from '../components/useMediaUpload';
+import CropModal from '../modals/CropModal';
 import { useEffect, useState } from 'react';
 import { updateData } from '../api/api';
 
 
-
 function EditProfileModal({ isOpen, onClose, user }) {
-    const { mediaAttachments: avatar, uploading, handleMediaUpload, deleteMedia, resetMedia, setMedia } = useMediaUpload(null, { multiple: false });
+    const { 
+        mediaAttachments: avatar, uploading, handleMediaUpload, 
+        deleteMedia, resetMedia, setMedia,
+        cropImageSrc, handleCropDone, handleCropCancel
+    } = useMediaUpload(null, { multiple: false });
+
     const [newUsername, setNewUserName] = useState(user?.username || '');
     const [newBio, setNewBio] = useState(user?.bio || '');
-    const [newAvatar, setNewAvatar] = useState(user?.avatar || '/assets/default.jpg');
 
     const [isAlertOn, setIsAlertOn] = useState(false);
     const [alertConfig, setAlertConfig] = useState({
@@ -70,6 +74,15 @@ function EditProfileModal({ isOpen, onClose, user }) {
                     bgColor={alertConfig.bgColor} 
                     textColor={alertConfig.textColor}
                 />}
+
+                {cropImageSrc && (
+                    <CropModal
+                        imageSrc={cropImageSrc}
+                        onCancel={handleCropCancel}
+                        onCropDone={handleCropDone}
+                    />
+                )}
+
                 <button className="close-btn" onClick={onClose}>&times;</button>
                 <h2 className="profile-modal-title">Profile Details</h2>
                 <div className="edit-container">
