@@ -104,7 +104,7 @@ function AboutUnsynth() {
                         <i className="bi bi-shield-lock-fill"></i> bcrypt
                     </div>
                     <div className="dependencies-item">
-                        <i className="bi bi-music-note-list"></i>lyrics.ovh API
+                        <img src="/assets/lyrics.png" width="25" height="25" />lyrics.ovh API
                     </div>
                     <div className="dependencies-item">
                         <i><SiBootstrap /></i>Bootstrap Icons
