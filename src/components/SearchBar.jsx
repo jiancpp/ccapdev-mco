@@ -40,7 +40,7 @@ export function SearchBar({ songs = [], albums = [], artists = [], onSelect }) {
                 <i className="bi bi-search search-icon"></i>
                 <input 
                     type="text" 
-                    placeholder="Search songs and albums" 
+                    placeholder="Search songs and albums..." 
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                 />
@@ -110,7 +110,7 @@ export function ArtistSearchBar({ onSearchChange }) {
                 <i className="bi bi-search search-icon"></i>
                 <input 
                     type="text" 
-                    placeholder="Search artists" 
+                    placeholder="Search artists..." 
                     onChange={(e) => onSearchChange(e.target.value)}
                 />
             </div>

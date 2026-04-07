@@ -29,15 +29,6 @@
     scale: 1.05;
 }
 
-#artists .filters .search-container {
-    height: 40px;
-    margin-right: 15px;
-    width: 500px;
-
-    background-color: white;
-    transition: 0.3s;
-}
-
 .blocks {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 

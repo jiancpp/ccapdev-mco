@@ -7,10 +7,15 @@
     width: 100%;
     padding: 12px 20px 12px 45px;
     border-radius: 25px;
-    border: 1px solid #df6490;
+    border: 1px solid var(--primary-main);
     background: #FFF;
-    color: #000;
+    color: var(--primary-main);
     outline: none;
+}
+
+.search-container input::placeholder {
+    color: var(--primary-main);
+    opacity: 0.8;
 }
 
 .search-icon {
@@ -18,7 +23,7 @@
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    color: #df6490;
+    color: var(--primary-main);
 }
 
 .song-icon, .album-icon {
