@@ -136,6 +136,23 @@
     width: 75%;
 }
 
+#login .password {
+    position: relative;
+    width: 100%;
+}
+
+.password-toggle-icon {
+    margin-top: 4px;
+    cursor: pointer;
+    color: #a11547;
+    font-size: 1.2rem;
+    z-index: 10;
+}
+
+.password-toggle-icon:hover {
+    color: #84123a;
+}
+
 #login .checkbox {
     border: white;
     margin-top: -0.5px;

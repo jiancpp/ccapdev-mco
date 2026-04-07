@@ -12,6 +12,10 @@
   }
 
 .sidebar .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
     width: 80%;
     height: 50px;
     text-align: left;
@@ -44,8 +48,6 @@
 
 .nav-button * {
     display: inline-block;
-    margin-left: 15px;
-
 }
 
 .review-button {
@@ -77,4 +79,37 @@
 .sidebar .current-page {
     opacity: 1;
     background-color: #d9d9d9;
+}
+
+.home-btn-txt::after {
+    content: 'Home';
+} 
+
+.artists-btn-txt::after {
+    content: 'Artists';
+} 
+
+.review-btn-txt::after {
+    content: 'Review +';
+} 
+
+@media (max-width: 868px) {
+    .sidebar {
+        width: 100px;
+    }
+    .sidebar .nav-button {
+        width: 50px;
+    }
+
+    .home-btn-txt::after, .artists-btn-txt::after {
+        content: '';
+    } 
+
+    .review-button {
+        width: 50px;
+    }
+
+    .review-btn-txt::after {
+        content: '+';
+    } 
 }
