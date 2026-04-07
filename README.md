@@ -166,10 +166,13 @@ Custom React hooks for reusable state and logic.
 
 # 🧑‍💻 Tech Stack
 
-* **Frontend:** React + Vite
-* **Backend / API:** Node.js 
+* **Frontend:** React, Vite, CSS, Bootstrap Icons
+* **Backend / API:** Node.js, Expres.js, lyrics.ovh API
 * **Database:** MongoDB
 * **Rich Text Editor:** Syncfusion React Rich Text Editor
+* **Authentication & Security** bcrypt
+* **Media Management** Cloudinary
+* **Deployment** Render.io
 
 ---
 
