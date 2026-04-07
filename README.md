@@ -132,7 +132,6 @@ src/
 ├── assets/          # Images, icons, and static files
 ├── components/      # Reusable UI static components
 ├── features/        # Reusable UI data-heavy components
-├── hooks/           # Custom React hooks
 ├── layouts/         # Website layout 
 ├── modals/          # Data or feature heavy modals
 ├── pages/           # Page-level components / views
@@ -166,10 +165,13 @@ Custom React hooks for reusable state and logic.
 
 # 🧑‍💻 Tech Stack
 
-* **Frontend:** React + Vite
-* **Backend / API:** Node.js 
+* **Frontend:** React, Vite, CSS, Bootstrap Icons
+* **Backend / API:** Node.js, Expres.js, lyrics.ovh API
 * **Database:** MongoDB
 * **Rich Text Editor:** Syncfusion React Rich Text Editor
+* **Authentication & Security** bcrypt
+* **Media Management** Cloudinary
+* **Deployment** Render.io
 
 ---
 
