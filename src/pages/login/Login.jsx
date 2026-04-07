@@ -9,7 +9,6 @@ function Login({ setActiveUser }) {
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [error, setError] = useState(null);
 
     const [alert, setAlert] = useState({ show: false, message: '', icon: '', type: 'error' });
 
@@ -36,7 +35,6 @@ function Login({ setActiveUser }) {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setError('');
         setAlert({ show: false });
 
         try {
