@@ -116,7 +116,7 @@ router.get('/', async (req, res) => {
  */
 router.get('/filter', async (req, res) => {
     try {
-        const { user, targetID, targetType, searchContent, artistName, songTitle, albumTitle } = req.query;
+        const { user, targetID, targetType, searchContent, artistName, songTitle, albumTitle, followerId } = req.query;
         let query = {};
 
         const filters = [ 'user', 'targetID', 'targetType' ];
@@ -145,6 +145,15 @@ router.get('/filter', async (req, res) => {
                 { artist: { $in: artistIds } },
                 { targetID: { $in: targetIds } }
             ];
+        }
+
+        if (followerId) {
+            const followerUser = await mongoose.model('User').findById(followerId).select('following');
+            if (followerUser?.following?.length > 0) {
+                query.user = { $in: followerUser.following };
+            } else {
+                return res.status(200).json([]);
+            }
         }
 
         console.log(`Fetching all reviews based on filters...`);
