@@ -54,7 +54,7 @@ SESSION_SECRET=your_random_secret_string
 Make sure .env is included in your .gitignore file. 
 
 ## 5️⃣ Setup MongoDB Atlas Account
-Log in to MongoDB Atlas at mongodb.com and accept the project invitation as a collaborator. Then, create a new database user or request credentials from an existing one to use for your ``MONGO_URL``.
+Log in to MongoDB Atlas at [mongodb.com](https://www.mongodb.com/) and accept the project invitation as a collaborator. Then, create a new database user or request credentials from an existing one to use for your ``MONGO_URL``.
 
 **📝 Notes**
 * Make sure your database user has the necessary permissions (e.g., read/write access).
