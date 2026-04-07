@@ -31,7 +31,7 @@ function AboutUnsynth() {
             <div className="about">
                 <header>
                     <p>HOW IT WORKS</p>
-                    <h1>From Opinions to Discovery.</h1>
+                    <h1>From <span className="styled">Opinions</span> to <span className="styled">Discovery</span></h1>
                     <p className='description'>A community-driven platform where your musical insights help others find their next favorite track.</p>
                 </header>
                 <main>
