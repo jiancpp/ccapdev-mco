@@ -376,6 +376,9 @@
     width: 100%;
     padding: 10px;
     border-radius: 10px;
+    border: solid 1px var(--secondary-main);;
+    color: var(--primary-main);
+    background-color: white;
 }
 
 .edit-tags-container textarea:focus {

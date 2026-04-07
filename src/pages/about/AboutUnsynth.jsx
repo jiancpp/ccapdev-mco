@@ -2,8 +2,8 @@ import { useNavigate } from 'react-router-dom'
 import './AboutUnsynth.css'
 
 // DEPENDENCIES ICONS
-import { FaReact, FaJsSquare, FaCss3Alt, FaNodeJs, FaSpotify, FaLayerGroup } from 'react-icons/fa';
-import { SiMongodb, SiExpress, SiCloudinary } from 'react-icons/si';
+import { FaReact, FaJsSquare, FaCss3Alt } from 'react-icons/fa';
+import { SiMongodb, SiExpress, SiCloudinary, SiNodedotjs, SiVite, SiBootstrap, SiRender, SiShieldsdotio} from 'react-icons/si';
 
 function AboutUnsynth() {
     const navigate = useNavigate();
@@ -74,25 +74,40 @@ function AboutUnsynth() {
                         <i><FaReact /></i> React
                     </div>
                     <div className="dependencies-item">
+                        <i><SiVite /></i> Vite
+                    </div>
+                    <div className="dependencies-item">
                         <i><FaJsSquare /></i> JavaScript
                     </div>
                     <div className="dependencies-item">
                         <i><FaCss3Alt/></i> CSS
                     </div>
                     <div className="dependencies-item">
+                        <i><SiNodedotjs/></i> Node.js
+                    </div>
+                    <div className="dependencies-item">
                         <i><SiExpress/></i> Express.js
                     </div>
                     <div className="dependencies-item">
-                        <i><SiMongodb/></i> MongoDB
+                        <i><SiMongodb/></i> MongoDB/Mongoose
                     </div>
                     <div className="dependencies-item">
-                        <img src="/assets/syncfusion.png" width="20" height="20" />SyncFusion
+                        <i><SiRender/></i> Render.io
+                    </div>
+                    <div className="dependencies-item">
+                        <img src="/assets/syncfusion.png" width="20" height="20" />SyncFusion RTE
                     </div>
                     <div className="dependencies-item">
                         <i><SiCloudinary /></i> Cloudinary
                     </div>
                     <div className="dependencies-item">
-                        <i><FaSpotify/></i> Spotify API
+                        <i className="bi bi-shield-lock-fill"></i> bcrypt
+                    </div>
+                    <div className="dependencies-item">
+                        <i className="bi bi-music-note-list"></i>lyrics.ovh API
+                    </div>
+                    <div className="dependencies-item">
+                        <i><SiBootstrap /></i>Bootstrap Icons
                     </div>
                 </div>
             </div>
