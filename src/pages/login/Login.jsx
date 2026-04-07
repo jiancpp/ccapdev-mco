@@ -8,6 +8,7 @@ function Login({ setActiveUser }) {
     const navigate = useNavigate();
     const [identifier, setIdentifier] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(null);
 
     const [alert, setAlert] = useState({ show: false, message: '', icon: '', type: 'error' });
@@ -27,6 +28,10 @@ function Login({ setActiveUser }) {
         setTimeout(() => {
             setAlert((prev) => ({ ...prev, show: false }));
         }, 3000);
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
     const handleLogin = async (e) => {
@@ -91,10 +96,22 @@ function Login({ setActiveUser }) {
                     <div className="login-title">
                         Login
                     </div>
-                    <div className="login-forms">
                         <form onSubmit={handleLogin} className="login-forms">
                             <input type="text" id="user" className="login-details" placeholder="Username/Email" value={identifier} onChange={(e) => setIdentifier(e.target.value)} required></input>
-                            <input type="password" id="password" className="login-details" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required></input>
+                            <div className="password">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                className="login-details"
+                                placeholder="Password"
+                                value={password} onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            <i
+                                className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"} password-toggle-icon`}
+                                onClick={togglePasswordVisibility}
+                            ></i>
+                            </div>
+                            {/* <input type="password" id="password" className="login-details" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required></input> */}
                             {/* <div className="login-options">
                                 <input type="checkbox" id="remember" className="checkbox"></input>
                                 <div className="remember-me">
@@ -106,7 +123,6 @@ function Login({ setActiveUser }) {
                             </div> */}
                             <button type="submit" className="login-button">LOGIN</button>
                         </form>
-                    </div>
                     <div className="create-account">
                         <p className="no-account">Don't have an account? <a onClick={() => navigate("/register")} className="sign-up-link">Sign-up.</a></p>
                     </div>
