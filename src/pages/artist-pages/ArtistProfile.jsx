@@ -7,6 +7,13 @@ import { StarRating } from "../../components/StarRating";
 
 import { getArtist, getAlbumsByArtist, getSongsByArtist, getSongsByAlbum, getReviewsForArtist } from '../../api/api';
 
+const getGenres = (genreString) => {
+    if (genreString == '') return [];
+    const genres = genreString.split('/');
+    console.log(genres);
+    return genres
+}
+
 function ArtistProfile() {
     const navigate = useNavigate();
     const { artist_id } = useParams();
@@ -20,6 +27,7 @@ function ArtistProfile() {
     const [albSongCounts, setAlbSongCounts] = useState([]);
     const [songs, setSongs] = useState([]);
     const [reviews, setReviews] = useState([]);
+    const [genres, setGenres] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -44,6 +52,7 @@ function ArtistProfile() {
                 setAlbSongCounts(albumSongCounts);
                 setSongs(songsData ?? []);
                 setReviews(reviewsData ?? []);
+                setGenres(getGenres(artistData.genre));
 
             } catch (error) {
                 console.error("Error loading artist profile data:", error);
@@ -84,7 +93,17 @@ function ArtistProfile() {
             </div>
 
             <div className="artist-profile-details indent">
-                <div className="artist-name">{artist.name}</div>
+                <div className="artist-name">
+                    {artist.name}
+                    <span className="artist-genres">
+                        {!genres.length 
+                            ? <span>No genres set.</span>                        
+                            : genres.map((genre, index) => (
+                                // Use .map() and make sure to provide a unique 'key'
+                                <span key={index} className="genre-tag">{genre}</span>
+                        ))}
+                    </span>
+                </div>
                 <div className="artist-rating">
                     <span className="stars">
                         <StarRating rating={Number(artist.aveRating)} />

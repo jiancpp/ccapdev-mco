@@ -329,6 +329,13 @@
     font-weight: 500;
     cursor: default;
     user-select: none;
+
+    transition: transform 0.2s ease-out;
+}
+
+.genre-tag:hover {
+    background-color:  #ca507b;
+    transform: translateY(-5px);
 }
 
 .profile-details {

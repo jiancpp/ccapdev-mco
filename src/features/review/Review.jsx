@@ -36,7 +36,7 @@ function Review({ review, activeUser }) {
 
     const handleReact = async (reactType) => {
         try {
-            await postReaction(review._id, activeUser._id, reactType);
+            await postReaction(review._id, activeUser._id, reactType, review.user);
         } catch (error) {
             alert("Error saving review: " + error.message);
         }

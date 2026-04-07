@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { IoNotificationsOutline, IoNotifications } from "react-icons/io5"; // Ionicons version
 import './Navbar.css'
 import { act, useState } from "react";
 import { BASE_URL } from "../api/api";
@@ -80,14 +81,19 @@ function Navbar({ activeUser, setActiveUser }) {
                         activeUser ? 
                         (
                             <>
-                                {/* <i id='notifications' className="bi bi-bell-fill"></i> */}
+                                <span
+                                    id='notifications' 
+                                    onClick={() => navigate(`/user/notifications/${activeUser._id}`)}
+                                    > 
+                                    <IoNotifications />
+                                </span>
                                 <div
                                     id="profile-pic"
                                     title='Open settings menu'
                                     onClick={() => setOpenSettings("visible")}>
                                     {activeUser ?
                                         (<img src={activeUser.avatar}></img>) : ""
-                                    }
+                                    }   
                                 </div>
                             </>
                         ) :

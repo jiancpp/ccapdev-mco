@@ -4,6 +4,7 @@ import express from 'express';
 import Review from '../models/Review.js';
 import ReviewReaction from '../models/ReviewReaction.js';
 import ReviewReply from '../models/ReviewReply.js';
+import Notification from '../models/Notification.js';
 
 const router = express.Router();
 
@@ -180,11 +181,18 @@ router.post('/create', async (req, res) => {
 router.post('/react', async (req, res) => {
     try {
         console.log("Update review reaction:"   );
-        const { reviewId, userId, type } = req.body;
+        const { reviewId, userId, type, postedById } = req.body;
         await ReviewReaction.findOneAndDelete({ user: userId, review: reviewId })
 
         // User unclicked a reaction
-        if (!type) return res.status(200).json({ message: "Reaction removed" });;
+        if (!type) { 
+            await Notification.findOneAndDelete({
+                senderId: userId,
+                recipientId: postedById,
+                relatedEntityId: reviewId,
+            });
+            return res.status(200).json({ message: "Reaction removed" });
+        }
 
         const newReaction = new ReviewReaction({
             type: type,
@@ -193,6 +201,22 @@ router.post('/react', async (req, res) => {
         });
 
         const savedReaction = await newReaction.save();
+
+        if (userId !== postedById) {
+            await Notification.findOneAndUpdate(
+                { 
+                    senderId: userId, 
+                    recipientId: postedById, 
+                    relatedEntityId: reviewId 
+                },
+                {
+                    type: type,
+                    createdAt: Date.now() 
+                },
+                { upsert: true, returnDocument: 'after' }
+            );
+        }
+
         res.status(200).json(savedReaction);
 
     } catch (error) {
