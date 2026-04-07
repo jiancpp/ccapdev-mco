@@ -1,4 +1,4 @@
-.modal-overlay {
+#Review-Modal .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +12,7 @@
     z-index: 2000;
 }
 
-.review-modal-content {
+#Review-Modal .review-modal-content {
     display: flex;
     flex-direction: column;
     background: #FDFDFD;
@@ -25,28 +25,28 @@
     overflow-y: hidden;
 }
 
-.review-modal-content .modal-scroll {
+#Review-Modal .review-modal-content .modal-scroll {
     padding: 0 40px;
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: #df6490 #ffffff00;
 }
 
-.review-modal-content .header {
+#Review-Modal .review-modal-content .header {
     padding-top: 40px;
     padding-left: 40px;
     padding-right: 40px;
 }
 
-.review-modal-content .footer {
+#Review-Modal .review-modal-content .footer {
     padding-bottom: 40px;
 }
 
-.review-modal-content .alert-message {
+#Review-Modal .review-modal-content .alert-message {
     margin-left: 60px;
 }
 
-.modal-title {
+#Review-Modal .modal-title {
     background: radial-gradient(circle at center, rgb(255, 87, 87), rgb(158, 0, 93));
     background-clip: text;
     -webkit-background-clip: text;
@@ -59,12 +59,12 @@
     text-align: center;
 }
 
-.search-container {
+#Review-Modal .search-container {
     position: relative;
     margin-bottom: 30px;
 }
 
-.search-container input {
+#Review-Modal .search-container input {
     width: 100%;
     padding: 12px 20px 12px 45px;
     border-radius: 25px;
@@ -74,7 +74,7 @@
     outline: none;
 }
 
-.search-icon {
+#Review-Modal .search-icon {
     position: absolute;
     left: 20px;
     top: 50%;
@@ -82,7 +82,7 @@
     color: #df6490;
 }
 
-.review-row {
+#Review-Modal .review-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -90,7 +90,7 @@
     gap: 20px;
 }
 
-.selected-card {
+#Review-Modal .selected-card {
     display: flex;
     align-items: center;
     height: 80px;
@@ -101,46 +101,47 @@
     flex: 1.5;
 }
 
-.selected-card img {
+#Review-Modal .selected-card img {
     width: 55px;
     height: 55px;
     border-radius: 8px;
     margin-right: 15px;
 }
 
-.item-title { 
+#Review-Modal .item-title { 
     font-weight: 600; 
     margin: 0; 
     color: #000; 
 }
 
-.artist-subtitle { 
+#Review-Modal .artist-subtitle { 
     font-size: var(--fs-sm); 
     margin: 0; 
     color: #333; 
 }
 
-.rating-section { 
+#Review-Modal .rating-section { 
     flex: 1; 
     padding-left: 10px;
 }
 
-.rating-label { 
+#Review-Modal .rating-label { 
+    margin: 5px 0px;
     font-weight: bold;
     font-size: var(--fs-lg) !important; 
     color: #df6490;
 }
 
-.input-group {
+#Review-Modal .input-group {
     border: 1px solid #df6490;
     border-radius: 20px;
+    overflow: hidden;
     background: white;
-    /* overflow-y: scroll; */
     scrollbar-width: thin;
     scrollbar-color: #df6490 #ffffff00;
 }
 
-.header-input {
+#Review-Modal .header-input {
     width: 100%;
     padding: 15px 20px;
     border: none;
@@ -152,22 +153,21 @@
     color: #000;
 }
 
-input::placeholder {
+#Review-Modal input::placeholder {
     color: #df6490; 
     opacity: 1;
 }
 
-textarea::placeholder {
+#Review-Modal textarea::placeholder {
     color: #df6490; 
     opacity: 1;
 }
 
-.review-rte .e-rte-content {
+#Review-Modal .review-rte .e-rte-content {
     height: 100%;
-    /* overflow-y: scroll; */
 }
 
-.submit-btn {
+#Review-Modal .submit-btn {
     color: white;
     background: radial-gradient(circle at center, rgb(255, 87, 87), rgb(158, 0, 93));
     font-size: var(--fs-md);
@@ -181,13 +181,13 @@ textarea::placeholder {
     margin-top: 25px;
 }
 
-.submit-btn:disabled {
+#Review-Modal .submit-btn:disabled {
     cursor: not-allowed;
     background: none;
     background-color: #797979;
 }
 
-.close-btn {
+#Review-Modal .close-btn {
     position: absolute;
     right: 30px;
     top: 25px;
@@ -201,7 +201,7 @@ textarea::placeholder {
 
 /** MEDIA **/
 
-.media-header {
+#Review-Modal .media-header {
     padding-top: 15px;
     font-weight: bold;
     font-size: var(--fs-lg);
@@ -209,7 +209,7 @@ textarea::placeholder {
     color: #df6490;
 }
 
-.media-group {
+#Review-Modal .media-group {
     display: flex;
     gap: 10px;
     margin: 15px 0px;
@@ -217,7 +217,7 @@ textarea::placeholder {
 }
 
 /* Upload button */
-.media-group .media-upload-btn {
+#Review-Modal .media-group .media-upload-btn {
     min-width: 100px;
     width: 100px;
     height: 100px;
@@ -231,7 +231,7 @@ textarea::placeholder {
     color: #ccc;
 }
 
-.media-upload-btn:hover {
+#Review-Modal .media-upload-btn:hover {
     border-color: #888;
     color: #888;
 }
