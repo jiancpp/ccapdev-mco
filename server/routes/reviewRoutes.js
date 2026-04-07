@@ -116,7 +116,7 @@ router.get('/', async (req, res) => {
  */
 router.get('/filter', async (req, res) => {
     try {
-        const { user, targetID, targetType, searchContent, artistName, songTitle, albumTitle } = req.query;
+        const { user, targetID, targetType, searchContent, artistName, songTitle, albumTitle, followerId } = req.query;
         let query = {};
 
         const filters = [ 'user', 'targetID', 'targetType' ];
@@ -147,6 +147,15 @@ router.get('/filter', async (req, res) => {
             ];
         }
 
+        if (followerId) {
+            const followerUser = await mongoose.model('User').findById(followerId).select('following');
+            if (followerUser?.following?.length > 0) {
+                query.user = { $in: followerUser.following };
+            } else {
+                return res.status(200).json([]);
+            }
+        }
+
         console.log(`Fetching all reviews based on filters...`);
         const reviews = await Review
             .find(query)
@@ -169,6 +178,31 @@ router.post('/create', async (req, res) => {
         console.log("Incoming review data:", req.body);
         const newReview = new Review(req.body);
         const savedReview = await newReview.save();
+        const { user, artist, _id, targetType, targetID } = savedReview;
+
+        const artistAccount = await mongoose.model('Artist').findOne({_id: artist});
+        const targetData = await mongoose.model(targetType).findById(targetID);
+
+        if (!targetData) {
+            console.error(`Target ${targetType} with ID ${targetID} not found.`);
+            return res.status(201).json(savedReview); // Return success for the review, even if notification fails
+        }
+
+        if (targetData) {
+            const targetTitle = targetType === 'Album' 
+                ? targetData.albumName 
+                : targetData.songTitle;
+
+            await Notification.create({ 
+                senderId: user, 
+                recipientId: artistAccount.user, 
+                relatedEntityId: _id,
+                type: 'rate',
+                content: `posted a review for "${targetTitle}"`,
+                createdAt: Date.now() 
+            });
+        }
+
         res.status(201).json(savedReview);
     } catch (error) {
         console.error("Error creating review:", error);
@@ -308,12 +342,20 @@ router.delete('/delete/:id', async (req, res) => {
         console.log(`  + checking routes ${id}`);
         const review = await Review.findById(id.trim());
         console.log(`  + checking review: ${review}`);
+        const artistAccount = await mongoose.model('Artist').findOne({_id: review.artist});
         
         if (!review) {
             return res.status(404).json({ message: "Review not found" });
         }
 
+        await Notification.findOneAndDelete({
+            senderId: review.user,
+            recipientId: artistAccount.user,
+            relatedEntityId: id,
+        });
+
         await review.deleteOne();
+
         res.status(200).json({message: 'Successfully deleted.'})
 
     } catch (error) {

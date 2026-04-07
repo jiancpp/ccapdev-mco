@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Sidebar.css"
 
-function Sidebar({ openModal }) {
+function Sidebar({ openModal, activeUser, setActiveUser}) {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -16,13 +16,13 @@ function Sidebar({ openModal }) {
             <button className={ currentPath === "/home" || currentPath.startsWith("/home/profile") ? "nav-button current-page" : "nav-button" } 
                     onClick={ goToHome }>
                 <i className="bi bi-house-fill"></i>
-                <span>Home</span>
+                <span className="home-btn-txt"></span>
             </button>
         
             <button className={ currentPath.startsWith("/artists") ? "nav-button current-page" : "nav-button"} 
                     onClick={ goToArtists }>
                     <i className="bi bi-people-fill"></i>
-                <span>Artists</span>
+                <span className="artists-btn-txt"></span>
             </button>
 
             {/* <button className={ currentPath === "/login" ? "nav-button current-page" : "nav-button"} 
@@ -30,9 +30,10 @@ function Sidebar({ openModal }) {
                 <i className="bi bi-bar-chart-line-fill"></i>
                 <span>Charts</span>
             </button> */}
-            <button className="review-button review-button-dynamic" onClick={openModal}>
-                <span>Review +</span>
-            </button>
+            {activeUser?.role == 'user' &&
+            (<button className="review-button review-button-dynamic" onClick={openModal}>
+                <span className="review-btn-txt"></span>
+            </button>)}
         </div>        
     )
 }
