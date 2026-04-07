@@ -143,8 +143,10 @@ function Review({ review, activeUser }) {
                         <span 
                             className="username" 
                             onClick={ () => navigate(`/profile/${review.user._id}`) }>
-                                {review.user?.username || "User unknown"}</span> · {getTimeAgo(review.createdAt)} 
-                                <span className={`edited ${review.isEdited ? "" : "hidden"}`}> (Edited)</span>
+                                {review.user?.username || "User unknown"}
+                        </span>
+                        <span className="edited">· {getTimeAgo(review.createdAt)} </span>
+                        <span className={`edited ${review.isEdited ? "" : "hidden"}`}> (Edited)</span>
                     </div>
 
                     <div className='title'>{review.review_header}</div>
