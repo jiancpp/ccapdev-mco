@@ -3,6 +3,11 @@
     padding: 40px 40px 15px 40px;
 }
 
+#home .filters {
+    display: flex;
+    width: 100%;
+}
+
 #home .buttons {
     width: 100%;
     justify-content: space-between;
@@ -31,10 +36,11 @@
 }
 
 #home .filters .search-container {
+    flex: 1;
     height: 40px;
     margin-right: 15px;
     margin-bottom: auto;
-    width: 500px;
+    width: 100%;
 
     transition: 0.3s;
 }
