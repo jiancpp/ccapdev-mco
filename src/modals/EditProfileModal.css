@@ -84,6 +84,17 @@
     transform: translateY(0) scale(1);
 }
 
+.close-btn {
+    position: absolute;
+    right: 40px;
+    top: 25px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #df6490;
+    cursor: pointer;
+}
+
 .profile-modal-title {
     background: var(--gr-accent);
     background-clip: text;

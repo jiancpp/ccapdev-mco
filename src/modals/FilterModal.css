@@ -1,4 +1,31 @@
-.filter-modal h2 {
+#Filter-Modal .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, rgba(255, 87, 87, .2), rgba(158, 0, 93, .2));
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+#Filter-Modal .modal-content {
+    display: flex;
+    flex-direction: column;
+    background: #FDFDFD;
+    border-radius: 40px;
+    width: 700px !important;
+    border: 1px solid #a11547;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    overflow-y: hidden;
+}
+
+#Filter-Modal h2 {
     background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -7,24 +34,35 @@
     margin-top: 0px;
 }
 
-.filter-modal .filter-label {
+#Filter-Modal .close-btn {
+    position: absolute;
+    right: 40px;
+    top: 25px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #df6490;
+    cursor: pointer;
+}
+
+#Filter-Modal .filter-label {
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-.filter-modal .tag-container {
+#Filter-Modal .tag-container {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.filter-modal .tag-container .genres, .rating-options {
+#Filter-Modal .tag-container .genres, .rating-options {
     display: flex;
     justify-content: space-between;
     gap: 5px;
 }
 
-.filter-modal .tag-btn, .rating-btn {
+#Filter-Modal .tag-btn, .rating-btn {
     padding: 8px 16px;
     width: 100%;
     border: 1px solid #df6490;
@@ -34,16 +72,16 @@
     cursor: pointer;
 }
 
-.filter-modal .tag-btn:hover, .rating-btn:hover {
+#Filter-Modal .tag-btn:hover, .rating-btn:hover {
     background: #df648f1f;
 }
 
-.filter-modal .tag-btn.active, .rating-btn.active {
+#Filter-Modal .tag-btn.active, .rating-btn.active {
     background: #df6490;
     color: white;
 }
 
-.filter-modal .clear-btn, .apply-btn {
+#Filter-Modal .clear-btn, .apply-btn {
     background: var(--primary-main);
     color: white;
     height: 40px;
@@ -60,7 +98,7 @@
     transition: ease-out 0.1s;
 }
 
-.filter-modal .modal-footer {
+#Filter-Modal .modal-footer {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -68,18 +106,18 @@
     
 }
 
-.filter-modal .clear-btn:hover, .apply-btn:hover {
+#Filter-Modal .clear-btn:hover, .apply-btn:hover {
     scale: 1.05;
 }
 
 
 /* Other genres tag */
-.filter-modal .other-input-wrapper {
+#Filter-Modal .other-input-wrapper {
     width: 100%;
     transition: all 0.3s ease-out;
 }
   
-.filter-modal .custom-tag-input {
+#Filter-Modal .custom-tag-input {
     color: var(--secondary-main);
     background-color: white;
     width: 100%;
@@ -90,6 +128,6 @@
     outline: none;
 }
 
-.filter-modal .custom-tag-input:focus {
+#Filter-Modal .custom-tag-input:focus {
     border-color: var(--secondary-main);
 }

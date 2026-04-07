@@ -23,84 +23,86 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
     console.log(currentFilters);
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="modal-content filter-modal" onClick={e => e.stopPropagation()}>
-                <div className="modal-header">
-                    <h2>Filter Artists</h2>
-                    <button className="close-btn" onClick={onClose}>&times;</button>
-                </div>
+        <div id="Filter-Modal">
+            <div className="modal-overlay" onClick={onClose}>
+                <div className="modal-content filter-modal" onClick={e => e.stopPropagation()}>
+                    <div className="modal-header">
+                        <h2>Filter Artists</h2>
+                        <button className="close-btn" onClick={onClose}>&times;</button>
+                    </div>
 
-                <div className="filter-section">
-                    <p className="filter-label">Tags</p>
-                    <div className="tag-container">
-                        <div className="genres">
-                            {genres.map(genre => (
+                    <div className="filter-section">
+                        <p className="filter-label">Tags</p>
+                        <div className="tag-container">
+                            <div className="genres">
+                                {genres.map(genre => (
+                                    <button 
+                                        key={genre}
+                                        className={`tag-btn ${tempFilters.genres.includes(genre) ? 'active' : ''}`}
+                                        onClick={() => toggleGenre(genre)}
+                                    >
+                                        {genre}
+                                    </button>
+                                ))}
+                            </div>
+                            {tempFilters.genres.includes("Others") &&
+                                <div className={`other-input-wrapper`}>
+                                    {/* <label htmlFor="others-genre" className="sr-only">Specify other genre</label> */}
+                                    <input 
+                                        type="text" 
+                                        id="others-genre"
+                                        name="others-genre"
+                                        placeholder="Type custom tags (separate with comma)"
+                                        className="custom-tag-input"
+                                        value={customGenreText}
+                                        onChange={(e) => {
+                                            const tags = e.target.value.split(',')
+                                                .map(tag => tag.trim())
+                                                .filter(tag => tag !== "");
+                                            setCustomGenreText(e.target.value);
+                                            setCustomGenre(tags || []);
+                                        }}
+                                        autoFocus/>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <div className="filter-section">
+                        <p className="filter-label">Rating</p>
+                        <div className="rating-options">
+                            {ratings.map(star => (
                                 <button 
-                                    key={genre}
-                                    className={`tag-btn ${tempFilters.genres.includes(genre) ? 'active' : ''}`}
-                                    onClick={() => toggleGenre(genre)}
+                                    key={star}
+                                    className={`rating-btn ${tempFilters.aveRating === star ? 'active' : ''}`}
+                                    onClick={() => setTempFilters({...tempFilters, aveRating: star})}
                                 >
-                                    {genre}
+                                    <i className="bi-star-fill" style={{color: '#ffc107'}}></i> {star}-Star +
                                 </button>
                             ))}
                         </div>
-                        {tempFilters.genres.includes("Others") &&
-                            <div className={`other-input-wrapper`}>
-                                {/* <label htmlFor="others-genre" className="sr-only">Specify other genre</label> */}
-                                <input 
-                                    type="text" 
-                                    id="others-genre"
-                                    name="others-genre"
-                                    placeholder="Type custom tags (separate with comma)"
-                                    className="custom-tag-input"
-                                    value={customGenreText}
-                                    onChange={(e) => {
-                                        const tags = e.target.value.split(',')
-                                            .map(tag => tag.trim())
-                                            .filter(tag => tag !== "");
-                                        setCustomGenreText(e.target.value);
-                                        setCustomGenre(tags || []);
-                                    }}
-                                    autoFocus/>
-                            </div>
-                        }
                     </div>
-                </div>
 
-                <div className="filter-section">
-                    <p className="filter-label">Rating</p>
-                    <div className="rating-options">
-                        {ratings.map(star => (
-                            <button 
-                                key={star}
-                                className={`rating-btn ${tempFilters.aveRating === star ? 'active' : ''}`}
-                                onClick={() => setTempFilters({...tempFilters, aveRating: star})}
-                            >
-                                <i className="bi-star-fill" style={{color: '#ffc107'}}></i> {star}-Star +
-                            </button>
-                        ))}
+                    <div className="modal-footer">
+                        <button className="clear-btn" onClick={() => {
+                            setTempFilters({ genres: [], aveRating: 0 });
+                            window.location.reload();
+                        }}>RESET</button>
+                        <button 
+                            className="apply-btn" 
+                            onClick={() => {
+                                const finalGenres = [
+                                    ...tempFilters.genres.filter(g => g !== "Others"), 
+                                    ...customGenre
+                                ];
+                                onApply({
+                                    ...tempFilters,
+                                    genres: finalGenres
+                                });
+                            }}>
+                            APPLY
+                        </button>
                     </div>
-                </div>
-
-                <div className="modal-footer">
-                    <button className="clear-btn" onClick={() => {
-                        setTempFilters({ genres: [], aveRating: 0 });
-                        window.location.reload();
-                    }}>RESET</button>
-                    <button 
-                        className="apply-btn" 
-                        onClick={() => {
-                            const finalGenres = [
-                                ...tempFilters.genres.filter(g => g !== "Others"), 
-                                ...customGenre
-                            ];
-                            onApply({
-                                ...tempFilters,
-                                genres: finalGenres
-                            });
-                        }}>
-                        APPLY
-                    </button>
                 </div>
             </div>
         </div>
