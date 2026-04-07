@@ -99,7 +99,7 @@
 
 .edited {
     color: #928b8b;
-    font-size: var(--fs-xs);
+    font-size: var(--fs-sm);
 }
 
 /* Text Styling */
@@ -107,9 +107,10 @@
     margin-top: 10px;
 }
 
-.post .user {
+.post .username {
     font-size: var(--fs-md);
     line-height: var(--lh-tight);
+    margin-right: 5px;
 }
 
 .post .username:hover {
