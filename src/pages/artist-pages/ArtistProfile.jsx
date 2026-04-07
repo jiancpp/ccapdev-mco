@@ -97,7 +97,11 @@ function ArtistProfile() {
                     {artist.name}
                     <span className="artist-genres">
                         {!genres.length 
-                            ? <span>No genres set.</span>                        
+                            ? <span 
+                                className="genre-tag" 
+                                style={{background: 'var(--text-contrast-dark)', fontStyle: 'italic'}}>
+                                    No genres set.
+                            </span>                        
                             : genres.map((genre, index) => (
                                 // Use .map() and make sure to provide a unique 'key'
                                 <span key={index} className="genre-tag">{genre}</span>

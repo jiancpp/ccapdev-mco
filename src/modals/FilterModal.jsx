@@ -3,8 +3,9 @@ import './FilterModal.css';
 
 export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
     const [tempFilters, setTempFilters] = useState(currentFilters);
+    const [customGenre, setCustomGenre] = useState([]);
 
-    const genres = ["Pop", "K-Pop", "OPM", "Rock", "R&B"];
+    const genres = ["Pop", "K-Pop", "OPM", "Rock", "R&B", "Others"];
     const ratings = [5, 4, 3, 2, 1];
 
     if (!isOpen) return null;
@@ -40,6 +41,24 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                                 {genre}
                             </button>
                         ))}
+                        {tempFilters.genres.includes("Others") &&
+                            <div className={`other-input-wrapper`}>
+                                {/* <label htmlFor="others-genre" className="sr-only">Specify other genre</label> */}
+                                <input 
+                                    type="text" 
+                                    id="others-genre"
+                                    name="others-genre"
+                                    placeholder="Type custom tags (separate with comma)"
+                                    className="custom-tag-input"
+                                    onChange={(e) => {
+                                        const tags = e.target.value.split(',')
+                                            .map(tag => tag.trim())
+                                            .filter(tag => tag !== "");
+                                            setCustomGenre(tags || [])
+                                    }}
+                                    autoFocus/>
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -59,8 +78,24 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                 </div>
 
                 <div className="modal-footer">
-                    <button className="clear-btn" onClick={() => setTempFilters({ genres: [], aveRating: 0 })}>Reset</button>
-                    <button className="apply-btn" onClick={() => onApply(tempFilters)}>Apply Filters</button>
+                    <button className="clear-btn" onClick={() => {
+                        setTempFilters({ genres: [], aveRating: 0 });
+                        window.location.reload();
+                    }}>Reset</button>
+                    <button 
+                        className="apply-btn" 
+                        onClick={() => {
+                            const finalGenres = [
+                                ...tempFilters.genres.filter(g => g !== "Others"), 
+                                ...customGenre
+                            ];
+                            onApply({
+                                ...tempFilters,
+                                genres: finalGenres
+                            });
+                        }}>
+                        Apply Filters
+                    </button>
                 </div>
             </div>
         </div>

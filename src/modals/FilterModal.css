@@ -70,3 +70,22 @@ h2 {
 .clear-btn:hover, .apply-btn:hover {
     scale: 1.05;
 }
+
+
+/* Other genres tag */
+.other-input-wrapper {
+    width: 80%;
+    transition: all 0.3s ease-out;
+}
+  
+.custom-tag-input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e0;
+    outline: none;
+}
+
+.custom-tag-input:focus {
+    border-color: var(--secondary-main);
+}

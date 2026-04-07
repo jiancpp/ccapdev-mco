@@ -41,14 +41,18 @@ function Artists() {
     const displayedArtists = allArtists.filter(artist => {
         const name = artist.name || "Unknown artist";
         const bio = artist.user?.bio || "No description yet";
-        const genre = artist.genre || "No genre specified";
+        const genres = artist.genre 
+        ? artist.genre.split('/').map(g => g.trim().toLowerCase()) 
+        : [];
 
         const matchesSearch = name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                               bio.toLowerCase().includes(searchTerm.toLowerCase());
         
         const matchesGenre = 
             activeFilters.genres.length === 0 || 
-            activeFilters.genres.includes(genre);
+            genres.some(g => 
+                activeFilters.genres.map(f => f.toLowerCase()).includes(g)
+            );
 
         const matchesRating = artist.aveRating >= activeFilters.aveRating;
 

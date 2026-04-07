@@ -66,3 +66,18 @@
     -webkit-line-clamp: 3;       
     overflow: hidden;
 }
+
+.artist-block .artist-genre-list {
+    display: flex;
+    gap: 5px;
+    margin: 5px 0;
+}
+
+.artist-block .artist-genre-list .genre-tag{
+    background-color: var(--secondary-light);
+    color: var(--secondary-main);
+    font-size: var(--fs-xs);
+    font-style: italic;
+    font-weight: 400;
+    padding: 5px 9px;
+}
