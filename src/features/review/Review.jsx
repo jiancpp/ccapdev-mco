@@ -76,6 +76,12 @@ function Review({ review, activeUser }) {
             setDislikes(prev => prev + 1); // increment
         }
     }
+
+    const isEmpty = (html) => {
+        if (!html) return true;
+        const text = html.replace(/<[^>]*>/g, '').trim();
+        return text === '';
+    };
     
     return (
         <div 
@@ -154,7 +160,9 @@ function Review({ review, activeUser }) {
                         <StarRating rating={Number(review.rating || 0)} />
                     </div>
                     <ReviewEmbed review={review} navigate={navigate}/>
-                    <div className="description" dangerouslySetInnerHTML={{ __html: review.review_content }} />
+                    {!isEmpty(review.review_content) && (
+                        <div className="description" dangerouslySetInnerHTML={{ __html: review.review_content }} />
+                    )}
                     <div className="description media">
                         <MediaPreviewStrip media={review.media} />
                     </div>
