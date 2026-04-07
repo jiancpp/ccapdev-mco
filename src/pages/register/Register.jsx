@@ -45,10 +45,14 @@ function Register() {
         setAlert({ show: false });
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const usernameRegex = /^[^@]*$/;
+        const usernameRegex = /^[^@\s]*$/;
+
+        if (username.trim().length > 50) {
+            return showAlert('Username cannot exceed 50 characters', 'bi-exclamation-triangle-fill', 'error');
+        }
 
         if (!usernameRegex.test(username)) {
-            return showAlert('Username cannot contain an @', 'bi-exclamation-triangle-fill', 'error');
+            return showAlert('Username cannot contain an @ or any spaces', 'bi-exclamation-triangle-fill', 'error');
         }
 
         if (!emailRegex.test(email)) {
