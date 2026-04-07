@@ -3,7 +3,7 @@ import './AboutUnsynth.css'
 
 // DEPENDENCIES ICONS
 import { FaReact, FaJsSquare, FaCss3Alt, FaNodeJs, FaSpotify, FaLayerGroup } from 'react-icons/fa';
-import { SiMongodb, SiExpress } from 'react-icons/si';
+import { SiMongodb, SiExpress, SiCloudinary } from 'react-icons/si';
 
 function AboutUnsynth() {
     const navigate = useNavigate();
@@ -36,31 +36,38 @@ function AboutUnsynth() {
                 </header>
                 <main>
                     <div className="feature-card">
-                        <div className="feature-icon">
-                            <i className='bi bi-chat-left-text-fill'></i>
+                        <div className="feature-title">
+                            <div className="feature-icon">
+                                <i className='bi bi-chat-left-text-fill'></i>
+                            </div>
+                            <p><span>Share</span> your music take</p>
                         </div>
-                        <h3>Share your music take</h3>
                         <p>Rate your latest listens and build a digital library of your musical journey.</p>
                     </div>
                     <div className="feature-card">
-                        <div className="feature-icon">
-                            <i className='bi bi-music-note-beamed'></i>
+                        <div className="feature-title">
+                            <div className="feature-icon">
+                                <i className='bi bi-music-note-beamed'></i>
+                            </div>
+                            <p><span>Discover</span> hidden gems</p>
                         </div>
-                        <h3>Discover hidden gems</h3>
                         <p>Explore new music using smart filters, and follow users and artists you love.</p>
                     </div>
                     <div className="feature-card">
-                        <div className="feature-icon">
-                            <i className='bi bi-chat-heart-fill'></i>
+                        <div className="feature-title">
+                            <div className="feature-icon">
+                                <i className='bi bi-chat-heart-fill'></i>
+                            </div>
+                            <p><span>Connect</span> with others</p>
                         </div>
-                        <h3>Connect with others</h3>
                         <p>Follow users, react to posts, and engage with a community that shares your taste.</p>
                     </div>
                 </main>
             </div>
             <div className="dependencies">
                 <header>
-                    <p>TECH STACK AND DEPENDENCIES</p>
+                    <p>WEBSITE TOOLS</p>
+                    <h1>Tech Stack and Dependencies</h1>
                 </header>
                 <div className="dependencies-list">
                     <div className="dependencies-item">
@@ -79,12 +86,10 @@ function AboutUnsynth() {
                         <i><SiMongodb/></i> MongoDB
                     </div>
                     <div className="dependencies-item">
-                        <i>
-                        <svg width="20" height="20" viewBox="0 0 256 256">
-                            {/* SVG Path here */}
-                        </svg>
-                        </i> 
-                        SyncFusion
+                        <img src="/assets/syncfusion.png" width="20" height="20" />SyncFusion
+                    </div>
+                    <div className="dependencies-item">
+                        <i><SiCloudinary /></i> Cloudinary
                     </div>
                     <div className="dependencies-item">
                         <i><FaSpotify/></i> Spotify API
