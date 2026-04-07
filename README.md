@@ -132,7 +132,6 @@ src/
 ├── assets/          # Images, icons, and static files
 ├── components/      # Reusable UI static components
 ├── features/        # Reusable UI data-heavy components
-├── hooks/           # Custom React hooks
 ├── layouts/         # Website layout 
 ├── modals/          # Data or feature heavy modals
 ├── pages/           # Page-level components / views
