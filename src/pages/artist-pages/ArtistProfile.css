@@ -53,9 +53,22 @@
 }
 
 .artist-profile .artist-name {
+    display: flex;
+    gap: 15px;
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 5px;
+}
+
+
+.artist-profile .artist-genres {
+    display: flex;      
+    gap: 5px;   
+    align-items: center;  
+}
+
+.artist-profile .artist-genres .genre-tag{
+    font-size: var(--fs-sm);
 }
 
 .artist-profile .artist-rating {

@@ -36,19 +36,22 @@ nav div {
     display: inline-block;
     font-size: 25px;
     color: #fdfdff;
+    cursor: pointer;
+
 }
 
-#notifications::after {
+/* #notifications::after {
     content: "";
     position: absolute;
     right: -1px;
 
-    width: 10px;
-    height: 10px;
-    background-color: red;
+    width: 5px;
+    height: 5px;
+    background-color: var(--bg-main);
+    border: 3px solid #64072a;
     border-radius: 50%;
     z-index: 10
-}
+} */
 
 #profile-pic {
     background: white;

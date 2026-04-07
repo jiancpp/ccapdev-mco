@@ -10,6 +10,7 @@ export const BASE_URL = import.meta.env.PROD
  * @returns JSON of model data
  */
 export const getAllData = async (model) => {
+    console.log('Fetching Data')
     const res = await fetch(`${BASE_URL}/${model}`);
     return await handleResponse(res, `Failed to fetch ${model}`);
 }    
@@ -162,14 +163,15 @@ export const createReview = async (reviewData) => {
     return await handleResponse(res, `Failed to create the review record.`);
 }
 
-export const postReaction = async (reviewId, userId, reactType) => {
+export const postReaction = async (reviewId, userId, reactType, postedById) => {
     const res = await fetch(`${BASE_URL}/reviews/react`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
             reviewId: reviewId,
             userId: userId,
-            type: reactType 
+            type: reactType,
+            postedById: postedById
         }),
     });
     return await handleResponse(res, `Failed to update review reaction.`);

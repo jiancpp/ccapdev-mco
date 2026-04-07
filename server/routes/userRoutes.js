@@ -1,5 +1,6 @@
 import express from 'express';
 import User from '../models/User.js';
+import Notification from '../models/Notification.js';
 // import bcrypt from 'bcrypt';
 
 const router = express.Router();
@@ -229,6 +230,24 @@ router.put('/update/:id', async (req, res) => {
         res.status(200).json({message: 'Successfully updated.'})
     } catch (error) {
         res.status(500).json({error: error.message})
+    }
+})
+
+// ----- USER NOTIFICATIONS 
+router.get('/fetch-notifs/:recipientId', async (req, res) => {
+    const { recipientId } = req.params;
+    try {
+        console.log('Fetching Data')
+        const notifs = await Notification.find({ recipientId: recipientId })
+            .populate('senderId', 'username avatar')
+            .sort({ createdAt: -1 })
+            .limit(20);
+
+        console.log(JSON.stringify(notifs))
+        res.status(200).json(notifs);
+    } catch (error) {
+        console.error(error.message, error);
+        res.status(400).json({ message: error.message });
     }
 })
 

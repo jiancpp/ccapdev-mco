@@ -1,0 +1,30 @@
+.notif-page {
+    padding: 50px;
+}
+
+.notif-page ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0;
+}
+
+.notif-page li {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    margin: 0;
+    background-color:  var(--secondary-lighter);
+    list-style: none;
+    height: auto;
+}
+
+.notif-page li:hover {
+    cursor: pointer;
+    background-color: var(--secondary-light);
+}
+
+.notif-page .notif-content strong {
+    color: var(--secondary-main);
+}

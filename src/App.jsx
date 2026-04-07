@@ -22,6 +22,7 @@ import AlbumProfile from "./pages/artist-pages/AlbumProfile.jsx";
 import ArtistView from './pages/artist-view/ArtistView.jsx'
 import ScrollToTopWrapper from './components/ScrollToTopWrapper'
 import ReviewPage from "./features/review/ReviewPage";
+import NotificationPage from "./features/notification/Notification";
 
 import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";  
 import LoadingBlock from "./components/LoadingBlock";
@@ -76,6 +77,7 @@ function App() {
             <Route path ="/albums/:album_id" element={<AlbumProfile />} />
             <Route path ="/songs/:song_id" element={<SongProfile />} />
             <Route path ="/review/:id" element={<ReviewPage activeUser={activeUser}/>} />
+            <Route path ="/user/notifications/:id" element={<NotificationPage activeUser={activeUser}/>} />
           </Route>
 
           {/* SECONDARY PAGES (w/ Navbar) */}
