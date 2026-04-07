@@ -1,12 +1,13 @@
 import express from 'express';
 import User from '../models/User.js';
 import Notification from '../models/Notification.js';
-// import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
 // POST /api/users/register
 router.post('/register', async (req, res) => {
+    const saltRounds = 10;
     const userData = req.body.userData; 
     // const confirmPassword = req.body.confirmPassword;
 
@@ -23,12 +24,16 @@ router.post('/register', async (req, res) => {
         }
 
         const newUser = new User(req.body.userData);
+
+        const hashed = await bcrypt.hash(userData.password, saltRounds);
+        newUser.password = hashed;
+
         const savedUser = await newUser.save();
 
         console.log(savedUser);
         return res.status(201).json({
             newUser: savedUser,
-            message: "Login successful!"
+            message: "Account Successfully Created!"
         });
 
     } catch (error) {
@@ -43,6 +48,7 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { identifier, password } = req.body;
 
+    // const loginIdentifier = identifier.toLowerCase();
     try {
         const user = await User.findOne({
             $or: [
@@ -55,8 +61,8 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ message: "User not found" });
         }
 
-        const passMatch = password == user.password;
-        if (!passMatch) {
+        const result = await bcrypt.compare(password, user.password);
+        if (!result) {
             return res.status(401).json({ message: "Invalid password" });
         }
 
