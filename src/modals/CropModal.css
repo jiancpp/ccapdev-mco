@@ -1,0 +1,63 @@
+.crop-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.crop-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--primary-main);
+}
+
+.crop-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.crop-controls input[type="range"] {
+    -webkit-appearance: none;
+    width: 150px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--primary-main);
+    outline: none;
+    cursor: pointer;
+}
+
+.crop-controls input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-main);
+}
+
+.crop-controls button {
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.crop-controls button:first-of-type {
+    background: transparent;
+    border: 1px solid var(--secondary-main);
+    color: var(--secondary-main);
+}
+
+.crop-controls button:last-of-type {
+    background: var(--gr-accent);
+    color: var(--text-contrast);
+}
