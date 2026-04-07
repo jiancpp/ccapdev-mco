@@ -179,104 +179,107 @@ export default function ReviewModal({ isOpen, onClose, activeUser, preSelected, 
     if (!isOpen) return null;
 
     return (
-        <div className="modal-overlay" onClick={onClose}>
-            <div className="review-modal-content" onClick={(e) => e.stopPropagation()}>
-                {isAlertOn && <AlertBlock
-                    message={ alertConfig.message }
-                    icon={alertConfig.icon }
-                    bgColor={alertConfig.bgColor} 
-                    textColor={alertConfig.textColor}
-                />}
-                <button className="close-btn" onClick={onClose}>&times;</button>
-                <div className="header">
-                    <h2 className="modal-title">{modalMode || "Write"} a Review</h2>
-                    <SearchBar
-                            songs={songs}
-                            albums={albums}
-                            artists={artists}
-                            onSelect={handleSelect}
-                        />
-                </div>
-                <div className="modal-scroll">
-                    <div className="review-form-area">
-                        <div className="review-row">
-                            <div className="selected-card">
-                                {selectedItem ? (
-                                    <img src={selectedItem.cover} alt="" />
-                                ) : (
-                                    <div className="empty-box" />
-                                )}
-                                <div className="card-info">
-                                    <p className="item-title">{selectedItem?.title || ""}</p>
-                                    <span className="artist-subtitle">
-                                        {selectedItem ? getArtistName(selectedItem.artistID) : ""}
-                                    </span>
+        <div id="Review-Modal">
+            <div className="modal-overlay" onClick={onClose}>
+                <div className="review-modal-content" onClick={(e) => e.stopPropagation()}>
+                    {isAlertOn && <AlertBlock
+                        message={ alertConfig.message }
+                        icon={alertConfig.icon }
+                        bgColor={alertConfig.bgColor} 
+                        textColor={alertConfig.textColor}
+                    />}
+                    <button className="close-btn" onClick={onClose}>&times;</button>
+                    <div className="header">
+                        <h2 className="modal-title">{modalMode || "Write"} a Review</h2>
+                        <SearchBar
+                                songs={songs}
+                                albums={albums}
+                                artists={artists}
+                                onSelect={handleSelect}
+                            />
+                    </div>
+                    <div className="modal-scroll">
+                        <div className="review-form-area">
+                            <div className="review-row">
+                                <div className="selected-card">
+                                    {selectedItem ? (
+                                        <img src={selectedItem.cover} alt="" />
+                                    ) : (
+                                        <div className="empty-box" />
+                                    )}
+                                    <div className="card-info">
+                                        <p className="item-title">{selectedItem?.title || ""}</p>
+                                        <span className="artist-subtitle">
+                                            {selectedItem ? getArtistName(selectedItem.artistID) : ""}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div className="rating-section">
+                                    <p className="rating-label">Star Rating</p>
+                                    <InteractiveStarRating
+                                        totalStars={5}
+                                        currentRating={currentRating || rating}
+                                        onRate={(val) => setRating(val)}
+                                    />
                                 </div>
                             </div>
 
-                            <div className="rating-section">
-                                <p className="rating-label">Star Rating</p>
-                                <InteractiveStarRating
-                                    totalStars={5}
-                                    currentRating={currentRating || rating}
-                                    onRate={(val) => setRating(val)}
+                            <div className="input-group">
+                                <input
+                                    type="text"
+                                    className="header-input"
+                                    placeholder="Header"
+                                    value={header}
+                                    onChange={(e) => setHeader(e.target.value)}
+                                />
+
+                                <RichTextEditorComponent
+                                    className="review-rte"
+                                    toolbarSettings={toolbarSettings}
+                                    htmlAttributes={{ "data-gramm": "false", "data-gramm_editor": "false" }}
+                                    ref={rteRef}
+                                >
+                                    <Inject services={[Toolbar, Link, HtmlEditor, QuickToolbar]} />
+                                </RichTextEditorComponent>
+                            </div>
+
+                            {/* Media preview strip with upload button */}
+                            <div className="media-header">Upload Media</div>
+                            <div className="media-group">
+                                {/* Upload button */}
+                                <label
+                                    className="media-upload-btn"
+                                    style={{ opacity: uploading ? 0.6 : 1, pointerEvents: uploading ? 'none' : 'auto' }}
+                                >
+                                    {uploading ? "↻" : "＋"}
+                                    <input
+                                        type="file"
+                                        accept="image/*,video/*"
+                                        onChange={handleMediaUpload}
+                                        style={{ display: 'none' }}
+                                    />
+                                </label>
+                                <MediaPreviewStrip
+                                    media={mediaAttachments}
+                                    onDelete={deleteMedia}
                                 />
                             </div>
                         </div>
-
-                        <div className="input-group">
-                            <input
-                                type="text"
-                                className="header-input"
-                                placeholder="Header"
-                                value={header}
-                                onChange={(e) => setHeader(e.target.value)}
-                            />
-
-                            <RichTextEditorComponent
-                                className="review-rte"
-                                toolbarSettings={toolbarSettings}
-                                htmlAttributes={{ "data-gramm": "false", "data-gramm_editor": "false" }}
-                                ref={rteRef}
-                            >
-                                <Inject services={[Toolbar, Link, HtmlEditor, QuickToolbar]} />
-                            </RichTextEditorComponent>
-                        </div>
-
-                        {/* Media preview strip with upload button */}
-                        <div className="media-header">Upload Media</div>
-                        <div className="media-group">
-                            {/* Upload button */}
-                            <label
-                                className="media-upload-btn"
-                                style={{ opacity: uploading ? 0.6 : 1, pointerEvents: uploading ? 'none' : 'auto' }}
-                            >
-                                {uploading ? "↻" : "＋"}
-                                <input
-                                    type="file"
-                                    accept="image/*,video/*"
-                                    onChange={handleMediaUpload}
-                                    style={{ display: 'none' }}
-                                />
-                            </label>
-                            <MediaPreviewStrip
-                                media={mediaAttachments}
-                                onDelete={deleteMedia}
-                            />
-                        </div>
                     </div>
-                </div>
-                <div className="footer">
-                    <button
-                        className="submit-btn"
-                        onClick={handleSubmit}
-                        disabled={isFormInvalid}
-                    >
-                        {modalMode == "Edit" ? "Save" : "Submit"} Review
-                    </button>
+                    <div className="footer">
+                        <button
+                            className="submit-btn"
+                            onClick={handleSubmit}
+                            disabled={isFormInvalid}
+                        >
+                            {modalMode == "Edit" ? "Save" : "Submit"} Review
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+        
     );
 }
 
