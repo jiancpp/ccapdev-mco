@@ -160,27 +160,6 @@ src/
 ├── main.jsx         # Application entry point
 └── index.css        # Global styles
 ```
-
-### Folder Descriptions
-
-**assets**
-Contains static resources such as images, fonts, or icons used throughout the application.
-
-**components**
-Reusable UI components that can be used across multiple pages.
-
-**features**
-Reusable UI data heavy components that can be used across multiple pages.
-
-**pages**
-High-level page components that represent different routes or screens in the application.
-
-**api**
-Handles communication with APIs or backend services (including MongoDB-related endpoints).
-
-**hooks**
-Custom React hooks for reusable state and logic.
-
 ---
 
 # 🧑‍💻 Tech Stack
