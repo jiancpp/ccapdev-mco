@@ -48,7 +48,14 @@ function NotificationPage({ activeUser }) {
                             </div>
                             <span className="notif-content">
                                 <strong>{notif.senderId?.username || "Someone"}</strong> 
-                                {" "}{notif.type.toLowerCase()}d your review
+                                {" "}
+                                { 
+                                    (notif.type == 'like' || notif.type == 'dislike') 
+                                    ? <>{notif.type.toLowerCase()}d your review</>
+                                    : (notif.type == 'rate')
+                                    ? <>{notif.content}</>
+                                    : <></>
+                                }
                             </span>
                             <span className="date">{getTimeAgo(notif.createdAt)}</span>
                         </li>
