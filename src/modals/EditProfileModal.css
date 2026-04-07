@@ -84,6 +84,12 @@
     transform: translateY(0) scale(1);
 }
 
+.close-btn {
+    width: 23.5px;
+    text-align: center;
+    margin-left: auto;
+}
+
 .profile-modal-title {
     background: var(--gr-accent);
     background-clip: text;
