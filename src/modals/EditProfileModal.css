@@ -85,9 +85,14 @@
 }
 
 .close-btn {
-    width: 23.5px;
-    text-align: center;
-    margin-left: auto;
+    position: absolute;
+    right: 40px;
+    top: 25px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #df6490;
+    cursor: pointer;
 }
 
 .profile-modal-title {
