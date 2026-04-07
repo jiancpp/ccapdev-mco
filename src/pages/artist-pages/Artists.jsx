@@ -65,7 +65,7 @@ function Artists() {
     };
 
     return (
-        <div id="artists">
+        <div id="artists" style={{paddingBottom: '50px'}}>
             <div className="toolbar flex f-center">
                 <ArtistSearchBar onSearchChange={setSearchTerm} />
                 <button className="filters" onClick={() => setIsFilterOpen(true)}>
