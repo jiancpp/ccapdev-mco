@@ -175,7 +175,7 @@ Custom React hooks for reusable state and logic.
 
 # 💻 Contributors
 
-* **Joshua Calibo
-* **Jessica Dela Cruz
-* **Shielo Lunario
-* **Jianna Moraga
+* **Joshua Calibo**
+* **Jessica Dela Cruz**
+* **Shielo Lunario**
+* **Jianna Moraga**
