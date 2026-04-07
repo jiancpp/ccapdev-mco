@@ -51,7 +51,7 @@ function Register() {
             return showAlert('Please enter a valid email address', 'bi-envelope-exclamation');
         }
 
-        if (password.length < 8) {
+        if (password.trim().length < 8) {
             showAlert('Passwords needs to be atleast 8 non-space characters', 'bi-shield-lock', 'error');
             return;
         }

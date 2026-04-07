@@ -17,13 +17,14 @@ router.post('/register', async (req, res) => {
                 { email: userData.email },
                 { username: userData.username },
             ]
-        });
+        })
+        .collation({locale: 'en', strength: 2});
 
         if (user) {
             if (user.email == userData.email) {
                 return res.status(409).json({ message: "Email is already registered" });
             }
-            if (user.username == userData.username) {
+            if (user.username.toLowerCase() == userData.username.toLowerCase()) {
                 return res.status(409).json({ message: "Username is already taken" });
             }
         }
