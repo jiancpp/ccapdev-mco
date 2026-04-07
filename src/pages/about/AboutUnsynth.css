@@ -211,14 +211,26 @@
     padding: 20px;
 }
 
-.about-page-container .about main .feature-card{
+.about-page-container .about main .feature-card {
     display: inline;
     width: 25%;
     height: 100;
-    padding: 20px;
+    padding: 30px;
     border: 1px solid var(--secondary-light);
     box-shadow: 0 15px 30px rgba(64, 10, 28, 0.1);;
-    border-radius: 15px;
+    border-radius: 20px;
+    color: var(--secondary-main);
+}
+
+.about-page-container .about main .feature-card p {
+    margin-top: 0%;
+    color: var(--secondary-main);
+}
+
+.about-page-container .about main .feature-title {
+    display: flex;
+    gap: 15px;
+    align-items: center;
 }
 
 .about-page-container .about main .feature-icon {
@@ -226,7 +238,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    background-color: var(--secondary-main);
+    background: radial-gradient(circle at center, rgb(255, 87, 87), rgb(158, 0, 93));
     color: white;
     width: 50px;
     height: 50px;
@@ -237,9 +249,22 @@
     font-size: var(--fs-xl);
 }
 
-.about-page-container .about main .feature-card h3 {
+.about-page-container .about main .feature-title p {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--fs-lg);
+    font-style: italic;
+    color: var(--primary-main);
+    margin-top: 0%;
+    line-height: 20px;
+    letter-spacing: var(--ls-very-tight);
+}
+
+.about-page-container .about main .feature-title span {
+    font-family: "Helvetica Now";
     font-size: var(--fs-xl);
-    color: var(--secondary-main);
+    font-style: normal;
+    font-weight: 500;
 }
 
 .about-page-container .record-disc {
@@ -350,15 +375,19 @@
     z-index: -2;
 }
 
-.about-page-container .dependencies header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.about-page-container .dependencies header p {
     text-align: center;
     color: var(--secondary-main);
     font-weight: 600;
     margin: 20px 0;
-    
+}
+
+.about-page-container .dependencies header h1 {
+    text-align: center;
+    font-size: var(--fs-xxxxl);
+    color: var(--primary-main);
+    margin: 15px;
+    margin-bottom: 30px;
 }
 
 .about-page-container .dependencies-list {
@@ -366,15 +395,22 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 60%;
+    color: var(--primary-main);
 }
 
 .about-page-container .dependencies-item {
+    display: flex;
+    gap: 8px;
     padding: 15px 20px;
     margin: 10px;
     border-radius: 30px;
     background: white;
     font-size: var(--fs-lg);
+}
+
+.about-page-container .dependencies-item i {
+    margin-top: 2px;
 }
 
 .about-page-container footer{

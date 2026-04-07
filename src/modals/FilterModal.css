@@ -1,4 +1,4 @@
-h2 {
+.filter-modal h2 {
     background: linear-gradient(to right, #9e005d, #ff5757, #9e005d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -7,19 +7,26 @@ h2 {
     margin-top: 0px;
 }
 
-.filter-label {
+.filter-modal .filter-label {
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-.tag-container {
+.filter-modal .tag-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.tag-btn, .rating-btn {
+.filter-modal .tag-container .genres, .rating-options {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.filter-modal .tag-btn, .rating-btn {
     padding: 8px 16px;
+    width: 100%;
     border: 1px solid #df6490;
     border-radius: 20px;
     background: transparent;
@@ -27,23 +34,17 @@ h2 {
     cursor: pointer;
 }
 
-.tag-btn:hover, .rating-btn:hover {
+.filter-modal .tag-btn:hover, .rating-btn:hover {
     background: #df648f1f;
 }
 
-.tag-btn.active, .rating-btn.active {
+.filter-modal .tag-btn.active, .rating-btn.active {
     background: #df6490;
     color: white;
 }
 
-.rating-options {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-}
-
-.clear-btn, .apply-btn {
-    background: #9e005d;
+.filter-modal .clear-btn, .apply-btn {
+    background: var(--primary-main);
     color: white;
     height: 40px;
     width: 130px;
@@ -53,13 +54,13 @@ h2 {
     margin-bottom: auto;
 
     font-size: var(--fs-sm);
-    font-weight: 300;
+    font-weight: 500;
 
     cursor: pointer;
     transition: ease-out 0.1s;
 }
 
-.modal-footer {
+.filter-modal .modal-footer {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -67,25 +68,28 @@ h2 {
     
 }
 
-.clear-btn:hover, .apply-btn:hover {
+.filter-modal .clear-btn:hover, .apply-btn:hover {
     scale: 1.05;
 }
 
 
 /* Other genres tag */
-.other-input-wrapper {
-    width: 80%;
+.filter-modal .other-input-wrapper {
+    width: 100%;
     transition: all 0.3s ease-out;
 }
   
-.custom-tag-input {
+.filter-modal .custom-tag-input {
+    color: var(--secondary-main);
+    background-color: white;
     width: 100%;
+    margin-top: 20px;
     padding: 8px 12px;
     border-radius: 6px;
-    border: 1px solid #cbd5e0;
+    border: 1px solid #ffe1f2;
     outline: none;
 }
 
-.custom-tag-input:focus {
+.filter-modal .custom-tag-input:focus {
     border-color: var(--secondary-main);
 }
