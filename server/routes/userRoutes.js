@@ -15,12 +15,18 @@ router.post('/register', async (req, res) => {
         const user = await User.findOne({
             $or: [
                 { email: userData.email },
-                { username: userData.username }
+                { username: userData.username },
             ]
-        });
+        })
+        .collation({locale: 'en', strength: 2});
 
         if (user) {
-            return res.status(409).json({ message: "User Already Exists" });
+            if (user.email == userData.email) {
+                return res.status(409).json({ message: "Email is already registered" });
+            }
+            if (user.username.toLowerCase() == userData.username.toLowerCase()) {
+                return res.status(409).json({ message: "Username is already taken" });
+            }
         }
 
         const newUser = new User(req.body.userData);
@@ -47,15 +53,17 @@ router.post('/register', async (req, res) => {
 // POST /api/users/login
 router.post('/login', async (req, res) => {
     const { identifier, password } = req.body;
+    // console.log(req.body);
 
-    // const loginIdentifier = identifier.toLowerCase();
     try {
         const user = await User.findOne({
             $or: [
                 { email: identifier },
                 { username: identifier }
             ]
-        }).select('+password');
+        })
+        .collation({locale: 'en', strength: 2})
+        .select('+password');
 
         if (!user) {
             return res.status(401).json({ message: "User not found" });
