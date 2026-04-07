@@ -3,8 +3,10 @@ import './FilterModal.css';
 
 export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
     const [tempFilters, setTempFilters] = useState(currentFilters);
+    const [customGenre, setCustomGenre] = useState([]);
+    const [customGenreText, setCustomGenreText] = useState('');
 
-    const genres = ["Pop", "K-Pop", "OPM", "Rock", "R&B"];
+    const genres = ["Pop", "K-Pop", "OPM", "Rock", "R&B", "Others"];
     const ratings = [5, 4, 3, 2, 1];
 
     if (!isOpen) return null;
@@ -31,15 +33,37 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                 <div className="filter-section">
                     <p className="filter-label">Tags</p>
                     <div className="tag-container">
-                        {genres.map(genre => (
-                            <button 
-                                key={genre}
-                                className={`tag-btn ${tempFilters.genres.includes(genre) ? 'active' : ''}`}
-                                onClick={() => toggleGenre(genre)}
-                            >
-                                {genre}
-                            </button>
-                        ))}
+                        <div className="genres">
+                            {genres.map(genre => (
+                                <button 
+                                    key={genre}
+                                    className={`tag-btn ${tempFilters.genres.includes(genre) ? 'active' : ''}`}
+                                    onClick={() => toggleGenre(genre)}
+                                >
+                                    {genre}
+                                </button>
+                            ))}
+                        </div>
+                        {tempFilters.genres.includes("Others") &&
+                            <div className={`other-input-wrapper`}>
+                                {/* <label htmlFor="others-genre" className="sr-only">Specify other genre</label> */}
+                                <input 
+                                    type="text" 
+                                    id="others-genre"
+                                    name="others-genre"
+                                    placeholder="Type custom tags (separate with comma)"
+                                    className="custom-tag-input"
+                                    value={customGenreText}
+                                    onChange={(e) => {
+                                        const tags = e.target.value.split(',')
+                                            .map(tag => tag.trim())
+                                            .filter(tag => tag !== "");
+                                        setCustomGenreText(e.target.value);
+                                        setCustomGenre(tags || []);
+                                    }}
+                                    autoFocus/>
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -59,8 +83,24 @@ export function FilterModal({ isOpen, onClose, onApply, currentFilters }) {
                 </div>
 
                 <div className="modal-footer">
-                    <button className="clear-btn" onClick={() => setTempFilters({ genres: [], aveRating: 0 })}>Reset</button>
-                    <button className="apply-btn" onClick={() => onApply(tempFilters)}>Apply Filters</button>
+                    <button className="clear-btn" onClick={() => {
+                        setTempFilters({ genres: [], aveRating: 0 });
+                        window.location.reload();
+                    }}>RESET</button>
+                    <button 
+                        className="apply-btn" 
+                        onClick={() => {
+                            const finalGenres = [
+                                ...tempFilters.genres.filter(g => g !== "Others"), 
+                                ...customGenre
+                            ];
+                            onApply({
+                                ...tempFilters,
+                                genres: finalGenres
+                            });
+                        }}>
+                        APPLY
+                    </button>
                 </div>
             </div>
         </div>

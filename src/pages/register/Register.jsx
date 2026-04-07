@@ -45,28 +45,34 @@ function Register() {
         setAlert({ show: false });
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const usernameRegex = /^[^@\s]*$/;
+
+        if (username.trim().length > 50) {
+            return showAlert('Username cannot exceed 50 characters', 'bi-exclamation-triangle-fill', 'error');
+        }
+
+        if (!usernameRegex.test(username)) {
+            return showAlert('Username cannot contain an @ or any spaces', 'bi-exclamation-triangle-fill', 'error');
+        }
 
         if (!emailRegex.test(email)) {
             return showAlert('Please enter a valid email address', 'bi-envelope-exclamation');
         }
 
-        if (password.length < 8) {
-            showAlert('Passwords needs to be atleast 8 characters', 'bi-shield-lock', 'error');
-            return;
+        if (password.trim().length < 8) {
+            return showAlert('Passwords needs to be atleast 8 non-space characters', 'bi-shield-lock', 'error');
         }
 
         if (password !== confirmPassword) {
-            showAlert('Passwords do not match', 'bi-exclamation-triangle-fill', 'error');
-            return;
+            return showAlert('Passwords do not match', 'bi-exclamation-triangle-fill', 'error');
         }
 
         if (shortDesc.length > 100) {
-            showAlert('Short description should be less than 100 characters', 'bi-exclamation-triangle-fill', 'error');
-            return;
+            return showAlert('Short description should be less than 100 characters', 'bi-exclamation-triangle-fill', 'error');
         }
 
         const userData = {
-            username: username.toLowerCase(),
+            username: username,
             password: password,
             email: email.toLowerCase(),
             bio: shortDesc,

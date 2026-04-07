@@ -128,10 +128,6 @@
     font-size: 13px;
 }
 
-#login .view-password {
-
-}
-
 #login .login-options {
     display: flex;
     align-items: left;
@@ -160,7 +156,7 @@
 }
 
 #login .login-button {
-    margin-top: 5px;
+    margin-top: 20px;
     width: 150px;
     padding: 10px;
     background-image: linear-gradient(to right, #fbc2d8, #fff4e0);

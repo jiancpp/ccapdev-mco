@@ -94,20 +94,24 @@ function ArtistProfile() {
 
             <div className="artist-profile-details indent">
                 <div className="artist-name">
-                    {artist.name}
-                    <span className="artist-genres">
-                        {!genres.length 
-                            ? <span>No genres set.</span>                        
-                            : genres.map((genre, index) => (
-                                // Use .map() and make sure to provide a unique 'key'
-                                <span key={index} className="genre-tag">{genre}</span>
-                        ))}
-                    </span>
+                    {artist.name}<i className="bi bi-patch-check-fill verified-mark"/>
                 </div>
                 <div className="artist-rating">
                     <span className="stars">
                         <StarRating rating={Number(artist.aveRating)} />
                     </span> 
+                    <span className="artist-genres">
+                        {!genres.length 
+                            ? <span 
+                                className="genre-tag" 
+                                style={{background: 'var(--text-contrast-dark)', fontStyle: 'italic'}}>
+                                    No genres set.
+                            </span>                        
+                            : genres.map((genre, index) => (
+                                // Use .map() and make sure to provide a unique 'key'
+                                <span key={index} className="genre-tag">{genre}</span>
+                        ))}
+                    </span>
                 </div>
                 <div className="artist-meta">
                     <span className="country">{artist.country}</span>

@@ -2,7 +2,10 @@ import express from 'express';
 import Song from '../models/Song.js';
 
 const router = express.Router();
-const songPopulate =  { path: 'reviewCount'}
+const songPopulate = [
+    { path: 'reviewCount' },
+    { path: 'albumID', select: 'albumName cover' }
+  ];
 
 /**
  * Fetch ALL songs or FILTER by album/artist
@@ -38,11 +41,11 @@ router.get('/:id', async (req, res) => {
         let song = null;
 
         if (id.match(/^[0-9a-fA-F]{24}$/)) {
-            song = await Song.findById(id);
+            song = await Song.findById(id).populate(songPopulate);
         }
 
         if (!song) {
-            song = await Song.findOne({ songID: id });
+            song = await Song.findOne({ songID: id }).populate(songPopulate);
         }
 
         if (!song) return res.status(404).json({ message: "Song not found" });

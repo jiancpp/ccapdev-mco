@@ -1,12 +1,13 @@
 import express from 'express';
 import User from '../models/User.js';
 import Notification from '../models/Notification.js';
-// import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
 // POST /api/users/register
 router.post('/register', async (req, res) => {
+    const saltRounds = 10;
     const userData = req.body.userData; 
     // const confirmPassword = req.body.confirmPassword;
 
@@ -14,21 +15,31 @@ router.post('/register', async (req, res) => {
         const user = await User.findOne({
             $or: [
                 { email: userData.email },
-                { username: userData.username }
+                { username: userData.username },
             ]
-        });
+        })
+        .collation({locale: 'en', strength: 2});
 
         if (user) {
-            return res.status(409).json({ message: "User Already Exists" });
+            if (user.email == userData.email) {
+                return res.status(409).json({ message: "Email is already registered" });
+            }
+            if (user.username.toLowerCase() == userData.username.toLowerCase()) {
+                return res.status(409).json({ message: "Username is already taken" });
+            }
         }
 
         const newUser = new User(req.body.userData);
+
+        const hashed = await bcrypt.hash(userData.password, saltRounds);
+        newUser.password = hashed;
+
         const savedUser = await newUser.save();
 
         console.log(savedUser);
         return res.status(201).json({
             newUser: savedUser,
-            message: "Login successful!"
+            message: "Account Successfully Created!"
         });
 
     } catch (error) {
@@ -42,6 +53,7 @@ router.post('/register', async (req, res) => {
 // POST /api/users/login
 router.post('/login', async (req, res) => {
     const { identifier, password } = req.body;
+    // console.log(req.body);
 
     try {
         const user = await User.findOne({
@@ -49,14 +61,16 @@ router.post('/login', async (req, res) => {
                 { email: identifier },
                 { username: identifier }
             ]
-        }).select('+password');
+        })
+        .collation({locale: 'en', strength: 2})
+        .select('+password');
 
         if (!user) {
             return res.status(401).json({ message: "User not found" });
         }
 
-        const passMatch = password == user.password;
-        if (!passMatch) {
+        const result = await bcrypt.compare(password, user.password);
+        if (!result) {
             return res.status(401).json({ message: "Invalid password" });
         }
 

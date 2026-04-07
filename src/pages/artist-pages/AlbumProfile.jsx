@@ -70,11 +70,14 @@ function AlbumProfile() {
                 
                 <div className="song-info-column">
                     <h1 className="main-song-title">{album.albumName}</h1>
-                    <div className="main-song-artist">
-                        {artist ? artist.name : "Loading Artist..."}
+                    <div 
+                        className="main-song-artist flex" 
+                        style={{gap: '5px', cursor: 'pointer'}}
+                        onClick={() => navigate(`/artists/artist-profile/${album.artistID}`)}>
+                        <i className="bi bi-person-fill"></i>
+                        {artist ? (artist.artistName || artist.name) : "Unknown Artist"}
                     </div>
                     <div className="main-song-genre">
-                        {album.genre || "Pop"}
                     </div>
                     
                     <div className="main-song-rating" style={{marginBottom: "20px"}}>
@@ -105,7 +108,14 @@ function AlbumProfile() {
                         <div className="rate-review-section">
                             <div className="user-input-row">
                                 <div className="user-avatar-placeholder">
-                                    <i className="bi bi-person-fill"></i>
+                                    { activeUser 
+                                    ? <div className="profile avatar-picture"
+                                        style={{
+                                            backgroundImage: `url(${activeUser.avatar})`
+                                        }}>
+                                    </div>
+                                    : <i className="bi bi-person-fill"></i>
+                                    }
                                 </div>
                                 <div className="interactive-stars">
                                     {[...Array(5)].map((_, i) => 

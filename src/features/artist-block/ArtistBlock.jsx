@@ -44,6 +44,13 @@ function ArtistBlock({ artist }) {
                             <h3 className="name">{artist.name}</h3>
                         <div className="details">{artistReviews.length} reviews</div>
                         </div>
+                        <div className="artist-genre-list">
+                        {artist.genre.split('/').map((genre, index) => (
+                            <span key={index} className="genre-tag">
+                                {genre.trim()}
+                            </span>
+                        ))}
+                        </div>
                         <div className="stars">
                             <StarRating rating={Number(artist.aveRating || 0)} />
                         </div>

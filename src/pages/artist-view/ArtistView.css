@@ -58,6 +58,11 @@
     margin-bottom: 5px;
 }
 
+.artist-view .verified-mark {
+    color: #9e005d;
+    font-size: 25px;
+}
+
 .artist-view .artist-rating {
     display: flex;
     align-items: center;

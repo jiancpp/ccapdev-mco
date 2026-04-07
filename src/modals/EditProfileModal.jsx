@@ -1,16 +1,31 @@
 import './EditProfileModal.css'
-
+import AlertBlock from '../components/AlertBlock';
 import { useMediaUpload } from '../components/useMediaUpload';
 import { useEffect, useState } from 'react';
 import { updateData } from '../api/api';
 
 
 
-function EditProfileModal({ isOpen, onClose, user, showAlert }) {
+function EditProfileModal({ isOpen, onClose, user }) {
     const { mediaAttachments: avatar, uploading, handleMediaUpload, deleteMedia, resetMedia, setMedia } = useMediaUpload(null, { multiple: false });
     const [newUsername, setNewUserName] = useState(user?.username || '');
     const [newBio, setNewBio] = useState(user?.bio || '');
     const [newAvatar, setNewAvatar] = useState(user?.avatar || '/assets/default.jpg');
+
+    const [isAlertOn, setIsAlertOn] = useState(false);
+    const [alertConfig, setAlertConfig] = useState({
+        message: '',
+        icon: '',
+        bgColor: 'var(--success-light)',
+        textColor: 'var(--success-dark)'
+    });
+    
+    const showAlert = (config) => {
+        setAlertConfig(config);
+        setIsAlertOn(true);
+        setTimeout(() => setIsAlertOn(false), 2000); // Reset after 2 seconds
+    };
+
 
     useEffect(() => {
         if (!isOpen) {
@@ -49,6 +64,12 @@ function EditProfileModal({ isOpen, onClose, user, showAlert }) {
     return (
         <div className={`profile-modal-overlay ${isOpen ? "open" : ""}`} onClick={ onClose }>
             <div className="profile-modal-content" onClick={ (e) => e.stopPropagation()}>
+                {isAlertOn && <AlertBlock
+                    message={ alertConfig.message }
+                    icon={alertConfig.icon }
+                    bgColor={alertConfig.bgColor} 
+                    textColor={alertConfig.textColor}
+                />}
                 <button className="close-btn" onClick={onClose}>&times;</button>
                 <h2 className="profile-modal-title">Profile Details</h2>
                 <div className="edit-container">
