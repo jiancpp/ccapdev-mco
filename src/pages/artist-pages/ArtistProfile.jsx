@@ -94,7 +94,12 @@ function ArtistProfile() {
 
             <div className="artist-profile-details indent">
                 <div className="artist-name">
-                    {artist.name}
+                    {artist.name}<i className="bi bi-patch-check-fill verified-mark"/>
+                </div>
+                <div className="artist-rating">
+                    <span className="stars">
+                        <StarRating rating={Number(artist.aveRating)} />
+                    </span> 
                     <span className="artist-genres">
                         {!genres.length 
                             ? <span 
@@ -107,11 +112,6 @@ function ArtistProfile() {
                                 <span key={index} className="genre-tag">{genre}</span>
                         ))}
                     </span>
-                </div>
-                <div className="artist-rating">
-                    <span className="stars">
-                        <StarRating rating={Number(artist.aveRating)} />
-                    </span> 
                 </div>
                 <div className="artist-meta">
                     <span className="country">{artist.country}</span>

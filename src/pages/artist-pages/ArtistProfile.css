@@ -60,6 +60,12 @@
     margin-bottom: 5px;
 }
 
+.artist-profile .verified-mark {
+    margin-top: 5px;
+    margin-left: -5px;
+    color: #9e005d;
+    font-size: 25px;
+}
 
 .artist-profile .artist-genres {
     display: flex;      
