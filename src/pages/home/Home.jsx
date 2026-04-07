@@ -42,6 +42,10 @@ function Home() {
     useEffect(() => {
         const params = new URLSearchParams();
 
+        if (filter === 'following') {
+            if (activeUser?._id) params.append('followerId', activeUser._id); // 👈 fix
+        }
+
         if (filter === 'albums') {
             params.append('targetType', 'Album');
         }
@@ -59,6 +63,12 @@ function Home() {
         setFetchKey(newKey);
     }, [filter, searchTerm])
 
+    useEffect(() => {
+        if (!activeUser && filter === 'following') {
+            setFilter('recent');
+        }
+    }, [activeUser]);
+
     const toggle = (filter) => {
         setFilter((prev) => (prev!==filter ? filter : prev))
     }
@@ -72,6 +82,13 @@ function Home() {
                         onClick={() => toggle("recent")}>
                         Recent
                     </button>
+                    {activeUser && (
+                        <button 
+                            className={`${filter==="following" ? "selected" : ""}`}
+                            onClick={() => toggle("following")}>
+                            Following
+                        </button>
+                    )}
                     <button 
                         className={`${filter==="albums" ? "selected" : ""}`}
                         onClick={() => toggle("albums")}>
