@@ -45,13 +45,14 @@ function Register() {
         setAlert({ show: false });
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const usernameRegex = /^[]$/
 
         if (!emailRegex.test(email)) {
             return showAlert('Please enter a valid email address', 'bi-envelope-exclamation');
         }
 
         if (password.length < 8) {
-            showAlert('Passwords needs to be atleast 8 characters', 'bi-shield-lock', 'error');
+            showAlert('Passwords needs to be atleast 8 non-space characters', 'bi-shield-lock', 'error');
             return;
         }
 
@@ -66,7 +67,7 @@ function Register() {
         }
 
         const userData = {
-            username: username.toLowerCase(),
+            username: username,
             password: password,
             email: email.toLowerCase(),
             bio: shortDesc,

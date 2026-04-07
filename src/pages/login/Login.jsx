@@ -54,7 +54,7 @@ function Login({ setActiveUser }) {
                     navigate('/home');
                 }
             } else {
-                showAlert('Invalid Credentials', 'bi-exclamation-circle-fill', 'error');
+                showAlert( data.message || 'Invalid Credentials', 'bi-exclamation-circle-fill', 'error');
             }
         } catch (err) {
             showAlert('Cannot connect to server', 'bi-wifi-off', 'error');
@@ -95,7 +95,7 @@ function Login({ setActiveUser }) {
                         <form onSubmit={handleLogin} className="login-forms">
                             <input type="text" id="user" className="login-details" placeholder="Username/Email" value={identifier} onChange={(e) => setIdentifier(e.target.value)} required></input>
                             <input type="password" id="password" className="login-details" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required></input>
-                            <div className="login-options">
+                            {/* <div className="login-options">
                                 <input type="checkbox" id="remember" className="checkbox"></input>
                                 <div className="remember-me">
                                     Remember Me
@@ -103,7 +103,7 @@ function Login({ setActiveUser }) {
                                 <div className="forgot-password">
                                     <a href="/" className="forgot-password-link">Forgot Password?</a>
                                 </div>
-                            </div>
+                            </div> */}
                             <button type="submit" className="login-button">LOGIN</button>
                         </form>
                     </div>
