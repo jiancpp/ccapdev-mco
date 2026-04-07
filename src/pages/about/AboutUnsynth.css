@@ -178,9 +178,22 @@
 }
 
 .about-page-container .about header h1 {
+    display: flex;
+    gap: 5px;
+
     font-size: var(--fs-xxxxl);
     color: var(--primary-main);
     margin: 15px
+}
+
+.about-page-container .about header h1 .styled {
+    padding-right: 5px;
+    color: var(--primary-main);
+
+    font-family: "Carollo Playscript";
+    font-size: 2.5rem;
+    font-weight: 500;
+    letter-spacing: var(--ls-very-tight);
 }
 
 .about p.description {
@@ -357,11 +370,9 @@
 }
 
 .about-page-container .dependencies-item {
-    padding: 10px;
-    vertical-align: baseline;
+    padding: 15px 20px;
     margin: 10px;
-
-    border-radius: 20px;
+    border-radius: 30px;
     background: white;
     font-size: var(--fs-lg);
 }
