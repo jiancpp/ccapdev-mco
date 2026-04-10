@@ -68,7 +68,9 @@ Start the development server:
 ```
 cd server
 node server.js
-cd ..
+```
+On a different terminal, run the following command:
+```
 npm run dev
 ```
 
