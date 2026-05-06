@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node backend/server.js"
+    "start": "node server/server.js"
   },
   "dependencies": {
     "@syncfusion/ej2-react-richtexteditor": "^32.2.4",
