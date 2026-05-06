@@ -24,8 +24,8 @@ npm -v
 ## 2️⃣ Clone Repository
 
 ```
-git clone https://github.com/your-username/your-repository.git
-cd your-repository
+git clone https://github.com/jiancpp/ccapdev-mco.git
+cd ccapdev-mco
 ```
 
 ---
@@ -41,14 +41,36 @@ npm install @syncfusion/ej2-react-richtexteditor --save
 
 ---
 
-## 4️⃣ Run the App Locally for Testing and Debugging
+## 4️⃣ Setup environment variables
+
+Each contributor must create an ``.env`` file containing the following
+
+```
+PORT=5001
+MONGO_URL=mongodb://<username>:<password>@<cluster-hosts>/<database-name>?options
+SESSION_SECRET=your_random_secret_string
+```
+⚠️ **Important:** Never commit or upload your .env file to the repository.
+Make sure .env is included in your .gitignore file. 
+
+## 5️⃣ Setup MongoDB Atlas Account
+Log in to MongoDB Atlas at [mongodb.com](https://www.mongodb.com/) and accept the project invitation as a collaborator. Then, create a new database user or request credentials from an existing one to use for your ``MONGO_URL``.
+
+**📝 Notes**
+* Make sure your database user has the necessary permissions (e.g., read/write access).
+* You can find your connection string in Database → Connect → Drivers.
+* Replace the placeholders in your .env file with your actual credentials.
+
+## 6️⃣ Run the App Locally for Testing and Debugging
 
 Start the development server:
 
 ```
 cd server
 node server.js
-cd ..
+```
+On a different terminal, run the following command:
+```
 npm run dev
 ```
 
@@ -122,16 +144,14 @@ This app is deployed using render. The set-up for the project is as follows:
 
 # 📁 `src` Organization
 
-The `src` folder contains the main source code of the application.
-A recommended structure is shown below:
-
+The `src` folder contains the main source code for the front-end of the application.
 ```
 src/
 │
 ├── api/             # API calls and database interaction logic
 ├── assets/          # Images, icons, and static files
 ├── components/      # Reusable UI static components
-├── features/        # Reusable UI data-heavy components
+├── features/        # Reusable UI data-driven components
 ├── layouts/         # Website layout 
 ├── modals/          # Data or feature heavy modals
 ├── pages/           # Page-level components / views
@@ -140,34 +160,13 @@ src/
 ├── main.jsx         # Application entry point
 └── index.css        # Global styles
 ```
-
-### Folder Descriptions
-
-**assets**
-Contains static resources such as images, fonts, or icons used throughout the application.
-
-**components**
-Reusable UI components that can be used across multiple pages.
-
-**features**
-Reusable UI data heavy components that can be used across multiple pages.
-
-**pages**
-High-level page components that represent different routes or screens in the application.
-
-**api**
-Handles communication with APIs or backend services (including MongoDB-related endpoints).
-
-**hooks**
-Custom React hooks for reusable state and logic.
-
 ---
 
 # 🧑‍💻 Tech Stack
 
 * **Frontend:** React, Vite, CSS, Bootstrap Icons
 * **Backend / API:** Node.js, Expres.js, lyrics.ovh API
-* **Database:** MongoDB
+* **Database:** MongoDB, Mongoose
 * **Rich Text Editor:** Syncfusion React Rich Text Editor
 * **Authentication & Security** bcrypt
 * **Media Management** Cloudinary
